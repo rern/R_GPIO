@@ -4,7 +4,7 @@ _(For RuneAudio beta-20160313. Tested on RPi 3)_
 
 GPIO connected relay module control  
 
-[**Demo**](https://rern.github.io/RuneUI_GPIO/)  
+Try it - [**Demo**](https://rern.github.io/RuneUI_GPIO/)  
 Can be installed without relay module to play with interface.
 
 ![settings](https://github.com/rern/Assets/blob/master/RuneUI_GPIO/gpio.gif)  
