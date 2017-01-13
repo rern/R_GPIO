@@ -1,0 +1,94 @@
+.container {
+	padding : 0 15px;
+}
+.form-group {
+	margin-top: 10px;
+}
+#gpio {
+	margin: 0 0 20px 0;
+	padding-right: 0;
+}
+.gpio-float-l {
+	float: left;
+	min-width: 220px;
+}
+.gpio-float-r {
+	float: left;
+	min-width: 320px;
+}
+#gpio a {
+	padding-left: 10px;
+}
+
+div#gpio-num.col-sm-10,
+.delay,
+#gpio-num .bootstrap-select {
+	width: 75px !important;
+}
+#gpio-name,
+#gpio div.text,
+#gpio-name input[type=text] {
+	width: 120px !important;
+}
+#gpio div.col-sm-10,
+.gpio-text,
+#gpio .bootstrap-select,
+#gpio input[type=text],
+#gpio input[type=number] {
+	width: 150px;
+}
+
+#gpio a.btn {
+	height: 40px;
+	line-height: 30px;
+	padding: 5px 15px;
+}
+#gpio a:hover {
+	text-decoration: none;
+	color: #e0e7ee;
+}
+#gpio div.col-sm-10 {
+	float: left;
+	margin: 0;
+	padding: 0;
+	line-height: 45px;
+}
+.gpio-text,
+#gpio .bootstrap-select,
+#gpio input[type=text],
+#gpio input[type=number] {
+	margin: 0 0 5px 0;
+	height: 41px;
+	color: #e0e7ee;
+}
+#gpio input[type=text],
+#gpio input[type=number] {
+	padding: 10px !important;
+}
+div#gpio-num.col-sm-10 {
+	margin-right: 5px;
+}
+#gpio button {
+	height: 40px;
+}
+#gpio-name,
+#gpio-name input[type=text] {
+	margin: 0 20px 5px 0 !important;
+	font-size: 1em;
+}
+#gpio div.text {
+	margin: 0 5px 0 0;
+}
+#gpio p {
+	text-align: center;
+	line-height: 46px;
+}
+.clear {
+	clear: both;
+}
+.blue {
+	color: #0095d8;
+}
+.yellow {
+	color: yellow;
+}

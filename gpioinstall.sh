@@ -1,0 +1,239 @@
+#!/bin/bash
+
+# gpioinstall.sh - RuneUI GPIO
+# https://github.com/rern/RuneUI_GPIO
+
+# already installed
+#		reinstall ?
+#			exit
+#			uninstall
+# install
+#		set mirror servers
+#		Pip
+#		python packages
+#		check RuneUI enhancement
+#			install
+#		get gpiouninstall.sh
+#		get tar.xz
+#		backup
+#		extract
+#		set gpio default
+# 		enable gpioset service
+#		reload sudoers
+# success (skip if reinstall with gpioinstall.sh)
+#		clear opcache
+#		Restart local browser
+#		info
+# remove install files
+
+arg=$#
+
+linered='\e[0;31m---------------------------------------------------------\e[m'
+line2='\e[0;36m=========================================================\e[m'
+line='\e[0;36m---------------------------------------------------------\e[m'
+bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
+warn=$( echo $(tput setab 1) ! $(tput setab 0) )
+info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
+runeenh=$( echo $(tput setaf 6)RuneUI Enhancement$(tput setaf 7) )
+runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
+sync=0
+
+# functions #######################################
+
+title2() {
+		echo -e "\n$line2\n"
+		echo -e "$bar $1"
+		echo -e "\n$line2\n"
+}
+title() {
+		echo -e "\n$line"
+		echo $1
+		echo -e "$line\n"
+}
+titleend() {
+		echo -e "\n$1"
+		echo -e "\n$line\n"
+}
+error() {
+		echo -e "\n$linered"
+		echo $warn $1
+		echo -e "$linered\n"
+}
+errorend() {
+		echo -e "\n$warn $1"
+		echo -e "\n$linered\n"
+}
+mirror() { # rank mirrors
+	if [ ! -f rankmirrors.sh ]; then 
+		wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/ArchLinuxArm_rankmirrors/blob/master/rankmirrors.sh?raw=1"
+		chmod +x rankmirrors.sh
+	fi
+	./rankmirrors.sh
+}
+
+# check already installed #######################################
+
+if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
+	title "$info $runegpio already installed."
+	echo 'Reinstall' $runegpio':'
+	echo -e '  \e[0;36m0\e[m No'
+	echo -e '  \e[0;36m1\e[m Yes'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read -n 1 answer
+	case $answer in
+		1 ) ./gpiouninstall.sh re;; # with any argument to skip success message
+		* ) echo
+			titleend "$runegpio reinstall cancelled."
+			rm gpioinstall.sh
+			exit;;	
+	esac
+fi
+
+# install packages #######################################
+
+title2 "Install $runegpio ..."
+
+pacman -Q python2-pip > /dev/null 2>&1
+pip=$?
+if (( $pip != 0 )); then
+	title "Sync Arch Linux package databases ..."
+	if (( $sync != 1 )); then
+		mirror
+		pacman -Sy
+		sync=1
+	fi
+fi
+function installpac {
+	pacman -Q $1 > /dev/null 2>&1
+	result=$?
+	if (( $result != 0 )); then
+		title "Install $2 ..."
+		pacman -S --noconfirm $1
+		result=$?
+		(( $result != 0 )) &&	error "Failed: Install $2"
+	fi
+}
+function installpip {
+	python -c "import $1" > /dev/null 2>&1
+	result=$?
+	if (( $result != 0 )); then
+		title "Install Python - $2 ..."
+		pip2 install $3
+		result=$?
+		(( $result != 0 )) && error "Failed: Install Python - $2"
+	fi
+}
+function installpackage {
+	installpac python2-pip Pip
+	pi=$result
+
+	installpip mpd MPD python-mpd2
+	mp=$result
+	installpip redis Redis redis
+	re=$result
+	installpip requests Requests requests
+	rq=$result
+}
+
+[ ! -e /usr/bin/python ] && ln -s /usr/bin/python2.7 /usr/bin/python
+installpackage
+
+if ( (( $pi != 0 )) || (( $mp != 0 )) || (( $re != 0 )) || (( $rq != 0 )) ); then
+	error "Failed: Install some packages"
+	echo 'Try again:'
+	echo -e '  \e[0;36m0\e[m No'
+	echo -e '  \e[0;36m1\e[m Yes'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read -n 1 answer
+	case $answer in
+		1 ) installpackage;;
+		* ) echo
+			errorend "$runegpio install cancelled"
+			file='/etc/pacman.d/mirrorlist'
+			mv $file'.original' $file
+			rm gpioinstall.sh
+			exit;;	
+	esac
+fi
+
+# get DAC config #######################################
+
+if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
+	title "$info Get DAC configuration ready:"
+	echo 'For external power DAC > power on'
+	echo
+	echo 'Menu > MPD > setup and verify DAC works properly before continue.'
+	echo '(This install can be left running while setup.)'
+	echo
+	read -n 1 -s -p 'Press any key to continue ... '
+	echo
+fi
+
+# check RuneUI enhancement #######################################
+
+if ! grep -qs 'RuneUIe' /srv/http/app/templates/header.php; then
+	echo -e "\nRequired $runeenh not found.\n"
+	wget -q --show-progress -O install.sh "https://github.com/rern/RuneUI_enhancement/blob/master/install.sh?raw=1"
+	chmod +x install.sh
+	./install.sh gpio # with any argument to skip local browser restart and success message
+fi
+
+# install RuneUI GPIO #######################################
+
+title "Get files ..."
+
+wget -q --show-progress -O RuneUI_GPIO.tar.xz "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/RuneUI_GPIO.tar.xz?raw=1"
+wget -q --show-progress -O gpiouninstall.sh "https://github.com/rern/RuneUI_GPIO/blob/master/gpiouninstall.sh?raw=1"
+chmod 755 gpiouninstall.sh
+
+title "Backup existing files ..."
+path='/srv/http/app/templates/'
+file=$path'footer.php'
+cp -v $file $file'.gpio'
+file=$path'header.php'
+cp -v $file $file'.gpio'
+
+file='/etc/udev/rules.d/rune_usb-audio.rules'
+cp -rfv $file $file'.gpio'
+
+if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
+	file='/etc/mpd.conf'
+	cp -rfv $file $file'.gpio'
+fi
+
+title "Install files ..."
+tar -Jxvf RuneUI_GPIO.tar.xz -C /
+
+chmod -R 755 /etc/sudoers.d
+chmod 755 /root/*.py
+chmod 755 /srv/http/*.php
+
+gpio=$( redis-cli exists gpio )
+if (( $gpio != 1 )); then
+	title "Set default data ..."
+	./gpiodefault.py
+fi
+rm gpiodefault.py
+./gpioset.py
+systemctl enable gpioset
+udevadm control --reload
+
+if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
+	title "Clear PHP OPcache ..."
+	curl '127.0.0.1/clear'
+	echo
+
+	killall midori
+	sleep 1
+	startx  > /dev/null 2>&1 &
+	echo -e '\nLocal browser restarted.\n'
+	
+	title2 "$runegpio successfully installed."
+	echo $info 'Refresh browser and go to Menu > GPIO for settings.'
+	titleend "To uninstall:   ./uninstall.sh"
+fi
+
+rm RuneUI_GPIO.tar.xz
+rm gpioinstall.sh

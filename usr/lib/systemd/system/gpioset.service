@@ -1,0 +1,10 @@
+[Unit]
+Description=Initial setup GPIO
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /root/gpioset.py
+
+[Install]
+WantedBy=multi-user.target
