@@ -81,7 +81,6 @@ rm -v /root/gpioset.py
 rm -v /root/gpiostatus.py
 rm -v /root/gpiotimer.py
 rm -v /root/poweroff.py
-rm -v /root/poweroff.py
 rm -v /root/reboot.py
 
 rm -v /srv/http/gpiooff.php
