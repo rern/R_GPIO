@@ -65,7 +65,7 @@ echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
 	1 ) echo;;
-	0 ) echo
+	* ) echo
 			title "Uninstall packages ..."
 			pip2 uninstall -y python-mpd2
 			pip2 uninstall -y requests
