@@ -57,7 +57,7 @@ fi
 title2 "Uninstall $runegpio ..."
 
 title "$runegpio installed packages"
-echo 'Uninstall:'
+echo 'Uninstall Python2-Pip, Python-MPD and Python-Requests:'
 echo -e '  \e[0;36m0\e[m Uninstall'
 echo -e '  \e[0;36m1\e[m Keep'
 echo
