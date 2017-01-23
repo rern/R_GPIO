@@ -7,7 +7,7 @@ import os
 os.system('/usr/bin/cp -rf /etc/mpd.conf.gpio /etc/mpd.conf > /dev/null 2>&1 &')
 os.system('/usr/bin/systemctl restart mpd > /dev/null 2>&1 &')
 
-with open('/root/gpio.json') as jsonfile:
+with open('/srv/http/gpio.json') as jsonfile:
 	gpio = json.load(jsonfile)
 	
 on = gpio['on']

@@ -5,7 +5,7 @@ import os
 import mpd
 import requests
 
-with open('/root/gpio.json') as jsonfile:
+with open('/srv/http/gpio.json') as jsonfile:
 	gpio = json.load(jsonfile)
 
 timer = int(gpio['timer']['timer'])

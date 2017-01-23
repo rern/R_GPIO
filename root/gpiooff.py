@@ -4,7 +4,7 @@ import json
 import time
 import os
 
-with open('/root/gpio.json') as jsonfile:
+with open('/srv/http/gpio.json') as jsonfile:
 	gpio = json.load(jsonfile)
 
 off = gpio['off']
