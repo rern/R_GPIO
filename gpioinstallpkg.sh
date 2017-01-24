@@ -93,10 +93,15 @@ pacman -Q python2-pip > /dev/null 2>&1 || pacman -Q python-pip > /dev/null 2>&1
 result=$?
 if (( $result != 0 )); then
 	title "Install Pip ..."
-	wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
-	tar -xvf var.tar -C /
-	pacman -Us --noconfirm /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz
+	if [ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]; then
+		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
+		tar -xvf var.tar -C /
+		rm var.tar
+	fi
+	pacman -U --noconfirm /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz
 fi
+
+[ ! -e /usr/bin/pip2 ] && ln -s /usr/bin/pip /usr/bin/pip2
 
 python -c "import mpd" > /dev/null 2>&1
 result=$?
@@ -110,8 +115,6 @@ if (( $result != 0 )); then
 	title "Install Python-Request ..."
 	pip2 install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
 fi
-
-rm var.tar
 
 # check RuneUI enhancement #######################################
 
