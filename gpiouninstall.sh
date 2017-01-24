@@ -73,6 +73,7 @@ case $answer in
 			result=$?
 			if (( $result == 0 )); then
 				pacman -Rs --noconfirm python2-pip
+				rm /usr/bin/pip
 			fi
 esac
 
