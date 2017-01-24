@@ -1,5 +1,5 @@
 {
-"enable": {"enable": 1},
+"enable": {"enable": 0},
 "pin": {"pin1": 31, "pin2": 33, "pin3": 35, "pin4": 37},
 "name": {"name1": "DAC", "name2": "PreAmp", "name3": "Amp", "name4": "Subwoofer"},
 "on": {"on1": 31, "ond1": 2, "on2": 33, "ond2": 2, "on3": 35, "ond3": 2, "on4": 37},
