@@ -3,6 +3,7 @@
 # gpioinstall.sh - RuneUI GPIO
 # https://github.com/rern/RuneUI_GPIO
 
+# remove install file
 # already installed
 #		reinstall ?
 #			exit
@@ -17,6 +18,7 @@
 #		get tar.xz
 #		backup
 #		extract
+#		remove install tar.xz
 #		set gpio default
 # 		enable gpioset service
 #		reload sudoers
@@ -24,7 +26,8 @@
 #		clear opcache
 #		Restart local browser
 #		info
-# remove install files
+
+rm gpioinstall.sh
 
 arg=$#
 
@@ -85,7 +88,6 @@ if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
 		1 ) ./gpiouninstall.sh re;; # with any argument to skip success message
 		* ) echo
 			titleend "$runegpio reinstall cancelled."
-			rm gpioinstall.sh
 			exit;;	
 	esac
 fi
@@ -222,6 +224,7 @@ if [ ! -f /srv/http/gpio.json ]; then
 else
 	tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude='srv/http/gpio.json' 
 fi
+rm RuneUI_GPIO.tar.xz
 
 chmod -R 755 /etc/sudoers.d
 chmod 755 /root/*.py
@@ -245,6 +248,3 @@ if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
 	echo $info 'Refresh browser and go to Menu > GPIO for settings.'
 	titleend "To uninstall:   ./uninstall.sh"
 fi
-
-rm RuneUI_GPIO.tar.xz
-rm gpioinstall.sh
