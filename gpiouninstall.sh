@@ -67,10 +67,13 @@ case $answer in
 	1 ) echo;;
 	* ) echo
 			title "Uninstall packages ..."
-			pip2 uninstall -y python-mpd2
-			pip2 uninstall -y requests
-			pacman -Rs --noconfirm python2-pip
-			[ ! -L /usr/bin/pip2 ] && rm /usr/bin/pip2
+			pip uninstall -y python-mpd2
+			pip uninstall -y requests
+			pacman -Q python2-pip > /dev/null 2>&1
+			result=$?
+			if (( $result == 0 )); then
+				pacman -Rs --noconfirm python2-pip
+			fi
 esac
 
 title "Remove files ..."
