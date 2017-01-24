@@ -103,25 +103,20 @@ if (( $result != 0 )); then
 	fi
 	title "Install Pip ..."
 	pacman -S --noconfirm python2-pip
-fi
-
-pacman -Q python-pip > /dev/null 2>&1
-result=$?
-if (( $result == 0 )) && [ ! -e /usr/bin/pip2 ]; then
-	ln -s /usr/bin/pip /usr/bin/pip2
+	ln -s /usr/bin/pip2 /usr/bin/pip
 fi
 
 python -c "import mpd" > /dev/null 2>&1
 result=$?
 if (( $result != 0 )); then
 	title "Install Python-MPD ..."
-	pip2 install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
+	pip install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
 fi
 python -c "import requests" > /dev/null 2>&1
 result=$?
 if (( $result != 0 )); then
 	title "Install Python-Request ..."
-	pip2 install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
+	pip install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
 fi
 
 # check RuneUI enhancement #######################################
