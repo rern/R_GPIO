@@ -7,12 +7,12 @@ GPIO connected relay module control
 Try it - [**Demo**](https://rern.github.io/RuneUI_GPIO/)  
 Can be installed without relay module to play with interface.  
 
-[Features](#features)  
-[Things to get](#things-to-get)  
-[Things to do](#things-to-do)  
-[Before install](#before-install)  
-[Install](#install)  
-[Uninstall](#uninstall)  
+>[Features](#features)  
+>[Things to get](#things-to-get)  
+>[Things to do](#things-to-do)  
+>[Before install](#before-install)  
+>[Install](#install)  
+>[Uninstall](#uninstall)  
 
 ![settings](https://github.com/rern/Assets/blob/master/RuneUI_GPIO/gpio.gif)  
 
