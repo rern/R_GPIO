@@ -3,6 +3,7 @@
 # gpioinstall.sh - RuneUI GPIO
 # https://github.com/rern/RuneUI_GPIO
 
+# remove install files
 # already installed
 #		reinstall ?
 #			exit
@@ -17,6 +18,7 @@
 #		get tar.xz
 #		backup
 #		extract
+#	remove tar.xz
 #		set gpio default
 # 		enable gpioset service
 #		reload sudoers
@@ -24,7 +26,8 @@
 #		clear opcache
 #		Restart local browser
 #		info
-# remove install files
+
+rm gpioinstall.sh
 
 arg=$#
 
@@ -92,19 +95,20 @@ title2 "Install $runegpio ..."
 pacman -Q python2-pip > /dev/null 2>&1 || pacman -Q python-pip > /dev/null 2>&1
 result=$?
 if (( $result != 0 )); then
-	title "Install Pip ..."
 	if [ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]; then
+		title "Get packages file ..."
 		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
-	pacman -U --noconfirm /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz
+	title "Install Pip ..."
+	pacman -S --noconfirm python2-pip
 fi
 
 pacman -Q python-pip > /dev/null 2>&1
 result=$?
-if (( $result == 0 )); then
-	[ ! -e /usr/bin/pip2 ] && ln -s /usr/bin/pip /usr/bin/pip2
+if ( (( $result == 0 )) && [ ! -e /usr/bin/pip2 ]; then
+	ln -s /usr/bin/pip /usr/bin/pip2
 fi
 
 python -c "import mpd" > /dev/null 2>&1
@@ -186,6 +190,7 @@ if [ ! -f /srv/http/gpio.json ]; then
 else
 	tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude='srv/http/gpio.json' 
 fi
+rm RuneUI_GPIO.tar.xz
 
 chmod -R 755 /etc/sudoers.d
 chmod 755 /root/*.py
@@ -209,6 +214,3 @@ if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
 	echo $info 'Refresh browser and go to Menu > GPIO for settings.'
 	titleend "To uninstall:   ./uninstall.sh"
 fi
-
-rm RuneUI_GPIO.tar.xz
-rm gpioinstall.sh
