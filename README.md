@@ -43,7 +43,7 @@ Features
 
 **Easy install and (almost) hassel-free**
 - Also install required [**RuneUI Enhancement**](https://github.com/rern/RuneUI_enhancement) if not yet installed.
-- Fix some package download errors by enable and [**rankmirrors.sh**](https://github.com/rern/rankmirrors) server list by speed
+- Offline packages install
 - Prompt for custom MPD configuration  
 
 <hr>

@@ -3,7 +3,7 @@
 # gpioinstall.sh - RuneUI GPIO
 # https://github.com/rern/RuneUI_GPIO
 
-# remove install file
+# remove install files
 # already installed
 #		reinstall ?
 #			exit
@@ -18,7 +18,7 @@
 #		get tar.xz
 #		backup
 #		extract
-#		remove install tar.xz
+#	remove tar.xz
 #		set gpio default
 # 		enable gpioset service
 #		reload sudoers
@@ -66,13 +66,6 @@ errorend() {
 		echo -e "\n$warn $1"
 		echo -e "\n$linered\n"
 }
-mirror() { # rank mirrors
-	if [ ! -f rankmirrors.sh ]; then 
-		wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/ArchLinuxArm_rankmirrors/blob/master/rankmirrors.sh?raw=1"
-		chmod +x rankmirrors.sh
-	fi
-	./rankmirrors.sh
-}
 
 # check already installed #######################################
 
@@ -88,6 +81,7 @@ if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
 		1 ) ./gpiouninstall.sh re;; # with any argument to skip success message
 		* ) echo
 			titleend "$runegpio reinstall cancelled."
+			rm gpioinstall.sh
 			exit;;	
 	esac
 fi
@@ -96,66 +90,38 @@ fi
 
 title2 "Install $runegpio ..."
 
-pacman -Q python2-pip > /dev/null 2>&1 || pacman -Q python-pip > /dev/null 2>&1
-pip=$?
-if (( $pip != 0 )); then
-	title "Sync Arch Linux package databases ..."
-	if (( $sync != 1 )); then
-		mirror
-		pacman -Sy
-		sync=1
-	fi
-fi
-function installpac {
-	pacman -Q $1 > /dev/null 2>&1 || pacman -Q python-pip > /dev/null 2>&1
-	result=$?
-	if (( $result != 0 )); then
-		title "Install $2 ..."
-		pacman -S --noconfirm $1
-		result=$?
-		(( $result != 0 )) &&	error "Failed: Install $2"
-	fi
-}
-function installpip {
-	python -c "import $1" > /dev/null 2>&1
-	result=$?
-	if (( $result != 0 )); then
-		title "Install Python - $2 ..."
-		pip2 install $3
-		result=$?
-		(( $result != 0 )) && error "Failed: Install Python - $2"
-	fi
-}
-function installpackage {
-	installpac python2-pip Pip
-	pi=$result
-
-	installpip mpd MPD python-mpd2
-	mp=$result
-	installpip requests Requests requests
-	rq=$result
-}
-
 [ ! -e /usr/bin/python ] && ln -s /usr/bin/python2.7 /usr/bin/python
-installpackage
 
-if ( (( $pi != 0 )) || (( $mp != 0 )) || (( $rq != 0 )) ); then
-	error "Failed: Install some packages"
-	echo 'Try again:'
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
-	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
-	read -n 1 answer
-	case $answer in
-		1 ) installpackage;;
-		* ) echo
-			errorend "$runegpio install cancelled"
-			file='/etc/pacman.d/mirrorlist'
-			mv $file'.original' $file
-			rm gpioinstall.sh
-			exit;;	
-	esac
+pacman -Q python2-pip > /dev/null 2>&1 || pacman -Q python-pip > /dev/null 2>&1
+result=$?
+if (( $result != 0 )); then
+	if [ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]; then
+		title "Get packages file ..."
+		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
+		tar -xvf var.tar -C /
+		rm var.tar
+	fi
+	title "Install Pip ..."
+	pacman -S --noconfirm python2-pip
+fi
+
+pacman -Q python-pip > /dev/null 2>&1
+result=$?
+if (( $result == 0 )) && [ ! -e /usr/bin/pip2 ]; then
+	ln -s /usr/bin/pip /usr/bin/pip2
+fi
+
+python -c "import mpd" > /dev/null 2>&1
+result=$?
+if (( $result != 0 )); then
+	title "Install Python-MPD ..."
+	pip2 install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
+fi
+python -c "import requests" > /dev/null 2>&1
+result=$?
+if (( $result != 0 )); then
+	title "Install Python-Request ..."
+	pip2 install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
 fi
 
 # check RuneUI enhancement #######################################
