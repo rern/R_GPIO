@@ -107,7 +107,7 @@ fi
 
 pacman -Q python-pip > /dev/null 2>&1
 result=$?
-if ( (( $result == 0 )) && [ ! -e /usr/bin/pip2 ]; then
+if (( $result == 0 )) && [ ! -e /usr/bin/pip2 ]; then
 	ln -s /usr/bin/pip /usr/bin/pip2
 fi
 
