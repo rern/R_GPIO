@@ -70,7 +70,7 @@ case $answer in
 			pip2 uninstall -y python-mpd2
 			pip2 uninstall -y requests
 			pacman -Rs --noconfirm python2-pip
-			rm /usr/bin/python
+			[ ! -L /usr/bin/pip2 ] && rm /usr/bin/pip2
 esac
 
 title "Remove files ..."
