@@ -200,10 +200,12 @@ if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
 	curl '127.0.0.1/clear'
 	echo
 
-	killall midori
-	sleep 1
-	startx  > /dev/null 2>&1 &
-	echo -e '\nLocal browser restarted.\n'
+	if pgrep midori > /dev/null; then
+		killall midori
+		sleep 1
+		startx  > /dev/null 2>&1 &
+		echo -e '\nLocal browser restarted.\n'
+	fi
 	
 	title2 "$runegpio successfully installed."
 	echo $info 'Refresh browser and go to Menu > GPIO for settings.'
