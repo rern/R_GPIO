@@ -194,7 +194,7 @@ if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
 	curl '127.0.0.1/clear'
 	echo
 
-	if pgrep midori > /dev/null 2>&1; then
+	if pgrep midori > /dev/null; then
 		killall midori
 		sleep 1
 		startx  > /dev/null 2>&1 &
