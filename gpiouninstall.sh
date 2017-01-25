@@ -69,9 +69,7 @@ case $answer in
 			title "Uninstall packages ..."
 			pip uninstall -y python-mpd2
 			pip uninstall -y requests
-			pacman -Q python2-pip > /dev/null 2>&1
-			result=$?
-			if (( $result == 0 )); then
+			if pacman -Q python2-pip > /dev/null; then
 				pacman -Rs --noconfirm python2-pip
 				rm /usr/bin/pip
 			fi
