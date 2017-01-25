@@ -92,9 +92,7 @@ title2 "Install $runegpio ..."
 
 [ ! -e /usr/bin/python ] && ln -s /usr/bin/python2.7 /usr/bin/python
 
-pacman -Q python2-pip > /dev/null 2>&1 || pacman -Q python-pip > /dev/null 2>&1
-result=$?
-if (( $result != 0 )); then
+if ! pacman -Q python2-pip > /dev/null 2>&1 || ! pacman -Q python-pip > /dev/null 2>&1; then
 	if [ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]; then
 		title "Get packages file ..."
 		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
@@ -106,15 +104,11 @@ if (( $result != 0 )); then
 	ln -s /usr/bin/pip2 /usr/bin/pip
 fi
 
-python -c "import mpd" > /dev/null 2>&1
-result=$?
-if (( $result != 0 )); then
+if ! python -c "import mpd" > /dev/null 2>&1; then
 	title "Install Python-MPD ..."
 	pip install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
 fi
-python -c "import requests" > /dev/null 2>&1
-result=$?
-if (( $result != 0 )); then
+if ! python -c "import requests" > /dev/null 2>&1; then
 	title "Install Python-Request ..."
 	pip install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
 fi
@@ -200,7 +194,7 @@ if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
 	curl '127.0.0.1/clear'
 	echo
 
-	if pgrep midori > /dev/null; then
+	if pgrep midori > /dev/null 2>&1; then
 		killall midori
 		sleep 1
 		startx  > /dev/null 2>&1 &
