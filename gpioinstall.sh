@@ -92,7 +92,7 @@ title2 "Install $runegpio ..."
 
 [ ! -e /usr/bin/python ] && ln -s /usr/bin/python2.7 /usr/bin/python
 
-if ! pacman -Q python2-pip > /dev/null 2>&1 || ! pacman -Q python-pip > /dev/null 2>&1; then
+if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/null 2>&1; then
 	if [ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]; then
 		title "Get packages file ..."
 		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
