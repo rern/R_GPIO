@@ -69,7 +69,7 @@ case $answer in
 			title "Uninstall packages ..."
 			pip uninstall -y python-mpd2
 			pip uninstall -y requests
-			if pacman -Q python2-pip > /dev/null; then
+			if pacman -Q python2-pip > /dev/null 2>&1; then
 				pacman -Rs --noconfirm python2-pip
 				rm /usr/bin/pip
 			fi
@@ -123,7 +123,7 @@ if [ $arg -eq 0 ]; then # skip if reinstall - gpiouninstall.sh <arg>
 	curl '127.0.0.1/clear'
 	echo
 
-	if pgrep midori > /dev/null; then
+	if pgrep midori > /dev/null 2>&1; then
 		killall midori
 		sleep 1
 		startx  > /dev/null 2>&1 &
