@@ -42,7 +42,6 @@ runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
 sync=0
 
 # functions #######################################
-
 title2() {
 		echo -e "\n$line2\n"
 		echo -e "$bar $1"
@@ -68,7 +67,6 @@ errorend() {
 }
 
 # check already installed #######################################
-
 if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
 	title "$info $runegpio already installed."
 	echo 'Reinstall' $runegpio':'
@@ -87,7 +85,6 @@ if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
 fi
 
 # install packages #######################################
-
 title2 "Install $runegpio ..."
 
 [ ! -e /usr/bin/python ] && ln -s /usr/bin/python2.7 /usr/bin/python
@@ -114,7 +111,6 @@ if ! python -c "import requests" > /dev/null 2>&1; then
 fi
 
 # check RuneUI enhancement #######################################
-
 if ! grep -qs 'RuneUIe' /srv/http/app/templates/header.php; then
 	echo -e "\nRequired $runeenh not found.\n"
 	wget -q --show-progress -O install.sh "https://github.com/rern/RuneUI_enhancement/blob/master/install.sh?raw=1"
@@ -123,7 +119,6 @@ if ! grep -qs 'RuneUIe' /srv/http/app/templates/header.php; then
 fi
 
 # get DAC config #######################################
-
 if [ -f /etc/mpd.conf.gpio ]; then
 		title "$info DAC configuration from previous install found."
 		echo 'Discard:'
@@ -150,7 +145,6 @@ if [ ! -f /etc/mpd.conf.gpio ]; then
 fi
 
 # install RuneUI GPIO #######################################
-
 title "Get files ..."
 
 wget -q --show-progress -O RuneUI_GPIO.tar.xz "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/RuneUI_GPIO.tar.xz?raw=1"
@@ -180,6 +174,13 @@ else
 	tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude='srv/http/gpio.json' 
 fi
 rm RuneUI_GPIO.tar.xz
+
+# for installed RuneUI password #######################################
+if ! grep -qs 'logout.php' /srv/http/app/templates/header.php.gpio; then
+	sed -i '/poweroff-modal/a \
+				<li><a href="/logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
+	' /srv/http/app/templates/header.php
+fi
 
 chmod -R 755 /etc/sudoers.d
 chmod 755 /root/*.py
