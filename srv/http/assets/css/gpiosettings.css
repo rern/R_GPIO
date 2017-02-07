@@ -1,6 +1,15 @@
 .container {
 	padding : 0 15px;
 }
+h1, #close {
+	display: inline-block;
+	width: 50%;
+}
+#close {
+	text-align: right;
+	font-size: 24px;
+	cursor: pointer;
+}
 .form-group {
 	margin-top: 10px;
 }

@@ -15,6 +15,9 @@ var name = {
 };
 var timer = $('#timer').val();
 
+$('#close').click(function() {
+	window.location.href = '/';
+});
 $('#gpio-enable').click(function() {
 	if (this.value == 1) {
 		$(this).val(0);

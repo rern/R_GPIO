@@ -99,7 +99,7 @@
             <li class="<?=$this->uri(1, 'debug', 'active')?>"><a href="/debug/"><i class="fa fa-bug"></i> Debug</a></li>
             <li class="<?=$this->uri(1, 'credits', 'active')?>"><a href="/credits/"><i class="fa fa-trophy"></i> Credits</a></li>
             <li class="<?=$this->uri(1, 'dev', 'active')?>"><a href="/dev/"><i class="fa fa-code"></i> Development</a></li>
-			<li><a href="/gpiosettings.php" target="_blank"><i class="fa fa-volume-off"></i> GPIO</a></li>
+			<li><a href="/gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
             <li><a href="#poweroff-modal" data-toggle="modal"><i class="fa fa-power-off"></i> Turn off</a></li>
         </ul>
     </div>    
