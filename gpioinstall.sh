@@ -176,7 +176,7 @@ fi
 rm RuneUI_GPIO.tar.xz
 
 # for installed RuneUI password #######################################
-if ! grep -qs 'logout.php' /srv/http/app/templates/header.php.gpio; then
+if grep -qs 'logout.php' /srv/http/app/templates/header.php.gpio; then
 	sed -i '/poweroff-modal/a \
 				<li><a href="/logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
 	' /srv/http/app/templates/header.php
