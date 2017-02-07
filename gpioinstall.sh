@@ -99,6 +99,11 @@ if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/nul
 	title "Install Pip ..."
 	pacman -S --noconfirm python2-pip
 	ln -s /usr/bin/pip2 /usr/bin/pip
+else
+	title "Get Pip packages file ..."
+	wget -q --show-progress -O varpip.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/varpip.tar?raw=1"
+	tar -xvf varpip.tar -C /
+	rm varpip.tar
 fi
 
 if ! python -c "import mpd" > /dev/null 2>&1; then
