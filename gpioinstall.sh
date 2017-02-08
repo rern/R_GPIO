@@ -165,8 +165,7 @@ cp -v $file $file'.gpio'
 file=$path'header.php'
 cp -v $file $file'.gpio'
 
-file='/etc/udev/rules.d/rune_usb-audio.rules'
-cp -rfv $file $file'.gpio'
+sed -i '/SUBSYSTEM=="sound"/s/^/#/' /etc/udev/rules.d/rune_usb-audio.rules
 udevadm control --reload
 
 if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
