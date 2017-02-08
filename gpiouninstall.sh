@@ -112,12 +112,11 @@ mv -v $file'.gpio' $file
 
 file='/etc/mpd.conf'
 cp -rfv $file'.pacorig' $file
-file='/etc/pacman.d/mirrorlist'
-cp -fv $file'.original' $file
-file='/etc/udev/rules.d/rune_usb-audio.rules'
-mv -fv $file'.gpio' $file
+
 rm -vrf /etc/sudoers.d
 udevadm control --reload
+
+sed -i '/SUBSYSTEM=="sound"/s/^#//' /etc/udev/rules.d/rune_usb-audio.rules
 
 if [ $arg -eq 0 ]; then # skip if reinstall - gpiouninstall.sh <arg>
 	title "Clear PHP OPcache ..."
