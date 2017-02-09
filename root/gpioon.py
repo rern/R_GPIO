@@ -3,9 +3,17 @@ import RPi.GPIO as GPIO
 import json
 import time
 import os
+import requests
+import filecmp
 
-os.system('/usr/bin/cp -rf /etc/mpd.conf.gpio /etc/mpd.conf > /dev/null 2>&1 &')
-os.system('/usr/bin/systemctl restart mpd > /dev/null 2>&1 &')
+# custom mpd.conf for DAC
+if filecmp.cmp('/etc/mpd.conf', '/etc/mpd.conf.gpio') is False:
+	os.system('/usr/bin/cp /etc/mpd.conf.gpio /etc/mpd.conf')
+	os.system('/usr/bin/systemctl restart mpd')
+	os.system('/usr/bin/sudo /usr/bin/killall midori 2>&1; sleep 1; startx > /dev/null 2>&1 &')
+	conf = 1
+else:
+	conf = 0
 
 with open('/srv/http/gpio.json') as jsonfile:
 	gpio = json.load(jsonfile)
@@ -27,6 +35,18 @@ GPIO.setwarnings(0)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(onx, GPIO.OUT)
 
+pullup = GPIO.input(onx[1])
+
+data = {'conf': conf, 'pullup': pullup}
+
+print(json.dumps(data))
+
+if pullup == 0:
+	exit()
+
+# broadcast pushstream (message non-char in curl must be escaped)
+requests.post("http://localhost/pub?id=gpio", json="ON")
+
 if on1 != 0:
 	GPIO.output(on1, 0)
 if on2 != 0:
@@ -39,4 +59,8 @@ if on4 != 0:
 	time.sleep(ond3)
 	GPIO.output(on4, 0)
 	
-print(GPIO.input(onx[1]))
+if GPIO.input(onx[1]) != 0:
+	requests.post("http://localhost/pub?id=gpio", json="FAILED")
+	exit()
+
+os.system('/usr/bin/sudo /root/gpiotimer.py > /dev/null 2>&1 &')

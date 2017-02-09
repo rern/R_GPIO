@@ -22,32 +22,36 @@ $gpio = json_decode($gpio, true);
 
 $enable = $gpio['enable']['enable'];
 
-$pin1 = $gpio['pin']['pin1'];
-$pin2 = $gpio['pin']['pin2'];
-$pin3 = $gpio['pin']['pin3'];
-$pin4 = $gpio['pin']['pin4'];
+$pin = $gpio['pin'];
+$pin1 = $pin['pin1'];
+$pin2 = $pin['pin2'];
+$pin3 = $pin['pin3'];
+$pin4 = $pin['pin4'];
 $pincount = ($pin1 == 0?0:1) + ($pin2 == 0?0:1) + ($pin3 == 0?0:1) + ($pin4 == 0?0:1);
 
-$name1 = $gpio['name']['name1'];
-$name2 = $gpio['name']['name2'];
-$name3 = $gpio['name']['name3'];
-$name4 = $gpio['name']['name4'];
+$name = $gpio['name'];
+$name1 = $name['name1'];
+$name2 = $name['name2'];
+$name3 = $name['name3'];
+$name4 = $name['name4'];
 
-$on1 = $gpio['on']['on1'];
-$ond1 = $gpio['on']['ond1'];
-$on2 = $gpio['on']['on2'];
-$ond2 = $gpio['on']['ond2'];
-$on3 = $gpio['on']['on3'];
-$ond3 = $gpio['on']['ond3'];
-$on4 = $gpio['on']['on4'];
+$on = $gpio['on'];
+$on1 = $on['on1'];
+$ond1 = $on['ond1'];
+$on2 = $on['on2'];
+$ond2 = $on['ond2'];
+$on3 = $on['on3'];
+$ond3 = $on['ond3'];
+$on4 = $on['on4'];
 
-$off1 = $gpio['off']['off1'];
-$offd1 = $gpio['off']['offd1'];
-$off2 = $gpio['off']['off2'];
-$offd2 = $gpio['off']['offd2'];
-$off3 = $gpio['off']['off3'];
-$offd3 = $gpio['off']['offd3'];
-$off4 = $gpio['off']['off4'];
+$off = $gpio['off'];
+$off1 = $off['off1'];
+$offd1 = $off['offd1'];
+$off2 = $off['off2'];
+$offd2 = $off['offd2'];
+$off3 = $off['off3'];
+$offd3 = $off['offd3'];
+$off4 = $off['off4'];
 
 $timer = $gpio['timer']['timer'];
 
