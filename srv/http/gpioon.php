@@ -13,8 +13,12 @@ exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=gpio" -d \"ON\"'); //
 // send command
 $pullup = exec('/usr/bin/sudo /root/gpioon.py');
 
-// if pulldown failed, broadcast message
-if ($pullup != 0) exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=gpio" -d '.escapeshellarg('"FAILED"'));
-
-// send gpio timer command (run in background)
-exec('/usr/bin/sudo /root/gpiotimer.py > /dev/null 2>&1 &');
+if ($pullup == 0) {
+  // send gpio timer command (run in background)
+  exec('/usr/bin/sudo /root/gpiotimer.py > /dev/null 2>&1 &');
+  // restart midori for show/hide volume
+  exec('/usr/bin/sudo /usr/bin/killall midori; sleep 1; startx > /dev/null 2>&1 &');
+} else {
+  // if pulldown failed, broadcast message
+  exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=gpio" -d '.escapeshellarg('"FAILED"'));
+}
