@@ -1,6 +1,8 @@
 $(document).ready(function() {
 // document ready start********************************************************************
 var timer = false; // for 'setInterval' status check
+ond = $('#ond').val() * 1000;
+offd = $('#offd').val() * 1000;
 
 function buttonOnOff(enable, pullup) {
 	if (pullup == 0 || pullup == 'ON') { // R pulldown low > trigger signal = relay on
@@ -46,8 +48,8 @@ pushstreamGPIO.onmessage = function(state) { // on receive broadcast
 		'FAILED': 'Powering FAILED !',
 	}
 	var dly = {
-		'ON': 8000,
-		'OFF': 4000,
+		'ON': ond,
+		'OFF': offd,
 		'IDLE': sec * 1000,
 		'FAILED': 8000,
 	}
@@ -95,64 +97,33 @@ pushstreamGPIO.connect();
 
 $('#gpio').click(function() {
 	var on = $('#gpio').hasClass('btn-primary');
-	$.get('gpiostatus.php', function(status) { // disable immediate toggle
-		if (status) {
-			var json = $.parseJSON(status);
-			var delay = 8000 + 1000 * (on ? json.offd : json.ond);
-			$('#gpio').prop('disabled', true);
-			setTimeout(function() { // re-enable 8s after sequence
-				$('#gpio').prop('disabled', false);
-			}, delay);
-		}
-	});
+	var delay = 8000 + (on ? offd : ond);
+	$('#gpio').prop('disabled', true);
+	setTimeout(function() { // re-enable 8s after sequence
+		$('#gpio').prop('disabled', false);
+	}, delay);
 	$.get(on ? 'gpiooff.php' : 'gpioon.php',
-		function(state) {
-		if (state){
-			PNotify.removeAll();
-			new PNotify({
-				icon: 'fa fa-warning fa-lg',
-				title: 'GPIO',
-				text: state,
-				delay: 4000,
-				addclass: 'pnotify_custom'
-			});
-			gpioOnOff();
-		}
-		$.get('gpiostatus.php', function(status) {
+		function(status) {
 			var json = $.parseJSON(status);
-			if (json.vol == $('#volume-knob').is(':visible')) {
-				buttonOnOff(json.enable, json.pullup);
-			} else {
-				location.reload();
+			if (json.pullup == on ? 1 : 0){
+				PNotify.removeAll();
+				new PNotify({
+					icon: 'fa fa-warning fa-lg',
+					title: 'GPIO',
+					text: on ? 'Already ON' : 'Already OFF',
+					delay: 4000,
+					addclass: 'pnotify_custom'
+				});
+				gpioOnOff();
 			}
-		});
-	});
-});
-
-// play reset timer
-$('#play').click(function(){
-	$.get('gpiostatus.php', function(status) {
-		var json = $.parseJSON(status);
-		if (json.pullup == 0) {
-			$.get('gpiotimerreset.php');
-			PNotify.removeAll();
+			if (json.conf == 1) location.reload();
 		}
-	});
+	);
 });
 
 // power off menu
 $('#reboot, #poweroff').click(function() {
-	var file = this.id +'.php';
-	$.get('gpiostatus.php', function(status) {
-		var json = $.parseJSON(status);
-		if (json.pullup) {
-			$.get(file);
-		} else {
-			$.get('gpiooff.php', function() {
-				$.get(file);
-			});
-		}
-	});
+	$.get(this.id +'.php');
 });
 // document ready end *********************************************************************
 });
