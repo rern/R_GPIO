@@ -103,12 +103,13 @@ title "Remove service ..."
 systemctl disable gpioset
 rm -v /usr/lib/systemd/system/gpioset.service
 
-title "Restore backup files ..."
-path='/srv/http/app/templates/'
-file=$path'footer.php'
-mv -v $file'.gpio' $file
-file=$path'header.php'
-mv -v $file'.gpio' $file
+sed -i -e '1d
+' -e '/$file/,/^\s*$/{d}
+' -e '/gpiosettings.php/d
+' -e '/id="gpio"/d
+' /srv/http/app/templates/header.php
+
+sed -i '/gpio.js/d' /srv/http/app/templates/footer.php
 
 file='/etc/mpd.conf'
 cp -rfv $file'.pacorig' $file
