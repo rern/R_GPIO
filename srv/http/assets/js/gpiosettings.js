@@ -156,19 +156,6 @@ $('.selectpicker.on, .selectpicker.off').change(function() {
 	txtcolor();
 });
 
-function gpiosave() {
-	$('.delay').prop('disabled', false); // for serialize
-	$.post('gpiosave.php',
-		$('#gpioform').serialize() +'&enable='+ $('#gpio-enable').val(),
-		function(data) {
-			if (data) {
-				location.reload();
-			} else {
-				alert('GPIO Settings Failed!')
-			}
-		}
-	);
-}
 $('#gpiosave').click(function() {
 	var on = [$('#on1').val(),
 		$('#on2').val(),
@@ -181,16 +168,19 @@ $('#gpiosave').click(function() {
 	if (on !== off) {
 		alert(on +' On : '+ off +' Off \nNumber of equipments not matched !');
 	} else {
-		$.get('gpiostatus.php', function(status) {
-			var json = $.parseJSON(status);
-			if (json.pullup == 0) {
-				$.get('gpiooff.php', function() {
-					gpiosave();
-				});
-			} else {
-				gpiosave();
+		$('.delay').prop('disabled', false); // for serialize
+		$.post('gpiosave.php',
+			$('#gpioform').serialize() +'&enable='+ $('#gpio-enable').val(),
+			function(data) {
+				if (data) {
+					$.get('gpiotimerreset.php', function() {
+						location.reload();
+					});
+				} else {
+					alert('GPIO Settings Failed!')
+				}
 			}
-		});
+		);
 	}
 });
 

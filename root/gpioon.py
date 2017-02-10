@@ -63,4 +63,5 @@ if GPIO.input(onx[1]) != 0:
 	requests.post("http://localhost/pub?id=gpio", json="FAILED")
 	exit()
 
-os.system('/usr/bin/sudo /root/gpiotimer.py > /dev/null 2>&1 &')
+if gpio['timer']['timer'] != 0:
+	os.system('/usr/bin/sudo /root/gpiotimer.py > /dev/null 2>&1 &')

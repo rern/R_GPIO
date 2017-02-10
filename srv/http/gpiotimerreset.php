@@ -1,3 +1,4 @@
 <?php
-exec('sudo /usr/bin/killall -9 gpiotimer.py');
-exec('sudo /root/gpiotimer.py > /dev/null 2>&1 &');
+exec('/usr/bin/sudo /usr/bin/pgrep gpiotimer.py', $pid);
+if ($pid) exec('/usr/bin/sudo /usr/bin/killall -9 gpiotimer.py; /root/gpiotimer.py > /dev/null 2>&1 &');
+?>
