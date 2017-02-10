@@ -1,3 +1,3 @@
 <?php
-$status = exec('sudo /root/gpiostatus.py');
+exec('sudo /root/gpiostatus.py', $status);
 echo $status;
