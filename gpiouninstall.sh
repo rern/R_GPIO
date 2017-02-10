@@ -95,6 +95,7 @@ rm -v /srv/http/gpiotimerreset.php
 rm -v /srv/http/poweroff.php
 rm -v /srv/http/reboot.php
 rm -v /srv/http/assets/css/gpiosettings.css
+rm -v /srv/http/assets/img/RPi3_GPIOs.png
 rm -v /srv/http/assets/js/gpio.js
 rm -v /srv/http/assets/js/gpiosettings.js
 rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
