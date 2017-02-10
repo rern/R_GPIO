@@ -158,13 +158,6 @@ wget -q --show-progress -O RuneUI_GPIO.tar.xz "https://github.com/rern/RuneUI_GP
 wget -q --show-progress -O gpiouninstall.sh "https://github.com/rern/RuneUI_GPIO/blob/master/gpiouninstall.sh?raw=1"
 chmod 755 gpiouninstall.sh
 
-title "Backup existing files ..."
-path='/srv/http/app/templates/'
-file=$path'footer.php'
-cp -v $file $file'.gpio'
-file=$path'header.php'
-cp -v $file $file'.gpio'
-
 sed -i '/SUBSYSTEM=="sound"/s/^/#/' /etc/udev/rules.d/rune_usb-audio.rules
 udevadm control --reload
 
@@ -172,6 +165,26 @@ if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
 	file='/etc/mpd.conf'
 	cp -rfv $file $file'.gpio'
 fi
+
+sed -i -e '/poweroff-modal/i \
+            <li><a href="/gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
+' -e '/playback-controls/i \
+    <button id="gpio" class="btn-default"><i class="fa fa-volume-off"></i></button>
+' -e '1 i\<?php\
+$file = '/srv/http/gpio.json';\
+$fileopen = fopen($file, 'r');\
+$gpio = fread($fileopen, filesize($file));\
+fclose($fileopen);\
+$gpio = json_decode($gpio, true);\
+\
+$on = $gpio['on'];\
+$off = $gpio['off'];\
+$ond = $on['ond1'] + $on['ond2'] + $on['ond3'];\
+$offd = $off['offd1'] + $off['offd2'] + $off['offd3'];\
+?>\
+' /srv/http/app/templates/header.php
+
+echo $'<script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>' >> /srv/http/app/templates/footer.php
 
 title "Install files ..."
 if [ ! -f /srv/http/gpio.json ]; then
