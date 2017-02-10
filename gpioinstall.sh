@@ -99,16 +99,15 @@ if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/nul
 	title "Install Pip ..."
 	pacman -S --noconfirm python2-pip
 	ln -s /usr/bin/pip2 /usr/bin/pip
-else
+fi
+
+if ! python -c "import mpd" > /dev/null 2>&1; then
 	if [ ! -e /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz ] || [ ! -e /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl ]; then
 		title "Get Pip packages file ..."
 		wget -q --show-progress -O varpip.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/varpip.tar?raw=1"
 		tar -xvf varpip.tar -C /
 		rm varpip.tar
 	fi
-fi
-
-if ! python -c "import mpd" > /dev/null 2>&1; then
 	title "Install Python-MPD ..."
 	pip install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
 fi
