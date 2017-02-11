@@ -106,6 +106,7 @@ rm -v /usr/lib/systemd/system/gpioset.service
 
 sed -i -e '1d
 ' -e '/$file/,/^\s*$/{d}
+' -e '/id="ond"/,/^\s*$/{d}
 ' -e '/gpiosettings.php/d
 ' -e '/id="gpio"/d
 ' /srv/http/app/templates/header.php
