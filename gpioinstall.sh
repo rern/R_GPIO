@@ -156,6 +156,19 @@ wget -q --show-progress -O RuneUI_GPIO.tar.xz "https://github.com/rern/RuneUI_GP
 wget -q --show-progress -O gpiouninstall.sh "https://github.com/rern/RuneUI_GPIO/blob/master/gpiouninstall.sh?raw=1"
 chmod 755 gpiouninstall.sh
 
+title "Install files ..."
+if [ ! -f /srv/http/gpio.json ]; then
+	tar -Jxvf RuneUI_GPIO.tar.xz -C /
+else
+	tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude='srv/http/gpio.json' 
+fi
+rm RuneUI_GPIO.tar.xz
+
+chmod -R 755 /etc/sudoers.d
+chmod 755 /root/*.py
+chmod 755 /srv/http/*.php
+chown http:http /srv/http/gpio.json
+
 sed -i '/SUBSYSTEM=="sound"/s/^/#/' /etc/udev/rules.d/rune_usb-audio.rules
 udevadm control --reload
 
@@ -164,6 +177,7 @@ if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
 	cp -rfv $file $file'.gpio'
 fi
 
+# modify files #######################################
 sed -i -e '1 i\<?php $file = '/srv/http/gpio.json';\
 $fileopen = fopen($file, 'r');\
 $gpio = fread($fileopen, filesize($file));\
@@ -185,25 +199,12 @@ $offd = $off['offd1'] + $off['offd2'] + $off['offd3'];\
 
 echo $'<script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>' >> /srv/http/app/templates/footer.php
 
-title "Install files ..."
-if [ ! -f /srv/http/gpio.json ]; then
-	tar -Jxvf RuneUI_GPIO.tar.xz -C /
-else
-	tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude='srv/http/gpio.json' 
-fi
-rm RuneUI_GPIO.tar.xz
-
 # for installed RuneUI password #######################################
 if grep -qs 'logout.php' /srv/http/app/templates/header.php.gpio; then
 	sed -i '/poweroff-modal/a \
 				<li><a href="/logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
 	' /srv/http/app/templates/header.php
 fi
-
-chmod -R 755 /etc/sudoers.d
-chmod 755 /root/*.py
-chmod 755 /srv/http/*.php
-chown http:http /srv/http/gpio.json
 
 ./gpioset.py
 systemctl enable gpioset
