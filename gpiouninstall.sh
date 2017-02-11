@@ -100,12 +100,8 @@ rm -v /srv/http/assets/js/gpio.js
 rm -v /srv/http/assets/js/gpiosettings.js
 rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 
-title "Remove service ..."
-systemctl disable gpioset
-rm -v /usr/lib/systemd/system/gpioset.service
-
-sed -i -e '1d
-' -e '/$file/,/^\s*$/{d}
+# restore modified files #######################################
+sed -i -e '/<?php $file =/,/^\s*$/{d}
 ' -e '/id="ond"/,/^\s*$/{d}
 ' -e '/gpiosettings.php/d
 ' -e '/id="gpio"/d
@@ -113,8 +109,13 @@ sed -i -e '1d
 
 sed -i '/gpio.js/d' /srv/http/app/templates/footer.php
 
+title "Remove service ..."
+systemctl disable gpioset
+rm -v /usr/lib/systemd/system/gpioset.service
+
 file='/etc/mpd.conf'
 cp -rfv $file'.pacorig' $file
+systemctl restart mpd
 
 rm -vrf /etc/sudoers.d
 udevadm control --reload
