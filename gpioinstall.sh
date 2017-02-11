@@ -178,7 +178,8 @@ if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
 fi
 
 # modify files #######################################
-sed -i -e '1 i\<?php $file = '/srv/http/gpio.json';\
+sed -i -e '1 i\<?php // gpio\
+$file = '/srv/http/gpio.json';\
 $fileopen = fopen($file, 'r');\
 $gpio = fread($fileopen, filesize($file));\
 fclose($fileopen);\
@@ -187,7 +188,7 @@ $on = $gpio['on'];\
 $off = $gpio['off'];\
 $ond = $on['ond1'] + $on['ond2'] + $on['ond3'];\
 $offd = $off['offd1'] + $off['offd2'] + $off['offd3'];\
-?>\
+?>
 ' -e '/barleft/i \
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>\
