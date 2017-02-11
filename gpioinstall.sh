@@ -176,6 +176,9 @@ $off = $gpio['off'];\
 $ond = $on['ond1'] + $on['ond2'] + $on['ond3'];\
 $offd = $off['offd1'] + $off['offd2'] + $off['offd3'];\
 ?>\
+' -e '/barleft/i \
+<input id="ond" type="hidden" value=<?=$ond ?>>\
+<input id="offd" type="hidden" value=<?=$offd ?>>\
 ' -e '/poweroff-modal/i \
             <li><a href="/gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
 ' -e '/playback-controls/i \
