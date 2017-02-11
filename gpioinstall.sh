@@ -165,8 +165,7 @@ if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
 	cp -rfv $file $file'.gpio'
 fi
 
-sed -i -e '1 i\<?php\
-$file = '/srv/http/gpio.json';\
+sed -i -e '1 i\<?php $file = '/srv/http/gpio.json';\
 $fileopen = fopen($file, 'r');\
 $gpio = fread($fileopen, filesize($file));\
 fclose($fileopen);\
