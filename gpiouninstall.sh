@@ -103,8 +103,8 @@ rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 # restore modified files #######################################
 sed -i -e '/<?php $file =/,/^\s*$/{d}
 ' -e '/id="ond"/,/^\s*$/{d}
-' -e '/gpiosettings.php/d
 ' -e '/id="gpio"/d
+' -e '/gpiosettings.php/d
 ' /srv/http/app/templates/header.php
 
 sed -i '/gpio.js/d' /srv/http/app/templates/footer.php
