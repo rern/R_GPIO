@@ -79,7 +79,6 @@ if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
 		1 ) ./gpiouninstall.sh re;; # with any argument to skip success message
 		* ) echo
 			titleend "$runegpio reinstall cancelled."
-			rm gpioinstall.sh
 			exit;;	
 	esac
 fi
