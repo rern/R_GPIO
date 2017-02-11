@@ -200,13 +200,6 @@ $offd = $off['offd1'] + $off['offd2'] + $off['offd3'];\
 
 echo $'<script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>' >> /srv/http/app/templates/footer.php
 
-# for installed RuneUI password #######################################
-if grep -qs 'logout.php' /srv/http/app/templates/header.php.gpio; then
-	sed -i '/poweroff-modal/a \
-				<li><a href="/logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
-	' /srv/http/app/templates/header.php
-fi
-
 ./gpioset.py
 systemctl enable gpioset
 
