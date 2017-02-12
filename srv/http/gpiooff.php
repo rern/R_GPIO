@@ -1,4 +1,4 @@
 <?php
-exec('/usr/bin/sudo /root/gpiooff.py', $pullup);
+$pullup = exec('/usr/bin/sudo /root/gpiooff.py');
 // response to only initiator (no broadcast)
 echo $pullup;
