@@ -101,13 +101,13 @@ rm -v /srv/http/assets/js/gpiosettings.js
 rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 
 # restore modified files #######################################
-sed -i -e '\|<?php // gpio|,\|?>| {d}
-' -e '\|id="ond"|,\|id="offd"| {d}
-' -e '\|id="gpio"|d
-' -e '\|gpiosettings.php|d
+sed -i -e '\|<?php // gpio|,\|?>| d
+' -e '\|id="ond"|,\|id="offd"| d
+' -e '\|id="gpio"| d
+' -e '\|gpiosettings.php| d
 ' /srv/http/app/templates/header.php
 
-sed -i '\|gpio.js|d' /srv/http/app/templates/footer.php
+sed -i '\|gpio.js| d' /srv/http/app/templates/footer.php
 
 title "Remove service ..."
 systemctl disable gpioset
