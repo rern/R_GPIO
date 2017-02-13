@@ -117,7 +117,7 @@ fi
 
 # check RuneUI enhancement #######################################
 if ! grep -qs 'RuneUIe' /srv/http/app/templates/header.php; then
-	echo -e "\nRequired $runeenh not found.\n"
+	echo -e "\nRequired $runeenh install.\n"
 	wget -q --show-progress -O install.sh "https://github.com/rern/RuneUI_enhancement/blob/master/install.sh?raw=1"
 	chmod +x install.sh
 	./install.sh gpio # with any argument to skip local browser restart and success message
