@@ -101,13 +101,13 @@ rm -v /srv/http/assets/js/gpiosettings.js
 rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 
 # restore modified files #######################################
-sed -i -e '/<?php \/\/ gpio/,/?>/{d}
-' -e '/id="ond"/,/id="offd"/{d}
-' -e '/id="gpio"/d
-' -e '/gpiosettings.php/d
+sed -i -e '\|<?php // gpio|,\|?>| {d}
+' -e '\|id="ond"|,\|id="offd"| {d}
+' -e '\|id="gpio"|d
+' -e '\|gpiosettings.php|d
 ' /srv/http/app/templates/header.php
 
-sed -i '/gpio.js/d' /srv/http/app/templates/footer.php
+sed -i '\|gpio.js|d' /srv/http/app/templates/footer.php
 
 title "Remove service ..."
 systemctl disable gpioset
@@ -117,10 +117,10 @@ file='/etc/mpd.conf'
 cp -rfv $file'.pacorig' $file
 systemctl restart mpd
 
-rm -vrf /etc/sudoers.d
+sed -i '\|SUBSYSTEM=="sound"| s|^#||' /etc/udev/rules.d/rune_usb-audio.rules
 udevadm control --reload
 
-sed -i '/SUBSYSTEM=="sound"/s/^#//' /etc/udev/rules.d/rune_usb-audio.rules
+rm -vrf /etc/sudoers.d
 
 if [ $arg -eq 0 ]; then # skip if reinstall - gpiouninstall.sh <arg>
 	title "Clear PHP OPcache ..."
