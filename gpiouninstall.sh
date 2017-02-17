@@ -51,7 +51,7 @@ fi
 ./gpiooff.py  > /dev/null 2>&1 &
 
 title2 "Uninstall $runegpio ..."
-
+# uninstall packages #######################################
 title "$runegpio installed packages"
 pacman -Q python2-pip > /dev/null 2>&1 && pip='Python-Pip,' || pip=''
 echo 'Uninstall' $pip' Python-MPD and Python-Requests:'
@@ -72,6 +72,7 @@ case $answer in
 			fi
 esac
 
+# remove files #######################################
 title "Remove files ..."
 rm -v /root/gpiooff.py
 rm -v /root/gpioon.py
