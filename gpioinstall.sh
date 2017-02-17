@@ -154,12 +154,12 @@ chmod 755 /srv/http/*.php
 # modify files #######################################
 title "Modify files ..."
 udev='/etc/udev/rules.d/rune_usb-audio.rules'
-echo $udev '...'
+echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $udev
 udevadm control --reload
 
 header='/srv/http/app/templates/header.php'
-echo $header '...'
+echo $header
 sed -i -e $'1 i\
 <?php // gpio\
 $file = \'/srv/http/gpio.json\';\
@@ -185,7 +185,7 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $header
 
 footer='/srv/http/app/templates/footer.php'
-echo $footer '...'
+echo $footer
 sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e 's/id="syscmd-reboot"/id="reboot"/
 ' -e $'$ a\

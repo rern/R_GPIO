@@ -106,7 +106,7 @@ fi
 # restore modified files #######################################
 title "Restore modified files ..."
 header='/srv/http/app/templates/header.php'
-echo $header '...'
+echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
 ' -e '/id="ond"/, /id="offd"/ d
 ' -e '/id="gpio"/ d
@@ -116,7 +116,7 @@ sed -i -e '\|<?php // gpio|, /?>/ d
 ! $enh && sed -i -e '/pnotify.css/ d' $header
 
 footer='/srv/http/app/templates/footer.php'
-echo $footer '...'
+echo $footer
 sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e 's/id="reboot"/id="syscmd-reboot"/
 ' -e '/gpio.js/ d
@@ -124,18 +124,17 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 # no RuneUI enhancement
 ! $enh && sed -i -e '/pnotify3.custom.min.js/ d' $footer
 
+udev='/etc/udev/rules.d/rune_usb-audio.rules'
+echo $udev
+sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
+udevadm control --reload
+
 title "Remove service ..."
 systemctl disable gpioset
 rm -v /usr/lib/systemd/system/gpioset.service
 
-file='/etc/mpd.conf'
-cp -rfv $file'.pacorig' $file
+cp -rfv /etc/mpd.conf.pacorig /etc/mpd.conf
 systemctl restart mpd
-
-udev='/etc/udev/rules.d/rune_usb-audio.rules'
-echo $udev '...'
-sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
-udevadm control --reload
 
 rm -vrf /etc/sudoers.d
 
