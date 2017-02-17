@@ -106,6 +106,7 @@ fi
 # restore modified files #######################################
 title "Restore modified files ..."
 header='/srv/http/app/templates/header.php'
+echo $header '...'
 sed -i -e '\|<?php // gpio|, /?>/ d
 ' -e '/id="ond"/, /id="offd"/ d
 ' -e '/id="gpio"/ d
@@ -115,6 +116,7 @@ sed -i -e '\|<?php // gpio|, /?>/ d
 ! $enh && sed -i -e '/pnotify.css/ d' $header
 
 footer='/srv/http/app/templates/footer.php'
+echo $footer '...'
 sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e 's/id="reboot"/id="syscmd-reboot"/
 ' -e '/gpio.js/ d
@@ -130,7 +132,9 @@ file='/etc/mpd.conf'
 cp -rfv $file'.pacorig' $file
 systemctl restart mpd
 
-sed -i '/SUBSYSTEM=="sound"/ s/^#//' /etc/udev/rules.d/rune_usb-audio.rules
+udev='/etc/udev/rules.d/rune_usb-audio.rules'
+echo $udev '...'
+sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
 udevadm control --reload
 
 rm -vrf /etc/sudoers.d
@@ -148,6 +152,6 @@ if pgrep midori > /dev/null; then
 fi
 
 title2 "$runegpio successfully uninstalled."
-titleend "$info Refresh browser for default RuneUI"
+titleend "$info Refresh browser for no $runegpio."
 
 rm gpiouninstall.sh
