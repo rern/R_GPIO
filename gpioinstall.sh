@@ -3,33 +3,28 @@
 # gpioinstall.sh - RuneUI GPIO
 # https://github.com/rern/RuneUI_GPIO
 
-# remove install files
+# remove gpioinstall.sh
 # already installed
 #		reinstall ?
 #			exit
 #			uninstall
 # install
-#		set mirror servers
 #		Pip
 #		python packages
-#		check RuneUI enhancement
-#			install
 #		get gpiouninstall.sh
 #		get tar.xz
-#		backup
+#		modify files
 #		extract
-#	remove tar.xz
+#		remove tar.xz
 #		set gpio default
 # 		enable gpioset service
 #		reload sudoers
-# success (skip if reinstall with gpioinstall.sh)
+# success
 #		clear opcache
-#		Restart local browser
+#		restart local browser
 #		info
 
 rm gpioinstall.sh
-
-arg=$#
 
 linered='\e[0;31m---------------------------------------------------------\e[m'
 line2='\e[0;36m=========================================================\e[m'
@@ -37,9 +32,7 @@ line='\e[0;36m---------------------------------------------------------\e[m'
 bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
 warn=$( echo $(tput setab 1) ! $(tput setab 0) )
 info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
-runeenh=$( echo $(tput setaf 6)RuneUI Enhancement$(tput setaf 7) )
 runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
-sync=0
 
 # functions #######################################
 title2() {
@@ -67,7 +60,7 @@ errorend() {
 }
 
 # check already installed #######################################
-if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
+if [ -e /srv/http/assets/css/gpiosettings.css ]; then
 	title "$info $runegpio already installed."
 	echo 'Reinstall' $runegpio':'
 	echo -e '  \e[0;36m0\e[m No'
@@ -76,10 +69,10 @@ if grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
 	echo -e '\e[0;36m0\e[m / 1 ? '
 	read -n 1 answer
 	case $answer in
-		1 ) ./gpiouninstall.sh re;; # with any argument to skip success message
+		1 ) ./gpiouninstall.sh;;
 		* ) echo
 			titleend "$runegpio reinstall cancelled."
-			exit;;	
+			exit;;
 	esac
 fi
 
@@ -115,14 +108,6 @@ if ! python -c "import requests" > /dev/null 2>&1; then
 	pip install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
 fi
 
-# check RuneUI enhancement #######################################
-if ! grep -qs 'RuneUIe' /srv/http/app/templates/header.php; then
-	title "Install required $runeenh ..."
-	wget -q --show-progress -O install.sh "https://github.com/rern/RuneUI_enhancement/blob/master/install.sh?raw=1"
-	chmod +x install.sh
-	./install.sh gpio # with any argument to skip local browser restart and success message
-fi
-
 # get DAC config #######################################
 if [ -f /etc/mpd.conf.gpio ]; then
 		title "$info DAC configuration from previous install found."
@@ -156,28 +141,22 @@ wget -q --show-progress -O RuneUI_GPIO.tar.xz "https://github.com/rern/RuneUI_GP
 wget -q --show-progress -O gpiouninstall.sh "https://github.com/rern/RuneUI_GPIO/blob/master/gpiouninstall.sh?raw=1"
 chmod 755 gpiouninstall.sh
 
-title "Install files ..."
-if [ ! -f /srv/http/gpio.json ]; then
-	tar -Jxvf RuneUI_GPIO.tar.xz -C /
-else
-	tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude='srv/http/gpio.json' 
-fi
+# extract files #######################################
+title "Install new files ..."
+[ -f /srv/http/gpio.json ] && excld='srv/http/gpio.json' || excld=''
+tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude=$excld
 rm RuneUI_GPIO.tar.xz
 
 chmod -R 755 /etc/sudoers.d
 chmod 755 /root/*.py
 chmod 755 /srv/http/*.php
-chown http:http /srv/http/gpio.json
-
-sed -i '/SUBSYSTEM=="sound"/s/^/#/' /etc/udev/rules.d/rune_usb-audio.rules
-udevadm control --reload
-
-if [ ! -f /etc/mpd.conf.gpio ]; then # skip if reinstall
-	file='/etc/mpd.conf'
-	cp -rfv $file $file'.gpio'
-fi
 
 # modify files #######################################
+title "Modify files ..."
+sed -i '/SUBSYSTEM=="sound"/ s/^/#/' /etc/udev/rules.d/rune_usb-audio.rules
+udevadm control --reload
+
+header='/srv/http/app/templates/header.php'
 sed -i -e $'1 i\
 <?php // gpio\
 $file = \'/srv/http/gpio.json\';\
@@ -190,33 +169,49 @@ $off = $gpio[\'off\'];\
 $ond = $on[\'ond1\'] + $on[\'ond2\'] + $on[\'ond3\'];\
 $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ?>
-' -e '\|barleft| i\
+' -e '/id="menu-top"/ i\
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>
-' -e '\|poweroff-modal| i\
-            <li><a href="/gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
-' -e '\|playback-controls| i\
-    <button id="gpio" class="btn-default"><i class="fa fa-volume-off"></i></button>
-' /srv/http/app/templates/header.php
+' -e '/poweroff-modal/ i\
+            <li><a href="gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
+' -e '/class="home"/ a\
+    <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
+' $header
+# no RuneUI enhancement
+! grep -q 'pnotify.css' $header &&
+	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $header
 
-echo $'<script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>' >> /srv/http/app/templates/footer.php
+footer='/srv/http/app/templates/footer.php'
+sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
+' -e 's/id="syscmd-reboot"/id="reboot"/
+' -e $'$ a\
+<script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
+' $footer
+# no RuneUI enhancement
+! grep -q 'pnotify3.custom.min.js' $footer &&
+	sed -i $'$ a\
+	<script src="<?=$this->asset(\'/js/vendor/pnotify3.custom.min.js\')?>"></script>
+	' $footer
 
-./gpioset.py
+[ ! -f /etc/mpd.conf.gpio ] &&
+	cp -rfv /etc/mpd.conf /etc/mpd.conf.gpio
+
 systemctl enable gpioset
+systemctl daemon-reload
+systemctl start gpioset
 
-if [ $arg -eq 0 ]; then # skip if reinstall - gpioinstall.sh <arg>
-	title "Clear PHP OPcache ..."
-	curl '127.0.0.1/clear'
-	echo
+# refresh #######################################
+title "Clear PHP OPcache ..."
+curl '127.0.0.1/clear'
+echo
 
-	if pgrep midori > /dev/null; then
-		killall midori
-		sleep 1
-		startx  > /dev/null 2>&1 &
-		echo -e '\nLocal browser restarted.\n'
-	fi
-	
-	title2 "$runegpio successfully installed."
-	echo $info 'Refresh browser and go to Menu > GPIO for settings.'
-	titleend "To uninstall:   ./uninstall.sh"
+if pgrep midori > /dev/null; then
+	killall midori
+	sleep 1
+	startx  > /dev/null 2>&1 &
+	echo -e '\nLocal browser restarted.\n'
 fi
+
+title2 "$runegpio successfully installed."
+echo $info 'Refresh browser and go to Menu > GPIO for settings.'
+titleend "To uninstall:   ./gpiouninstall.sh"

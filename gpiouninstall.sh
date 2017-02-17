@@ -11,12 +11,11 @@
 #		disable service
 #		remove gpio data
 #		restore files
-# success (skip if install with gpioinstall.sh)
+# success
 #		clear opcache
+#		restart local browser
 #		info
-# remove install files
-
-arg=$#
+# remove gpiouninstall.sh
 
 linered='\e[0;31m---------------------------------------------------------\e[m'
 line2='\e[0;36m=========================================================\e[m'
@@ -24,11 +23,9 @@ line='\e[0;36m---------------------------------------------------------\e[m'
 bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
 warn=$( echo $(tput setab 1) ! $(tput setab 0) )
 info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
-runeenh=$( echo $(tput setaf 6)RuneUI Enhancement$(tput setaf 7) )
 runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
 
 # functions #######################################
-
 title2() {
 		echo -e "\n$line2\n"
 		echo -e "$bar $1"
@@ -45,8 +42,7 @@ titleend() {
 }
 
 # check installed #######################################
-
-if ! grep -qs 'id="gpio"' /srv/http/app/templates/header.php; then
+if [ ! -e /srv/http/assets/css/gpiosettings.css ]; then
 	title "$info $runegpio not found."
 	exit
 fi
@@ -77,7 +73,6 @@ case $answer in
 esac
 
 title "Remove files ..."
-
 rm -v /root/gpiooff.py
 rm -v /root/gpioon.py
 rm -v /root/gpioset.py
@@ -85,29 +80,47 @@ rm -v /root/gpiostatus.py
 rm -v /root/gpiotimer.py
 rm -v /root/poweroff.py
 rm -v /root/reboot.py
+path='/srv/http/'
+rm -v $path'gpiooff.php'
+rm -v $path'gpioon.php'
+rm -v $path'gpiosave.php'
+rm -v $path'gpiosettings.php'
+rm -v $path'gpiostatus.php'
+rm -v $path'gpiotimerreset.php'
+rm -v $path'poweroff.php'
+rm -v $path'reboot.php'
+path='/srv/http/assets/'
+rm -v $path'css/gpiosettings.css'
+rm -v $path'img/RPi3_GPIOs.png'
+rm -v $path'js/gpio.js'
+rm -v $path'js/gpiosettings.js'
+rm -v $path'js/vendor/bootstrap-select-1.12.1.min.js'
 
-rm -v /srv/http/gpiooff.php
-rm -v /srv/http/gpioon.php
-rm -v /srv/http/gpiosave.php
-rm -v /srv/http/gpiosettings.php
-rm -v /srv/http/gpiostatus.php
-rm -v /srv/http/gpiotimerreset.php
-rm -v /srv/http/poweroff.php
-rm -v /srv/http/reboot.php
-rm -v /srv/http/assets/css/gpiosettings.css
-rm -v /srv/http/assets/img/RPi3_GPIOs.png
-rm -v /srv/http/assets/js/gpio.js
-rm -v /srv/http/assets/js/gpiosettings.js
-rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
+# if RuneUI enhancement not installed
+[ -e $path'css/custom.css' ] && enh=true || enh=false
+if ! $enh; then
+	rm -v $path'css/pnotify.css'
+	rm -v $path'js/vendor/pnotify3.custom.min.js'
+fi
 
 # restore modified files #######################################
-sed -i -e '\|<?php // gpio|,\|?>| d
-' -e '\|id="ond"|,\|id="offd"| d
-' -e '\|id="gpio"| d
-' -e '\|gpiosettings.php| d
-' /srv/http/app/templates/header.php
+title "Restore modified files ..."
+header='/srv/http/app/templates/header.php'
+sed -i -e '\|<?php // gpio|, /?>/ d
+' -e '/id="ond"/, /id="offd"/ d
+' -e '/id="gpio"/ d
+' -e '/gpiosettings.php/ d
+' $header
+# no RuneUI enhancement
+! $enh && sed -i -e '/pnotify.css/ d' $header
 
-sed -i '\|gpio.js| d' /srv/http/app/templates/footer.php
+footer='/srv/http/app/templates/footer.php'
+sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
+' -e 's/id="reboot"/id="syscmd-reboot"/
+' -e '/gpio.js/ d
+' $footer
+# no RuneUI enhancement
+! $enh && sed -i -e '/pnotify3.custom.min.js/ d' $footer
 
 title "Remove service ..."
 systemctl disable gpioset
@@ -117,25 +130,24 @@ file='/etc/mpd.conf'
 cp -rfv $file'.pacorig' $file
 systemctl restart mpd
 
-sed -i '\|SUBSYSTEM=="sound"| s|^#||' /etc/udev/rules.d/rune_usb-audio.rules
+sed -i '/SUBSYSTEM=="sound"/ s/^#//' /etc/udev/rules.d/rune_usb-audio.rules
 udevadm control --reload
 
 rm -vrf /etc/sudoers.d
 
-if [ $arg -eq 0 ]; then # skip if reinstall - gpiouninstall.sh <arg>
-	title "Clear PHP OPcache ..."
-	curl '127.0.0.1/clear'
-	echo
+# refresh #######################################
+title "Clear PHP OPcache ..."
+curl '127.0.0.1/clear'
+echo
 
-	if pgrep midori > /dev/null; then
-		killall midori
-		sleep 1
-		startx  > /dev/null 2>&1 &
-		echo -e '\nLocal browser restarted.\n'
-	fi
-	
-	title2 "$runegpio successfully uninstalled."
-	titleend "$info Refresh browser for default $runeenh."
+if pgrep midori > /dev/null; then
+	killall midori
+	sleep 1
+	startx  > /dev/null 2>&1 &
+	echo -e '\nLocal browser restarted.\n'
 fi
+
+title2 "$runegpio successfully uninstalled."
+titleend "$info Refresh browser for default RuneUI"
 
 rm gpiouninstall.sh

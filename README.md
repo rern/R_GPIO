@@ -23,7 +23,6 @@ Features
 - up to 4 equipments(relays)
 - delay setting for each equipment(relay)
 - Notification broadcast for `on` `off`
-- delay to prevent immediate `on` `off`
 
 **Idle timer power off**
 - polling 'play' status every minute
@@ -42,7 +41,6 @@ Features
 - Can be used with [**USB PC Remote**](https://github.com/rern/Rune_USB_PC_Remote)
 
 **Easy install and (almost) hassel-free**
-- Also install required [**RuneUI Enhancement**](https://github.com/rern/RuneUI_enhancement) if not yet installed.
 - Offline packages install
 - Prompt for custom MPD configuration  
 

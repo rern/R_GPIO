@@ -13,7 +13,6 @@ pin3 = int(pin['pin3'])
 pin4 = int(pin['pin4'])
 
 pinx = [pin1, pin2, pin3, pin4]
-pinx = [i for i in pinx if i != 0] # remove '0' from array
 
 GPIO.setwarnings(0)
 GPIO.setmode(GPIO.BOARD)

@@ -96,12 +96,11 @@ pushstreamGPIO.addChannel('gpio');
 pushstreamGPIO.connect();
 
 $('#gpio').click(function() {
-	var on = $('#gpio').hasClass('btn-primary');
-	var delay = 8000 + (on ? offd : ond);
-	$('#gpio').prop('disabled', true);
-	setTimeout(function() { // re-enable 8s after sequence
-		$('#gpio').prop('disabled', false);
-	}, delay);
+	var on = $(this).hasClass('btn-primary');
+	$(this).prop('disabled', true);
+	setTimeout(function() {
+		$(this).prop('disabled', false);
+	}, on ? offd : ond);
 	$.get(on ? 'gpiooff.php' : 'gpioon.php',
 		function(status) {
 			var json = $.parseJSON(status);
