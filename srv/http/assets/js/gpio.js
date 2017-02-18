@@ -99,7 +99,7 @@ $('#gpio').click(function() {
 	var on = $(this).hasClass('btn-primary');
 	$(this).prop('disabled', true);
 	setTimeout(function() {
-		$(this).prop('disabled', false);
+		$('#gpio').prop('disabled', false); // $(this) not work
 	}, on ? offd : ond);
 	$.get(on ? 'gpiooff.php' : 'gpioon.php',
 		function(status) {
