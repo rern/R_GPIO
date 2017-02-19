@@ -69,7 +69,7 @@ if [ -e /srv/http/assets/css/gpiosettings.css ]; then
 	echo -e '\e[0;36m0\e[m / 1 ? '
 	read -n 1 answer
 	case $answer in
-		1 ) ./gpiouninstall.sh;;
+		1 ) ./gpiouninstall.sh re;;
 		* ) echo
 			titleend "$runegpio reinstall cancelled."
 			exit;;
