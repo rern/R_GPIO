@@ -60,7 +60,7 @@ errorend() {
 }
 
 # check already installed #######################################
-if [ -e /srv/http/assets/css/gpiosettings.css ]; then
+if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	title "$info $runegpio already installed."
 	echo 'Reinstall' $runegpio':'
 	echo -e '  \e[0;36m0\e[m No'
@@ -79,10 +79,10 @@ fi
 # install packages #######################################
 title2 "Install $runegpio ..."
 
-[ ! -e /usr/bin/python ] && ln -s /usr/bin/python2.7 /usr/bin/python
+[[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
 if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/null 2>&1; then
-	if [ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]; then
+	if [[ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		title "Get packages file ..."
 		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
 		tar -xvf var.tar -C /
@@ -94,7 +94,7 @@ if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/nul
 fi
 
 if ! python -c "import mpd" > /dev/null 2>&1; then
-	if [ ! -e /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz ] || [ ! -e /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl ]; then
+	if [[ ! -e /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		title "Get Pip packages file ..."
 		wget -q --show-progress -O varpip.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/varpip.tar?raw=1"
 		tar -xvf varpip.tar -C /
@@ -109,7 +109,7 @@ if ! python -c "import requests" > /dev/null 2>&1; then
 fi
 
 # get DAC config #######################################
-if [ -f /etc/mpd.conf.gpio ]; then
+if [[ -f /etc/mpd.conf.gpio ]]; then
 		title "$info DAC configuration from previous install found."
 		echo 'Discard:'
 		echo -e '  \e[0;36m0\e[m Discard (new DAC)'
@@ -123,7 +123,7 @@ if [ -f /etc/mpd.conf.gpio ]; then
 					rm -v '/etc/mpd.conf.gpio';;
 		esac
 fi
-if [ ! -f /etc/mpd.conf.gpio ]; then
+if [[ ! -f /etc/mpd.conf.gpio ]]; then
 	title "$info Get DAC configuration ready:"
 	echo 'For external power DAC > power on'
 	echo
@@ -197,7 +197,7 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 	<script src="<?=$this->asset(\'/js/vendor/pnotify3.custom.min.js\')?>"></script>
 	' $footer
 
-[ ! -f /etc/mpd.conf.gpio ] &&
+[[ ! -f /etc/mpd.conf.gpio ]] &&
 	cp -rfv /etc/mpd.conf /etc/mpd.conf.gpio
 
 title "GPIO service ..."
