@@ -140,7 +140,7 @@ systemctl restart mpd
 rm -vrf /etc/sudoers.d
 
 # skip if reinstall - gpiouninstall.sh re (any argument)
-[ $# -ne 0 ] && exit
+(( $# != 0 )) && exit
 
 # refresh #######################################
 title "Clear PHP OPcache ..."
