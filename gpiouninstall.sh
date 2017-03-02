@@ -98,7 +98,7 @@ rm -v $path'js/gpiosettings.js'
 rm -v $path'js/vendor/bootstrap-select-1.12.1.min.js'
 
 # if RuneUI enhancement not installed
-[ -e $path'css/custom.css' ] && enh=true || enh=false
+[[ -e $path'css/custom.css' ]] && enh=true || enh=false
 if ! $enh; then
 	rm -v $path'css/pnotify.css'
 	rm -v $path'js/vendor/pnotify3.custom.min.js'
