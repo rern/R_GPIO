@@ -5,16 +5,16 @@
 
 # (called by uninstall.sh)
 # not installed
-#		exit
+#	exit
 # uninstall
-#		remove files
-#		disable service
-#		remove gpio data
-#		restore files
+#	remove files
+#	disable service
+#	remove gpio data
+#	restore files
 # success
-#		clear opcache
-#		restart local browser
-#		info
+#	clear opcache
+#	restart local browser
+#	info
 # remove gpiouninstall.sh
 
 linered='\e[0;31m---------------------------------------------------------\e[m'
@@ -27,18 +27,18 @@ runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
 
 # functions #######################################
 title2() {
-		echo -e "\n$line2\n"
-		echo -e "$bar $1"
-		echo -e "\n$line2\n"
+	echo -e "\n$line2\n"
+	echo -e "$bar $1"
+	echo -e "\n$line2\n"
 }
 title() {
-		echo -e "\n$line"
-		echo $1
-		echo -e "$line\n"
+	echo -e "\n$line"
+	echo $1
+	echo -e "$line\n"
 }
 titleend() {
-		echo -e "\n$1"
-		echo -e "\n$line\n"
+	echo -e "\n$1"
+	echo -e "\n$line\n"
 }
 
 # check installed #######################################
@@ -63,13 +63,13 @@ read -n 1 answer
 case $answer in
 	1 ) echo;;
 	* ) echo
-			title "Uninstall packages ..."
-			pip uninstall -y python-mpd2
-			pip uninstall -y requests
-			if pacman -Q python2-pip > /dev/null 2>&1; then
-				pacman -Rs --noconfirm python2-pip
-				rm /usr/bin/pip
-			fi
+		title "Uninstall packages ..."
+		pip uninstall -y python-mpd2
+		pip uninstall -y requests
+		if pacman -Q python2-pip > /dev/null 2>&1; then
+			pacman -Rs --noconfirm python2-pip
+			rm /usr/bin/pip
+		fi
 esac
 
 # remove files #######################################
