@@ -5,24 +5,24 @@
 
 # remove gpioinstall.sh
 # already installed
-#		reinstall ?
-#			exit
-#			uninstall
+#	reinstall ?
+#		exit
+#		uninstall
 # install
-#		Pip
-#		python packages
-#		get gpiouninstall.sh
-#		get tar.xz
-#		modify files
-#		extract
-#		remove tar.xz
-#		set gpio default
-# 		enable gpioset service
-#		reload sudoers
+#	Pip
+#	python packages
+#	get gpiouninstall.sh
+#	get tar.xz
+#	modify files
+#	extract
+#	remove tar.xz
+#	set gpio default
+# 	enable gpioset service
+#	reload sudoers
 # success
-#		clear opcache
-#		restart local browser
-#		info
+#	clear opcache
+#	restart local browser
+#	info
 
 rm gpioinstall.sh
 
@@ -36,27 +36,27 @@ runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
 
 # functions #######################################
 title2() {
-		echo -e "\n$line2\n"
-		echo -e "$bar $1"
-		echo -e "\n$line2\n"
+	echo -e "\n$line2\n"
+	echo -e "$bar $1"
+	echo -e "\n$line2\n"
 }
 title() {
-		echo -e "\n$line"
-		echo $1
-		echo -e "$line\n"
+	echo -e "\n$line"
+	echo $1
+	echo -e "$line\n"
 }
 titleend() {
-		echo -e "\n$1"
-		echo -e "\n$line\n"
+	echo -e "\n$1"
+	echo -e "\n$line\n"
 }
 error() {
-		echo -e "\n$linered"
-		echo $warn $1
-		echo -e "$linered\n"
+	echo -e "\n$linered"
+	echo $warn $1
+	echo -e "$linered\n"
 }
 errorend() {
-		echo -e "\n$warn $1"
-		echo -e "\n$linered\n"
+	echo -e "\n$warn $1"
+	echo -e "\n$linered\n"
 }
 
 # check already installed #######################################
@@ -110,18 +110,18 @@ fi
 
 # get DAC config #######################################
 if [[ -f /etc/mpd.conf.gpio ]]; then
-		title "$info DAC configuration from previous install found."
-		echo 'Discard:'
-		echo -e '  \e[0;36m0\e[m Discard (new DAC)'
-		echo -e '  \e[0;36m1\e[m Keep   (same DAC)'
-		echo
-		echo -e '\e[0;36m0\e[m / 1 ? '
-		read -n 1 answer
-		case $answer in
-			1 ) echo;;
-			* ) echo
-					rm -v '/etc/mpd.conf.gpio';;
-		esac
+	title "$info DAC configuration from previous install found."
+	echo 'Discard:'
+	echo -e '  \e[0;36m0\e[m Discard (new DAC)'
+	echo -e '  \e[0;36m1\e[m Keep   (same DAC)'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read -n 1 answer
+	case $answer in
+		1 ) echo;;
+		* ) echo
+			rm -v '/etc/mpd.conf.gpio';;
+	esac
 fi
 if [[ ! -f /etc/mpd.conf.gpio ]]; then
 	title "$info Get DAC configuration ready:"
