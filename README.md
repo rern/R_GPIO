@@ -90,13 +90,12 @@ _(MPD configuration can still be reset to default and setup manually.)_
 Install
 ---
 ```sh
-wget -q --show-progress -O gpioinstall.sh "https://github.com/rern/RuneUI_GPIO/blob/master/gpioinstall.sh?raw=1"; chmod +x gpioinstall.sh; ./gpioinstall.sh
+wget -q --show-progress -O install.sh "https://github.com/rern/RuneUI_GPIO/blob/master/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
 
 Uninstall
 ---
-Selectable: `RuneUI GPIO` only or both `RuneUI GPIO` + `RuneUI Enhancement`
 ```sh
-./uninstall.sh
+./uninstall_gpio.sh
 ```
 _Uninstalling will restore files to originals and delete all added ones._  
