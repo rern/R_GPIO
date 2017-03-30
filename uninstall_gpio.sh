@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# gpiouninstall.sh - RuneUI GPIO
+# uninstall_gpio.sh - RuneUI GPIO
 # https://github.com/rern/RuneUI_GPIO
 
 # (called by uninstall.sh)
@@ -15,7 +15,7 @@
 #	clear opcache
 #	restart local browser
 #	info
-# remove gpiouninstall.sh
+# remove uninstall_gpio.sh
 
 linered='\e[0;31m---------------------------------------------------------\e[m'
 line2='\e[0;36m=========================================================\e[m'
@@ -157,4 +157,4 @@ fi
 title2 "$runegpio successfully uninstalled."
 titleend "$info Refresh browser for no $runegpio."
 
-rm gpiouninstall.sh
+rm uninstall_gpio.sh
