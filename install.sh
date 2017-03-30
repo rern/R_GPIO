@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# gpioinstall.sh - RuneUI GPIO
+# install.sh - RuneUI GPIO
 # https://github.com/rern/RuneUI_GPIO
 
-# remove gpioinstall.sh
+# remove install.sh
 # already installed
 #	reinstall ?
 #		exit
@@ -24,7 +24,7 @@
 #	restart local browser
 #	info
 
-rm gpioinstall.sh
+rm install.sh
 
 linered='\e[0;31m---------------------------------------------------------\e[m'
 line2='\e[0;36m=========================================================\e[m'
