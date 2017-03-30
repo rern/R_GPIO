@@ -138,8 +138,8 @@ fi
 title "Get files ..."
 
 wget -q --show-progress -O RuneUI_GPIO.tar.xz "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/RuneUI_GPIO.tar.xz?raw=1"
-wget -q --show-progress -O gpiouninstall.sh "https://github.com/rern/RuneUI_GPIO/blob/master/gpiouninstall.sh?raw=1"
-chmod 755 gpiouninstall.sh
+wget -q --show-progress -O uninstall_gpio.sh "https://github.com/rern/RuneUI_GPIO/blob/master/uninstall_gpio.sh?raw=1"
+chmod 755 uninstall_gpio.sh
 
 # extract files #######################################
 title "Install new files ..."
@@ -218,5 +218,5 @@ if pgrep midori > /dev/null; then
 fi
 
 title2 "$runegpio successfully installed."
-echo $info 'Refresh browser and go to Menu > GPIO for settings.'
-titleend "To uninstall:   ./gpiouninstall.sh"
+echo "Uninstall:   ./uninstall_gpio.sh"
+titleend $info 'Refresh browser and go to Menu > GPIO for settings.'
