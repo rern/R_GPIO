@@ -144,7 +144,7 @@ chmod 755 uninstall_gpio.sh
 # extract files #######################################
 title "Install new files ..."
 [ -f /srv/http/gpio.json ] && excld='srv/http/gpio.json' || excld=''
-tar -Jxvf RuneUI_GPIO.tar.xz -C / --exclude=$excld
+bsdtar -xvf RuneUI_GPIO.tar.xz -C / --exclude=$excld
 rm RuneUI_GPIO.tar.xz
 
 chmod -R 755 /etc/sudoers.d
