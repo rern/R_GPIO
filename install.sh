@@ -218,4 +218,4 @@ fi
 
 title2 "$runegpio successfully installed."
 echo "Uninstall:   ./uninstall_gpio.sh"
-titleend $info 'Refresh browser and go to Menu > GPIO for settings.'
+titleend "$info Refresh browser and go to Menu > GPIO for settings."
