@@ -200,8 +200,8 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 	cp -rfv /etc/mpd.conf /etc/mpd.conf.gpio
 
 title "GPIO service ..."
-systemctl enable gpioset
 systemctl daemon-reload
+systemctl enable gpioset
 systemctl start gpioset
 
 # refresh #######################################
