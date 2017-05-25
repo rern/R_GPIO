@@ -48,12 +48,12 @@ if [ ! -e /srv/http/assets/css/gpiosettings.css ]; then
 fi
 
 # gpio off #######################################
-./gpiooff.py  > /dev/null 2>&1 &
+./gpiooff.py &>/dev/null &
 
 title2 "Uninstall $runegpio ..."
 # uninstall packages #######################################
 title "$runegpio installed packages"
-pacman -Q python2-pip > /dev/null 2>&1 && pip='Python-Pip,' || pip=''
+pacman -Q python2-pip &>/dev/null && pip='Python-Pip,' || pip=''
 echo 'Uninstall' $pip' Python-MPD and Python-Requests:'
 echo -e '  \e[0;36m0\e[m Uninstall'
 echo -e '  \e[0;36m1\e[m Keep'
@@ -66,7 +66,7 @@ case $answer in
 		title "Uninstall packages ..."
 		pip uninstall -y python-mpd2
 		pip uninstall -y requests
-		if pacman -Q python2-pip > /dev/null 2>&1; then
+		if pacman -Q python2-pip &>/dev/null; then
 			pacman -Rs --noconfirm python2-pip
 			rm /usr/bin/pip
 		fi
@@ -147,10 +147,10 @@ title "Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
 echo
 
-if pgrep midori > /dev/null; then
+if pgrep midori >/dev/null; then
 	killall midori
 	sleep 1
-	xinit > /dev/null 2>&1 &
+	xinit &>/dev/null &
 	echo -e '\nLocal browser restarted.\n'
 fi
 
