@@ -81,7 +81,7 @@ title2 "Install $runegpio ..."
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
-if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/null 2>&1; then
+if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
 	if [[ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		title "Get packages file ..."
 		wget -q --show-progress -O var.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar?raw=1"
@@ -93,7 +93,7 @@ if ! pacman -Q python2-pip > /dev/null 2>&1 && ! pacman -Q python-pip > /dev/nul
 	ln -s /usr/bin/pip2 /usr/bin/pip
 fi
 
-if ! python -c "import mpd" > /dev/null 2>&1; then
+if ! python -c "import mpd" &>/dev/null; then
 	if [[ ! -e /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		title "Get Pip packages file ..."
 		wget -q --show-progress -O varpip.tar "https://github.com/rern/RuneUI_GPIO/blob/master/_repo/varpip.tar?raw=1"
@@ -103,7 +103,7 @@ if ! python -c "import mpd" > /dev/null 2>&1; then
 	title "Install Python-MPD ..."
 	pip install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
 fi
-if ! python -c "import requests" > /dev/null 2>&1; then
+if ! python -c "import requests" &>/dev/null; then
 	title "Install Python-Request ..."
 	pip install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
 fi
@@ -209,10 +209,10 @@ title "Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
 echo
 
-if pgrep midori > /dev/null; then
+if pgrep midori >/dev/null; then
 	killall midori
 	sleep 1
-	xinit > /dev/null 2>&1 &
+	xinit &>/dev/null &
 	echo -e '\nLocal browser restarted.\n'
 fi
 
