@@ -90,7 +90,7 @@ _(MPD configuration can still be reset to default and setup manually.)_
 Install
 ---
 ```sh
-wget -q --show-progress -O install.sh "https://github.com/rern/RuneUI_GPIO/blob/master/install.sh?raw=1"; chmod +x install.sh; ./install.sh
+wget -q --show-progress https://github.com/rern/RuneUI_GPIO/blob/master/install.sh; chmod +x install.sh; ./install.sh
 ```
 
 Uninstall
