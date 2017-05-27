@@ -84,7 +84,7 @@ title2 "Install $runegpio ..."
 if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
 	if [[ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		title "Get packages file ..."
-		wget -q --show-progress https://github.com/rern/RuneUI_GPIO/blob/master/_repo/var.tar
+		wget -q --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/_repo/var.tar
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
@@ -96,7 +96,7 @@ fi
 if ! python -c "import mpd" &>/dev/null; then
 	if [[ ! -e /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		title "Get Pip packages file ..."
-		wget -q --show-progress https://github.com/rern/RuneUI_GPIO/blob/master/_repo/varpip.tar
+		wget -q --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/_repo/varpip.tar
 		tar -xvf varpip.tar -C /
 		rm varpip.tar
 	fi
@@ -137,8 +137,8 @@ fi
 # install RuneUI GPIO #######################################
 title "Get files ..."
 
-wget -q --show-progress https://github.com/rern/RuneUI_GPIO/blob/master/_repo/RuneUI_GPIO.tar.xz
-wget -q --show-progress https://github.com/rern/RuneUI_GPIO/blob/master/uninstall_gpio.sh
+wget -q --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/_repo/RuneUI_GPIO.tar.xz
+wget -q --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/uninstall_gpio.sh
 chmod 755 uninstall_gpio.sh
 
 # extract files #######################################
