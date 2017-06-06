@@ -79,6 +79,7 @@ Things to do
 
 Before install
 ---
+- RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage. 
 - No need to connect relay module before install
 - Power on DAC if external powered
 - `Menu` > `MPD` complete all settings
