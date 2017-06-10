@@ -90,6 +90,7 @@ _(MPD configuration can still be reset to default and setup manually.)_
 
 Install
 ---
+RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage.
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
 ```
