@@ -102,7 +102,7 @@ if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; th
 fi
 
 if ! python -c "import mpd" &>/dev/null; then
-	if [[ ! -e $path/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $path/requests-2.12.5-py2.py3-none-any.whl ]]; then
+	if [[ ! -e $pkgpath/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $pkgpath/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		title "Get Pip packages file ..."
 		wget -qN --show-progress $gitpath/_repo/varpip.tar
 		tar -xvf varpip.tar -C /
