@@ -85,7 +85,7 @@ title2 "Install $runegpio ..."
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
 if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
-	if [[ ! -e $path/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
+	if [[ ! -e $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		title "Get packages file ..."
 		wget -qN --show-progress $gitpath/_repo/var.tar
 		tar -xvf var.tar -C /
