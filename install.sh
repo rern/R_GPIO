@@ -76,36 +76,39 @@ if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	esac
 fi
 
+gitpath=https://github.com/rern/RuneUI_GPIO/raw/master
+pkgpath=/var/cache/pacman/pkg
+
 # install packages #######################################
 title2 "Install $runegpio ..."
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
 if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
-	if [[ ! -e /var/cache/pacman/pkg/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
+	if [[ ! -e $path/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		title "Get packages file ..."
-		wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/_repo/var.tar
+		wget -qN --show-progress $gitpath/_repo/var.tar
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
 	title "Install Pip ..."
-	pacman -S --noconfirm python2-pip
+	pacman -U --noconfirm $pkgpath/python2-pip
 	ln -s /usr/bin/pip2 /usr/bin/pip
 fi
 
 if ! python -c "import mpd" &>/dev/null; then
-	if [[ ! -e /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl ]]; then
+	if [[ ! -e $path/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $path/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		title "Get Pip packages file ..."
-		wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/_repo/varpip.tar
+		wget -qN --show-progress $gitpath/_repo/varpip.tar
 		tar -xvf varpip.tar -C /
 		rm varpip.tar
 	fi
 	title "Install Python-MPD ..."
-	pip install /var/cache/pacman/pkg/python-mpd2-0.5.5.tar.gz
+	pip install $pkgpath/python-mpd2-0.5.5.tar.gz
 fi
 if ! python -c "import requests" &>/dev/null; then
 	title "Install Python-Request ..."
-	pip install /var/cache/pacman/pkg/requests-2.12.5-py2.py3-none-any.whl
+	pip install $pkgpath/requests-2.12.5-py2.py3-none-any.whl
 fi
 
 # get DAC config #######################################
@@ -137,8 +140,8 @@ fi
 # install RuneUI GPIO #######################################
 title "Get files ..."
 
-wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/_repo/RuneUI_GPIO.tar.xz
-wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/uninstall_gpio.sh
+wget -qN --show-progress $gitpath/_repo/RuneUI_GPIO.tar.xz
+wget -qN --show-progress $gitpath/uninstall_gpio.sh
 chmod 755 uninstall_gpio.sh
 
 # extract files #######################################
