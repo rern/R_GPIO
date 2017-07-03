@@ -42,7 +42,7 @@ titleend() {
 }
 
 # check installed #######################################
-if [ ! -e /srv/http/assets/css/gpiosettings.css ]; then
+if [[ ! -e /srv/http/assets/css/gpiosettings.css ]]; then
 	title "$info $runegpio not found."
 	exit
 fi
@@ -60,9 +60,7 @@ echo -e '  \e[0;36m1\e[m Keep'
 echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
-case $answer in
-	1 ) echo;;
-	* ) echo
+if [[ $answer != 1 ]]; then
 		title "Uninstall packages ..."
 		pip uninstall -y python-mpd2
 		pip uninstall -y requests
@@ -70,7 +68,7 @@ case $answer in
 			pacman -Rs --noconfirm python2-pip
 			rm /usr/bin/pip
 		fi
-esac
+fi
 
 # remove files #######################################
 title "Remove files ..."
@@ -154,7 +152,7 @@ if pgrep midori >/dev/null; then
 	echo -e '\nLocal browser restarted.\n'
 fi
 
-title2 "$runegpio successfully uninstalled."
+title2 "$runegpio uninstalled successfully."
 titleend "$info Refresh browser for no $runegpio."
 
 rm uninstall_gpio.sh
