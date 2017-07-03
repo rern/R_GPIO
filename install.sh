@@ -76,6 +76,29 @@ if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	esac
 fi
 
+# user inputs
+# get DAC config #######################################
+if [[ -f /etc/mpd.conf.gpio ]]; then
+	title "$info DAC configuration from previous install found."
+	echo 'Discard:'
+	echo -e '  \e[0;36m0\e[m Discard (new DAC)'
+	echo -e '  \e[0;36m1\e[m Keep   (same DAC)'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read -n 1 ansconf
+	[[ $ansconf == 1 ]] && rm -v /etc/mpd.conf.gpio
+fi
+if [[ ! -f /etc/mpd.conf.gpio ]]; then
+	title "$info Get DAC configuration ready:"
+	echo 'For external power DAC > power on'
+	echo
+	echo 'Menu > MPD > setup and verify DAC works properly before continue.'
+	echo '(This install can be left running while setup.)'
+	echo
+	read -n 1 -s -p 'Press any key to continue ... '
+	echo
+fi
+
 gitpath=https://github.com/rern/RuneUI_GPIO/raw/master
 pkgpath=/var/cache/pacman/pkg
 
@@ -114,32 +137,6 @@ fi
 if ! python -c "import requests" &>/dev/null; then
 	title "Install Python-Request ..."
 	pip install $pkgpath/requests-2.12.5-py2.py3-none-any.whl
-fi
-
-# get DAC config #######################################
-if [[ -f /etc/mpd.conf.gpio ]]; then
-	title "$info DAC configuration from previous install found."
-	echo 'Discard:'
-	echo -e '  \e[0;36m0\e[m Discard (new DAC)'
-	echo -e '  \e[0;36m1\e[m Keep   (same DAC)'
-	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
-	read -n 1 answer
-	case $answer in
-		1 ) echo;;
-		* ) echo
-			rm -v '/etc/mpd.conf.gpio';;
-	esac
-fi
-if [[ ! -f /etc/mpd.conf.gpio ]]; then
-	title "$info Get DAC configuration ready:"
-	echo 'For external power DAC > power on'
-	echo
-	echo 'Menu > MPD > setup and verify DAC works properly before continue.'
-	echo '(This install can be left running while setup.)'
-	echo
-	read -n 1 -s -p 'Press any key to continue ... '
-	echo
 fi
 
 # install RuneUI GPIO #######################################
