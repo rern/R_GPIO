@@ -26,37 +26,38 @@
 
 rm install.sh
 
-linered='\e[0;31m---------------------------------------------------------\e[m'
-line2='\e[0;36m=========================================================\e[m'
-line='\e[0;36m---------------------------------------------------------\e[m'
+linered=$( printf '\e[0;31m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - )
+line2=$( printf '\e[0;36m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' = )
+line=$( printf '\e[0;36m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - )
 bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
 warn=$( echo $(tput setab 1) ! $(tput setab 0) )
 info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
 runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
 
 # functions #######################################
+# functions #######################################
 title2() {
-	echo -e "\n$line2\n"
+	echo $line2
 	echo -e "$bar $1"
-	echo -e "\n$line2\n"
+	echo $line2
 }
 title() {
-	echo -e "\n$line"
-	echo $1
-	echo -e "$line\n"
+	echo $line
+	echo -e "$1"
+	echo $line
 }
 titleend() {
 	echo -e "\n$1"
-	echo -e "\n$line\n"
+	echo $line
 }
 error() {
-	echo -e "\n$linered"
+	echo $linered
 	echo $warn $1
-	echo -e "$linered\n"
+	echo $linered
 }
 errorend() {
 	echo -e "\n$warn $1"
-	echo -e "\n$linered\n"
+	echo $linered
 }
 
 # check already installed #######################################
