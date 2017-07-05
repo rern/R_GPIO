@@ -35,7 +35,6 @@ info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
 runegpio=$( echo $(tput setaf 6)RuneUI GPIO$(tput setaf 7) )
 
 # functions #######################################
-# functions #######################################
 title2() {
 	echo $line2
 	echo -e "$bar $1"
