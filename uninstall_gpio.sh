@@ -19,7 +19,6 @@
 
 # import heading function
 wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh
-chmod +x f_heading.sh
 . f_heading.sh
 rm f_heading.sh
 
