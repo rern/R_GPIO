@@ -23,6 +23,8 @@ chmod +x f_heading.sh
 . f_heading.sh
 rm f_heading.sh
 
+runegpio=$( texrcolor "RuneUI GPIO" 6 )
+
 # check installed #######################################
 if [[ ! -e /srv/http/assets/css/gpiosettings.css ]]; then
 	title "$info $runegpio not found."
