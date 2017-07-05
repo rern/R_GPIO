@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# install.sh - RuneUI GPIO
+# install.sh [any = skip DAC ready prompt]
+
 # https://github.com/rern/RuneUI_GPIO
 
 # remove install.sh
