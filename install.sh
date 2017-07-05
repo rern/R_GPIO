@@ -25,9 +25,7 @@
 #	info
 
 # import heading function
-wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh
-. f_heading.sh
-rm install.sh f_heading.sh
+wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
 
 runegpio=$( texrcolor "RuneUI GPIO" 6 )
 
