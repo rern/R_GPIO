@@ -30,7 +30,7 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.
 
 rm install.sh
 
-runegpio=$( texrcolor "RuneUI GPIO" 6 )
+runegpio=$( textcolor "RuneUI GPIO" 6 )
 
 # check already installed #######################################
 if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
