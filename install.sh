@@ -35,7 +35,7 @@ runegpio=$( textcolor "RuneUI GPIO" 6 )
 # check already installed #######################################
 if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	title "$info $runegpio already installed."
-	echo 'Reinstall' $runegpio':'
+	echo Reinstall $runegpio:
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
 	echo
@@ -55,7 +55,7 @@ fi
 if (( $# == 0 )); then
 	if [[ -f /etc/mpd.conf.gpio ]]; then
 		title "$info DAC configuration from previous install found."
-		echo 'Discard:'
+		echo Discard:
 		echo -e '  \e[0;36m0\e[m Discard (new DAC)'
 		echo -e '  \e[0;36m1\e[m Keep   (same DAC)'
 		echo
@@ -65,10 +65,10 @@ if (( $# == 0 )); then
 	fi
 	if [[ ! -f /etc/mpd.conf.gpio ]]; then
 		title "$info Get DAC configuration ready:"
-		echo 'For external power DAC > power on'
+		echo For external power DAC > power on
 		echo
-		echo 'Menu > MPD > setup and verify DAC works properly before continue.'
-		echo '(This install can be left running while setup.)'
+		echo Menu > MPD > setup and verify DAC works properly before continue.
+		echo (This install can be left running while setup.)
 		echo
 		read -n 1 -s -p 'Press any key to continue ... '
 		echo
@@ -198,5 +198,5 @@ if pgrep midori >/dev/null; then
 fi
 
 title2 "$runegpio successfully installed."
-echo "Uninstall:   ./uninstall_gpio.sh"
+echo Uninstall: ./uninstall_gpio.sh
 titleend "$info Refresh browser and go to Menu > GPIO for settings."
