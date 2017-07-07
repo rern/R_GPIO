@@ -60,7 +60,7 @@ rm -v /root/gpiostatus.py
 rm -v /root/gpiotimer.py
 rm -v /root/poweroff.py
 rm -v /root/reboot.py
-path='/srv/http/'
+path=/srv/http/
 rm -v $path'gpiooff.php'
 rm -v $path'gpioon.php'
 rm -v $path'gpiosave.php'
@@ -69,7 +69,7 @@ rm -v $path'gpiostatus.php'
 rm -v $path'gpiotimerreset.php'
 rm -v $path'poweroff.php'
 rm -v $path'reboot.php'
-path='/srv/http/assets/'
+path=/srv/http/assets/
 rm -v $path'css/gpiosettings.css'
 rm -v $path'img/RPi3_GPIOs.png'
 rm -v $path'js/gpio.js'
@@ -85,7 +85,7 @@ fi
 
 # restore modified files #######################################
 title "Restore modified files ..."
-header='/srv/http/app/templates/header.php'
+header=/srv/http/app/templates/header.php
 echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
 ' -e '/id="ond"/, /id="offd"/ d
@@ -95,7 +95,7 @@ sed -i -e '\|<?php // gpio|, /?>/ d
 # no RuneUI enhancement
 ! $enh && sed -i -e '/pnotify.css/ d' $header
 
-footer='/srv/http/app/templates/footer.php'
+footer=/srv/http/app/templates/footer.php
 echo $footer
 sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e 's/id="reboot"/id="syscmd-reboot"/
@@ -104,7 +104,7 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 # no RuneUI enhancement
 ! $enh && sed -i -e '/pnotify3.custom.min.js/ d' $footer
 
-udev='/etc/udev/rules.d/rune_usb-audio.rules'
+udev=/etc/udev/rules.d/rune_usb-audio.rules
 echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
 udevadm control --reload
