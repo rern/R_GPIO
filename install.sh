@@ -133,12 +133,12 @@ chmod 755 /srv/http/*.php
 
 # modify files #######################################
 title "Modify files ..."
-udev='/etc/udev/rules.d/rune_usb-audio.rules'
+udev=/etc/udev/rules.d/rune_usb-audio.rules
 echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $udev
 udevadm control --reload
 
-header='/srv/http/app/templates/header.php'
+header=/srv/http/app/templates/header.php
 echo $header
 sed -i -e $'1 i\
 <?php // gpio\
@@ -164,7 +164,7 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ! grep -q 'pnotify.css' $header &&
 	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $header
 
-footer='/srv/http/app/templates/footer.php'
+footer=/srv/http/app/templates/footer.php
 echo $footer
 sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e 's/id="syscmd-reboot"/id="reboot"/
