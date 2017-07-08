@@ -68,7 +68,7 @@ if (( $# == 0 )); then
 		echo For external power DAC > power on
 		echo
 		echo Menu > MPD > setup and verify DAC works properly before continue.
-		echo (This install can be left running while setup.)
+		echo '(This install can be left running while setup.)'
 		echo
 		read -n 1 -s -p 'Press any key to continue ... '
 		echo
