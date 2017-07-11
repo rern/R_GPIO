@@ -18,22 +18,21 @@
 # remove uninstall_gpio.sh
 
 # import heading function
-wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
-
-runegpio=$( textcolor "RuneUI GPIO" 6 )
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+runegpio=$( textcolor "RuneUI GPIO" )
 
 # check installed #######################################
 if [[ ! -e /srv/http/assets/css/gpiosettings.css ]]; then
-	title "$info $runegpio not found."
+	title $info $runegpio not found.
 	exit
 fi
 
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
 
-title2 "Uninstall $runegpio ..."
+title -l = $bar Uninstall $runegpio ...
 # uninstall packages #######################################
-title "$runegpio installed packages"
+title $runegpio installed packages
 pacman -Q python2-pip &>/dev/null && pip='Python-Pip,' || pip=''
 echo 'Uninstall' $pip' Python-MPD and Python-Requests:'
 echo -e '  \e[0;36m0\e[m Uninstall'
@@ -42,7 +41,7 @@ echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 if [[ $answer != 1 ]]; then
-		title "Uninstall packages ..."
+		title Uninstall packages ...
 		pip uninstall -y python-mpd2
 		pip uninstall -y requests
 		if pacman -Q python2-pip &>/dev/null; then
@@ -52,7 +51,7 @@ if [[ $answer != 1 ]]; then
 fi
 
 # remove files #######################################
-title "Remove files ..."
+title Remove files ...
 rm -v /root/gpiooff.py
 rm -v /root/gpioon.py
 rm -v /root/gpioset.py
@@ -84,7 +83,7 @@ if ! $enh; then
 fi
 
 # restore modified files #######################################
-title "Restore modified files ..."
+title Restore modified files ...
 header=/srv/http/app/templates/header.php
 echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
@@ -109,7 +108,7 @@ echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
 udevadm control --reload
 
-title "Remove service ..."
+title Remove service ...
 systemctl disable gpioset
 rm -v /usr/lib/systemd/system/gpioset.service
 
@@ -122,7 +121,7 @@ rm -vrf /etc/sudoers.d
 (( $# != 0 )) && exit
 
 # refresh #######################################
-title "Clear PHP OPcache ..."
+title Clear PHP OPcache ...
 curl '127.0.0.1/clear'
 echo
 
@@ -133,7 +132,7 @@ if pgrep midori >/dev/null; then
 	echo -e '\nLocal browser restarted.\n'
 fi
 
-title2 "$runegpio uninstalled successfully."
-titleend "$info Refresh browser for no $runegpio."
+title -l = $bar $runegpio uninstalled successfully.
+title -nt $info Refresh browser for no $runegpio.
 
 rm uninstall_gpio.sh
