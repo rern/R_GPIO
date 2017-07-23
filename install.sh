@@ -25,11 +25,11 @@
 #	restart local browser
 #	info
 
+rm $0
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 runegpio=$( tcolor "RuneUI GPIO" )
-
-rm install.sh
 
 # check already installed #######################################
 if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
