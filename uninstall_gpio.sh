@@ -135,4 +135,4 @@ fi
 title -l = "$bar $runegpio uninstalled successfully."
 title -nt "$info Refresh browser for no $runegpio."
 
-rm uninstall_gpio.sh
+rm $0
