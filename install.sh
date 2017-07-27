@@ -29,6 +29,8 @@ rm $0
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+timestart
+
 runegpio=$( tcolor "RuneUI GPIO" )
 
 # check already installed #######################################
@@ -196,6 +198,7 @@ if pgrep midori >/dev/null; then
 	echo -e '\nLocal browser restarted.\n'
 fi
 
+timestop
 title -l = "$bar $runegpio successfully installed."
 echo 'Uninstall: ./uninstall_gpio.sh'
 title -nt "$info Refresh browser and go to Menu > GPIO for settings."
