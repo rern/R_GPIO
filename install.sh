@@ -130,7 +130,6 @@ rm RuneUI_GPIO.tar.xz
 
 chmod -R 755 /etc/sudoers.d
 chmod 755 /root/*.py
-chmod 755 /srv/http/*.php
 
 # modify files #######################################
 title "Modify files ..."
