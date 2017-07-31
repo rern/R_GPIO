@@ -35,19 +35,14 @@ runegpio=$( tcolor "RuneUI GPIO" )
 
 # check already installed #######################################
 if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
-	title "$info $runegpio already installed."
-	echo "Reinstall $runegpio:"
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
-	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
-	read -n 1 answer
-	case $answer in
-		1 ) ./gpiouninstall.sh re;;
-		* ) echo
-			title -nt "$runegpio reinstall cancelled."
-			exit;;
-	esac
+	echo -e "$info $runegpio already installed."
+	yesno "$info Reinstall $runegpio:" answer
+	if [[ $answer != 1 ]]; then
+		echo -e "$bar $runegpio reinstall cancelled."
+		exit
+	else
+		./uninstall_gpio.sh re
+	fi
 fi
 
 # user inputs
@@ -55,17 +50,12 @@ fi
 # skip with any argument
 if (( $# == 0 )); then
 	if [[ -f /etc/mpd.conf.gpio ]]; then
-		title "$info DAC configuration from previous install found."
-		echo 'Discard:'
-		echo -e '  \e[0;36m0\e[m Discard (new DAC)'
-		echo -e '  \e[0;36m1\e[m Keep   (same DAC)'
-		echo
-		echo -e '\e[0;36m0\e[m / 1 ? '
-		read -n 1 ansconf
+		echo -e "$info DAC configuration from previous install found."
+		yesno "Ignore:" ansconf
 		[[ $ansconf == 1 ]] && rm -v /etc/mpd.conf.gpio
 	fi
 	if [[ ! -f /etc/mpd.conf.gpio ]]; then
-		title "$info Get DAC configuration ready:"
+		echo -e "$info Get DAC configuration ready:"
 		echo 'For external power DAC > power on'
 		echo
 		echo 'Menu > MPD > setup and verify DAC works properly before continue.'
@@ -86,12 +76,12 @@ title -l = "$bar Install $runegpio ..."
 
 if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
 	if [[ ! -e $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
-		title Get packages file ...
+		echo -e "$bar Get packages file ..."
 		wget -qN --show-progress $gitpath/_repo/var.tar
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
-	title "Install Pip ..."
+	echo -e "$bar Install Pip ..."
 	pacman -U --noconfirm $pkgpath/python2-appdirs-1.4.0-5-any.pkg.tar.xz
 	pacman -U --noconfirm $pkgpath/python2-pyparsing-2.1.10-2-any.pkg.tar.xz
 	pacman -U --noconfirm $pkgpath/python2-six-1.10.0-3-any.pkg.tar.xz
@@ -103,34 +93,34 @@ fi
 
 if ! python -c "import mpd" &>/dev/null; then
 	if [[ ! -e $pkgpath/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $pkgpath/requests-2.12.5-py2.py3-none-any.whl ]]; then
-		title "Get Pip packages file ..."
+		echo -e "$bar Get Pip packages file ..."
 		wget -qN --show-progress $gitpath/_repo/varpip.tar
 		tar -xvf varpip.tar -C /
 		rm varpip.tar
 	fi
-	title "Install Python-MPD ..."
+	echo -e "$bar Install Python-MPD ..."
 	pip install $pkgpath/python-mpd2-0.5.5.tar.gz
 fi
 if ! python -c "import requests" &>/dev/null; then
-	title "Install Python-Request ..."
+	echo -e "$bar Install Python-Request ..."
 	pip install $pkgpath/requests-2.12.5-py2.py3-none-any.whl
 fi
 
 # install RuneUI GPIO #######################################
-title "Get files ..."
+echo -e "$bar Get files ..."
 
 wget -qN --show-progress $gitpath/_repo/RuneUI_GPIO.tar.xz
 wget -qN --show-progress $gitpath/uninstall_gpio.sh
 chmod 755 uninstall_gpio.sh
 
 # extract files #######################################
-title "Install new files ..."
+echo -e "$bar Install new files ..."
 bsdtar -xvf RuneUI_GPIO.tar.xz -C / $([ -f /srv/http/gpio.json ] && echo '--exclude=gpio.json')
 rm RuneUI_GPIO.tar.xz
 chmod 755 /root/*.py
 
 # modify files #######################################
-title "Modify files ..."
+echo -e "$bar Modify files ..."
 udev=/etc/udev/rules.d/rune_usb-audio.rules
 echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $udev
@@ -178,13 +168,13 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 [[ ! -f /etc/mpd.conf.gpio ]] &&
 	cp -rfv /etc/mpd.conf /etc/mpd.conf.gpio
 
-title "GPIO service ..."
+echo -e "$bar GPIO service ..."
 systemctl daemon-reload
 systemctl enable gpioset
 systemctl start gpioset
 
 # refresh #######################################
-title "Clear PHP OPcache ..."
+echo -e "$bar Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
 echo
 
