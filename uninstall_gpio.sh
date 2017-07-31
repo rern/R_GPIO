@@ -35,7 +35,7 @@ title -l = "$bar Uninstall $runegpio ..."
 echo -e "$bar Remove installed packages ..."
 pacman -Q python2-pip &>/dev/null && pip='Python-Pip,' || pip=''
 yesno "Uninstall $pip Python-MPD and Python-Requests:" answer
-if [[ $answer != 1 ]]; then
+if [[ $answer == 1 ]]; then
 		echo -e "$bar Uninstall packages ..."
 		pip uninstall -y python-mpd2
 		pip uninstall -y requests
