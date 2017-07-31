@@ -182,7 +182,7 @@ if pgrep midori >/dev/null; then
 	killall midori
 	sleep 1
 	xinit &>/dev/null &
-	echo -e 'Local browser restarted.'
+	echo 'Local browser restarted.'
 fi
 
 timestop
