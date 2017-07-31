@@ -23,7 +23,7 @@ runegpio=$( tcolor "RuneUI GPIO" )
 
 # check installed #######################################
 if [[ ! -e /srv/http/assets/css/gpiosettings.css ]]; then
-	title "$info $runegpio not found."
+	echo -e "$info $runegpio not found."
 	exit
 fi
 
@@ -32,16 +32,11 @@ fi
 
 title -l = "$bar Uninstall $runegpio ..."
 # uninstall packages #######################################
-title $runegpio installed packages
+echo -e "$bar Remove installed packages ..."
 pacman -Q python2-pip &>/dev/null && pip='Python-Pip,' || pip=''
-echo 'Uninstall' $pip' Python-MPD and Python-Requests:'
-echo -e '  \e[0;36m0\e[m Uninstall'
-echo -e '  \e[0;36m1\e[m Keep'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
+yesno "Uninstall $pip Python-MPD and Python-Requests:" answer
 if [[ $answer != 1 ]]; then
-		title "Uninstall packages ..."
+		echo -e "$bar Uninstall packages ..."
 		pip uninstall -y python-mpd2
 		pip uninstall -y requests
 		if pacman -Q python2-pip &>/dev/null; then
@@ -51,7 +46,7 @@ if [[ $answer != 1 ]]; then
 fi
 
 # remove files #######################################
-title "Remove files ..."
+echo -e "$bar Remove files ..."
 rm -v /root/gpiooff.py
 rm -v /root/gpioon.py
 rm -v /root/gpioset.py
@@ -83,7 +78,7 @@ if ! $enh; then
 fi
 
 # restore modified files #######################################
-title "Restore modified files ..."
+echo -e "$bar Restore modified files ..."
 header=/srv/http/app/templates/header.php
 echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
@@ -108,7 +103,7 @@ echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
 udevadm control --reload
 
-title "Remove service ..."
+echo -e "$bar Remove service ..."
 systemctl disable gpioset
 rm -v /usr/lib/systemd/system/gpioset.service
 
@@ -121,7 +116,7 @@ rm -vrf /etc/sudoers.d
 (( $# != 0 )) && exit
 
 # refresh #######################################
-title "Clear PHP OPcache ..."
+echo -e "$bar Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
 echo
 
