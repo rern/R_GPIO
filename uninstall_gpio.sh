@@ -107,8 +107,10 @@ sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
 udevadm control --reload
 
 echo -e "$bar Remove service ..."
-systemctl disable gpioset
+systemctl disable gpiooff gpioset
+rm -v /usr/lib/systemd/system/gpiooff.service
 rm -v /usr/lib/systemd/system/gpioset.service
+systemctl daemon-reload
 
 cp -rfv /etc/mpd.conf.pacorig /etc/mpd.conf
 systemctl restart mpd
