@@ -6,5 +6,10 @@ After=multi-user.target
 Type=idle
 ExecStart=/usr/bin/python /root/gpioset.py
 
+Type=oneshot
+RemainAfterExit=true
+ExecStart==/usr/bin/python /root/gpioset.py
+ExecStop=/usr/bin/python /root/gpiooff.py
+
 [Install]
 WantedBy=multi-user.target
