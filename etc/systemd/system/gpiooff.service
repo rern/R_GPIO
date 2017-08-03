@@ -7,3 +7,6 @@ Before=shutdown.target reboot.target halt.target
 Type=oneshot
 RemainAfterExit=true
 ExecStart=/usr/bin/python /root/gpiooff.py
+
+[Install]		
+WantedBy=halt.target reboot.target shutdown.target
