@@ -3,10 +3,8 @@ Description=Initial setup GPIO
 After=multi-user.target
 
 [Service]
-Type=oneshot
-RemainAfterExit=true
+Type=idle
 ExecStart==/usr/bin/python /root/gpioset.py
-ExecStop=/usr/bin/python /root/gpiooff.py
 
 [Install]
 WantedBy=multi-user.target
