@@ -1,0 +1,9 @@
+[Unit]
+Description=shutdown GPIO
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/usr/bin/python /root/gpiooff.py
