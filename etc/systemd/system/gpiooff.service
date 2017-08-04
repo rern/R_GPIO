@@ -1,12 +1,10 @@
 [Unit]
-Description=shutdown GPIO
-DefaultDependencies=no
-Before=shutdown.target reboot.target halt.target
+Description=Before shutdown, turn off GPIO
 
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=/usr/bin/python /root/gpiooff.py
+ExecStop=/usr/bin/python /home/osmc/gpiooff.py
 
-[Install]		
-WantedBy=halt.target reboot.target shutdown.target
+[Install]
+WantedBy=multi-user.target
