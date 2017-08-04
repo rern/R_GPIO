@@ -38,6 +38,7 @@ Features
 - setting in `Menu` > `GPIO` (local browser: right click > `Fullscreen` (exit) > click `GPIO` tab)
 - instantly update all fields on changing pins or names
 - `RPi pin numbering` diagram included, show / hide on click
+- Auto power off on reboot / shotdown
 - Can be used with [**USB PC Remote**](https://github.com/rern/Rune_USB_PC_Remote)
 
 **Easy install and (almost) hassel-free**
