@@ -4,7 +4,7 @@ Description=Before shutdown, turn off GPIO
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStop=/usr/bin/python /home/osmc/gpiooff.py
+ExecStop=/usr/bin/python /root/gpiooff.py
 
 [Install]
 WantedBy=multi-user.target
