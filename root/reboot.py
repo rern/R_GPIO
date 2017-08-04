@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import gpiooff
 import sys
 import os
 
