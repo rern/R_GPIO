@@ -47,8 +47,6 @@ fi
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
-rm /etc/sudoers.d/sudoers
-rm /etc/systemd/system/gpioset.service
 rm -v /root/gpiooff.py
 rm -v /root/gpioon.py
 rm -v /root/gpioset.py
