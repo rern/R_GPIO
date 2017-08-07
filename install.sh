@@ -171,8 +171,8 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 
 echo -e "$bar GPIO service ..."
 systemctl daemon-reload
-systemctl enable gpiooff gpioset
-systemctl start gpiooff gpioset
+systemctl enable gpioset
+systemctl start gpioset
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
