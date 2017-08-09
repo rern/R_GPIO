@@ -99,7 +99,7 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ! $enh && sed -i -e '/pnotify3.custom.min.js/ d' $footer
 
 # Dual boot
-sed -i -e '/^#echo/ s/^#//g
+sed -i -e '/^#"echo/ s/^#//g
 ' -e '/reboot.py/d
 ' /root/.xbindkeysrc
 
