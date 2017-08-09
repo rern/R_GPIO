@@ -98,6 +98,11 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 # no RuneUI enhancement
 ! $enh && sed -i -e '/pnotify3.custom.min.js/ d' $footer
 
+# Dual boot
+sed -i -e '/^#echo/ s/^#//g
+' -e '/reboot.py/d
+' /root/.xbindkeysrc
+
 udev=/etc/udev/rules.d/rune_usb-audio.rules
 echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
