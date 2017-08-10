@@ -28,7 +28,7 @@
 rm $0
 
 # import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
 timestart
 
 runegpio=$( tcolor "RuneUI GPIO" )
@@ -62,7 +62,7 @@ if (( $# == 0 )); then
 	fi
 fi
 
-gitpath=https://github.com/rern/RuneUI_GPIO/raw/master
+gitpath=https://raw.githubusercontent.com/rern/RuneUI_GPIO/master
 pkgpath=/var/cache/pacman/pkg
 
 # install packages #######################################
