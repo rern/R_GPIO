@@ -167,11 +167,14 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
-' -e '/echo 6/ i\
+' -e '/echo 6/ a\
 "/root/reboot.py 6"
-' -e '/echo 8/ i\
+' -e '/echo 8/ a\
 "/root/reboot.py 8"
 ' /root/.xbindkeysrc
+killall xbindkeysrc
+export DISPLAY=":0" &
+xbindkeysrc &
 
 echo -e "$bar GPIO service ..."
 systemctl daemon-reload
