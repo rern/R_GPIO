@@ -1,14 +1,9 @@
 #!/usr/bin/python
-import json
+from gpio import timer
 import time
 import os
 import mpd
 import requests
-
-with open('/srv/http/gpio.json') as jsonfile:
-	gpio = json.load(jsonfile)
-
-timer = int(gpio['timer']['timer'])
 
 if timer == 0:
 	exit()
