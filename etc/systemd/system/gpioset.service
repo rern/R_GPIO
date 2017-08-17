@@ -2,6 +2,7 @@
 Description=GPIO initial setup
 
 [Service]
+Type=Idle
 ExecStart=/usr/bin/python /root/gpio.py set
 
 [Install]
