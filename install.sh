@@ -84,7 +84,7 @@ if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; th
 	pacman -U --noconfirm $pkgpath/python2-packaging-16.8-2-any.pkg.tar.xz
 	pacman -U --noconfirm $pkgpath/python2-setuptools-1_34.0.1-1-any.pkg.tar.xz
 	pacman -U --noconfirm $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz
-	ln -s /usr/bin/pip2 /usr/bin/pip
+	ln -s /usr/bin/pip{2,}
 fi
 
 if ! python -c "import mpd" &>/dev/null; then
@@ -113,8 +113,7 @@ chmod 755 uninstall_gpio.sh
 echo -e "$bar Install new files ..."
 bsdtar -xvf RuneUI_GPIO.tar.xz -C / $([ -f /srv/http/gpio.json ] && echo '--exclude gpio.json')
 rm RuneUI_GPIO.tar.xz
-chmod 755 -R /etc/sudoers.d/
-chmod 755 /root/*.py
+chmod 755 /etc/sudoers.d/sudoers /root/*.py
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
@@ -163,7 +162,7 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 	' $footer
 
 [[ ! -f /etc/mpd.conf.gpio ]] &&
-	cp -rfv /etc/mpd.conf /etc/mpd.conf.gpio
+	cp -rfv /etc/mpd.conf{,.gpio}
 
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
