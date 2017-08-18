@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
 import json
+import sys
 
 with open('/srv/http/gpio.json') as jsonfile:
 	gpio = json.load(jsonfile)
@@ -16,6 +17,10 @@ GPIO.setwarnings(0)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pinx, GPIO.OUT)
 
+if len(sys.argv) > 1 and sys.argv[1] == 'set':
+	GPIO.output(pinx, 1)
+	exit()
+
 on = gpio['on']
 on1 = int(on['on1'])
 ond1 = int(on['ond1'])
@@ -26,6 +31,12 @@ ond3 = int(on['ond3'])
 on4 = int(on['on4'])
 onx = [on1, on2, on3, on4]
 onx = [i for i in onx if i != 0]
+
+if len(sys.argv) > 1 and sys.argv[1] == 'status':
+	data = {'enable': gpio['enable']['enable'], \
+		'pullup': GPIO.input(onx[1])}
+	print(json.dumps(data))
+	exit()
 
 off = gpio['off']
 off1 = int(off['off1'])
