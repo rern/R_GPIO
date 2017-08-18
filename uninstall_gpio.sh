@@ -37,8 +37,7 @@ pacman -Q python2-pip &>/dev/null && pip='Python-Pip,' || pip=''
 yesno "Uninstall $pip Python-MPD and Python-Requests:" answer
 if [[ $answer == 1 ]]; then
 		echo -e "$bar Uninstall packages ..."
-		pip uninstall -y python-mpd2
-		pip uninstall -y requests
+		pip uninstall -y python-mpd2 requests
 		if pacman -Q python2-pip &>/dev/null; then
 			pacman -Rs --noconfirm python2-pip
 			rm /usr/bin/pip
