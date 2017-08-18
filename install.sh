@@ -78,7 +78,14 @@ if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; th
 		rm var.tar
 	fi
 	echo -e "$bar Install Pip ..."
-	pacman -U --noconfirm $pkgpath/python2-{appdirs-1.4.0-5,pyparsing-2.1.10-2,six-1.10.0-3,packaging-16.8-2,setuptools-1_34.0.1-1,pip-9.0.1-2}-any.pkg.tar.xz
+	pacman -U --noconfirm $pkgpath/python2-{\
+		appdirs-1.4.0-5\
+		,pyparsing-2.1.10-2\
+		,six-1.10.0-3\
+		,packaging-16.8-2\
+		,setuptools-1_34.0.1-1\
+		,pip-9.0.1-2\
+	}-any.pkg.tar.xz
 	ln -s /usr/bin/pip{2,}
 fi
 
