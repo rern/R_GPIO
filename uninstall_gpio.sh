@@ -47,34 +47,19 @@ fi
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
-rm -v /root/gpiooff.py
-rm -v /root/gpioon.py
-rm -v /root/gpioset.py
-rm -v /root/gpiostatus.py
-rm -v /root/gpiotimer.py
-rm -v /root/poweroff.py
-rm -v /root/reboot.py
-path=/srv/http/
-rm -v $path'gpiooff.php'
-rm -v $path'gpioon.php'
-rm -v $path'gpiosave.php'
-rm -v $path'gpiosettings.php'
-rm -v $path'gpiostatus.php'
-rm -v $path'gpiotimerreset.php'
-rm -v $path'poweroff.php'
-rm -v $path'reboot.php'
-path=/srv/http/assets/
-rm -v $path'css/gpiosettings.css'
-rm -v $path'img/RPi3_GPIOs.png'
-rm -v $path'js/gpio.js'
-rm -v $path'js/gpiosettings.js'
-rm -v $path'js/vendor/bootstrap-select-1.12.1.min.js'
+rm -v /root/{gpiooff.py,gpioon.py,gpiotimer.py,poweroff.py,reboot.py}
+rm -v /srv/http/{gpiooff.php,gpioon.php,gpiosave.php,gpiosettings.php,gpiostatus.php,gpiotimerreset.php,poweroff.php,reboot.php}
+path=/srv/http/assets
+rm -v $path/css/gpiosettings.css
+rm -v $path/img/RPi3_GPIOs.png
+rm -v $path/js/{gpio.js,gpiosettings.js}
+rm -v $path/js/vendor/bootstrap-select-1.12.1.min.js
 
 # if RuneUI enhancement not installed
-[[ -e $path'css/custom.css' ]] && enh=true || enh=false
+[[ -e $path/css/custom.css ]] && enh=true || enh=false
 if ! $enh; then
-	rm -v $path'css/pnotify.css'
-	rm -v $path'js/vendor/pnotify3.custom.min.js'
+	rm -v $path/css/pnotify.css
+	rm -v $path/js/vendor/pnotify3.custom.min.js
 fi
 
 # restore modified files #######################################
@@ -113,7 +98,7 @@ systemctl disable gpioset
 rm -v /usr/lib/systemd/system/gpioset.service
 systemctl daemon-reload
 
-cp -rfv /etc/mpd.conf.pacorig /etc/mpd.conf
+cp -rfv /etc/mpd.conf{.pacorig,}
 systemctl restart mpd
 
 rm -vrf /etc/sudoers.d
