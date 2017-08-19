@@ -177,10 +177,15 @@ killall xbindkeysrc
 export DISPLAY=":0" &
 xbindkeysrc &
 
+# set initial gpio #######################################
 echo -e "$bar GPIO service ..."
 systemctl daemon-reload
 systemctl enable gpioset
 systemctl start gpioset
+
+# set /dev/gpiomem permission #######################################
+usermod -a -G root http # '-a' append '-G' group root with user osmc
+#chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
