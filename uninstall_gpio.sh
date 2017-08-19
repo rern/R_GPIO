@@ -97,10 +97,10 @@ systemctl disable gpioset
 rm -v /usr/lib/systemd/system/gpioset.service
 systemctl daemon-reload
 
-cp -rfv /etc/mpd.conf{.pacorig,}
+cp -vf /etc/mpd.conf{.pacorig,}
 systemctl restart mpd
 
-rm -vrf /etc/sudoers.d
+rm -v /etc/sudoers.d/http
 
 # skip if reinstall - gpiouninstall.sh re (any argument)
 (( $# != 0 )) && exit
