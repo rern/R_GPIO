@@ -19,7 +19,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pinx, GPIO.OUT)
 
 if len(sys.argv) > 1 and sys.argv[1] == 'set':
-	os.system('/bin/chmod g+rw /dev/gpiomem') # fix permission
+	os.system('/bin/chmod g+rw /dev/gpiomem') # fix permission every boot
 	GPIO.output(pinx, 1)
 	exit()
 
