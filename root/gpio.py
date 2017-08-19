@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO
 import json
 import sys
+import os
 
 with open('/srv/http/gpio.json') as jsonfile:
 	gpio = json.load(jsonfile)
