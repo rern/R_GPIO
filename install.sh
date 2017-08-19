@@ -183,8 +183,10 @@ systemctl daemon-reload
 systemctl enable gpioset
 systemctl start gpioset
 
-# set /dev/gpiomem permission #######################################
-usermod -a -G root http # '-a' append '-G' group root with user osmc
+# set permission #######################################
+sed -i 's/#includedir/includedir/' /etc/sudoers
+echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/sudoers
+usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
 # refresh #######################################
