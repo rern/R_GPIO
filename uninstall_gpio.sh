@@ -87,6 +87,9 @@ sed -i -e '/^#"echo/ s/^#//g
 ' -e '/reboot.py/d
 ' /root/.xbindkeysrc
 
+cp -vf /etc/mpd.conf{.pacorig,}
+systemctl restart mpd
+
 udev=/etc/udev/rules.d/rune_usb-audio.rules
 echo $udev
 sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
@@ -94,13 +97,8 @@ udevadm control --reload
 
 echo -e "$bar Remove service ..."
 systemctl disable gpioset
-rm -v /usr/lib/systemd/system/gpioset.service
 systemctl daemon-reload
-
-cp -vf /etc/mpd.conf{.pacorig,}
-systemctl restart mpd
-
-rm -v /etc/sudoers.d/http
+rm -v /etc/sudoers.d/http /etc/systemd/system/gpioset.service
 
 # skip if reinstall - gpiouninstall.sh re (any argument)
 (( $# != 0 )) && exit
