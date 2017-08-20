@@ -10,7 +10,8 @@ How It Works
 - use nginx 'pushstream' websocket
 	- **php**  `exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=amp" -d '.escapeshellarg('"message"'));`
 	- **python** `requests.post("http://localhost/pub?id=amp", json="message")`
-<hr>	
+<hr>
+
 - **jquery** 'get' php
 	- `$.get('gpioon.php' / 'gpiooff.php');`
 - **php** 'exec' python
