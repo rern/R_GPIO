@@ -5,38 +5,35 @@ How It Works
 - set `/etc/sudoers.d/http` to allow root command without password
 - run `sudo` commands
 	- **jquery** `$.get(...);` >> **php** `exec(...);` >> **python** `os.system(...)`
-	- php: `exec()` needs full path command (plus `sudo` for root command)
+	- php `exec()` and python `os.system` need full path command (plus `sudo` for root command)
 - broadcast messagewith NGINX 'pushstream' websocket
 	- **php**  `exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=amp" -d '.escapeshellarg('"message"'));`
 	- **python** `requests.post("http://localhost/pub?id=amp", json="message")`
 <hr>
 
-- **jquery** 'get' php
-	- `$.get('gpioon.php' / 'gpiooff.php');`
-- **php** 'exec' python
-	- `exec('sudo /root/gpiostatus.py');`
-- **python** get pin status, set pin state
-	- `GPIO.input()`
-	- `GPIO.output()`
-- **php** broadcast
-	- if already on / off, 'die' - not broadcast
-	- notify caller only
+- **jquery** cannot run python directly
+	- run php
+		- `$.get('gpioon.php' / 'gpiooff.php');`
+
+- **php** for js <-> python
+	- get status
+		- `exec('sudo /root/gpiostatus.py');`
+	- broadcast
 		- `exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=amp" -d \"ON\"');`
-	- notify all
+	- run python on / off
 		- `exec('sudo /root/gpioon.py' / 'gpiooff.py');`
-	- if failed, 'curl' broadcast 'FAILED'
-- **python** gpio conbtrol
-	- off - kill idle timer process, set pin pulldown
-		- `os.system('killall -9 gpiotimer.py')`
-	- broadcast to all to replace current message, 'ON' / 'OFF'
-		- `python-requests`
-- **php** start python timer
-	- on - start idle timer in background
+	- start python timer in background
 		- `exec('sudo /root/gpiotimer.py > /dev/null 2>&1 &');`
-- **python** gpio timer 
+		
+- **python** gpio control
+	- on / off
+		- `RPi.GPIO`
+	- broadcast
+		- `python-requests`
+	- idle timer 
 	- poll idle state
 		- `python-mpd2`
 		- `cat /proc/asound/card*/pcm*/sub*/status`
 	- broadcast last minute warning
-- **php**
-	- `exec('/usr/bin/sudo /root/gpioon.py');`
+	- off - kill idle timer process
+		- `os.system('killall -9 gpiotimer.py')`
