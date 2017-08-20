@@ -6,8 +6,7 @@ How It Works
 - run `sudo` commands
 	- **jquery** `$.get(...);` >> **php** `exec(...);` >> **python** `os.system(...)`
 	- php: `exec()` needs full path command (plus `sudo` for root command)
-- broadcast message
-- use nginx 'pushstream' websocket
+- broadcast messagewith NGINX 'pushstream' websocket
 	- **php**  `exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=amp" -d '.escapeshellarg('"message"'));`
 	- **python** `requests.post("http://localhost/pub?id=amp", json="message")`
 <hr>
