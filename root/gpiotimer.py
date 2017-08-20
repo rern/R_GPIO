@@ -14,9 +14,10 @@ while i >= 0:
 	client = mpd.MPDClient(use_unicode=True)
 	client.connect("localhost", 6600)
 	state = client.status()['state']
+	status = os.system('cat /proc/asound/card*/pcm*/sub*/status | grep -q state') # airplay
 	client.close()
 	client.disconnect()
-	if state == "play":
+	if state == "play" || status == 0:
 		i = timer
 	else:
 		i -= 1
