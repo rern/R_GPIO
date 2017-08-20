@@ -17,7 +17,7 @@ while i >= 0:
 	status = os.system('cat /proc/asound/card*/pcm*/sub*/status | grep -q state') # airplay
 	client.close()
 	client.disconnect()
-	if state == "play" || status == 0:
+	if state == "play" or status == 0:
 		i = timer
 	else:
 		i -= 1
