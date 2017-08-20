@@ -26,18 +26,18 @@ How It Works
 	- notify all
 		- `exec('sudo /root/gpioon.py' / 'gpiooff.py');`
 	- if failed, 'curl' broadcast 'FAILED'
-- **python**
+- **python** gpio conbtrol
 	- off - kill idle timer process, set pin pulldown
 		- `os.system('killall -9 gpiotimer.py')`
-	- notify all to replace current broadcast 'ON' / 'OFF'
+	- broadcast to all to replace current message, 'ON' / 'OFF'
+		- `python-requests`
+- **php** start python timer
 	- on - start idle timer in background
 		- `exec('sudo /root/gpiotimer.py > /dev/null 2>&1 &');`
+- **python** gpio timer 
 	- poll idle state
 		- `python-mpd2`
 		- `cat /proc/asound/card*/pcm*/sub*/status`
 	- broadcast last minute warning
-		- `python-requests`
-	- notify all
-		- `requests.post("http://localhost/pub?id=gpio", json=str(60) +"IDLE")`
 - **php**
 	- `exec('/usr/bin/sudo /root/gpioon.py');`
