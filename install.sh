@@ -47,7 +47,7 @@ fi
 if (( $# == 0 )); then
 	if [[ -f /etc/mpd.conf.gpio ]]; then
 		echo -e "$info DAC configuration from previous install found."
-		yesno "Ignore:" ansconf
+		yesno "Overwrite:" ansconf
 		[[ $ansconf == 1 ]] && rm -v /etc/mpd.conf.gpio
 	fi
 	if [[ ! -f /etc/mpd.conf.gpio ]]; then
