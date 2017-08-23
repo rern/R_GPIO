@@ -110,7 +110,7 @@ wget -qN --show-progress https://codeload.github.com/rern/RuneUI_GPIO/zip/master
 
 echo -e "$bar Install new files ..."
 mkdir -p /tmp/install
-bsdtar -xvf master.zip --strip 1 --exclude '_repo/' -C /tmp/install
+bsdtar -xf master.zip --strip 1 --exclude '_repo/' -C /tmp/install
 rm master.zip /tmp/install/{.*,*.md,install.sh} &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
 
