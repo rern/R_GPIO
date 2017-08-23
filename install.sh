@@ -118,6 +118,7 @@ mv /tmp/install/uninstall*.sh ./
 chmod +x *.sh
 
 chown -R http:http /tmp/install
+chmod +x /tmp/install/root/*
 cp -r /tmp/install/* /
 rm -r /tmp/install
 
