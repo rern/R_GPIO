@@ -106,16 +106,20 @@ fi
 
 # install RuneUI GPIO #######################################
 echo -e "$bar Get files ..."
+wget -qN --show-progress https://codeload.github.com/rern/RuneUI_GPIO/zip/master -O master.zip
 
-wget -qN --show-progress $gitpath/_repo/RuneUI_GPIO.tar.xz
-wget -qN --show-progress $gitpath/uninstall_gpio.sh
-chmod 755 uninstall_gpio.sh
-
-# extract files #######################################
 echo -e "$bar Install new files ..."
-bsdtar -xvf RuneUI_GPIO.tar.xz -C / $([ -f /srv/http/gpio.json ] && echo '--exclude gpio.json')
-rm RuneUI_GPIO.tar.xz
-chmod 755 /etc/sudoers.d/sudoers /root/*.py
+mkdir -p /tmp/install
+bsdtar -xvf master.zip --strip 1 --exclude '_repo/' -C /tmp/install
+rm master.zip /tmp/install/{.*,*.md,install.sh} &> /dev/null
+[[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
+
+mv /tmp/install/uninstall*.sh ./
+chmod +x *.sh
+
+chown -R http:http /tmp/install
+cp -r /tmp/install/* /
+rm -r /tmp/install
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
