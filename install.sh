@@ -117,7 +117,7 @@ rm master.zip /tmp/install/{.*,*.md,install.sh} &> /dev/null
 chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 644 /tmp/install
-chmod 755 /tmp/install/root/*
+chmod 755 /tmp/install/root/* /tmp/install/usr/local/bin/uninstall*
 
 cp -r /tmp/install/* /
 rm -r /tmp/install
@@ -208,5 +208,5 @@ fi
 
 timestop
 title -l = "$bar $runegpio successfully installed."
-echo 'Uninstall: ./uninstall_gpio.sh'
+echo 'Uninstall: uninstall_gpio.sh'
 title -nt "$info Refresh browser and go to Menu > GPIO for settings."
