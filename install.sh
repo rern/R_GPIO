@@ -114,9 +114,6 @@ bsdtar -xf master.zip --strip 1 --exclude '_repo/' -C /tmp/install
 rm master.zip /tmp/install/{.*,*.md,install.sh} &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
 
-mv /tmp/install/uninstall*.sh ./
-chmod +x *.sh
-
 chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 644 /tmp/install
