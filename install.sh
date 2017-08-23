@@ -117,7 +117,8 @@ rm master.zip /tmp/install/{.*,*.md,install.sh} &> /dev/null
 mv /tmp/install/uninstall*.sh ./
 chmod +x *.sh
 
-chown -R http:http /tmp/install
+chown -R root:root /tmp/install
+chown -R http:http /tmp/install/srv/http
 chmod +x /tmp/install/root/*
 cp -r /tmp/install/* /
 rm -r /tmp/install
