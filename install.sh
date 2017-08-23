@@ -119,7 +119,9 @@ chmod +x *.sh
 
 chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
-chmod +x /tmp/install/root/* /tmp/install/etc/systemd/system/*
+chmod -R 644 /tmp/install
+chmod 755 /tmp/install/root/*
+
 cp -r /tmp/install/* /
 rm -r /tmp/install
 
