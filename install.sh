@@ -27,8 +27,12 @@
 
 rm $0
 
+wgetnc() {
+    wget -qN --show-progress --no-check-certificate $@
+}
+
 # import heading function
-wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wgetnc https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 runegpio=$( tcolor "RuneUI GPIO" )
@@ -62,7 +66,7 @@ if (( $# == 0 )); then
 	fi
 fi
 
-gitpath=https://raw.githubusercontent.com/rern/RuneUI_GPIO/master
+gitpath=https://github.com/rern/RuneUI_GPIO/raw/master
 pkgpath=/var/cache/pacman/pkg
 
 # install packages #######################################
@@ -73,7 +77,7 @@ title -l = "$bar Install $runegpio ..."
 if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
 	if [[ ! -e $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		echo -e "$bar Get packages file ..."
-		wget -qN --show-progress --no-check-certificate $gitpath/_repo/var.tar
+		wgetnc $gitpath/_repo/var.tar
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
@@ -92,7 +96,7 @@ fi
 if ! python -c "import mpd" &>/dev/null; then
 	if [[ ! -e $pkgpath/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $pkgpath/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		echo -e "$bar Get Pip packages file ..."
-		wget -qN --show-progress --no-check-certificate $gitpath/_repo/varpip.tar
+		wgetnc $gitpath/_repo/varpip.tar
 		tar -xvf varpip.tar -C /
 		rm varpip.tar
 	fi
@@ -106,7 +110,7 @@ fi
 
 # install RuneUI GPIO #######################################
 echo -e "$bar Get files ..."
-wget -qN --show-progress --no-check-certificate https://codeload.github.com/rern/RuneUI_GPIO/zip/master -O master.zip
+wgetnc https://github.com/rern/RuneUI_GPIO/archive/master.zip
 
 echo -e "$bar Install new files ..."
 mkdir -p /tmp/install
