@@ -18,7 +18,7 @@
 # remove uninstall_gpio.sh
 
 # import heading function
-wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 runegpio=$( tcolor "RuneUI GPIO" )
 
 # check installed #######################################
