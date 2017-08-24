@@ -93,12 +93,5 @@ Install
 ---
 RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage.
 ```
-wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneUI_GPIO/master/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
 ```
-
-Uninstall
----
-```
-./uninstall_gpio.sh
-```
-_Uninstalling will restore files to originals and delete all added ones._  
