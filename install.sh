@@ -27,12 +27,8 @@
 
 rm $0
 
-wgetnc() {
-    wget -qN --show-progress --no-check-certificate $@
-}
-
 # import heading function
-wgetnc https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN --show-progress --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 runegpio=$( tcolor "RuneUI GPIO" )
