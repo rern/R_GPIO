@@ -62,7 +62,7 @@ if (( $# == 0 )); then
 	fi
 fi
 
-gitpath=https://github.com/rern/RuneUI_GPIO/raw/master
+gitpath=https://github.com/rern/_assets/tree/master/RuneUI_GPIO
 pkgpath=/var/cache/pacman/pkg
 
 # install packages #######################################
@@ -73,7 +73,7 @@ title -l = "$bar Install $runegpio ..."
 if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
 	if [[ ! -e $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		echo -e "$bar Get packages file ..."
-		wgetnc $gitpath/_repo/var.tar
+		wgetnc $gitpath/var.tar
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
@@ -92,7 +92,7 @@ fi
 if ! python -c "import mpd" &>/dev/null; then
 	if [[ ! -e $pkgpath/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $pkgpath/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		echo -e "$bar Get Pip packages file ..."
-		wgetnc $gitpath/_repo/varpip.tar
+		wgetnc $gitpath/varpip.tar
 		tar -xvf varpip.tar -C /
 		rm varpip.tar
 	fi
