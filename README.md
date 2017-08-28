@@ -14,7 +14,7 @@ Can be installed without relay module to play with interface.
 >[Install](#install)  
 >[Uninstall](#uninstall)  
 
-![settings](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/gpio.gif)  
+![settings](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/gpio.gif)  
 
 Features
 ---
@@ -47,7 +47,7 @@ Features
 
 <hr>
 
-![warning](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/warning_el.png) **Warning**
+![warning](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/warning_el.png) **Warning**
 - A relay module can be connected to GPIO, to see how it works, by anyone with basic skill.  
 - Wrong connection may just damage your RPi. (only 5V)  
 - Requires **electrical skill and knowledge** to connect these relays as power switches. (110V / 220V)  
@@ -59,8 +59,8 @@ Things to get
 ---
 Dirt cheap on ebay
 
-![relay](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/relay.jpg)
-![jumper](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/jumper.jpg)
+![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay.jpg)
+![jumper](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/jumper.jpg)
 
 - [Relay module](http://www.ebay.com/sch/i.html?_sacat=0&_nkw=4+channel+relay+module&_frs=1)
 - [GPIO jumper wires](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.X10pcs+2pin+jumper.TRS0&_nkw=10pcs+2pin+jumper&_sacat=0)
@@ -70,13 +70,13 @@ Dirt cheap on ebay
 Things to do
 ---
 (click for larger image)  
-[![1](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/1.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/1.jpg?raw=1)
-[![2](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/2.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/2.jpg?raw=1)
-[![3](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/3.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/3.jpg?raw=1)
-[![4](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/4.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/4.jpg?raw=1)
-[![5](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/5.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/5.jpg?raw=1)
-[![6](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/6.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/6.jpg?raw=1)
-[![7](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/GPIOs/7.jpg)](https://github.com/rern/RuneUI_GPIO/blob/master/_repo/7.jpg?raw=1)
+[![1](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/1.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/1.jpg?raw=1)
+[![2](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/2.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/2.jpg?raw=1)
+[![3](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/3.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/3.jpg?raw=1)
+[![4](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/4.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/4.jpg?raw=1)
+[![5](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/5.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/5.jpg?raw=1)
+[![6](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/6.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/6.jpg?raw=1)
+[![7](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/7.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/7.jpg?raw=1)
 
 Before install
 ---
