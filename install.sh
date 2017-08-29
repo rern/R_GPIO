@@ -209,6 +209,6 @@ if pgrep midori >/dev/null; then
 fi
 
 timestop
-title -l = "$bar $runegpio successfully installed."
+title -l = "$bar $runegpio installed successfully."
 echo 'Uninstall: uninstall_gpio.sh'
 title -nt "$info Refresh browser and go to Menu > GPIO for settings."
