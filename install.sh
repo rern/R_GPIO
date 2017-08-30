@@ -147,7 +147,7 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>
 ' -e '/poweroff-modal/ i\
-            <li><a href="/gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
+            <li><a href="gpiosettings.php"><i class="fa fa-volume-off"></i> GPIO</a></li>
 ' -e '/class="home"/ a\
     <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
 ' $header
