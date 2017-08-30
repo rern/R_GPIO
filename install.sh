@@ -70,7 +70,7 @@ title -l = "$bar Install $runegpio ..."
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
-if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; then
+if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; then
 	if [[ ! -e $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
 		echo -e "$bar Get packages file ..."
 		wgetnc $gitpath/var.tar
@@ -89,7 +89,7 @@ if ! pacman -Q python2-pip &>/dev/null && ! pacman -Q python-pip &>/dev/null; th
 	ln -s /usr/bin/pip{2,}
 fi
 
-if ! python -c "import mpd" &>/dev/null; then
+if ! python -c "import mpd" &> /dev/null; then
 	if [[ ! -e $pkgpath/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $pkgpath/requests-2.12.5-py2.py3-none-any.whl ]]; then
 		echo -e "$bar Get Pip packages file ..."
 		wgetnc $gitpath/varpip.tar
@@ -99,7 +99,7 @@ if ! python -c "import mpd" &>/dev/null; then
 	echo -e "$bar Install Python-MPD ..."
 	pip install $pkgpath/python-mpd2-0.5.5.tar.gz
 fi
-if ! python -c "import requests" &>/dev/null; then
+if ! python -c "import requests" &> /dev/null; then
 	echo -e "$bar Install Python-Request ..."
 	pip install $pkgpath/requests-2.12.5-py2.py3-none-any.whl
 fi
@@ -201,10 +201,10 @@ echo -e "$bar Clear PHP OPcache ..."
 systemctl reload php-fpm
 echo
 
-if pgrep midori >/dev/null; then
+if pgrep midori > /dev/null; then
 	killall midori
 	sleep 1
-	xinit &>/dev/null &
+	xinit &> /dev/null &
 	echo 'Local browser restarted.'
 fi
 
