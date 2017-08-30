@@ -33,12 +33,12 @@ fi
 title -l = "$bar Uninstall $runegpio ..."
 # uninstall packages #######################################
 echo -e "$bar Remove installed packages ..."
-pacman -Q python2-pip &>/dev/null && pip='Python-Pip,' || pip=''
+pacman -Q python2-pip &> /dev/null && pip='Python-Pip,' || pip=''
 yesno "Uninstall $pip Python-MPD and Python-Requests:" answer
 if [[ $answer == 1 ]]; then
 		echo -e "$bar Uninstall packages ..."
 		pip uninstall -y python-mpd2 requests
-		if pacman -Q python2-pip &>/dev/null; then
+		if pacman -Q python2-pip &> /dev/null; then
 			pacman -Rs --noconfirm python2-pip
 			rm /usr/bin/pip
 		fi
@@ -109,10 +109,10 @@ echo -e "$bar Clear PHP OPcache ..."
 systemctl reload php-fpm
 echo
 
-if pgrep midori >/dev/null; then
+if pgrep midori > /dev/null; then
 	killall midori
 	sleep 1
-	xinit &>/dev/null &
+	xinit &> /dev/null &
 	echo -e '\nLocal browser restarted.\n'
 fi
 
