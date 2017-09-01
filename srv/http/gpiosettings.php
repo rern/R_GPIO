@@ -92,7 +92,7 @@ function opttime($n) {
 <body>
 
 <div class="container">
-<h1>GPIO</h1><a id="close"><i class="fa fa-times fa-lg"></i></a>
+<h1>GPIO</h1><a id="close"><i class="fa fa-times fa-2x"></i></a>
 <legend>Settings</legend>
 <form class="form-horizontal">
 
