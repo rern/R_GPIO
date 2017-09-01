@@ -104,19 +104,16 @@ redis-cli hset addons gpio 0 &> /dev/null
 # skip if reinstall - gpiouninstall.sh re (any argument)
 (( $# != 0 )) && exit
 
-# refresh #######################################
-echo -e "$bar Clear PHP OPcache ..."
+title -l = "$bar $runegpio uninstalled successfully."
+title -nt "$info Refresh browser for no $runegpio."
+
+# clear opcache and restart local browser #######################################
 systemctl reload php-fpm
-echo
 
 if pgrep midori > /dev/null; then
 	killall midori
 	sleep 1
 	xinit &> /dev/null &
-	echo -e '\nLocal browser restarted.\n'
 fi
-
-title -l = "$bar $runegpio uninstalled successfully."
-title -nt "$info Refresh browser for no $runegpio."
 
 rm $0
