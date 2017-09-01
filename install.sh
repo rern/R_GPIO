@@ -110,7 +110,7 @@ wgetnc https://github.com/rern/RuneUI_GPIO/archive/master.zip
 
 echo -e "$bar Install new files ..."
 mkdir -p /tmp/install
-bsdtar -xf master.zip --strip 1 --exclude '_repo/' -C /tmp/install
+bsdtar -xf master.zip --strip 1 -C /tmp/install
 rm master.zip /tmp/install/{.*,*.md,install.sh} &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
 
