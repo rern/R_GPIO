@@ -198,19 +198,16 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 
 redis-cli hset addons gpio $version &> /dev/null
 
-# refresh #######################################
-echo -e "$bar Clear PHP OPcache ..."
+timestop
+title -l = "$bar $runegpio installed successfully."
+echo 'Uninstall: uninstall_gpio.sh'
+title -nt "$info Refresh browser and go to Menu > GPIO for settings."
+
+# clear opcache and restart local browser #######################################
 systemctl reload php-fpm
-echo
 
 if pgrep midori > /dev/null; then
 	killall midori
 	sleep 1
 	xinit &> /dev/null &
-	echo 'Local browser restarted.'
 fi
-
-timestop
-title -l = "$bar $runegpio installed successfully."
-echo 'Uninstall: uninstall_gpio.sh'
-title -nt "$info Refresh browser and go to Menu > GPIO for settings."
