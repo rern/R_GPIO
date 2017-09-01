@@ -1,5 +1,7 @@
 #!/bin/bash
 
+version=20170901
+
 # install.sh [any = skip DAC ready prompt]
 
 # https://github.com/rern/RuneUI_GPIO
@@ -194,7 +196,7 @@ echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
-redis-cli hset addons gpio 1 &> /dev/null
+redis-cli hset addons gpio $version &> /dev/null
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
