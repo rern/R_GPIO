@@ -86,7 +86,7 @@ udevadm control --reload
 echo -e "$bar Remove service ..."
 systemctl disable gpioset
 systemctl daemon-reload
-rm -v /etc/sudoers.d/http /etc/systemd/system/gpioset.service
+rm -v /etc/systemd/system/gpioset.service
 
 redis-cli hdel addons gpio &> /dev/null
 # skip if reinstall - gpiouninstall.sh re (any argument)
