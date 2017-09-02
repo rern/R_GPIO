@@ -100,7 +100,7 @@ systemctl disable gpioset
 systemctl daemon-reload
 rm -v /etc/sudoers.d/http /etc/systemd/system/gpioset.service
 
-redis-cli hset addons gpio 0 &> /dev/null
+redis-cli hdel addons gpio &> /dev/null
 # skip if reinstall - gpiouninstall.sh re (any argument)
 (( $# != 0 )) && exit
 
