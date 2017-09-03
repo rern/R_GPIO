@@ -35,7 +35,7 @@ title -l = "$bar Uninstall $runegpio ..."
 # remove files #######################################
 echo -e "$bar Remove files ..."
 rm -v /root/{gpiooff.py,gpioon.py,gpiotimer.py,poweroff.py,reboot.py}
-rm -v /srv/http/{gpiooff.php,gpioon.php,gpiosave.php,gpiosettings.php,gpiostatus.php,gpiotimerreset.php,poweroff.php,reboot.php}
+rm -v /srv/http/{gpio*}
 path=/srv/http/assets
 rm -v $path/css/gpiosettings.css
 rm -v $path/img/RPi3_GPIOs.png
