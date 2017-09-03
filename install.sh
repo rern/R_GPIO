@@ -38,13 +38,10 @@ runegpio=$( tcolor "RuneUI GPIO" )
 # check already installed #######################################
 if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	echo -e "$info $runegpio already installed."
-	if (( $# == 0 )); then
-		yesno "Reinstall $runegpio:" answer
-		[[ $answer != 1 ]] && exit
-		./uninstall_gpio.sh re
-	else
-		exit
-	fi
+	(( $# != 0 )) && exit
+	yesno "Reinstall $runegpio:" answer
+	[[ $answer != 1 ]] && exit
+	./uninstall_gpio.sh re
 fi
 
 # user inputs
