@@ -42,6 +42,8 @@ if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 		yesno "Reinstall $runegpio:" answer
 		[[ $answer != 1 ]] && exit
 		./uninstall_gpio.sh re
+	else
+		exit
 	fi
 fi
 
