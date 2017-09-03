@@ -122,7 +122,7 @@ chown -R http:http /tmp/install/srv/http
 chmod -R 644 /tmp/install
 chmod 755 /tmp/install/root/* /tmp/install/usr/local/bin/uninstall*
 
-cp -r /tmp/install/* /
+cp -rp /tmp/install/* /
 rm -r /tmp/install
 
 # modify files #######################################
