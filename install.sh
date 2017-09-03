@@ -65,7 +65,7 @@ if (( $# == 0 )); then
 	fi
 fi
 
-gitpath=https://github.com/rern/_assets/tree/master/RuneUI_GPIO
+gitpath=https://github.com/rern/_assets/raw/master/RuneUI_GPIO
 pkgpath=/var/cache/pacman/pkg
 
 # install packages #######################################
