@@ -38,7 +38,7 @@ runegpio=$( tcolor "RuneUI GPIO" )
 # check already installed #######################################
 if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	echo -e "$info $runegpio already installed."
-	(( $# != 0 )) && exit
+	[[ ! -t 1 ]] && exit
 	yesno "Reinstall $runegpio:" answer
 	[[ $answer != 1 ]] && exit
 	./uninstall_gpio.sh re
@@ -204,9 +204,10 @@ title -l = "$bar $runegpio installed successfully."
 echo 'Uninstall: uninstall_gpio.sh'
 title -nt "$info Refresh browser and go to Menu > GPIO for settings."
 
-# clear opcache and restart local browser #######################################
-systemctl reload php-fpm
+# clear opcache if run from terminal #######################################
+[[ -t 1 ]] && systemctl reload php-fpm
 
+# restart local browser #######################################
 if pgrep midori > /dev/null; then
 	killall midori
 	sleep 1
