@@ -201,7 +201,7 @@ redis-cli hset addons gpio $version &> /dev/null
 
 timestop
 title -l = "$bar $runegpio installed successfully."
-echo 'Uninstall: uninstall_gpio.sh'
+[[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
 title -nt "$info Refresh browser and go to Menu > GPIO for settings."
 
 # clear opcache if run from terminal #######################################
