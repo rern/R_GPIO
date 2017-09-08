@@ -24,7 +24,7 @@ runegpio=$( tcolor "RuneUI GPIO" )
 # check installed #######################################
 if [[ ! -e /srv/http/assets/css/gpiosettings.css ]]; then
 	echo -e "$info $runegpio not found."
-	exit
+	exit 1
 fi
 
 # gpio off #######################################
