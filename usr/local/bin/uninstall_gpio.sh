@@ -32,20 +32,14 @@ fi
 
 $type=Uninstall
 # if update, save settings #######################################
-if [[ ${@:$#} == -u ]]; then
-	rm -r /tmp/gpio
-	mkdir -p /tmp/gpio
-	cp /srv/http/gpio.json /tmp/gpio
-	cp /etc/mpd.conf.gpio /tmp/gpio
-	type=Update
-fi
+[[ ${@:$#} == -u ]] && type=Update
 
 title -l = "$bar $type $runegpio ..."
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
 rm -v /root/{gpiooff.py,gpioon.py,gpiotimer.py,poweroff.py,reboot.py}
-rm -v /srv/http/{gpio*}
+rm -v /srv/http/{gpioo*,gpios*,gpiot*}
 path=/srv/http/assets
 rm -v $path/css/gpiosettings.css
 rm -v $path/img/RPi3_GPIOs.png
@@ -85,8 +79,10 @@ sed -i -e '/^#"echo/ s/^#//g
 ' -e '/reboot.py/d
 ' /root/.xbindkeysrc
 
-cp -vf /etc/mpd.conf{.pacorig,}
-systemctl restart mpd
+if [[ ! update ]]; then
+	cp -vf /etc/mpd.conf{.pacorig,}
+	systemctl restart mpd
+fi
 
 udev=/etc/udev/rules.d/rune_usb-audio.rules
 echo $udev
