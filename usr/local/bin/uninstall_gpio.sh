@@ -17,6 +17,14 @@
 #	info
 # remove uninstall_gpio.sh
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=Update
+else
+	type=Uninstall
+fi
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 runegpio=$( tcolor "RuneUI GPIO" )
@@ -29,10 +37,6 @@ fi
 
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
-
-type=Uninstall
-# if update, save settings #######################################
-[[ ${@:$#} == -u ]] && type=Update
 
 title -l = "$bar $type $runegpio ..."
 
