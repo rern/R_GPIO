@@ -44,8 +44,8 @@ if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	./uninstall_gpio.sh re
 fi
 
-$type=installed
-[[ ${@:$#} == -u ]] && update=1; $type=updated
+type=installed
+[[ ${@:$#} == -u ]] && update=1; type=updated
 
 # user inputs
 # get DAC config #######################################
