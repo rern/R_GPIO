@@ -30,7 +30,17 @@ fi
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
 
-title -l = "$bar Uninstall $runegpio ..."
+$type=Uninstall
+# if update, save settings #######################################
+if [[ ${@:$#} == -u ]]; then
+	rm -r /tmp/gpio
+	mkdir -p /tmp/gpio
+	cp /srv/http/gpio.json /tmp/gpio
+	cp /etc/mpd.conf.gpio /tmp/gpio
+	type=Update
+fi
+
+title -l = "$bar $type $runegpio ..."
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
@@ -93,7 +103,7 @@ redis-cli hdel addons gpio &> /dev/null
 (( $# != 0 )) && exit
 
 title -l = "$bar $runegpio uninstalled successfully."
-title -nt "$info Refresh browser for no $runegpio."
+[[ ! update ]] && title -nt "$info Refresh browser for no $runegpio."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
