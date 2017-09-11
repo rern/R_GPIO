@@ -44,6 +44,9 @@ if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
 	./uninstall_gpio.sh re
 fi
 
+$type=installed
+[[ ${@:$#} == -u ]] && update=1; $type=updated
+
 # user inputs
 # get DAC config #######################################
 # skip with any argument
@@ -171,8 +174,7 @@ sed -i $'$ a\
 <script src="<?=$this->asset(\'/js/vendor/pnotify3.custom.min.js\')?>"></script>
 ' $footer
 
-[[ ! -f /etc/mpd.conf.gpio ]] &&
-	cp -rfv /etc/mpd.conf{,.gpio}
+[[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
 
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
@@ -203,7 +205,7 @@ redis-cli hset addons gpio $version &> /dev/null
 timestop
 title -l = "$bar $runegpio installed successfully."
 [[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
-title -nt "$info Refresh browser and go to Menu > GPIO for settings."
+[[ ! update ]] && title -nt "$info Refresh browser and go to Menu > GPIO for settings."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
