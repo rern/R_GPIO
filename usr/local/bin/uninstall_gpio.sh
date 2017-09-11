@@ -99,7 +99,7 @@ redis-cli hdel addons gpio &> /dev/null
 (( $# != 0 )) && exit
 
 title -l = "$bar $runegpio uninstalled successfully."
-[[ ! update ]] && title -nt "$info Refresh browser for no $runegpio."
+[[ ! $update ]] && title -nt "$info Refresh browser for no $runegpio."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
