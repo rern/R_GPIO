@@ -30,7 +30,7 @@ fi
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
 
-$type=Uninstall
+type=Uninstall
 # if update, save settings #######################################
 [[ ${@:$#} == -u ]] && type=Update
 
