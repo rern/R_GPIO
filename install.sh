@@ -203,7 +203,7 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 redis-cli hset addons gpio $version &> /dev/null
 
 timestop
-title -l = "$bar $runegpio installed successfully."
+title -l = "$bar $runegpio $type successfully."
 [[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
 [[ ! update ]] && title -nt "$info Refresh browser and go to Menu > GPIO for settings."
 
