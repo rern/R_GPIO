@@ -69,7 +69,7 @@ gitpath=https://github.com/rern/_assets/raw/master/RuneUI_GPIO
 pkgpath=/var/cache/pacman/pkg
 
 # install packages #######################################
-title -l = "$bar Install $runegpio ..."
+[[ $1 != u ]] && title -l = "$bar Install $runegpio ..."
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
