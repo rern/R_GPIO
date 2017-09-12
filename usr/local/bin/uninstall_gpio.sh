@@ -17,14 +17,6 @@
 #	info
 # remove uninstall_gpio.sh
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=Update
-else
-	type=Uninstall
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 runegpio=$( tcolor "RuneUI GPIO" )
@@ -38,6 +30,7 @@ fi
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
 
+[[ $1 != u ]] && type=Uninstall || type=Update
 title -l = "$bar $type $runegpio ..."
 
 # remove files #######################################
@@ -83,7 +76,7 @@ sed -i -e '/^#"echo/ s/^#//g
 ' -e '/reboot.py/d
 ' /root/.xbindkeysrc
 
-if [[ ! update ]]; then
+if [[ $1 != u ]]; then
 	cp -vf /etc/mpd.conf{.pacorig,}
 	systemctl restart mpd
 fi
@@ -100,10 +93,11 @@ rm -v /etc/systemd/system/gpioset.service
 
 redis-cli hdel addons gpio &> /dev/null
 # skip if reinstall - gpiouninstall.sh re (any argument)
-(( $# != 0 )) && exit
 
-title -l = "$bar $runegpio uninstalled successfully."
-[[ ! $update ]] && title -nt "$info Refresh browser for no $runegpio."
+if [[ $1 != u ]]; then
+	title -l = "$bar $runegpio uninstalled successfully."
+	title -nt "$info Refresh browser for no $runegpio."
+fi
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
