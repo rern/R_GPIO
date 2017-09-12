@@ -29,14 +29,6 @@ version=20170901
 
 rm $0
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=updated
-else
-	type=installed
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
@@ -208,9 +200,11 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 redis-cli hset addons gpio $version &> /dev/null
 
 timestop
+
+[[ $1 != u ]] && type=installed || type=updated
 title -l = "$bar $runegpio $type successfully."
 [[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
-[[ ! $update ]] && title -nt "$info Refresh browser and go to Menu > GPIO for settings."
+[[ $1 != u ]] && title -nt "$info Refresh browser and go to Menu > GPIO for settings."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
