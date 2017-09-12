@@ -57,7 +57,7 @@ echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
 ' -e '/id="ond"/, /id="offd"/ d
 ' -e '/id="gpio"/ d
-' -e '/gpiosettings.php/ d
+' -e '/id="gpiosettings"/ d
 ' $header
 # no RuneUI enhancement
 ! $enh && sed -i -e '/pnotify.css/ d' $header
