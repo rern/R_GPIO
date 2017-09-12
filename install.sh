@@ -201,11 +201,13 @@ redis-cli hset addons gpio $version &> /dev/null
 
 timestop
 
-[[ $1 != u ]] && type=installed || type=updated
-title -l = "$bar $runegpio $type successfully."
-[[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
-[[ $1 != u ]] && title -nt "$info Refresh browser and go to Menu > GPIO for settings."
-
+if [[ $1 != u ]]; then
+	title -l = "$bar $runegpio installed successfully."
+	[[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
+	title -nt "$info Refresh browser and go to Menu > GPIO for settings."
+else
+	title -l = "$bar $runegpio updated successfully."
+fi
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
 
