@@ -1,37 +1,16 @@
 #!/bin/bash
 
-# uninstall_gpio.sh - RuneUI GPIO
-# https://github.com/rern/RuneUI_GPIO
-
-# (called by uninstall.sh)
-# not installed
-#	exit
-# uninstall
-#	remove files
-#	disable service
-#	remove gpio data
-#	restore files
-# success
-#	clear opcache
-#	restart local browser
-#	info
-# remove uninstall_gpio.sh
+# required variables
+alias=motd
+title='RuneUI GPIO'
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-runegpio=$( tcolor "RuneUI GPIO" )
-
-# check installed #######################################
-if [[ ! -e /usr/local/bin/uninstall_gpio.sh ]]; then
-	echo -e "$info $runegpio not found."
-	exit 1
-fi
 
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
 
-[[ $1 != u ]] && type=Uninstall || type=Update
-title -l = "$bar $type $runegpio ..."
+uninstallstart $1
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
@@ -91,22 +70,8 @@ systemctl disable gpioset
 systemctl daemon-reload
 rm -v /etc/systemd/system/gpioset.service
 
-redis-cli hdel addons gpio &> /dev/null
-# skip if reinstall - gpiouninstall.sh re (any argument)
+uninstallfinish $1
 
-if [[ $1 != u ]]; then
-	title -l = "$bar $runegpio uninstalled successfully."
-	title -nt "$info Refresh browser for no $runegpio."
-fi
+title -nt "$info Refresh browser for no $runegpio."
 
-# clear opcache if run from terminal #######################################
-[[ -t 1 ]] && systemctl reload php-fpm
-
-# restart local browser #######################################
-if pgrep midori > /dev/null; then
-	killall midori
-	sleep 1
-	xinit &> /dev/null &
-fi
-
-rm $0
+[[ -t 1 ]] && clearcache
