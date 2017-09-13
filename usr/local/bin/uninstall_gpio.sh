@@ -72,6 +72,4 @@ rm -v /etc/systemd/system/gpioset.service
 
 uninstallfinish $1
 
-title -nt "$info Refresh browser for no $runegpio."
-
 [[ -t 1 ]] && clearcache
