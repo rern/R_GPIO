@@ -2,7 +2,6 @@
 
 # required variables
 alias=motd
-title='RuneUI GPIO'
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
