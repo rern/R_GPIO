@@ -22,7 +22,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 runegpio=$( tcolor "RuneUI GPIO" )
 
 # check installed #######################################
-if [[ ! -e /srv/http/assets/css/gpiosettings.css ]]; then
+if [[ ! -e /usr/local/bin/uninstall_gpio.sh ]]; then
 	echo -e "$info $runegpio not found."
 	exit 1
 fi
