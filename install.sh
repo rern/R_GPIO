@@ -1,48 +1,11 @@
 #!/bin/bash
 
-version=20170901
-
-# install.sh [any = skip DAC ready prompt]
-
-# https://github.com/rern/RuneUI_GPIO
-
-# remove install.sh
-# already installed
-#	reinstall ?
-#		exit
-#		uninstall
-# install
-#	Pip
-#	python packages
-#	get gpiouninstall.sh
-#	get tar.xz
-#	modify files
-#	extract
-#	remove tar.xz
-#	set gpio default
-# 	enable gpioset service
-#	reload sudoers
-# success
-#	clear opcache
-#	restart local browser
-#	info
-
-rm $0
+# required variables
+alias=motd
+title='RuneUI GPIO'
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-timestart
-
-runegpio=$( tcolor "RuneUI GPIO" )
-
-# check already installed #######################################
-if [[ -e /usr/local/bin/uninstall_gpio.sh ]]; then
-	echo -e "$info $runegpio already installed."
-	[[ ! -t 1 ]] && exit
-	yesno "Reinstall $runegpio:" answer
-	[[ $answer != 1 ]] && exit
-	./uninstall_gpio.sh re
-fi
 
 # user inputs
 # get DAC config #######################################
@@ -65,11 +28,10 @@ if (( $# == 0 )); then
 	fi
 fi
 
+installstart $1
+
 gitpath=https://github.com/rern/_assets/raw/master/RuneUI_GPIO
 pkgpath=/var/cache/pacman/pkg
-
-# install packages #######################################
-[[ $1 != u ]] && title -l = "$bar Install $runegpio ..."
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
@@ -199,23 +161,9 @@ echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
-redis-cli hset addons gpio $version &> /dev/null
+installfinish $1
 
-timestop
+title -nt "$info Refresh browser and go to Menu > GPIO for settings."
 
-if [[ $1 != u ]]; then
-	title -l = "$bar $runegpio installed successfully."
-	[[ -t 1 ]] && echo 'Uninstall: uninstall_gpio.sh'
-	title -nt "$info Refresh browser and go to Menu > GPIO for settings."
-else
-	title -l = "$bar $runegpio updated successfully."
-fi
 # clear opcache if run from terminal #######################################
-[[ -t 1 ]] && systemctl reload php-fpm
-
-# restart local browser #######################################
-if pgrep midori > /dev/null; then
-	killall midori
-	sleep 1
-	xinit &> /dev/null &
-fi
+[[ -t 1 ]] && clearcache
