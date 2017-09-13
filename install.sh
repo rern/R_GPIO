@@ -36,7 +36,7 @@ timestart
 runegpio=$( tcolor "RuneUI GPIO" )
 
 # check already installed #######################################
-if [[ -e /srv/http/assets/css/gpiosettings.css ]]; then
+if [[ -e /usr/local/bin/uninstall_gpio.sh ]]; then
 	echo -e "$info $runegpio already installed."
 	[[ ! -t 1 ]] && exit
 	yesno "Reinstall $runegpio:" answer
