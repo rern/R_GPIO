@@ -142,9 +142,9 @@ sed -i -e '/echo/ s/^/#/g
 ' -e '/echo 8/ a\
 "/root/reboot.py 8"
 ' /root/.xbindkeysrc
-killall xbindkeysrc
+killall xbindkeys
 export DISPLAY=":0" &
-xbindkeysrc &
+xbindkeys &
 
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."
