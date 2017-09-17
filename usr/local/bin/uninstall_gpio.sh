@@ -2,8 +2,7 @@
 
 alias=gpio
 
-# import heading function
-wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
+. /srv/http/title.sh
 
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
