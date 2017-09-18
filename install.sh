@@ -132,9 +132,7 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' $footer
 # no RuneUI enhancement
 ! grep -q 'pnotify3.custom.min.js' $footer &&
-sed -i $'$ a\
-<script src="<?=$this->asset(\'/js/vendor/pnotify3.custom.min.js\')?>"></script>
-' $footer
+echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?>"></script>' >> $footer
 
 [[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
 
