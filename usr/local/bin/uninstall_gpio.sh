@@ -2,7 +2,7 @@
 
 alias=gpio
 
-. /srv/http/title.sh
+. /srv/http/addonstitle.sh
 
 # gpio off #######################################
 ./gpiooff.py &>/dev/null &
