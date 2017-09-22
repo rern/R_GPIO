@@ -11,13 +11,7 @@ alias=gpio
 # user inputs
 # get DAC config #######################################
 # skip with any argument
-if (( $# == 0 )); then
-	if [[ -f /etc/mpd.conf.gpio ]]; then
-		echo -e "$info DAC configuration from previous install found."
-		yesno "Overwrite:" ansconf
-		[[ $ansconf == 1 ]] && rm -v /etc/mpd.conf.gpio
-	fi
-	if [[ ! -f /etc/mpd.conf.gpio ]]; then
+if [[ -t 1 ]] && [[ ! -e /etc/mpd.conf.gpio ]]; then
 		echo -e "$info Get DAC configuration ready:"
 		echo 'For external power DAC > power on'
 		echo
@@ -26,7 +20,6 @@ if (( $# == 0 )); then
 		echo
 		read -n 1 -s -p 'Press any key to continue ... '
 		echo
-	fi
 fi
 
 installstart $1
