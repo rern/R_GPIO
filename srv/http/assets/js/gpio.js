@@ -19,7 +19,7 @@ function buttonOnOff(enable, pullup) {
 	}
 }
 function gpioOnOff() {
-	$.get('gpiostatus.php', function(status) {
+	$.get( (window.location.pathname === '/') ? 'gpiostatus.php' : '../gpiostatus.php', function(status) {
 		var json = $.parseJSON(status);
 		buttonOnOff(json.enable, json.pullup);
 	});
