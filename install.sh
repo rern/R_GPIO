@@ -4,9 +4,7 @@
 
 alias=gpio
 
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
-[[ ! -e /srv/http/addonslist.php ]] && wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 # user inputs
 # get DAC config #######################################
@@ -156,6 +154,3 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 installfinish $1
 
 title -nt "$info Refresh browser and go to Menu > GPIO for settings."
-
-# clear opcache if run from terminal #######################################
-[[ -t 1 ]] && clearcache
