@@ -153,4 +153,7 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 
 installfinish $1
 
-title -nt "$info Refresh browser and go to Menu > GPIO for settings."
+if [[ -t 1 ]]; then
+	title -nt "$info Refresh browser and go to Menu > GPIO for settings."
+	clearcache
+fi
