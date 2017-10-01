@@ -71,5 +71,3 @@ systemctl daemon-reload
 rm -v /etc/systemd/system/gpioset.service
 
 uninstallfinish $1
-
-[[ -t 1 ]] && clearcache
