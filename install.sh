@@ -54,7 +54,7 @@ wgetnc https://github.com/rern/RuneUI_GPIO/archive/master.zip
 echo -e "$bar Install new files ..."
 rm -rf /tmp/install
 mkdir -p /tmp/install
-bsdtar -xvf master.zip --strip 1 -C /tmp/install
+bsdtar --exclude='.*' --exclude='*.md' -xvf master.zip --strip 1 -C /tmp/install
 rm master.zip /tmp/install/* &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
 
