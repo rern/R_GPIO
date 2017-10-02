@@ -67,13 +67,13 @@ rm -r /tmp/install
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
-udev=/etc/udev/rules.d/rune_usb-audio.rules
-echo $udev
-sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $udev
+file=/etc/udev/rules.d/rune_usb-audio.rules
+echo $file
+sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $file
 udevadm control --reload
 
-header=/srv/http/app/templates/header.php
-echo $header
+file=/srv/http/app/templates/header.php
+echo $file
 sed -i -e $'1 i\
 <?php // gpio\
 $file = \'/srv/http/gpio.json\';\
@@ -95,21 +95,21 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 			</li>
 ' -e '/class="home"/ a\
     <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
-' $header
+' $file
 # no RuneUI enhancement
-! grep -q 'pnotify.css' $header &&
-	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $header
+! grep -q 'pnotify.css' $file &&
+	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $file
 
-footer=/srv/http/app/templates/footer.php
-echo $footer
+file=/srv/http/app/templates/footer.php
+echo $file
 sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e 's/id="syscmd-reboot"/id="reboot"/
 ' -e $'$ a\
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
-' $footer
+' $file
 # no RuneUI enhancement
-! grep -q 'pnotify3.custom.min.js' $footer &&
-echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?>"></script>' >> $footer
+! grep -q 'pnotify3.custom.min.js' $file &&
+echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?>"></script>' >> $file
 
 [[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
 
