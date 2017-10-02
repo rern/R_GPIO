@@ -6,20 +6,6 @@ alias=gpio
 
 . /srv/http/addonstitle.sh
 
-# user inputs
-# get DAC config #######################################
-# skip with any argument
-if [[ -t 1 ]] && [[ ! -e /etc/mpd.conf.gpio ]]; then
-		echo -e "$info Get DAC configuration ready:"
-		echo 'For external power DAC > power on'
-		echo
-		echo 'Menu > MPD > setup and verify DAC works properly before continue.'
-		echo '(This install can be left running while setup.)'
-		echo
-		read -n 1 -s -p 'Press any key to continue ... '
-		echo
-fi
-
 installstart $1
 
 gitpath=https://github.com/rern/_assets/raw/master/RuneUI_GPIO
