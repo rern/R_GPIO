@@ -62,8 +62,8 @@ chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 755 /tmp/install
 
-mv -f /tmp/install/* /
-rm -r /tmp/install
+mv -vf /tmp/install/* /
+rm -rf /tmp/install
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
