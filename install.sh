@@ -62,7 +62,7 @@ chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 755 /tmp/install
 
-cp -rpfv /tmp/install/* /
+cp -rpf /tmp/install/* /
 rm -rf /tmp/install
 
 # modify files #######################################
