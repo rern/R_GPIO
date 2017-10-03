@@ -57,6 +57,10 @@ mkdir -p /tmp/install
 bsdtar --exclude='.*' --exclude='*.md' -xvf master.zip --strip 1 -C /tmp/install
 rm master.zip /tmp/install/* &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
+if [[ -L /root ]]; then # fix 0.4b /root as symlink
+	mkdir /tmp/install/home
+	mv /tmp/install/{,home/}root
+fi
 
 chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
