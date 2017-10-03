@@ -143,4 +143,6 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 
 installfinish $1
 
+clearcache
+
 title -nt "$info Menu > GPIO for settings."
