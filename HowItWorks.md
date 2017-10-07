@@ -7,8 +7,8 @@ How It Works
 	- **jquery** `$.get(...);` >> **php** `exec(...);` >> **python** `os.system(...)`
 	- php `exec()` and python `os.system` need full path command (plus `sudo` for root command)
 - broadcast message with **NGINX pushstream** websocket
+	- **python** `requests.post('http://localhost/pub?id=gpio', data='message')` ( or `json={'key':'value'}` )
 	- **php**  `exec('/usr/bin/curl -s -v -X POST "http://localhost/pub?id=gpio" -d '.escapeshellarg('"message"'));`
-	- **python** `requests.post('http://localhost/pub?id=gpio', json='message')`
 	- **bash** `curl -s -v -X POST 'http://localhost/pub?id=gpio' -d 'message'`
 <hr>
 
@@ -24,7 +24,7 @@ How It Works
 
 **`gpioon.py`**
 - broadcast
-	- `requests.post('http://localhost/pub?id=gpio', json='ON')`
+	- `requests.post('http://localhost/pub?id=gpio', json='ON')` ( retrive by `data[0]` )
 - gpio pulldown
 
 **`gpiotimer.py`**
