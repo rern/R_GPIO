@@ -22,17 +22,21 @@ How It Works
 	- run python on / off
 		- `exec('sudo /root/gpioon.py' / 'gpiooff.py');`
 
-- **python** gpio control
-	- on / off
-		- `RPi.GPIO`
-	- **on** broadcast
-		- `requests.post("http://localhost/pub?id=gpio", json="ON")`
-	- idle timer
-		- `exec('sudo /root/gpiotimer.py > /dev/null 2>&1 &');`
-	- poll idle state
-		- `python-mpd2`
-		- `cat /proc/asound/card*/pcm*/sub*/status`
-	- broadcast last minute warning
-		- `requests.post("http://localhost/pub?id=gpio", json=str(60) +"IDLE")`
-	- **off** - kill idle timer process
-		- `os.system('killall -9 gpiotimer.py')`
+**`gpioon.py`**
+- broadcast
+	- `requests.post("http://localhost/pub?id=gpio", json="ON")`
+- gpio pulldown
+
+**`gpiotimer.py`**
+- poll idle state
+	- `python-mpd2`
+	- `cat /proc/asound/card*/pcm*/sub*/status`
+- broadcast last minute warning
+	- `requests.post("http://localhost/pub?id=gpio", json=str(60) +"IDLE")`
+	
+**`gpiooff.py`**
+- broadcast
+	- `requests.post("http://localhost/pub?id=gpio", json="OFF")`
+- kill idle timer process
+	- `os.system('killall -9 gpiotimer.py')`
+- gpio pullup
