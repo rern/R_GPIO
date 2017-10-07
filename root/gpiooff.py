@@ -12,7 +12,7 @@ print(json.dumps(data))
 
 if pullup == 0:
 	# broadcast message
-	requests.post("http://localhost/pub?id=gpio", json="OFF")
+	requests.post('http://localhost/pub?id=gpio', json='OFF')
 
 	if off1 != 0:
 		GPIO.output(off1, 1)
@@ -27,7 +27,7 @@ if pullup == 0:
 		GPIO.output(off4, 1)
 
 	if GPIO.input(offx[1]) != 1:
-		requests.post("http://localhost/pub?id=gpio", json="FAILED")
+		requests.post('http://localhost/pub?id=gpio', json='FAILED')
 		exit()
 
 	if gpio['timer']['timer'] != 0:
