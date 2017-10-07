@@ -24,7 +24,7 @@ How It Works
 
 **`gpioon.py`**
 - broadcast
-	- `requests.post("http://localhost/pub?id=gpio", json="ON")`
+	- `requests.post('http://localhost/pub?id=gpio', json='ON')`
 - gpio pulldown
 
 **`gpiotimer.py`**
@@ -32,11 +32,11 @@ How It Works
 	- `python-mpd2`
 	- `cat /proc/asound/card*/pcm*/sub*/status`
 - broadcast last minute warning
-	- `requests.post("http://localhost/pub?id=gpio", json=str(60) +"IDLE")`
+	- `requests.post('http://localhost/pub?id=gpio', json=str(60) +'IDLE')`
 	
 **`gpiooff.py`**
 - broadcast
-	- `requests.post("http://localhost/pub?id=gpio", json="OFF")`
+	- `requests.post('http://localhost/pub?id=gpio', json='OFF')`
 - kill idle timer process
 	- `os.system('killall -9 gpiotimer.py')`
 - gpio pullup
