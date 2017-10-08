@@ -65,6 +65,7 @@ fi
 chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 755 /tmp/install
+chmod -R 644 /tmp/install/etc/systemd/system
 
 cp -rfp /tmp/install/* /
 rm -rf /tmp/install
