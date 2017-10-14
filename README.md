@@ -12,7 +12,6 @@ Can be installed without relay module to play with interface.
 >[Things to do](#things-to-do)  
 >[Before install](#before-install)  
 >[Install](#install)  
->[Uninstall](#uninstall)  
 
 ![settings](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/gpio.gif)  
 
