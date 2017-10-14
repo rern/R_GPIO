@@ -29,7 +29,7 @@ if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; 
 		$pkgpath/python2-setuptools-1_34.0.1-1-any.pkg.tar.xz \
 		$pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz
 
-	[[ -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
+	[[ ! -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
 fi
 
 if ! python -c "import mpd" &> /dev/null; then
