@@ -8,9 +8,6 @@ alias=gpio
 
 installstart $1
 
-gitpath=https://github.com/rern/_assets/raw/master/RuneUI_GPIO
-pkgpath=/var/cache/pacman/pkg
-
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
 if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; then
