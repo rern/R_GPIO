@@ -76,7 +76,6 @@ Things to do
 
 Before install
 ---
-- RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage. 
 - No need to connect relay module before install
 - Power on DAC if external powered
 - `Menu` > `MPD` complete all settings
@@ -88,9 +87,3 @@ _(MPD configuration can still be reset to default and setup manually.)_
 Install
 ---
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
-
-or from SSH terminal
-```
-wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
-```
-_RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage._
