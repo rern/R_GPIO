@@ -14,31 +14,17 @@ pkgpath=/var/cache/pacman/pkg
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
 if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; then
-	if [[ ! ls $pkgpath/python2-pip*pkg.tar.xz &> /dev/null ]]; then
-		echo -e "$bar Get packages file ..."
-		wgetnc $gitpath/var.tar
-		tar -xvf var.tar -C /
-		rm var.tar
-	fi
+	rankmirrors
+	
 	echo -e "$bar Install Pip ..."
-	pacman -U --noconfirm $pkgpath/python2-*.tar.xz
-
+	pacman -S --noconfirm pip
 	[[ ! -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
-fi
 
-if ! python -c "import mpd" &> /dev/null; then
-	if [[ ! ls $pkgpath/python-mpd2*.tar.gz &> /dev/null ]]; then
-		echo -e "$bar Get Pip packages file ..."
-		wgetnc $gitpath/varpip.tar
-		tar -xvf varpip.tar -C /
-		rm varpip.tar
-	fi
 	echo -e "$bar Install Python-MPD ..."
-	pip install $pkgpath/python-mpd2-0.5.5.tar.gz
-fi
-if ! python -c "import requests" &> /dev/null; then
+	pip install python-mpd2
+
 	echo -e "$bar Install Python-Request ..."
-	pip install $pkgpath/requests-2.12.5-py2.py3-none-any.whl
+	pip install requests
 fi
 
 # install RuneUI GPIO #######################################
