@@ -18,10 +18,10 @@ if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; 
 	[[ ! -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
 
 	echo -e "$bar Install Python-MPD ..."
-	pip install python-mpd2
+	pip -q install python-mpd2
 
 	echo -e "$bar Install Python-Request ..."
-	pip install requests
+	pip -q install requests
 fi
 
 # install RuneUI GPIO #######################################
