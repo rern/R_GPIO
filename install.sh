@@ -14,26 +14,20 @@ pkgpath=/var/cache/pacman/pkg
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
 if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; then
-	if [[ ! -e $pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz ]]; then
+	if [[ ! ls $pkgpath/python2-pip*pkg.tar.xz &> /dev/null ]]; then
 		echo -e "$bar Get packages file ..."
 		wgetnc $gitpath/var.tar
 		tar -xvf var.tar -C /
 		rm var.tar
 	fi
 	echo -e "$bar Install Pip ..."
-	pacman -U --noconfirm \
-		$pkgpath/python2-appdirs-1.4.0-5-any.pkg.tar.xz \
-		$pkgpath/python2-pyparsing-2.1.10-2-any.pkg.tar.xz \
-		$pkgpath/python2-six-1.10.0-3-any.pkg.tar.xz \
-		$pkgpath/python2-packaging-16.8-2-any.pkg.tar.xz \
-		$pkgpath/python2-setuptools-1_34.0.1-1-any.pkg.tar.xz \
-		$pkgpath/python2-pip-9.0.1-2-any.pkg.tar.xz
+	pacman -U --noconfirm $pkgpath/python2-*.tar.xz
 
 	[[ ! -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
 fi
 
 if ! python -c "import mpd" &> /dev/null; then
-	if [[ ! -e $pkgpath/python-mpd2-0.5.5.tar.gz ]] || [[ ! -e $pkgpath/requests-2.12.5-py2.py3-none-any.whl ]]; then
+	if [[ ! ls $pkgpath/python-mpd2*.tar.gz &> /dev/null ]]; then
 		echo -e "$bar Get Pip packages file ..."
 		wgetnc $gitpath/varpip.tar
 		tar -xvf varpip.tar -C /
