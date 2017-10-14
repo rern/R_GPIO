@@ -41,10 +41,6 @@ Features
 - Auto power off on reboot / shutdown
 - Can be used with [**USB PC Remote**](https://github.com/rern/Rune_USB_PC_Remote)
 
-**Easy install and (almost) hassel-free**
-- Offline packages install
-- Prompt for custom MPD configuration  
-
 <hr>
 
 ![warning](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/warning_el.png) **Warning**
