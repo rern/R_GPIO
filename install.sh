@@ -14,7 +14,7 @@ if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; 
 	rankmirrors
 	
 	echo -e "$bar Install Pip ..."
-	pacman -S --noconfirm pip
+	pacman -S --noconfirm python2-pip
 	[[ ! -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
 
 	echo -e "$bar Install Python-MPD ..."
