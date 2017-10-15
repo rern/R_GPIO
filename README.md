@@ -1,6 +1,6 @@
-#RuneUI GPIO
-
-_(For RuneAudio beta-20160313. Tested on RPi 3)_
+RuneUI GPIO
+---
+_Tested on RuneAudio 0.3 and 0.4b_
 
 GPIO connected relay module control  
 
