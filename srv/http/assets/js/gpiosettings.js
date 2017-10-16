@@ -2,16 +2,16 @@ $( document ).ready( function() {
 
 var enable = $( '#gpio-enable' ).val();
 var pin = {
-	1: $( '#pin1' ).val(),
-	2: $( '#pin2' ).val(),
-	3: $( '#pin3' ).val(),
-	4: $( '#pin4' ).val()
+	  1: $( '#pin1' ).val()
+	, 2: $( '#pin2' ).val()
+	, 3: $( '#pin3' ).val()
+	, 4: $( '#pin4' ).val()
 };
 var name = {
-	1: $( '#name1' ).val(),
-	2: $( '#name2' ).val(),
-	3: $( '#name3' ).val(),
-	4: $( '#name4' ).val()
+	  1: $( '#name1' ).val()
+	, 2: $( '#name2' ).val()
+	, 3: $( '#name3' ).val()
+	, 4: $( '#name4' ).val()
 };
 var timer = $( '#timer' ).val();
 
@@ -108,10 +108,10 @@ $( '.selectpicker.pin' ).change( function() { // 'object' by 'class' must add cl
 	if ( pin[ n ] != 0 ) $( '.on, .off' ).find( '[value='+ pin[ n ] +']' ).remove(); // remove only not 'none'
 
 	pin = { // update new value
-		1: $( '#pin1' ).val(),
-		2: $( '#pin2' ).val(),
-		3: $( '#pin3' ).val(),
-		4: $( '#pin4' ).val()
+		  1: $( '#pin1' ).val()
+		, 2: $( '#pin2' ).val()
+		, 3: $( '#pin3' ).val()
+		, 4: $( '#pin4' ).val()
 	};
 	txtcolorpin();
 } );
@@ -134,10 +134,10 @@ $( '.name' ).change( function() {
 	on.val( pin[ n ] ); // select new option
 	off.val( pin[ n ] );
 	name = { // update new value
-		1: $( '#name1' ).val(),
-		2: $( '#name2' ).val(),
-		3: $( '#name3' ).val(),
-		4: $( '#name4' ).val()
+		  1: $( '#name1' ).val()
+		, 2: $( '#name2' ).val()
+		, 3: $( '#name3' ).val()
+		, 4: $( '#name4' ).val()
 	};
 	txtcolorname();
 } );
@@ -158,14 +158,18 @@ $( '.selectpicker.on, .selectpicker.off' ).change( function() {
 } );
 
 $( '#gpiosave' ).click( function() {
-	var on = [ $( '#on1' ).val(),
-		$( '#on2' ).val(),
-		$( '#on3' ).val(),
-		$( '#on4' ).val() ].filter( function( x ) { return x != 0; } ).length;
-	var off = [ $( '#off1' ).val(),
-		$( '#off2' ).val(),
-		$( '#off3' ).val(),
-		$( '#off4' ).val() ].filter( function( x ) { return x != 0; } ).length;
+	var on = [ 
+		  $( '#on1' ).val()
+		, $( '#on2' ).val()
+		, $( '#on3' ).val()
+		, $( '#on4' ).val()
+	].filter( function( x ) { return x != 0; } ).length;
+	var off = [
+		  $( '#off1' ).val()
+		, $( '#off2' ).val()
+		, $( '#off3' ).val()
+		, $( '#off4' ).val()
+	].filter( function( x ) { return x != 0; } ).length;
 	if ( on !== off ) {
 		alert( on +' On : '+ off +' Off \nNumber of equipments not matched !' );
 	} else {

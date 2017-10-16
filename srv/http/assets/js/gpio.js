@@ -42,16 +42,16 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	var sec = parseInt( response[ 0 ] );
 	var state = response[ 0 ].replace( /[0-9]/g, '' );
 	var txt = {
-		'ON': 'Powering ON ...',
-		'OFF': 'Powering OFF ...',
-		'IDLE': 'IDLE Timer OFF\nin '+ sec +' seconds ...',
-		'FAILED': 'Powering FAILED !',
+		  ON    : 'Powering ON ...'
+		, OFF   : 'Powering OFF ...'
+		, IDLE  : 'IDLE Timer OFF\nin '+ sec +' seconds ...'
+		, FAILED: 'Powering FAILED !'
 	};
 	var dly = {
-		'ON': ond,
-		'OFF': offd,
-		'IDLE': sec * 1000,
-		'FAILED': 8000,
+		  ON    : ond
+		, OFF   : offd
+		, IDLE  : sec * 1000
+		, FAILED: 8000
 	};
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
@@ -59,30 +59,30 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	}
 	PNotify.removeAll();
 	new PNotify( {
-		icon: ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg',
-		title: 'GPIO',
-		text: txt[ state ],
-		delay: dly[ state ],
-		addclass: 'pnotify_custom',
-		confirm: {
-			confirm: state == 'IDLE' ? true : false,
-			buttons: [ {
-				text: 'Timer Reset',
-				click: function( notice ) {
+		  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
+		, title   : 'GPIO'
+		, text    : txt[ state ]
+		, delay   : dly[ state ]
+		, addclass: 'pnotify_custom'
+		, confirm: {
+			  confirm: state == 'IDLE' ? true : false
+			, buttons: [ {
+				  text : 'Timer Reset'
+				, click: function( notice ) {
 					$.get( 'gpiotimerreset.php' );
 					notice.remove();
 				}
 			}, null ]
-		},
-		before_open: function() {
+		}
+		, before_open: function() {
 			if ( state == 'IDLE' ) {
 				timer = setInterval( function() {
 					if ( sec == 1 ) clearInterval( timer );
 					$( '.ui-pnotify-text' ).html( 'IDLE Timer OFF<br>in '+ sec-- +' sec ...' );
 				}, 1000 );
 			}
-		},
-		after_close: function() {
+		}
+		, after_close: function() {
 			if ( state == 'ON' || state == 'OFF' ) buttonOnOff( 1, state );
 			if ( timer ) {
 				clearInterval( timer );
@@ -107,11 +107,11 @@ $( '#gpio' ).click( function() {
 			if ( json.pullup == on ? 1 : 0 ) {
 				PNotify.removeAll();
 				new PNotify( {
-					icon: 'fa fa-warning fa-lg',
-					title: 'GPIO',
-					text: on ? 'Already ON' : 'Already OFF',
-					delay: 4000,
-					addclass: 'pnotify_custom'
+					  icon : 'fa fa-warning fa-lg'
+					, title: 'GPIO'
+					, text : on ? 'Already ON' : 'Already OFF'
+					, delay: 4000
+					, addclass: 'pnotify_custom'
 				} );
 				gpioOnOff();
 			}
