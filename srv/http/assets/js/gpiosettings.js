@@ -179,7 +179,13 @@ $( '#gpiosave' ).click( function() {
 			function( data ) {
 				if ( data ) {
 					$.get( 'gpiotimerreset.php', function() {
-						location.reload();
+						new PNotify( {
+							  icon    : 'fa fa-cog fa-info-circle fa-lg'
+							, title   : 'GPIO'
+							, text    : 'Settings saved'
+							, delay   : 3000
+							, addclass: 'pnotify_custom'
+						} );
 					});
 				} else {
 					alert( 'GPIO Settings Failed!' );
