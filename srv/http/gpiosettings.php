@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="assets/css/runeui.css">
     <link rel="stylesheet" href="assets/css/gpiosettings.css">
     <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="asset/css/pnotify.css">
+	<style>
+		.ui-pnotify-container {
+			color: #e0e7ee;
+			background: #0095d8;
+		}	
+		.pnotify_custom {
+			top: 70px !important;
+		}
+	</style>
 </head>
 
 <?php
@@ -211,6 +221,7 @@ function opttime( $n ) {
 <script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/vendor/bootstrap-select-1.12.1.min.js"></script>
+<script src="assets/js/vendor/pnotify3.custom.min.js"></script>
 <script src="assets/js/gpiosettings.js"></script>
 
 </body>
