@@ -13,13 +13,7 @@
     <link rel="shortcut icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="asset/css/pnotify.css">
 	<style>
-		.ui-pnotify-container {
-			color: #e0e7ee;
-			background: #0095d8;
-		}	
-		.pnotify_custom {
-			top: 70px !important;
-		}
+		.pnotify_custom { top: 60px !important; }
 	</style>
 </head>
 
