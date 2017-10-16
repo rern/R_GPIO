@@ -1,3 +1,3 @@
 <?php
-$pullup = exec( 'sudo /root/gpio.py status' );
+$pullup = exec( '/usr/bin/sudo /root/gpio.py status' );
 echo $pullup;
