@@ -15,74 +15,74 @@
 
 <?php
 $file = '/srv/http/gpio.json';
-$fileopen = fopen($file, 'r');
-$gpio = fread($fileopen, filesize($file));
-fclose($fileopen);
-$gpio = json_decode($gpio, true);
+$fileopen = fopen( $file, 'r' );
+$gpio = fread( $fileopen, filesize( $file ) );
+fclose( $fileopen );
+$gpio = json_decode( $gpio, true );
 
-$enable = $gpio['enable']['enable'];
+$enable = $gpio[ 'enable' ][ 'enable' ];
 
-$pin = $gpio['pin'];
-$pin1 = $pin['pin1'];
-$pin2 = $pin['pin2'];
-$pin3 = $pin['pin3'];
-$pin4 = $pin['pin4'];
-$pincount = ($pin1 == 0?0:1) + ($pin2 == 0?0:1) + ($pin3 == 0?0:1) + ($pin4 == 0?0:1);
+$pin  = $gpio[ 'pin' ];
+$pin1 = $pin[ 'pin1' ];
+$pin2 = $pin[ 'pin2' ];
+$pin3 = $pin[ 'pin3' ];
+$pin4 = $pin[ 'pin4' ];
+$pincount = ( $pin1 == 0 ? 0 : 1 ) + ( $pin2 == 0 ? 0 : 1 ) + ( $pin3 == 0 ? 0 : 1 ) + ( $pin4 == 0 ? 0 : 1 );
 
-$name = $gpio['name'];
-$name1 = $name['name1'];
-$name2 = $name['name2'];
-$name3 = $name['name3'];
-$name4 = $name['name4'];
+$name  = $gpio[ 'name' ];
+$name1 = $name[ 'name1' ];
+$name2 = $name[ 'name2' ];
+$name3 = $name[ 'name3' ];
+$name4 = $name[ 'name4' ];
 
-$on = $gpio['on'];
-$on1 = $on['on1'];
-$ond1 = $on['ond1'];
-$on2 = $on['on2'];
-$ond2 = $on['ond2'];
-$on3 = $on['on3'];
-$ond3 = $on['ond3'];
-$on4 = $on['on4'];
+$on   = $gpio[ 'on' ];
+$on1  = $on[ 'on1' ];
+$ond1 = $on[ 'ond1' ];
+$on2  = $on[ 'on2' ];
+$ond2 = $on[ 'ond2' ];
+$on3  = $on[ 'on3' ];
+$ond3 = $on[ 'ond3' ];
+$on4  = $on[ 'on4' ];
 
-$off = $gpio['off'];
-$off1 = $off['off1'];
-$offd1 = $off['offd1'];
-$off2 = $off['off2'];
-$offd2 = $off['offd2'];
-$off3 = $off['off3'];
-$offd3 = $off['offd3'];
-$off4 = $off['off4'];
+$off   = $gpio[ 'off' ];
+$off1  = $off[ 'off1' ];
+$offd1 = $off[ 'offd1' ];
+$off2  = $off[ 'off2' ];
+$offd2 = $off[ 'offd2' ];
+$off3  = $off[ 'off3' ];
+$offd3 = $off[ 'offd3' ];
+$off4  = $off[ 'off4' ];
 
-$timer = $gpio['timer']['timer'];
+$timer = $gpio[ 'timer' ][ 'timer' ];
 
-function optpin($n) {
-	$pinarray = array(3,5,7,8,10,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,35,36,37,38,40);
+function optpin( $n ) {
+	$pinarray = array( 3,5,7,8,10,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,35,36,37,38,40 );
 	$option = '';
-	foreach ($pinarray as $pin) {
-		$selected = ($pin == $n) ? ' selected' : '';
+	foreach ( $pinarray as $pin ) {
+		$selected = ( $pin == $n ) ? ' selected' : '';
 		$option.= '<option value='.$pin.$selected.'>'.$pin.'</option>';
 	}
 	echo $option;
 }
 $parray = array(
-	$pin1=>$name1,
-	$pin2=>$name2,
-	$pin3=>$name3,
-	$pin4=>$name4
+	  $pin1 => $name1
+	, $pin2 => $name2
+	, $pin3 => $name3
+	, $pin4 => $name4
 );
-function optname($n) {
+function optname( $n ) {
 	global $parray;
 	$option = '<option value="0">none</option>';
-	foreach ($parray as $pin=>$name) {
-		$selected = ($pin == $n) ? ' selected' : '';
+	foreach ( $parray as $pin => $name ) {
+		$selected = ( $pin == $n ) ? ' selected' : '';
 		$option.= '<option value='.$pin.$selected.'>'.$name.' - '.$pin.'</option>';
 	}
 	echo $option;
 }
-function opttime($n) {
+function opttime( $n ) {
 	$option = '<option value="0">none</option>';
-	foreach ( range(1, 10) as $num) {
-		$selected = ($num == $n) ? ' selected' : '';
+	foreach ( range( 1, 10 ) as $num ) {
+		$selected = ( $num == $n ) ? ' selected' : '';
 		$option.= '<option value='.$num.$selected.'>'.$num.'</option>';
 	}
 	echo $option;
@@ -101,7 +101,7 @@ function opttime($n) {
 	Using <a id="gpioimgtxt" style="cursor: pointer">RPi pin numbering.</a>
 </p>
 <img src="assets/img/RPi3_GPIOs.png" style="display: none; margin-bottom: 10px;">
-<div id="divgpio" class="<?php if($enable == 1) echo 'boxed-group'?>" >
+<div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>" >
 	<div class="form-group">
 		<label for="gpio" class="col-sm-2 control-label">Enable</label>
 		<div class="col-sm-10">
@@ -120,20 +120,20 @@ function opttime($n) {
 						<div class="col-sm-10" id="gpio-num">
 							<a class="gpio-text"><i class="fa fa-ellipsis-v fa-lg blue"></i> &nbsp; Pin</a>
 							<select id="pin1" name="pin1" class="selectpicker pin">
-								<?php optpin($pin1)?>
+								<?php optpin( $pin1 )?>
 							</select>
 							<select id="pin2" name="pin2" class="selectpicker pin">
-								<?php optpin($pin2)?>
+								<?php optpin( $pin2 )?>
 							</select>
 							<select id="pin3" name="pin3" class="selectpicker pin">
-								<?php optpin($pin3)?>
+								<?php optpin( $pin3 )?>
 							</select>
 							<select id="pin4" name="pin4" class="selectpicker pin">
-								<?php optpin($pin4)?>
+								<?php optpin( $pin4 )?>
 							</select>
 							<a class="gpio-text"><i class="fa fa-clock-o fa-lg yellow"></i> &nbsp; Idle</a>
 							<select id="timer" name="timer" class="selectpicker timer">
-								<?php opttime($timer)?>
+								<?php opttime( $timer )?>
 							</select>
 						</div>
 						<div class="col-sm-10" id="gpio-name">
@@ -150,25 +150,25 @@ function opttime($n) {
 						<div class="col-sm-10">
 							<a class="gpio-text"><i class="fa fa-power-off fa-lg green"></i> &nbsp; On Sequence</a>
 							<select id="on1" name="on1" class="selectpicker on">
-								<?php optname($on1)?>
+								<?php optname( $on1 )?>
 							</select>
 							<select id="ond1" name="ond1" class="selectpicker ond delay">
-								<?php opttime($ond1)?>
+								<?php opttime( $ond1 )?>
 							</select> &nbsp; sec.
 							<select id="on2" name="on2" class="selectpicker on">
-								<?php optname($on2)?>
+								<?php optname( $on2 )?>
 							</select>
 							<select id="ond2" name="ond2" class="selectpicker ond delay">
-								<?php opttime($ond2)?>
+								<?php opttime( $ond2 )?>
 							</select> &nbsp; sec.
 							<select id="on3" name="on3" class="selectpicker on">
-								<?php optname($on3)?>
+								<?php optname( $on3 )?>
 							</select>
 							<select id="ond3" name="ond3" class="selectpicker ond delay">
-								<?php opttime($ond3)?>
+								<?php opttime( $ond3 )?>
 							</select> &nbsp; sec.
 							<select id="on4" name="on4" class="selectpicker on">
-								<?php optname($on4)?>
+								<?php optname( $on4 )?>
 							</select>
 						</div>
 					<div class="col-sm-10" style="width: 20px;">
@@ -176,25 +176,25 @@ function opttime($n) {
 						<div class="col-sm-10">
 							<a class="gpio-text"><i class="fa fa-power-off fa-lg red"></i> &nbsp; Off Sequence</a>
 							<select id="off1" name="off1" class="selectpicker off">
-								<?php optname($off1)?>
+								<?php optname( $off1 )?>
 							</select>
 							<select id="offd1" name="offd1" class="selectpicker offd delay">
-								<?php opttime($offd1)?>
+								<?php opttime( $offd1 )?>
 							</select> &nbsp; sec.
 							<select id="off2" name="off2" class="selectpicker off">
-								<?php optname($off2)?>
+								<?php optname( $off2 )?>
 							</select>
 							<select id="offd2" name="offd2" class="selectpicker offd delay">
-								<?php opttime($offd2)?>
+								<?php opttime( $offd2 )?>
 							</select> &nbsp; sec.
 							<select id="off3" name="off3" class="selectpicker off">
-								<?php optname($off3)?>
+								<?php optname( $off3 )?>
 							</select>
 							<select id="offd3" name="offd3" class="selectpicker offd delay">
-								<?php opttime($offd3)?>
+								<?php opttime( $offd3 )?>
 							</select> &nbsp; sec.
 							<select id="off4" name="off4" class="selectpicker off">
-								<?php optname($off4)?>
+								<?php optname( $off4 )?>
 							</select>
 							<a id="gpiosave" class="btn btn-primary">Apply</a>
 						</div>
