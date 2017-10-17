@@ -49,11 +49,8 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
-' -e '/reboot.py/d
+' -e '/gpiopower.py/d
 ' /root/.xbindkeysrc
-killall xbindkeys
-export DISPLAY=":0" &
-xbindkeys &
 
 if [[ $1 != u ]]; then
 	cp -vf /etc/mpd.conf{.pacorig,}
