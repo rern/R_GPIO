@@ -104,8 +104,8 @@ $( '#gpio' ).click( function() {
 	}, on ? offd : ond );
 	
 	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
-	var file = on ? 'gpiooff.py' : 'gpioon.py';
-	$.get( path +'gpioexec.php?gpio='+ file,
+	var py = on ? 'gpiooff.py' : 'gpioon.py';
+	$.get( path +'gpioexec.php?gpio='+ py,
 		function( status ) {
 			var json = $.parseJSON( status );
 			if ( json.pullup == on ? 1 : 0 ) {
@@ -133,7 +133,8 @@ $( '#gpiosettings' ).click( function() {
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
 	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
-	$.get( path +'gpioexec.php?gpio='+ this.id +'.py' );
+	py = ( this.id == 'reboot' ) ? 'gpiopower.py reboot' : 'gpiopower.py';
+	$.get( path +'gpioexec.php?gpio='+ py );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
