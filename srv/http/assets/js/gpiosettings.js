@@ -177,14 +177,16 @@ $( '#gpiosave' ).click( function() {
 		$.post( 'gpiosave.php',
 			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val(),
 			function( data ) {
-				if ( data ) {	
+				if ( data ) {
+					var icon = 'fa fa-info-circle fa-lg';
 					var result = 'Settings saved'; 
 					$.get( 'gpiotimerreset.php' );
 				} else {
+					var icon = 'fa fa-warning fa-lg';
 					var result = 'Settings FAILED!';
 				}
 				new PNotify( {
-					  icon    : 'fa fa-cog fa-info-circle fa-lg'
+					  icon    : icon
 					, title   : 'GPIO'
 					, text    : result
 					, delay   : 3000
