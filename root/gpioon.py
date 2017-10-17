@@ -9,7 +9,8 @@ import filecmp
 if filecmp.cmp( '/etc/mpd.conf', '/etc/mpd.conf.gpio' ) is False:
 	os.system( '/usr/bin/cp /etc/mpd.conf.gpio /etc/mpd.conf' )
 	os.system( '/usr/bin/systemctl restart mpd' )
-	os.system( '/usr/bin/sudo /usr/bin/killall midori; sleep 1; xinit &> /dev/null &' )
+	if os.system( '/usr/bin/pgrep midori' ) == 0:
+		os.system( '/usr/bin/sudo /usr/bin/killall midori; sleep 1; xinit &> /dev/null &' )
 	conf = 1
 else:
 	conf = 0
