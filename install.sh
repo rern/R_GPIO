@@ -40,7 +40,6 @@ if [[ -L /root ]]; then # fix 0.4b /root as symlink
 	mv /tmp/install/{,home/}root
 fi
 
-chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 755 /tmp/install
 chmod -R 644 /tmp/install/etc/systemd/system
