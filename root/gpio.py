@@ -7,7 +7,7 @@ import os
 with open( '/srv/http/gpio.json' ) as jsonfile:
 	gpio = json.load( jsonfile )
 
-pin = gpio[ 'pin' ] # get data as key[ 'value' ]
+pin  = gpio[ 'pin' ] # get data as key[ 'value' ]
 pin1 = int( pin[ 'pin1' ] ) # convert to integer
 pin2 = int( pin[ 'pin2' ] )
 pin3 = int( pin[ 'pin3' ] )
