@@ -22,6 +22,6 @@ while i >= 0:
 	else:
 		i -= 1
 		if i == 1: # broadcast last loop
-			requests.post( 'http://localhost/pub?id=gpio', json=str(60) +'IDLE' )
+			requests.post( 'http://localhost/pub?id=gpio', json={ 'sec': str(60), 'state': 'IDLE' } )
 		if i == 0:
 			os.system( '/usr/bin/php /srv/http/gpiooff.php' )
