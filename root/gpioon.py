@@ -23,7 +23,7 @@ print( json.dumps( data ) )
 
 if pullup == 1:
 	# broadcast pushstream (message non-char in curl must be escaped)
-	requests.post( 'http://localhost/pub?id=gpio', json='ON' )
+	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'ON' } )
 
 	if on1 != 0:
 		GPIO.output( on1, 0 )
@@ -38,7 +38,7 @@ if pullup == 1:
 		GPIO.output( on4, 0 )
 
 	if GPIO.input( onx[ 1 ] ) != 0:
-		requests.post( 'http://localhost/pub?id=gpio', json='FAILED' )
+		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED' } )
 		exit()
 
 	if gpio[ 'timer' ][ 'timer' ] != 0:
