@@ -4,10 +4,6 @@
 
 alias=gpio
 
-# for testing branch
-branch=master
-(( $# != 0 )) && [[ $1 != u ]] && branch=$1
-
 . /srv/http/addonstitle.sh
 
 installstart $1
