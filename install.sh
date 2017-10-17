@@ -4,6 +4,10 @@
 
 alias=gpio
 
+# for testing branch
+branch=master
+(( $# != 0 )) && [[ $1 != u ]] && branch=$1
+
 . /srv/http/addonstitle.sh
 
 installstart $1
@@ -26,13 +30,14 @@ fi
 
 # install RuneUI GPIO #######################################
 echo -e "$bar Get files ..."
-wgetnc https://github.com/rern/RuneUI_GPIO/archive/master.zip
+wgetnc https://github.com/rern/RuneUI_GPIO/archive/$branch.zip
 
 echo -e "$bar Install new files ..."
 rm -rf /tmp/install
 mkdir -p /tmp/install
-bsdtar --exclude='.*' --exclude='*.md' -xvf master.zip --strip 1 -C /tmp/install
-rm master.zip /tmp/install/* &> /dev/null
+bsdtar --exclude='.*' --exclude='*.md' -xvf $branch.zip --strip 1 -C /tmp/install
+
+rm $branch.zip /tmp/install/* &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
 if [[ -L /root ]]; then # fix 0.4b /root as symlink
 	mkdir /tmp/install/home
