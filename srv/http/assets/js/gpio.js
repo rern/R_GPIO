@@ -39,9 +39,9 @@ var pushstreamGPIO = new PushStream( {
 	modes: GUI.mode
 } );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
-	// pushstream message is array
-	var sec = parseInt( response[ 0 ] );
-	var state = response[ 0 ].replace( /[0-9]/g, '' );
+	// pushstream message from python requests 'json' is array[ 0 ]
+	var sec = response[ 0 ].sec;
+	var state = response[ 0 ].state;
 	var txt = {
 		  ON    : 'Powering ON ...'
 		, OFF   : 'Powering OFF ...'
@@ -65,7 +65,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		, text    : txt[ state ]
 		, delay   : dly[ state ]
 		, addclass: 'pnotify_custom'
-		, confirm: {
+		, confirm : {
 			  confirm: state == 'IDLE' ? true : false
 			, buttons: [ {
 				  text : 'Timer Reset'
