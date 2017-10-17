@@ -19,7 +19,7 @@ function buttonOnOff( enable, pullup ) {
 	}
 }
 (function gpioOnOff() {
-	var path = ( window.location.pathname === '/' ) ? '' : '../';
+	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	$.get( path +'gpioexec.php?gpio=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
@@ -103,7 +103,7 @@ $( '#gpio' ).click( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, on ? offd : ond );
 	
-	path = ( window.location.pathname === '/' ) ? '' : '../';
+	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	var file = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( path +'gpioexec.php?gpio='+ file,
 		function( status ) {
@@ -126,13 +126,14 @@ $( '#gpio' ).click( function() {
 
 // gpiosettings menu
 $( '#gpiosettings' ).click( function() {
-	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
+	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	window.location.href = path +'gpiosettings.php';
 });
 	
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
-	$.get( this.id +'.php' );
+	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
+	$.get( path +'gpioexec.php?gpio='+ this.id +'.py' );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
