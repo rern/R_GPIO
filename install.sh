@@ -100,9 +100,6 @@ sed -i -e '/echo/ s/^/#/g
 ' -e '/echo 8/ a\
 "/root/gpiopower.py 8"
 ' /root/.xbindkeysrc
-killall xbindkeys
-export DISPLAY=":0" &
-xbindkeys &
 
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."
