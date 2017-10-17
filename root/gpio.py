@@ -23,32 +23,31 @@ if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'set':
 	GPIO.output( pinx, 1 )
 	exit()
 
-on = gpio[ 'on' ]
-on1 = int( on[ 'on1' ] )
+on   = gpio[ 'on' ]
+on1  = int( on[ 'on1' ] )
 ond1 = int( on[ 'ond1' ] )
-on2 = int( on[ 'on2' ] )
+on2  = int( on[ 'on2' ] )
 ond2 = int( on[ 'ond2' ] )
-on3 = int( on[ 'on3' ] )
+on3  = int( on[ 'on3' ] )
 ond3 = int( on[ 'ond3' ] )
-on4 = int( on[ 'on4' ] )
-onx = [ on1, on2, on3, on4 ]
-onx = [ i for i in onx if i != 0 ]
+on4  = int( on[ 'on4' ] )
+onx  = [ on1, on2, on3, on4 ]
+onx  = [ i for i in onx if i != 0 ]
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'status':
-	data = { 'enable': gpio[ 'enable' ][ 'enable' ], \
-		'pullup': GPIO.input( onx[ 1 ] ) }
+	data = { 'enable': gpio[ 'enable' ][ 'enable' ], 'pullup': GPIO.input( onx[ 1 ] ) }
 	print( json.dumps( data ) )
 	exit()
 
-off = gpio[ 'off' ]
-off1 = int( off[ 'off1' ] )
+off   = gpio[ 'off' ]
+off1  = int( off[ 'off1' ] )
 offd1 = int( off[ 'offd1' ] )
-off2 = int( off[ 'off2' ] )
+off2  = int( off[ 'off2' ] )
 offd2 = int( off[ 'offd2' ] )
-off3 = int( off[ 'off3' ] )
+off3  = int( off[ 'off3' ] )
 offd3 = int( off[ 'offd3' ] )
-off4 = int( off[ 'off4' ] )
-offx = [ off1, off2, off3, off4 ]
-offx = [ i for i in offx if i != 0 ]
+off4  = int( off[ 'off4' ] )
+offx  = [ off1, off2, off3, off4 ]
+offx  = [ i for i in offx if i != 0 ]
 
 timer = int( gpio[ 'timer' ][ 'timer' ] )
