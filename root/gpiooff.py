@@ -31,4 +31,4 @@ if pullup == 0:
 		exit()
 
 	if gpio['timer']['timer'] != 0:
-		os.system('/usr/bin/sudo /usr/bin/pkill -9 gpiotimer.py > /dev/null 2>&1 &')
+		os.system('/usr/bin/sudo /usr/bin/pkill -9 gpiotimer.py &> /dev/null')
