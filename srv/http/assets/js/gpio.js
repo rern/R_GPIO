@@ -18,13 +18,14 @@ function buttonOnOff( enable, pullup ) {
 		$( '#gpio' ).hide();
 	}
 }
-function gpioOnOff() {
-	$.get( ( window.location.pathname === '/' ) ? 'gpiostatus.php' : '../gpiostatus.php', function( status ) {
+(function gpioOnOff() {
+	var path = ( window.location.pathname === '/' ) ? '' : '../';
+	$.get( path +'gpioexec.php?gpio=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
 	} );
-}
-gpioOnOff(); // initial run
+})();
+
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
 		//pushstreamGPIO.connect(); // force reconnect
@@ -101,7 +102,10 @@ $( '#gpio' ).click( function() {
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, on ? offd : ond );
-	$.get( on ? 'gpiooff.php' : 'gpioon.php',
+	
+	path = ( window.location.pathname === '/' ) ? '' : '../';
+	var file = on ? 'gpiooff.py' : 'gpioon.py';
+	$.get( path +'gpioexec.php?gpio='+ file,
 		function( status ) {
 			var json = $.parseJSON( status );
 			if ( json.pullup == on ? 1 : 0 ) {
