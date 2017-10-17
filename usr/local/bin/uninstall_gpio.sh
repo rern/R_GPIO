@@ -5,7 +5,7 @@ alias=gpio
 . /srv/http/addonstitle.sh
 
 # gpio off #######################################
-./gpiooff.py &>/dev/null &
+./gpiooff.py &> /dev/null &
 
 uninstallstart $1
 
