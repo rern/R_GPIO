@@ -96,9 +96,9 @@ echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
 ' -e '/echo 6/ a\
-"/root/reboot.py 6"
+"/root/gpiopower.py 6"
 ' -e '/echo 8/ a\
-"/root/reboot.py 8"
+"/root/gpiopower.py 8"
 ' /root/.xbindkeysrc
 killall xbindkeys
 export DISPLAY=":0" &
