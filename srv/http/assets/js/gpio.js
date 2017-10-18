@@ -39,7 +39,7 @@ var pushstreamGPIO = new PushStream( {
 	modes: GUI.mode
 } );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
-	// pushstream message from python requests 'json' is array[ 0 ]
+	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var sec = response[ 0 ].sec;
 	var state = response[ 0 ].state;
 	var txt = {
