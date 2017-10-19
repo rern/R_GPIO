@@ -4,6 +4,8 @@
 
 alias=gpio
 
+branch=master
+
 . /srv/http/addonstitle.sh
 
 installstart $1
@@ -26,20 +28,20 @@ fi
 
 # install RuneUI GPIO #######################################
 echo -e "$bar Get files ..."
-wgetnc https://github.com/rern/RuneUI_GPIO/archive/master.zip
+wgetnc https://github.com/rern/RuneUI_GPIO/archive/$branch.zip
 
 echo -e "$bar Install new files ..."
 rm -rf /tmp/install
 mkdir -p /tmp/install
-bsdtar --exclude='.*' --exclude='*.md' -xvf master.zip --strip 1 -C /tmp/install
-rm master.zip /tmp/install/* &> /dev/null
+bsdtar --exclude='.*' --exclude='*.md' -xvf $branch.zip --strip 1 -C /tmp/install
+
+rm $branch.zip /tmp/install/* &> /dev/null
 [[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
 if [[ -L /root ]]; then # fix 0.4b /root as symlink
 	mkdir /tmp/install/home
 	mv /tmp/install/{,home/}root
 fi
 
-chown -R root:root /tmp/install
 chown -R http:http /tmp/install/srv/http
 chmod -R 755 /tmp/install
 chmod -R 644 /tmp/install/etc/systemd/system
@@ -96,13 +98,10 @@ echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
 ' -e '/echo 6/ a\
-"/root/reboot.py 6"
+"/root/gpiopower.py 6"
 ' -e '/echo 8/ a\
-"/root/reboot.py 8"
+"/root/gpiopower.py 8"
 ' /root/.xbindkeysrc
-killall xbindkeys
-export DISPLAY=":0" &
-xbindkeys &
 
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."

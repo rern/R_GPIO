@@ -178,18 +178,20 @@ $( '#gpiosave' ).click( function() {
 			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val(),
 			function( data ) {
 				if ( data ) {
-					$.get( 'gpiotimerreset.php', function() {
-						new PNotify( {
-							  icon    : 'fa fa-cog fa-info-circle fa-lg'
-							, title   : 'GPIO'
-							, text    : 'Settings saved'
-							, delay   : 3000
-							, addclass: 'pnotify_custom'
-						} );
-					});
+					var icon = 'fa fa-info-circle fa-lg';
+					var result = 'Settings saved'; 
+					$.get( 'gpiotimerreset.php' );
 				} else {
-					alert( 'GPIO Settings Failed!' );
+					var icon = 'fa fa-warning fa-lg';
+					var result = 'Settings FAILED!';
 				}
+				new PNotify( {
+					  icon    : icon
+					, title   : 'GPIO'
+					, text    : result
+					, delay   : 3000
+					, addclass: 'pnotify_custom'
+				} );
 			}
 		);
 	}

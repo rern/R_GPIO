@@ -50,4 +50,3 @@ $set = fwrite( $jsonfile, json_encode( $gpio ) );
 fclose( $jsonfile );
 
 echo $set;
-?>

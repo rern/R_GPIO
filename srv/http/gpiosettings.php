@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="assets/css/gpiosettings.css">
     <link rel="shortcut icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="asset/css/pnotify.css">
-	<style>
-		.pnotify_custom { top: 60px !important; }
-	</style>
 </head>
 
 <?php

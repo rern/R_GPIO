@@ -18,13 +18,14 @@ function buttonOnOff( enable, pullup ) {
 		$( '#gpio' ).hide();
 	}
 }
-function gpioOnOff() {
-	$.get( ( window.location.pathname === '/' ) ? 'gpiostatus.php' : '../gpiostatus.php', function( status ) {
+(function gpioOnOff() {
+	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
+	$.get( path +'gpioexec.php?gpio=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
 	} );
-}
-gpioOnOff(); // initial run
+})();
+
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
 		//pushstreamGPIO.connect(); // force reconnect
@@ -38,9 +39,9 @@ var pushstreamGPIO = new PushStream( {
 	modes: GUI.mode
 } );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
-	// pushstream message is array
-	var sec = parseInt( response[ 0 ] );
-	var state = response[ 0 ].replace( /[0-9]/g, '' );
+	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
+	var sec = response[ 0 ].sec;
+	var state = response[ 0 ].state;
 	var txt = {
 		  ON    : 'Powering ON ...'
 		, OFF   : 'Powering OFF ...'
@@ -64,7 +65,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		, text    : txt[ state ]
 		, delay   : dly[ state ]
 		, addclass: 'pnotify_custom'
-		, confirm: {
+		, confirm : {
 			  confirm: state == 'IDLE' ? true : false
 			, buttons: [ {
 				  text : 'Timer Reset'
@@ -101,7 +102,10 @@ $( '#gpio' ).click( function() {
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, on ? offd : ond );
-	$.get( on ? 'gpiooff.php' : 'gpioon.php',
+	
+	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
+	var py = on ? 'gpiooff.py' : 'gpioon.py';
+	$.get( path +'gpioexec.php?gpio='+ py,
 		function( status ) {
 			var json = $.parseJSON( status );
 			if ( json.pullup == on ? 1 : 0 ) {
@@ -122,13 +126,15 @@ $( '#gpio' ).click( function() {
 
 // gpiosettings menu
 $( '#gpiosettings' ).click( function() {
-	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
+	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	window.location.href = path +'gpiosettings.php';
 });
 	
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
-	$.get( this.id +'.php' );
+	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
+	py = ( this.id == 'reboot' ) ? 'gpiopower.py reboot' : 'gpiopower.py';
+	$.get( path +'gpioexec.php?gpio='+ py );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
