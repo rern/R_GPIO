@@ -4,11 +4,9 @@
 
 alias=gpio
 
-branch=master
-
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
@@ -116,7 +114,7 @@ echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
-installfinish $1
+installfinish $@
 
 clearcache
 
