@@ -7,7 +7,7 @@ alias=gpio
 # gpio off #######################################
 ./gpiooff.py &> /dev/null &
 
-uninstallstart $1
+uninstallstart $@
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
@@ -64,4 +64,4 @@ systemctl disable gpioset
 systemctl daemon-reload
 rm -v /etc/systemd/system/gpioset.service
 
-uninstallfinish $1
+uninstallfinish $@
