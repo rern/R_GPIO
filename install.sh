@@ -4,11 +4,9 @@
 
 alias=gpio
 
-branch=master
-
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 [[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
 
@@ -27,27 +25,11 @@ if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; 
 fi
 
 # install RuneUI GPIO #######################################
-echo -e "$bar Get files ..."
-wgetnc https://github.com/rern/RuneUI_GPIO/archive/$branch.zip
+getinstallzip
 
-echo -e "$bar Install new files ..."
-rm -rf /tmp/install
-mkdir -p /tmp/install
-bsdtar --exclude='.*' --exclude='*.md' -xvf $branch.zip --strip 1 -C /tmp/install
-
-rm $branch.zip /tmp/install/* &> /dev/null
-[[ -e /srv/http/gpio.json ]] && rm /tmp/install/srv/http/gpio.json
-if [[ -L /root ]]; then # fix 0.4b /root as symlink
-	mkdir /tmp/install/home
-	mv /tmp/install/{,home/}root
-fi
-
-chown -R http:http /tmp/install/srv/http
-chmod -R 755 /tmp/install
-chmod -R 644 /tmp/install/etc/systemd/system
-
-cp -rfp /tmp/install/* /
-rm -rf /tmp/install
+file=/etc/systemd/system/gpioset.service
+chown root:root $file
+chmod -R 644 $file
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
@@ -116,7 +98,7 @@ echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
-installfinish $1
+installfinish $@
 
 clearcache
 
