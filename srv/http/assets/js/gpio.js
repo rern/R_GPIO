@@ -18,14 +18,15 @@ function buttonOnOff( enable, pullup ) {
 		$( '#gpio' ).hide();
 	}
 }
-(function gpioOnOff() {
+function gpioOnOff() {
 	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	$.get( path +'gpioexec.php?gpio=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
 	} );
-})();
-
+});
+gpioOnOff();
+	
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
 		//pushstreamGPIO.connect(); // force reconnect
