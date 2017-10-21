@@ -24,7 +24,7 @@ function gpioOnOff() {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
 	} );
-});
+}
 gpioOnOff();
 	
 document.addEventListener( 'visibilitychange', function( change ) {
