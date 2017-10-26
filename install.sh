@@ -75,9 +75,9 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ! grep -q 'pnotify3.custom.min.js' $file &&
 echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?>"></script>' >> $file
 
-#echo '.playback-controls {
-#    left: 55px;
-#}' >> /srv/http/assets/css/runeui.css
+echo '.playback-controls {
+    margin-left: 60px;
+}' >> /srv/http/assets/css/runeui.css
 
 [[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
 
