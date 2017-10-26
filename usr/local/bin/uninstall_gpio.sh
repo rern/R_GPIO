@@ -44,7 +44,7 @@ if [[ ! -e /usr/local/bin/uninstall_enha.sh ]]; then
 	sed -i '/pnotify3.custom.min.js/ d' $footer
 fi
 
-sed -i '\|\.playback-controls { /\* gpio \*|,\|} /\* gpio \*/| d' /srv/http/assets/css/runeui.css
+#sed -i '\|\.playback-controls { /\* gpio \*|,\|} /\* gpio \*/| d' /srv/http/assets/css/runeui.css
 
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
