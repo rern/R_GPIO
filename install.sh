@@ -25,11 +25,11 @@ if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; 
 fi
 
 # install RuneUI GPIO #######################################
+[[ -e /srv/http/gpio.json ]] && mv /srv/http/gpio.json{,.backup}
+
 getinstallzip
 
-file=/etc/systemd/system/gpioset.service
-chown root:root $file
-chmod -R 644 $file
+[[ -e /srv/http/gpio.json.backup ]] && mv /srv/http/gpio.json{.backup,}
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
