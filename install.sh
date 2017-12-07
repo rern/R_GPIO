@@ -87,8 +87,7 @@ systemctl start gpioset
 
 # set permission #######################################
 echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
-[[ $(stat -c %a /usr/bin/sudo) != 4755 ]] && chmod 4755 /usr/bin/sudo
-#chmod -R 550 /etc/sudoers.d
+chmod 4755 /usr/bin/sudo
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 
