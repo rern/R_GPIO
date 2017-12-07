@@ -69,10 +69,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-echo '.playback-controls { /* gpio */
-    margin-left: 60px; /* gpio */
-} /* gpio */' >> /srv/http/assets/css/runeui.css
-
 [[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
 
 # Dual boot
