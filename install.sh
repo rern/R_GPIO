@@ -52,6 +52,8 @@ $off = $gpio[\'off\'];\
 $ond = $on[\'ond1\'] + $on[\'ond2\'] + $on[\'ond3\'];\
 $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ?>
+' -e $'/runeui.css/ a\
+    <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>
