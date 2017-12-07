@@ -60,9 +60,6 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ' -e '/class="home"/ a\
     <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
 ' $file
-# no RuneUI enhancement
-! grep -q 'pnotify.css' $file &&
-	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $file
 
 file=/srv/http/app/templates/footer.php
 echo $file
@@ -71,9 +68,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e $'$ a\
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
-# no RuneUI enhancement
-! grep -q 'pnotify3.custom.min.js' $file &&
-echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?>"></script>' >> $file
 
 echo '.playback-controls { /* gpio */
     margin-left: 60px; /* gpio */
