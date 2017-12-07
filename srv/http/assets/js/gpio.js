@@ -26,11 +26,12 @@ function gpioOnOff() {
 	} );
 }
 gpioOnOff();
-	
+
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
 		//pushstreamGPIO.connect(); // force reconnect
 		gpioOnOff(); // update gpio button on reopen page
+		if ( timer ) $( '#infoMessage' ).hide();
 	}
 } );
 // nginx pushstream websocket (broadcast)
@@ -59,6 +60,27 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		clearInterval( timer );
 		timer = false;
 	}
+	if ( state == 'IDLE' ) {
+		info( {
+			  icon        : '<i class="fa fa-cog fa-spin fa-2x"></i>'
+			, title       : 'GPIO Timer'
+			, message     : 'IDLE Timer OFF<br>in '+ sec +' sec ...'
+			, cancellabel : 'Hide'
+			, cancel      : 1
+			, oklabel     : 'Reset'
+			, ok          : function() {
+				$.get( 'gpiotimerreset.php' );
+			}
+		} );
+		timer = setInterval( function() {
+			if ( sec == 1 ) {
+				$( '#infoOverlay' ).hide();
+				clearInterval( timer );
+			}
+			$( '#infoMessage' ).html( 'IDLE Timer OFF<br>in '+ sec-- +' sec ...' );
+		}, 1000 );
+		return
+	} 
 	PNotify.removeAll();
 	new PNotify( {
 		  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
@@ -66,30 +88,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		, text    : txt[ state ]
 		, delay   : dly[ state ]
 		, addclass: 'pnotify_custom'
-		, confirm : {
-			  confirm: state == 'IDLE' ? true : false
-			, buttons: [ {
-				  text : 'Timer Reset'
-				, click: function( notice ) {
-					$.get( 'gpiotimerreset.php' );
-					notice.remove();
-				}
-			}, null ]
-		}
-		, before_open: function() {
-			if ( state == 'IDLE' ) {
-				timer = setInterval( function() {
-					if ( sec == 1 ) clearInterval( timer );
-					$( '.ui-pnotify-text' ).html( 'IDLE Timer OFF<br>in '+ sec-- +' sec ...' );
-				}, 1000 );
-			}
-		}
 		, after_close: function() {
 			if ( state == 'ON' || state == 'OFF' ) buttonOnOff( 1, state );
-			if ( timer ) {
-				clearInterval( timer );
-				timer = false;
-			}
 			if ( state == 'FAIL' ) gpioOnOff();
 		}
 	} );

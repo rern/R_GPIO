@@ -52,6 +52,8 @@ $off = $gpio[\'off\'];\
 $ond = $on[\'ond1\'] + $on[\'ond2\'] + $on[\'ond3\'];\
 $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ?>
+' -e $'/runeui.css/ a\
+    <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>
@@ -60,9 +62,6 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ' -e '/class="home"/ a\
     <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
 ' $file
-# no RuneUI enhancement
-! grep -q 'pnotify.css' $file &&
-	sed -i $'/runeui.css/ a\    <link rel="stylesheet" href="<?=$this->asset(\'/css/pnotify.css\')?>">' $file
 
 file=/srv/http/app/templates/footer.php
 echo $file
@@ -71,13 +70,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e $'$ a\
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
-# no RuneUI enhancement
-! grep -q 'pnotify3.custom.min.js' $file &&
-echo '<script src="<?=$this->asset('"'"'/js/vendor/pnotify3.custom.min.js'"'"')?>"></script>' >> $file
-
-echo '.playback-controls { /* gpio */
-    margin-left: 60px; /* gpio */
-} /* gpio */' >> /srv/http/assets/css/runeui.css
 
 [[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
 
@@ -97,8 +89,7 @@ systemctl start gpioset
 
 # set permission #######################################
 echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
-[[ $(stat -c %a /usr/bin/sudo) != 4755 ]] && chmod 4755 /usr/bin/sudo
-#chmod -R 550 /etc/sudoers.d
+chmod 4755 /usr/bin/sudo
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
 

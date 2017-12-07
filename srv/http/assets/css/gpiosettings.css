@@ -1,3 +1,11 @@
+.pnotify_custom {
+    top: 60px !important;
+    bottom: auto !important;
+    left: 0 !important;
+    width: 210px !important;
+    box-shadow: -4px 4px 10px #000000;
+}
+
 .container {
 	padding : 0 15px;
 }

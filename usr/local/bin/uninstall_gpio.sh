@@ -25,6 +25,7 @@ header=/srv/http/app/templates/header.php
 echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
 ' -e '/id="ond"/, /id="offd"/ d
+' -e '/gpio.css/ d
 ' -e '/id="gpio"/ d
 ' -e '/id="gpiosettings"/ d
 ' $header
@@ -35,16 +36,6 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e 's/id="reboot"/id="syscmd-reboot"/
 ' -e '/gpio.js/ d
 ' $footer
-
-# if RuneUI enhancement not installed
-if [[ ! -e /usr/local/bin/uninstall_enha.sh ]]; then
-	rm $path/css/pnotify.css
-	rm $path/js/vendor/pnotify3.custom.min.js
-	sed -i '/pnotify.css/ d' $header
-	sed -i '/pnotify3.custom.min.js/ d' $footer
-fi
-
-sed -i '\|/\* gpio \*/| d' /srv/http/assets/css/runeui.css
 
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
