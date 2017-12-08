@@ -47,13 +47,11 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	var txt = {
 		  ON    : 'Powering ON ...'
 		, OFF   : 'Powering OFF ...'
-		, IDLE  : 'IDLE Timer OFF\nin '+ sec +' seconds ...'
 		, FAILED: 'Powering FAILED !'
 	};
 	var dly = {
 		  ON    : ond
 		, OFF   : offd
-		, IDLE  : sec * 1000
 		, FAILED: 8000
 	};
 	if ( timer ) { // must clear before pnotify can remove
@@ -77,7 +75,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 				$( '#infoOverlay' ).hide();
 				clearInterval( timer );
 			}
-			$( '#infoMessage' ).html( 'IDLE Timer OFF<br>in '+ sec-- +' sec ...' );
+			$( '#infoMessage white' ).text( sec-- );
 		}, 1000 );
 		return
 	} 
