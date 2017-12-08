@@ -64,7 +64,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : '<i class="fa fa-cog fa-spin fa-2x"></i>'
 			, title       : 'GPIO Timer'
-			, message     : 'IDLE Timer OFF<br>in '+ sec +' sec ...'
+			, message     : 'IDLE Timer OFF<br>in <white>'+ sec +'</white> sec ...'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
