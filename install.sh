@@ -8,14 +8,14 @@ alias=gpio
 
 installstart $@
 
-[[ ! -e /usr/bin/python ]] && ln -s /usr/bin/python2.7 /usr/bin/python
+ln -sf /usr/bin/python{2.7,}
 
 if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; then
 	rankmirrors
 	
 	echo -e "$bar Install Pip ..."
 	pacman -S --noconfirm python2-pip
-	[[ ! -e /usr/bin/pip ]] && ln -s /usr/bin/pip{2,}
+	ln -sf /usr/bin/pip{2,}
 
 	echo -e "$bar Install Python-MPD ..."
 	pip -q install python-mpd2
@@ -25,11 +25,11 @@ if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; 
 fi
 
 # install RuneUI GPIO #######################################
-[[ -e /srv/http/gpio.json ]] && mv /srv/http/gpio.json{,.backup}
+mv /srv/http/gpio.json{,.backup} &> /dev/null
 
 getinstallzip
 
-[[ -e /srv/http/gpio.json.backup ]] && mv /srv/http/gpio.json{.backup,}
+mv /srv/http/gpio.json{.backup,} &> /dev/null
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
@@ -71,7 +71,7 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-[[ ! -f /etc/mpd.conf.gpio ]] && cp -rfv /etc/mpd.conf{,.gpio}
+[[ ! -f /etc/mpd.conf.gpio ]] && cp -fv /etc/mpd.conf{,.gpio}
 
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
