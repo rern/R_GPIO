@@ -12,7 +12,7 @@ ln -sf /usr/bin/python{2.7,}
 
 if ! pacman -Q python2-pip &> /dev/null && ! pacman -Q python-pip &> /dev/null; then
 
-	[[ $( pacman -Sy | grep -c 'up to date') != 5 ]] && rankmirrors
+	rankmirrors
 	
 	echo -e "$bar Install Pip ..."
 	pacman -S --noconfirm python2-pip
