@@ -10,14 +10,12 @@ installstart $@
 
 ln -sf /usr/bin/python{2.7,}
 
-if ! which pip &> /dev/null; then
-
-	rankmirrors
+rankmirrors
 	
-	echo -e "$bar Install Pip ..."
-	pacman -S --noconfirm python2-pip
-	ln -sf /usr/bin/pip{2,}
-fi
+echo -e "$bar Install Pip ..."
+pacman -S --noconfirm python2-pip
+ln -sf /usr/bin/pip{2,}
+	
 if ! python -c 'import mpd' &> /dev/null; then
 	echo -e "$bar Install Python-MPD ..."
 	pip -q install python-mpd2
