@@ -18,11 +18,11 @@ if ! which pip &> /dev/null; then
 	pacman -S --noconfirm python2-pip
 	ln -sf /usr/bin/pip{2,}
 fi
-if ! python -c 'import mpd'; then
+if ! python -c 'import mpd' &> /dev/null; then
 	echo -e "$bar Install Python-MPD ..."
 	pip -q install python-mpd2
 fi
-if ! python -c 'import requests'; then
+if ! python -c 'import requests' &> /dev/null; then
 	echo -e "$bar Install Python-Request ..."
 	pip -q install requests
 fi
