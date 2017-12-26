@@ -16,14 +16,11 @@ echo -e "$bar Install Pip ..."
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
 	
-if ! python -c 'import mpd' &> /dev/null; then
-	echo -e "$bar Install Python-MPD ..."
-	pip -q install python-mpd2
-fi
-if ! python -c 'import requests' &> /dev/null; then
-	echo -e "$bar Install Python-Request ..."
-	pip -q install requests
-fi
+echo -e "$bar Install Python-MPD ..."
+pip -q install python-mpd2
+
+echo -e "$bar Install Python-Request ..."
+pip -q install requests
 
 # install RuneUI GPIO #######################################
 mv /srv/http/gpio.json{,.backup} &> /dev/null
