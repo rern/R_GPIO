@@ -19,7 +19,7 @@ ln -sf /usr/bin/pip{2,}
 echo -e "$bar Install Python-MPD ..."
 pip -q install python-mpd2
 
-echo -e "$bar Install Python-Request ..."
+echo -e "$bar Install Python-Requests ..."
 pip -q install requests
 
 # install RuneUI GPIO #######################################
