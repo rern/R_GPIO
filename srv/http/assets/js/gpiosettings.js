@@ -115,7 +115,11 @@ $( '.selectpicker.pin' ).change( function() { // 'object' by 'class' must add cl
 	};
 	txtcolorpin();
 } );
-$( '.name' ).change( function() {
+$( '.name' ).click( function() {
+	if ( $( this ).val() == '(no name)' ) $( this ).val( '' );
+} ).blur( function() {
+	if ( !$( this ).val() ) $( this ).val( '(no name)' );
+} ).change( function() {
 	var tnew = '';
 	if ( this.value != '' && this.value != '(no name)' ) {
 		tnew = $( this ).val();
