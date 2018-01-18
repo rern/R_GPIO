@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="assets/css/runeui.css">
     <link rel="stylesheet" href="assets/css/gpiosettings.css">
     <link rel="shortcut icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="asset/css/pnotify.css">
 </head>
 
 <?php
