@@ -56,6 +56,7 @@ $off4  = $off[ 'off4' ];
 $timer = $gpio[ 'timer' ][ 'timer' ];
 
 function optpin( $n ) {
+	// omit pins: on-boot-pullup, uart, I2S
 	$pinarray = array( 11,13,15,16,18,19,21,22,23,24,26,29,31,32,33,36,37 );
 	$option = '';
 	foreach ( $pinarray as $pin ) {
