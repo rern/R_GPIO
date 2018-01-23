@@ -71,6 +71,16 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 
 [[ ! -f /etc/mpd.conf.gpio ]] && cp -fv /etc/mpd.conf{,.gpio}
 
+# for nginx svg support
+file=/etc/nginx/nginx.conf
+if ! grep '|ico' $file | grep -q 'svg'; then
+	echo $file
+	sed -i 's/|ico/&|svg/' $file
+	svg=0
+else
+	svg=1
+fi
+
 # Dual boot
 sed -i -e '/echo/ s/^/#/g
 ' -e '/echo 6/ a\
@@ -96,3 +106,6 @@ installfinish $@
 clearcache
 
 title -nt "$info Menu > GPIO for settings."
+
+# refresh svg support last for webui installation
+[[ $svg == 0 ]] && systemctl reload nginx
