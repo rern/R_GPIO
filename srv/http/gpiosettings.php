@@ -100,7 +100,7 @@ function opttime( $n ) {
 	Controlling 'GPIO' connected relay module for power on /off equipments in sequence.<br>
 	Using <a id="gpioimgtxt" style="cursor: pointer">RPi J8 pin numbering.</a>
 </p>
-<img src="assets/img/RPi3_GPIOs.png" style="display: none; margin-bottom: 10px;">
+<img src="assets/img/RPi3_GPIO.png" width="600" style="display: none; margin-bottom: 10px;">
 <div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>" >
 	<div class="form-group">
 		<label for="gpio" class="col-sm-2 control-label">Enable</label>
