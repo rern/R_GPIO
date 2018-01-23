@@ -4,9 +4,6 @@ import time
 import os
 import requests
 
-on = 1
-off = 0
-
 pullup = GPIO.input( offx[ 1 ] )
 
 data = { 'conf': 0, 'pullup': pullup }
