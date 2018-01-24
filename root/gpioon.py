@@ -6,6 +6,7 @@ import subprocess
 import requests
 
 # set mpd output to dac
+aogpio = gpio[ 'ao' ]
 aocurrent = subprocess.Popen( [ '/usr/bin/redis-cli', 'get', 'ao' ], stdout=subprocess.PIPE ).communicate()[ 0 ].strip()
 
 if aocurrent != aogpio:
