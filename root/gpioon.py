@@ -10,9 +10,6 @@ import filecmp
 aocurrent = subprocess.Popen( [ 'redis-cli', 'get', 'ao' ], stdout=subprocess.PIPE ).communicate()[ 0 ].strip()
 
 if aocurrent != aogpio:
-	subprocess.Popen( [ 'redis-cli', 'set', 'ao', aogpio ] )
-	os.system( '/usr/bin/php /srv/http/app/libs/gpiompgcfg.php' )
-	os.system( '/usr/bin/systemctl restart mpd' )
 	conf = 1
 else:
 	conf = 0
