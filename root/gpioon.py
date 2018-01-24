@@ -23,17 +23,13 @@ if pullup == off:
 	# broadcast pushstream (message non-char in curl must be escaped)
 	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'ON' } )
 
-	if on1 != on:
-		GPIO.output( on1, on )
-	if on2 != on:
-		time.sleep( ond1 )
-		GPIO.output( on2, on )
-	if on3 != on:
-		time.sleep( ond2 )
-		GPIO.output( on3, on )
-	if on4 != on:
-		time.sleep( ond3 )
-		GPIO.output( on4, on )
+	GPIO.output( on1, on )
+	time.sleep( ond1 )
+	GPIO.output( on2, on )
+	time.sleep( ond2 )
+	GPIO.output( on3, on )
+	time.sleep( ond3 )
+	GPIO.output( on4, on )
 
 	if GPIO.input( onx[ 1 ] ) != on:
 		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED' } )
