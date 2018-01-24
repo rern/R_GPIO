@@ -22,15 +22,16 @@ $( '#gpio-enable' ).click( function() {
 	if ( this.value == 1 ) {
 		$( this ).val( 0 );
 		if ( enable == 0 ) {
-			$( '#gpio-group' ).hide();
+			$( '#audiolabel, #audioout, #gpio-group' ).hide();
 			$( '#divgpio' ).removeClass( 'boxed-group' );
 		}
 	} else {
-		$( '#gpio-group' ).show();
+		$( '#audiolabel, #audioout, #gpio-group' ).show();
 		$( '#divgpio' ).addClass( 'boxed-group' );
 		$( this ).val( 1 );
 	}
 } );
+
 $( '#gpioimgtxt' ).click( function() {
 	$( this ).parent().next().slideToggle();
 } );
@@ -179,7 +180,7 @@ $( '#gpiosave' ).click( function() {
 	} else {
 		$( '.delay' ).prop( 'disabled', false ); // for serialize
 		$.post( 'gpiosave.php',
-			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val(),
+			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val() +'&ao='+ $( '#ao' ).val(),
 			function( data ) {
 				if ( data ) {
 					var icon = 'fa fa-info-circle fa-lg';
