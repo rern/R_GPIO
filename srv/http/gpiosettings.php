@@ -20,6 +20,7 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
+$ao = $gpio[ 'ao' ];
 $enable = $gpio[ 'enable' ][ 'enable' ];
 
 $pin  = $gpio[ 'pin' ];
@@ -87,6 +88,20 @@ function opttime( $n ) {
 		$option.= '<option value='.$num.$selected.'>'.$num.'</option>';
 	}
 	echo $option;
+}
+
+$redis = new Redis(); 
+$redis->pconnect( '127.0.0.1' );
+$acardsarray = $redis->hVals( 'acards' );
+
+$optao = '';
+foreach ( $acardsarray as $acard ) {
+	preg_match( '/"extlabel":".*?"/', $acard, $extlabel );
+	preg_match( '/"name":".*?"/', $acard, $name );
+	$extlabel = preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] );
+	$name = preg_replace( '/"name"|[:"]/', '', $name[ 0 ] );
+	$selected = ( $name == $ao ) ? ' selected' : '';
+	$optao.= '<option value='.$name.$selected.'>'.$extlabel.'</option>';
 }
 ?>
 
