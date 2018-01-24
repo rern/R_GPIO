@@ -2,13 +2,16 @@
 from gpio import *
 import time
 import os
+import subprocess
 import requests
 import filecmp
 
-# custom mpd.conf for DAC
-if filecmp.cmp( '/etc/mpd.conf', '/etc/mpd.conf.gpio' ) is False:
-	os.system( '/usr/bin/cp /etc/mpd.conf.gpio /etc/mpd.conf' )
-	os.system( '/usr/bin/systemctl restart mpd' )
+# set mpd output to dac
+aocurrent = subprocess.Popen( [ 'redis-cli', 'get', 'ao' ], stdout=subprocess.PIPE ).communicate()[ 0 ].strip()
+
+if aocurrent != aogpio:
+	subprocess.Popen( [ 'redis-cli', 'set', 'ao', aogpio ] )
+	os.system( '/usr/bin/php /srv/http/app/libs/gpiompgcfg.php' )
 	conf = 1
 else:
 	conf = 0
