@@ -40,4 +40,9 @@ if pullup == off:
 		exit()
 
 	if gpio[ 'timer' ][ 'timer' ] != 0:
-		os.system( '/usr/bin/sudo /root/gpiotimer.py &> /dev/null &' )
+		os.system( '/root/gpiotimer.py &> /dev/null &' )
+		
+	if aocurrent != aogpio:
+		subprocess.Popen( [ '/usr/bin/redis-cli', 'set', 'ao', aogpio ] )
+		os.system( '/usr/bin/php /srv/http/app/libs/gpiompgcfg.php' )
+		os.system( '/usr/bin/systemctl restart mpd' )
