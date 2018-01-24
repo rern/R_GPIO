@@ -58,6 +58,8 @@ Dirt cheap on ebay
 ![jumper](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/jumper.jpg)
 
 - [Relay module](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2055119.m570.l1313.TR0.TRC0.H0.Xrelay+low+high+trigger.TRS0&_nkw=relay+low+high+trigger&_sacat=0)
+    - with high/low trigger jumpers
+	- 'low trigger' code to be revised to 'high trigger' to fix initial boot flash on-off
 - [GPIO jumper wires](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.X10pcs+2pin+jumper.TRS0&_nkw=10pcs+2pin+jumper&_sacat=0)
 - Power cables
 - DIY enclosure
