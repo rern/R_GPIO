@@ -69,8 +69,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-[[ ! -f /etc/mpd.conf.gpio ]] && cp -fv /etc/mpd.conf{,.gpio}
-
 # for nginx svg support
 file=/etc/nginx/nginx.conf
 if ! grep '|ico' $file | grep -q 'svg'; then
