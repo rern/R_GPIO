@@ -1,4 +1,5 @@
 <?php
+$ao = $_POST[ 'enable' ];
 $enable = array(
 	  'enable' => $_POST[ 'enable' ]
 );
@@ -37,7 +38,8 @@ $timer = array(
 );
 
 $gpio = array(
-	  'enable' => $enable
+	  'ao'     => $ao
+	, 'enable' => $enable
 	, 'pin'    => $pin
 	, 'name'   => $name
 	, 'on'     => $on
