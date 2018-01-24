@@ -84,7 +84,7 @@ div#gpio-num.col-sm-10,
 div#gpio-num.col-sm-10 {
 	margin-right: 5px;
 }
-#gpio button {
+button {
 	height: 40px;
 }
 #gpio-name,
