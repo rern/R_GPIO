@@ -4,10 +4,9 @@ import time
 import os
 import subprocess
 import requests
-import filecmp
 
 # set mpd output to dac
-aocurrent = subprocess.Popen( [ 'redis-cli', 'get', 'ao' ], stdout=subprocess.PIPE ).communicate()[ 0 ].strip()
+aocurrent = subprocess.Popen( [ '/usr/bin/redis-cli', 'get', 'ao' ], stdout=subprocess.PIPE ).communicate()[ 0 ].strip()
 
 if aocurrent != aogpio:
 	conf = 1
