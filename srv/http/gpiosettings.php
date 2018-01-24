@@ -116,7 +116,7 @@ foreach ( $acardsarray as $acard ) {
 	Controlling 'GPIO' connected relay module for power on /off equipments in sequence.<br>
 	Using <a id="gpioimgtxt" style="cursor: pointer">RPi J8 pin numbering.</a>
 </p>
-<img src="assets/img/RPi3_GPIO.svg" width="600" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
+<img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>" >
 	<div class="form-group">
 		<label for="gpio" class="col-sm-2 control-label" style="padding-right: 5px;">Enable</label>
