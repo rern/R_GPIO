@@ -102,14 +102,14 @@ foreach ( $acardsarray as $acard ) {
 	$name = preg_replace( '/"name"|[:"]/', '', $name[ 0 ] );
 	$extlabel = $extlabel ? preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] ) : $name;
 	$selected = ( $name == $aogpio ) ? ' selected' : '';
-	$aoarray[] = '['.$extlabel.']<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
+	$aoarray[] = '#'.$extlabel.'#<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
 }
 asort( $aoarray );
 $optao = '';           // populate sorted options
 foreach ( $aoarray as $ao ) {
-	$optao.= preg_replace( '/[.*?]/', '',  $ao );
+	$optao.= preg_replace( '/#.*?#/', '',  $ao );
 }
-$optao.= '<option disabled>(no USB: power on > reboot)</option>';
+$optao.= '<option value="0" disabled>(no USB: power on > reboot)</option>';
 ?>
 
 <body>
