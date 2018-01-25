@@ -20,7 +20,7 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
-$ao = $gpio[ 'ao' ];
+$aogpio = $gpio[ 'aogpio' ][ 'aogpio' ];
 $enable = $gpio[ 'enable' ][ 'enable' ];
 
 $pin  = $gpio[ 'pin' ];
@@ -100,9 +100,10 @@ foreach ( $acardsarray as $acard ) {
 	preg_match( '/"name":".*?"/', $acard, $name );
 	$extlabel = preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] );
 	$name = preg_replace( '/"name"|[:"]/', '', $name[ 0 ] );
-	$selected = ( $name == $ao ) ? ' selected' : '';
-	$optao.= '<option value='.$name.$selected.'>'.$extlabel.'</option>';
+	$selected = ( $name == $aogpio ) ? ' selected' : '';
+	$optao.= '<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
 }
+$optao.= '<option value="0" disabled>(USB: power on > refresh)</option>';
 ?>
 
 <body>
@@ -113,35 +114,34 @@ foreach ( $acardsarray as $acard ) {
 <form class="form-horizontal">
 
 <p>
-	Controlling 'GPIO' connected relay module for power on /off equipments in sequence.<br>
-	Using <a id="gpioimgtxt" style="cursor: pointer">RPi J8 pin numbering.</a>
+	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
+	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8</a>
 </p>
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
-<div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>" >
+<div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>">
 	<div class="form-group">
-		<label for="gpio" class="col-sm-2 control-label" style="padding-right: 5px;">Enable</label>
-		<div class="col-sm-10">
+		<div class="col-sm-10 section">
 			<div class="gpio-float-l">
-				<div class="col-sm-10" style="padding: 0; width: 155px;">
+				<div class="col-sm-10">
+					<a class="gpio-text"><i class="fa fa-check-square-o fa-lg green"></i> &nbsp; Enable</a>
 					<label class="switch-light">
 						<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
 						<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
 					</label>
 				</div>
-				<label class="col-sm-2 control-label" id="audiolabel" style="padding-left: 0;">Output</label>
 			</div>
 			<div class="gpio-float-r" id="audioout">
-					<div class="col-sm-10" style="padding: 0;">
-						<select id="ao" name="ao" class="selectpicker on">
-							<?=$optao?>
-						</select>
-					</div>
+				<div class="col-sm-10">
+					<a class="gpio-text"><i class="fa fa-sign-out fa-lg blue"></i> &nbsp; Output</a>
+					<select id="aogpio" class="selectpicker">
+						<?=$optao?>
+					</select>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="form-group" <?=$enable == 0 ? 'style="display:none"' : ''?> id="gpio-group">
-		<label class="col-sm-2 control-label"></label>
-		<div class="col-sm-10" id="gpio">
+		<div class="col-sm-10 section" id="gpio">
 			<form></form> <!-- dummy for bypass 1st form not serialize -->
 			<form id="gpioform">
 				<div class="gpio-float-l">
@@ -228,7 +228,6 @@ foreach ( $acardsarray as $acard ) {
 						</div>
 				</div>
 			</form>
-			<div class="clear"></div>
 		</div>
 	</div>
 </div>
