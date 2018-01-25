@@ -4,42 +4,35 @@ import time
 import os
 import subprocess
 import requests
-
-# set mpd output to dac
-aogpio = gpio[ 'ao' ]
-aocurrent = subprocess.Popen( [ '/usr/bin/redis-cli', 'get', 'ao' ], stdout=subprocess.PIPE ).communicate()[ 0 ].strip()
-
-if aocurrent != aogpio:
-	conf = 1
-else:
-	conf = 0
+import filecmp
 
 pullup = GPIO.input( onx[ 1 ] )
 
-data = { 'conf': conf, 'pullup': pullup }
+data = { 'pullup': pullup }
 
 print( json.dumps( data ) )
 
-if pullup == off:
+if pullup == 1:
 	# broadcast pushstream (message non-char in curl must be escaped)
 	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'ON' } )
 
-	GPIO.output( on1, on )
-	time.sleep( ond1 )
-	GPIO.output( on2, on )
-	time.sleep( ond2 )
-	GPIO.output( on3, on )
-	time.sleep( ond3 )
-	GPIO.output( on4, on )
+	if on1 != 0:
+		GPIO.output( on1, 0 )
+	if on2 != 0:
+		time.sleep( ond1 )
+		GPIO.output( on2, 0 )
+	if on3 != 0:
+		time.sleep( ond2 )
+		GPIO.output( on3, 0 )
+	if on4 != 0:
+		time.sleep( ond3 )
+		GPIO.output( on4, 0 )
 
-	if GPIO.input( onx[ 1 ] ) != on:
+	if GPIO.input( onx[ 1 ] ) != 0:
 		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED' } )
 		exit()
 
 	if gpio[ 'timer' ][ 'timer' ] != 0:
 		os.system( '/root/gpiotimer.py &> /dev/null &' )
 		
-	if aocurrent != aogpio:
-		subprocess.Popen( [ '/usr/bin/redis-cli', 'set', 'ao', aogpio ] )
-		os.system( '/usr/bin/php /srv/http/app/libs/gpiompgcfg.php' )
-		os.system( '/usr/bin/systemctl restart mpd' )
+	os.system( '/usr/bin/systemctl restart mpd' )
