@@ -123,7 +123,7 @@ $optao.= '<option value="0" disabled>(USB: power on > refresh)</option>';
 		<div class="col-sm-10 section">
 			<div class="gpio-float-l">
 				<div class="col-sm-10">
-					<a class="gpio-text"><i class="fa fa-check-square-o fa-lg green"></i> &nbsp; Enable</a>
+					<a class="gpio-text"><i class="fa fa-check-square-o fa-lg blue"></i> &nbsp; Enable</a>
 					<label class="switch-light">
 						<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
 						<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
