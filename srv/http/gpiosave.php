@@ -3,11 +3,9 @@ $aogpio = $_POST[ 'aogpio' ];
 $redis = new Redis(); 
 $redis->pconnect( '127.0.0.1' );
 $aodetail = $redis->hGet( 'acards', $aogpio );
-$redis->hSet( 'aodetail', $aodetail );
+$redis->set( 'aogpio', $aogpio );
+$redis->set( 'aodetail', $aodetail );
 
-$aogpio = array(
-	  'aogpio' => $aogpio
-);
 $enable = array(
 	  'enable' => $_POST[ 'enable' ]
 );
@@ -46,8 +44,7 @@ $timer = array(
 );
 
 $gpio = array(
-	  'aogpio' => $aogpio
-	, 'enable' => $enable
+	  'enable' => $enable
 	, 'pin'    => $pin
 	, 'name'   => $name
 	, 'on'     => $on

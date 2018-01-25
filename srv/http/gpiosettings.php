@@ -20,7 +20,6 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
-$aogpio = $gpio[ 'aogpio' ][ 'aogpio' ];
 $enable = $gpio[ 'enable' ][ 'enable' ];
 
 $pin  = $gpio[ 'pin' ];
@@ -93,6 +92,7 @@ function opttime( $n ) {
 $redis = new Redis(); 
 $redis->pconnect( '127.0.0.1' );
 $acardsarray = $redis->hVals( 'acards' );
+$aogpio = $redis->get( 'aogpio' );
 
 $optao = '';
 foreach ( $acardsarray as $acard ) {
