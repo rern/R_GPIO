@@ -117,7 +117,6 @@ $( '#gpio' ).click( function() {
 				} );
 				gpioOnOff();
 			}
-			if ( json.conf == 1 ) location.reload();
 		}
 	);
 } );
