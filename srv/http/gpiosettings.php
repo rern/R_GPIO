@@ -89,25 +89,27 @@ function opttime( $n ) {
 	echo $option;
 }
 
+// audio output select
 $redis = new Redis(); 
 $redis->pconnect( '127.0.0.1' );
 $acardsarray = $redis->hVals( 'acards' );
 $aogpio = $redis->get( 'aogpio' );
 
-$optao = '';
+$oaarray = array();       // option array for sorting
 foreach ( $acardsarray as $acard ) {
 	preg_match( '/"extlabel":".*?"/', $acard, $extlabel );
 	preg_match( '/"name":".*?"/', $acard, $name );
 	$name = preg_replace( '/"name"|[:"]/', '', $name[ 0 ] );
-	if ( $extlabel ) {
-		$extlabel = preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] );
-	} else {
-		$extlabel = $name;
-	}
+	$extlabel = $extlabel ? preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] ) : $name;
 	$selected = ( $name == $aogpio ) ? ' selected' : '';
-	$optao.= '<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
+	$aoarray[] = '['.$extlabel.']<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
 }
-$optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
+asort( $aoarray );
+$optao = '';           // populate sorted options
+foreach ( $aoarray as $ao ) {
+	$optao.= preg_replace( '/[.*?]/', '',  $ao );
+}
+$optao.= '<option disabled>(no USB: power on > reboot)</option>';
 ?>
 
 <body>
@@ -127,7 +129,7 @@ $optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 		<div class="col-sm-10 section">
 			<div class="gpio-float-l">
 				<div class="col-sm-10">
-					<a class="gpio-text"><i class="fa fa-check-square-o fa-lg blue"></i> &nbsp; Enable</a>
+					<span class="gpio-text"><i class="fa fa-check-square-o fa-lg blue"></i> &nbsp; Enable</span>
 					<label class="switch-light">
 						<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
 						<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
@@ -136,7 +138,7 @@ $optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 			</div>
 			<div class="gpio-float-r" id="audioout">
 				<div class="col-sm-10">
-					<a class="gpio-text"><i class="fa fa-sign-out fa-lg blue"></i> &nbsp; Output</a>
+					<span class="gpio-text"><i class="fa fa-sign-out fa-lg blue"></i> &nbsp; Output</span>
 					<select id="aogpio" class="selectpicker">
 						<?=$optao?>
 					</select>
@@ -150,7 +152,7 @@ $optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 			<form id="gpioform">
 				<div class="gpio-float-l">
 					<div class="col-sm-10" id="gpio-num">
-						<a class="gpio-text"><i class="fa fa-ellipsis-v fa-lg blue"></i> &nbsp; Pin</a>
+						<span class="gpio-text"><i class="fa fa-ellipsis-v fa-lg blue"></i> &nbsp; Pin</span>
 						<select id="pin1" name="pin1" class="selectpicker pin">
 							<?php optpin( $pin1 )?>
 						</select>
@@ -163,13 +165,13 @@ $optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 						<select id="pin4" name="pin4" class="selectpicker pin">
 							<?php optpin( $pin4 )?>
 						</select>
-						<a class="gpio-text"><i class="fa fa-clock-o fa-lg yellow"></i> &nbsp; Idle</a>
+						<span class="gpio-text"><i class="fa fa-clock-o fa-lg yellow"></i> &nbsp; Idle</span>
 						<select id="timer" name="timer" class="selectpicker timer">
 							<?php opttime( $timer )?>
 						</select>
 					</div>
 					<div class="col-sm-10" id="gpio-name">
-						<a class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</a>
+						<span class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</span>
 						<input id="name1" name="name1" type="text" class="form-control osk-trigger input-lg name" value="<?=$name1?>">
 						<input id="name2" name="name2" type="text" class="form-control osk-trigger input-lg name" value="<?=$name2?>">
 						<input id="name3" name="name3" type="text" class="form-control osk-trigger input-lg name" value="<?=$name3?>">
@@ -180,7 +182,7 @@ $optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 				</div>
 				<div class="gpio-float-r">
 					<div class="col-sm-10">
-						<a class="gpio-text"><i class="fa fa-power-off fa-lg green"></i> &nbsp; On Sequence</a>
+						<span class="gpio-text"><i class="fa fa-power-off fa-lg green"></i> &nbsp; On Sequence</span>
 						<select id="on1" name="on1" class="selectpicker on">
 							<?php optname( $on1 )?>
 						</select>
@@ -206,7 +208,7 @@ $optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 					<div class="col-sm-10" style="width: 20px;">
 					</div>
 						<div class="col-sm-10">
-							<a class="gpio-text"><i class="fa fa-power-off fa-lg red"></i> &nbsp; Off Sequence</a>
+							<span class="gpio-text"><i class="fa fa-power-off fa-lg red"></i> &nbsp; Off Sequence</span>
 							<select id="off1" name="off1" class="selectpicker off">
 								<?php optname( $off1 )?>
 							</select>
