@@ -2,7 +2,6 @@
 from gpio import *
 import time
 import os
-import subprocess
 import requests
 import filecmp
 
