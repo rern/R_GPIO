@@ -19,8 +19,7 @@ function buttonOnOff( enable, pullup ) {
 	}
 }
 function gpioOnOff() {
-	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
-	$.get( path +'gpioexec.php?gpio=gpio.py status', function( status ) {
+	$.get( '/gpioexec.php?gpio=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
 	} );
@@ -103,9 +102,8 @@ $( '#gpio' ).click( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, on ? offd : ond );
 	
-	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
-	$.get( path +'gpioexec.php?gpio='+ py,
+	$.get( '/gpioexec.php?gpio='+ py,
 		function( status ) {
 			var json = $.parseJSON( status );
 			if ( json.pullup == on ? 1 : 0 ) {
@@ -126,9 +124,8 @@ $( '#gpio' ).click( function() {
 
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
-	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	py = ( this.id == 'reboot' ) ? 'gpiopower.py reboot' : 'gpiopower.py';
-	$.get( path +'gpioexec.php?gpio='+ py );
+	$.get( '/gpioexec.php?gpio='+ py );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
