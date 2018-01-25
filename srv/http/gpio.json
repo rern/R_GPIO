@@ -1,5 +1,5 @@
 {
-  "aogpio": { "aogpio":"bcm2835 ALSA_2" }
+  "aogpio": { "aogpio":"bcm2835 ALSA_1" }
 , "enable": { "enable": 0 }
 , "pin"   : { "pin1": 11, "pin2": 13, "pin3": 15, "pin4": 16 }
 , "name"  : { "name1": "DAC", "name2": "PreAmp", "name3": "Amp", "name4": "Subwoofer" }
