@@ -19,6 +19,13 @@ h1 {
 }
 .form-group {
 	margin-top: 10px;
+	padding: 0 30px;
+}
+.boxed-group {
+	padding: 10px 15px 5px;
+}
+#divgpio div.col-sm-10 {
+	padding: 0;
 }
 #gpio {
 	margin: 0 0 20px 0;
@@ -32,8 +39,11 @@ h1 {
 	float: left;
 	min-width: 320px;
 }
-#gpio a {
-	padding-left: 10px;
+.bootstrap-select.btn-group .dropdown-menu li.selected .text {
+  color: #0095d8;
+}
+.bootstrap-select.btn-group .dropdown-menu li.disabled .text {
+  color: #587ca0;
 }
 
 div#gpio-num.col-sm-10,
@@ -53,6 +63,15 @@ div#gpio-num.col-sm-10,
 #gpio input[type=number] {
 	width: 150px;
 }
+@media(max-width: 500px) {
+	#divgpio {
+		padding-left: 0;
+	}
+	#gpio div.col-sm-10,
+	#gpio .bootstrap-select {
+		width: 135px;
+	}
+}
 
 #gpio a.btn {
 	height: 40px;
@@ -69,7 +88,13 @@ div#gpio-num.col-sm-10,
 	padding: 0;
 	line-height: 45px;
 }
-.gpio-text,
+.gpio-text {
+	display: block;
+	width: 100%;
+	padding: 0 0 0 10px;
+	line-height: 40px;
+	color: #e0e7ee;
+}
 #gpio .bootstrap-select,
 #gpio input[type=text],
 #gpio input[type=number] {
@@ -86,6 +111,9 @@ div#gpio-num.col-sm-10 {
 }
 button {
 	height: 40px;
+}
+#audioout button {
+	width: 200px;
 }
 #gpio-name,
 #gpio-name input[type=text] {
