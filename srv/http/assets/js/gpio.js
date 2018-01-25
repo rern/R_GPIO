@@ -124,12 +124,6 @@ $( '#gpio' ).click( function() {
 	);
 } );
 
-// gpiosettings menu
-$( '#gpiosettings' ).click( function() {
-	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
-	window.location.href = path +'gpiosettings.php';
-});
-	
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
 	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';

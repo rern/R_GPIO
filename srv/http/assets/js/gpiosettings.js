@@ -33,6 +33,11 @@ $( '#gpio-enable' ).click( function() {
 } );
 $( '#gpioimgtxt' ).click( function() {
 	$( this ).parent().next().slideToggle();
+	if ( $( this ).text() == 'RPi J8 ▼' ) {
+		$( this ).text( 'RPi J8 ▲' )
+	} else {
+		$( this ).text( 'RPi J8 ▼' )
+	}
 } );
 
 function txtcolorpin() {
