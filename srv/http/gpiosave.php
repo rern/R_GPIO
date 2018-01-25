@@ -1,4 +1,13 @@
 <?php
+$aogpio = $_POST[ 'aogpio' ];
+$redis = new Redis(); 
+$redis->pconnect( '127.0.0.1' );
+$aodetail = $redis->hGet( 'acards', $aogpio );
+
+$aogpio = array(
+	  'aogpio' => $aogpio
+	, 'detail' => $aodetail
+);
 $enable = array(
 	  'enable' => $_POST[ 'enable' ]
 );
@@ -43,6 +52,7 @@ $gpio = array(
 	, 'on'     => $on
 	, 'off'    => $off
 	, 'timer'  => $timer
+	, 'aogpio' => $aogpio
 );
 
 $jsonfile = fopen( '/srv/http/gpio.json', 'w' );
