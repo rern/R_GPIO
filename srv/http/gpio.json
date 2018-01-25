@@ -1,12 +1,9 @@
 {
-  "enable": { "enable": 0 }
+  "aogpio": { "aogpio":"bcm2835 ALSA_1" }
+, "enable": { "enable": 0 }
 , "pin"   : { "pin1": 11, "pin2": 13, "pin3": 15, "pin4": 16 }
 , "name"  : { "name1": "DAC", "name2": "PreAmp", "name3": "Amp", "name4": "Subwoofer" }
 , "on"    : { "on1": 11, "ond1": 2, "on2": 13, "ond2": 2, "on3": 15, "ond3": 2, "on4": 16 }
 , "off"   : { "off1": 16, "offd1": 2, "off2": 15, "offd2": 2, "off3": 13, "offd3": 2, "off4": 11 }
 , "timer" : { "timer": 5 }
-, "aogpio": {
-		  "aogpio":"bcm2835 ALSA_1"
-		, "detail":"{\"id\":\"1\",\"sysname\":\"bcm2835 ALSA\",\"extlabel\":\"RaspberryPi Analog Out\",\"hwplatformid\":\"01\",\"mixer_numid\":\"1\",\"mixer_control\":\"PCM\",\"route_cmd\":\"amixer -c 0 cset numid=3 1 > \\\/dev\\\/null\",\"device\":\"hw:0,0\",\"name\":\"bcm2835 ALSA_1\",\"type\":\"alsa\",\"integrated_sub\":1,\"real_interface\":\"{\\\"device\\\":\\\"hw:0,0\\\",\\\"name\\\":\\\"bcm2835 ALSA\\\",\\\"type\\\":\\\"alsa\\\",\\\"system\\\":\\\"card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]\\\"}\"}"
-	}
 }
