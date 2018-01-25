@@ -1,7 +1,7 @@
 <?php
-$gpio = $_GET[ 'gpio' ];
+$onoffpy = $_GET[ 'onoffpy' ];
 
-if ( $gpio === 'gpioon.py' ) {
+if ( $onoffpy === 'gpioon.py' ) {
 	$redis = new Redis(); 
 	$redis->pconnect( '127.0.0.1' );
 	$aogpio = $redis->get( 'aogpio' )
