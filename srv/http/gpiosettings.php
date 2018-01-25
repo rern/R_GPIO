@@ -98,12 +98,16 @@ $optao = '';
 foreach ( $acardsarray as $acard ) {
 	preg_match( '/"extlabel":".*?"/', $acard, $extlabel );
 	preg_match( '/"name":".*?"/', $acard, $name );
-	$extlabel = preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] );
 	$name = preg_replace( '/"name"|[:"]/', '', $name[ 0 ] );
+	if ( $extlabel ) {
+		$extlabel = preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] );
+	} else {
+		$extlabel = $name;
+	}
 	$selected = ( $name == $aogpio ) ? ' selected' : '';
 	$optao.= '<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
 }
-$optao.= '<option value="0" disabled>(USB: power on > refresh)</option>';
+$optao.= '<option value="0" disabled>(USB: power on > reboot)</option>';
 ?>
 
 <body>
@@ -115,7 +119,7 @@ $optao.= '<option value="0" disabled>(USB: power on > refresh)</option>';
 
 <p>
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
-	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8</a>
+	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 ▼</a>
 </p>
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>">
