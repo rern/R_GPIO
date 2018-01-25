@@ -31,7 +31,6 @@ $( '#gpio-enable' ).click( function() {
 		$( this ).val( 1 );
 	}
 } );
-
 $( '#gpioimgtxt' ).click( function() {
 	$( this ).parent().next().slideToggle();
 } );
@@ -76,13 +75,6 @@ function txtcolordelay() {
 	// 'render' & 'refresh' in textcolor()
 }
 function txtcolor() {
-	$( '.timer, .delay, .on, .off' )
-		.selectpicker( 'render' )
-		.find( 'option, span' )
-		.css( 'color', '#e0e7ee' ); // default color text
-	$( '.timer, .delay, .on, .off' ) // 'selected' option blue text
-		.find( 'option:selected' )
-		.css( 'color', '#0095d8' );
 	$( '.timer, .delay, .on, .off' )
 		.find( 'span:contains("none"), option[value=0]' )
 		.css( 'color', '#587ca0' ); // 'none' gray text
@@ -180,7 +172,7 @@ $( '#gpiosave' ).click( function() {
 	} else {
 		$( '.delay' ).prop( 'disabled', false ); // for serialize
 		$.post( 'gpiosave.php',
-			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val() +'&ao='+ $( '#ao' ).val(),
+			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val() +'&aogpio='+ $( '#aogpio' ).val(),
 			function( data ) {
 				if ( data ) {
 					var icon = 'fa fa-info-circle fa-lg';
