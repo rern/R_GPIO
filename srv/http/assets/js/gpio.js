@@ -103,7 +103,7 @@ $( '#gpio' ).click( function() {
 	}, on ? offd : ond );
 	
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
-	$.get( '/gpioexec.php?gpio='+ py,
+	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
 			var json = $.parseJSON( status );
 			if ( json.pullup == on ? 1 : 0 ) {
