@@ -112,7 +112,8 @@ installfinish $@
 
 clearcache
 
-title -nt "$info Menu > GPIO for settings."
+echo -e "$info Menu > GPIO for settings."
+title -nt "$info USB DAC not listed: power on > reboot"
 
 # refresh svg support last for webui installation
 [[ $svg == 0 ]] && systemctl reload nginx
