@@ -91,8 +91,8 @@ txtcolordelay();
 txtcolor();
 
 $( '.selectpicker' ).selectpicker( {
-    iconBase: 'fa',
-    tickIcon: 'fa-check'
+	  iconBase: 'fontawesome'
+	, tickIcon: 'fa fa-check'
 } );
 $( '.selectpicker.pin' ).change( function() { // 'object' by 'class' must add class '.selectpicker' to suppress twice firing events
 	var pnew = this.value;

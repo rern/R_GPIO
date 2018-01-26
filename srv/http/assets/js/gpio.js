@@ -4,7 +4,7 @@ var timer = false; // for 'setInterval' status check
 ond = $( '#ond' ).val() * 1000;
 offd = $( '#offd' ).val() * 1000;
 
-function buttonOnOff( enable, pullup ) {
+function buttonOnOff( pullup ) {
 	if ( pullup == 0 || pullup == 'ON' ) { // R pulldown low > trigger signal = relay on
 		$( '#gpio' ).addClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-off' ).addClass( 'fa-volume-up' );
@@ -12,7 +12,7 @@ function buttonOnOff( enable, pullup ) {
 		$( '#gpio' ).removeClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-up' ).addClass( 'fa-volume-off' );
 	}
-	if ( enable == 1 ) {
+	if ( $( '#enable' ).val() == 1 ) {
 		$( '#gpio' ).show();
 	} else {
 		$( '#gpio' ).hide();
@@ -21,7 +21,7 @@ function buttonOnOff( enable, pullup ) {
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
-		buttonOnOff( json.enable, json.pullup );
+		buttonOnOff( json.pullup );
 	} );
 }
 gpioOnOff();
@@ -104,6 +104,7 @@ $( '#gpio' ).click( function() {
 	}, on ? offd : ond );
 	
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
+	console.log(py);
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
 //			var json = $.parseJSON( pullup );  // python 'json.dumps()' is already json
