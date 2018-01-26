@@ -5,28 +5,25 @@ import os
 import requests
 
 pullup = GPIO.input( offx[ 1 ] )
+print( json.dumps( { 'pullup': pullup } ) )
 
-data = { 'pullup': pullup }
-
-print( json.dumps( data ) )
-
-if pullup == 0:
+if pullup == ON:
 	# broadcast message
 	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'OFF' } )
 
 	if off1 != 0:
-		GPIO.output( off1, 1 )
+		GPIO.output( off1, OFF )
 	if off2 != 0:
 		time.sleep( offd1 )
-		GPIO.output( off2, 1 )
+		GPIO.output( off2, OFF )
 	if off3 != 0:
 		time.sleep( offd2 )
-		GPIO.output( off3, 1 )
+		GPIO.output( off3, OFF )
 	if off4 != 0:
 		time.sleep( offd3 )
-		GPIO.output( off4, 1 )
+		GPIO.output( off4, OFF )
 
-	if GPIO.input( offx[ 1 ] ) != 1:
+	if GPIO.input( offx[ 1 ] ) != OFF:
 		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED' } )
 		exit()
 
