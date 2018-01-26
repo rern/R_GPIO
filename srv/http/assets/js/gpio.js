@@ -19,7 +19,7 @@ function buttonOnOff( enable, pullup ) {
 	}
 }
 function gpioOnOff() {
-	$.get( '/gpioexec.php?gpio=gpio.py status', function( status ) {
+	$.get( '/gpioexec.php?onoffpy=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
 		buttonOnOff( json.enable, json.pullup );
 	} );
@@ -39,6 +39,7 @@ var pushstreamGPIO = new PushStream( {
 	port: window.location.port,
 	modes: GUI.mode
 } );
+pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var sec = response[ 0 ].sec;
@@ -91,8 +92,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	} else {
 		gpioOnOff();
 	}
+	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
-pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.connect();
 
 $( '#gpio' ).click( function() {
@@ -105,8 +106,8 @@ $( '#gpio' ).click( function() {
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
-			var json = $.parseJSON( status );
-			if ( json.pullup == on ? 1 : 0 ) {
+//			var json = $.parseJSON( pullup );  // python 'json.dumps()' is already json
+			if ( status.pullup == on ? 1 : 0 ) {
 				PNotify.removeAll();
 				new PNotify( {
 					  icon : 'fa fa-warning fa-lg'
