@@ -30,7 +30,7 @@ Features
 - reset on play or `reset` button during warning
 
 **Integrated into existing RuneUI**
-- auto load MPD settings on power on (no need to reboot for USB DAC)
+- auto load MPD settings on power on (no need to reboot for power-off-to-on USB DAC)
 - `GPIO` (speaker icon) button on the left of top bar
 - change button icon and color on `on` `off`
 - show button only when enable
