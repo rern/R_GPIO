@@ -5,7 +5,7 @@ ond = $( '#ond' ).val() * 1000;
 offd = $( '#offd' ).val() * 1000;
 
 function buttonOnOff( pullup ) {
-	if ( pullup == 0 || pullup == 'ON' ) { // R pulldown low > trigger signal = relay on
+	if ( pullup == 0 || pullup == 'ON' ) { // R pullup = 0V > low trigger relay ON
 		$( '#gpio' ).addClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-off' ).addClass( 'fa-volume-up' );
 	} else {
@@ -88,7 +88,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		, addclass: 'pnotify_custom'
 	} );
 	if ( state != 'FAIL' ) {
-		buttonOnOff( 1, state );
+		buttonOnOff( state );
 	} else {
 		gpioOnOff();
 	}
@@ -104,7 +104,6 @@ $( '#gpio' ).click( function() {
 	}, on ? offd : ond );
 	
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
-	console.log(py);
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
 //			var json = $.parseJSON( pullup );  // python 'json.dumps()' is already json
