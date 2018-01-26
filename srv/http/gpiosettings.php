@@ -20,8 +20,6 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
-$enable = $gpio[ 'enable' ][ 'enable' ];
-
 $pin  = $gpio[ 'pin' ];
 $pin1 = $pin[ 'pin1' ];
 $pin2 = $pin[ 'pin2' ];
@@ -94,22 +92,12 @@ $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
 $acardsarray = $redis->hVals( 'acards' );
 $aogpio = $redis->get( 'aogpio' );
+$enable = $redis->get( 'enablegpio' );
 
-$oaarray = array();       // option array for sorting
-foreach ( $acardsarray as $acard ) {
-	preg_match( '/"extlabel":".*?"/', $acard, $extlabel );
-	preg_match( '/"name":".*?"/', $acard, $name );
-	$name = preg_replace( '/"name"|[:"]/', '', $name[ 0 ] );
-	$extlabel = $extlabel ? preg_replace( '/"extlabel"|[:"]/', '', $extlabel[ 0 ] ) : $name;
-	$selected = ( $name == $aogpio ) ? ' selected' : '';
-	$aoarray[] = '#'.$extlabel.'#<option value="'.$name.'"'.$selected.'>'.$extlabel.'</option>';
-}
-asort( $aoarray );
-$optao = '';           // populate sorted options
-foreach ( $aoarray as $ao ) {
-	$optao.= preg_replace( '/#.*?#/', '',  $ao );
-}
-$optao.= '<option value="0" disabled>(no USB: power on > reboot)</option>';
+$optao = '
+	<option>'.$aogpio.'</option>
+	<option>Change &gt;&gt;</option>
+';
 ?>
 
 <body>
@@ -124,7 +112,7 @@ $optao.= '<option value="0" disabled>(no USB: power on > reboot)</option>';
 	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 ▼</a>
 </p>
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
-<div id="divgpio" class="<?php if( $enable == 1 ) echo 'boxed-group'?>">
+<div id="divgpio" class="boxed-group">
 	<div class="form-group">
 		<div class="col-sm-10 section">
 			<div class="gpio-float-l">
@@ -136,9 +124,9 @@ $optao.= '<option value="0" disabled>(no USB: power on > reboot)</option>';
 					</label>
 				</div>
 			</div>
-			<div class="gpio-float-r" id="audioout">
+			<div class="gpio-float-r" <?=$enable == 0 ? 'style="display:none"' : ''?> id="audioout">
 				<div class="col-sm-10">
-					<span class="gpio-text"><i class="fa fa-sign-out fa-lg blue"></i> &nbsp; Output</span>
+					<span class="gpio-text"><i class="fa fa-sign-out fa-lg blue"></i> &nbsp; Audio Output</span>
 					<select id="aogpio" class="selectpicker">
 						<?=$optao?>
 					</select>
