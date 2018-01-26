@@ -90,9 +90,9 @@ function opttime( $n ) {
 // audio output select
 $redis = new Redis(); 
 $redis->pconnect( '127.0.0.1' );
-$acardsarray = $redis->hVals( 'acards' );
-$aogpio = $redis->get( 'aogpio' );
 $enable = $redis->get( 'enablegpio' );
+$aogpio = $redis->get( 'aogpio' );
+if (! $aogpio ) $aogpio = $redis->get( 'ao' );
 
 $optao = '
 	<option>'.$aogpio.'</option>

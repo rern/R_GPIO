@@ -7,7 +7,7 @@ if ( $onoffpy === 'gpioon.py' ) {
 	$redis->pconnect( '127.0.0.1' );
 	
 	$aogpio = $redis->get( 'aogpio' );
-	$volumegpio = $redis->get( 'volume' );
+	$volumegpio = $redis->get( 'volumegpio' );
 	$acardsgpio = $redis->hGetAll( 'acardsgpio' );
 	$mpdconfgpio = $redis->hGetAll( 'mpdconfgpio' );
 	
@@ -18,8 +18,7 @@ if ( $onoffpy === 'gpioon.py' ) {
 	
 	include( '/srv/http/app/libs/runeaudio.php' );
 	
-	wrk_mpdconf( $redis, 'writecfg' );
-	sysCmd( 'systemctl restart mpd' );
+	wrk_mpdconf( $redis, 'switchao', $aogpio );
 }
 
 $pullup = exec( '/usr/bin/sudo /root/'.$onoffpy );
