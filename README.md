@@ -30,13 +30,13 @@ Features
 - reset on play or `reset` button during warning
 
 **Integrated into existing RuneUI**
-- auto enable custom configured MPD on power on
+- auto load MPD settings on power on (no need to reboot for USB DAC)
 - `GPIO` (speaker icon) button on the left of top bar
 - change button icon and color on `on` `off`
 - show button only when enable
-- setting in `Menu` > `GPIO` (local browser: right click > `Fullscreen` (exit) > click `GPIO` tab)
+- setting in `Menu` > `GPIO`
 - instantly update all fields on changing pins or names
-- `RPi pin numbering` diagram included, show / hide on click
+- `RPi J8` pin numbering diagram included, show / hide on click
 - Auto power off on reboot / shutdown
 - Can be used with [**USB PC Remote**](https://github.com/rern/Rune_USB_PC_Remote)
 
