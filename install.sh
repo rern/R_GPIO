@@ -44,6 +44,10 @@ file=/srv/http/app/templates/header.php
 echo $file
 sed -i -e $'1 i\
 <?php // gpio\
+$redis = new Redis();\
+$redis->pconnect( \'127.0.0.1\' );\
+$enable = $redis->get( \'enablegpio\' );\
+
 $file = \'/srv/http/gpio.json\';\
 $fileopen = fopen($file, \'r\');\
 $gpio = fread($fileopen, filesize($file));\
@@ -57,6 +61,7 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ' -e $'/runeui.css/ a\
     <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
+<input id="enable" type="hidden" value=<?=$enable ?>>\
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>
 ' -e '/Credits/ a\
