@@ -20,7 +20,7 @@ GPIO.setup( pinx, GPIO.OUT )
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'set':
 	os.system( '/bin/chmod g+rw /dev/gpiomem' ) # fix permission every boot
-#	GPIO.output( pinx, 1 )
+	GPIO.output( pinx, 1 )
 	exit()
 
 on   = gpio[ 'on' ]
@@ -51,6 +51,3 @@ offx  = [ off1, off2, off3, off4 ]
 offx  = [ i for i in offx if i != 0 ]
 
 timer = int( gpio[ 'timer' ][ 'timer' ] )
-
-on = 1
-off = 0
