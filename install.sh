@@ -31,6 +31,10 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
+file=/etc/mpd.conf
+echo $file
+chmod 666 $file
+
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
 sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $file
