@@ -42,9 +42,6 @@ h1 {
 .bootstrap-select.btn-group .dropdown-menu li.selected .text {
   color: #0095d8;
 }
-.bootstrap-select.btn-group .dropdown-menu li.disabled .text {
-  color: #587ca0;
-}
 
 div#gpio-num.col-sm-10,
 .delay,
