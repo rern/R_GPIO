@@ -106,8 +106,8 @@ $( '#gpio' ).click( function() {
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
-//			var json = $.parseJSON( pullup );  // python 'json.dumps()' is already json
-			if ( status.pullup == on ? 1 : 0 ) {
+			var json = $.parseJSON( status );
+			if ( json.pullup == on ? 1 : 0 ) {
 				PNotify.removeAll();
 				new PNotify( {
 					  icon : 'fa fa-warning fa-lg'
