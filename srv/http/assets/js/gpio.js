@@ -67,7 +67,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			, cancel      : 1
 			, oklabel     : 'Reset'
 			, ok          : function() {
-				$.get( 'gpiotimerreset.php' );
+				$.get( '/gpioexec.php?onoffpy=timerreset' );
 			}
 		} );
 		timer = setInterval( function() {
