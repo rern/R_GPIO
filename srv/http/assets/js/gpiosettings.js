@@ -20,11 +20,7 @@ $( '#close' ).click( function() {
 } );
 $( '#gpioimgtxt' ).click( function() {
 	$( this ).parent().next().slideToggle();
-	if ( $( this ).text() == 'RPi J8 ▼' ) {
-		$( this ).text( 'RPi J8 ▲' )
-	} else {
-		$( this ).text( 'RPi J8 ▼' )
-	}
+	$( this ).find( 'i' ).toggleClass('fa-caret-down fa-caret-up')
 } );
 $( '#gpio-enable' ).click( function() {
 	if ( this.value == 1 ) {
