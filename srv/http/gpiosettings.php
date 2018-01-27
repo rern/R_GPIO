@@ -117,7 +117,7 @@ $optao = '
 		<div class="col-sm-10 section">
 			<div class="gpio-float-l">
 				<div class="col-sm-10">
-					<span class="gpio-text"><i class="fa fa-check-square-o fa-lg blue"></i> &nbsp; Enable</span>
+					<span class="gpio-text"><i class="fa fa-check-square fa-lg blue"></i> &nbsp; Enable</span>
 					<label class="switch-light">
 						<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
 						<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
