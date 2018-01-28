@@ -52,4 +52,4 @@ off4  = int( off[ 'off4' ] )
 offx  = [ off1, off2, off3, off4 ]
 offx  = [ i for i in offx if i != 0 ]
 
-timer = int( gpio[ 'timer' ][ 'timer' ] )
+timer = gpio[ 'timer' ][ 'timer' ]
