@@ -4,7 +4,6 @@ import time
 import os
 import requests
 
-pullup = GPIO.input( offx[ 1 ] )
 print( json.dumps( { 'pullup': pullup } ) )
 
 if pullup == ON:

@@ -4,7 +4,6 @@ import time
 import os
 import requests
 
-pullup = GPIO.input( onx[ 1 ] )
 print( json.dumps( { 'pullup': pullup } ) )
 
 if pullup == OFF:
@@ -28,5 +27,5 @@ if pullup == OFF:
 		exit()
 
 	if timer > 0:
-		os.system( '/root/gpiotimer.py '+ timer +'&> /dev/null &' )
+		os.system( '/root/gpiotimer.py &> /dev/null &' )
 			

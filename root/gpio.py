@@ -37,8 +37,10 @@ on4  = int( on[ 'on4' ] )
 onx  = [ on1, on2, on3, on4 ]
 onx  = [ i for i in onx if i != 0 ]
 
+pullup = GPIO.input( onx[ 1 ] )
+
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'status':
-	print( json.dumps( { 'pullup': GPIO.input( onx[ 1 ] ) } ) )
+	print( json.dumps( { 'pullup': pullup } ) )
 	exit()
 
 off   = gpio[ 'off' ]
@@ -52,4 +54,4 @@ off4  = int( off[ 'off4' ] )
 offx  = [ off1, off2, off3, off4 ]
 offx  = [ i for i in offx if i != 0 ]
 
-timer = gpio[ 'timer' ][ 'timer' ]
+timer = int( gpio[ 'timer' ][ 'timer' ] )

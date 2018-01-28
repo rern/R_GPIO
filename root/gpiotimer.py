@@ -1,11 +1,10 @@
 #!/usr/bin/python
+from gpio import timer
 import time
 import sys
 import os
 import mpd
 import requests
-
-timer = int( sys.argv[ 1 ] )
 
 if timer == 0:
 	exit()
