@@ -109,7 +109,7 @@ $optao = '
 
 <p>
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
-	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-caret-down fa-lg"></i></a>
+	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-circle-down fa-lg"></i></a>
 </p>
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="boxed-group">
