@@ -86,7 +86,12 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		, text    : txt[ state ]
 		, delay   : dly[ state ]
 		, addclass: 'pnotify_custom'
+		, after_close: function() {
+			if ( state == 'ON' || state == 'OFF' ) buttonOnOff( 1, state );
+			if ( state == 'FAIL' ) gpioOnOff();
+		}
 	} );
+
 	if ( state != 'FAIL' ) {
 		buttonOnOff( state );
 	} else {

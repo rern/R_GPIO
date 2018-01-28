@@ -7,6 +7,10 @@ alias=gpio
 # gpio off #######################################
 ./gpiooff.py &> /dev/null &
 
+if [[ $1 != u ]]; then
+	redis-cli del enablegpio aogpio volumegpio acardsgpio mpdconfgpio &> /dev/null
+fi
+
 uninstallstart $@
 
 # remove files #######################################
