@@ -28,7 +28,7 @@ echo -e "$bar Restore modified files ..."
 header=/srv/http/app/templates/header.php
 echo $header
 sed -i -e '\|<?php // gpio|, /?>/ d
-' -e '/id="ond"/, /id="offd"/ d
+' -e '/id="enable"/, /id="offd"/ d
 ' -e '/gpio.css/ d
 ' -e '/id="gpio"/ d
 ' -e '/gpiosettings.php/ d
