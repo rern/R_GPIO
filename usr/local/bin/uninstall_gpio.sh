@@ -27,7 +27,7 @@ sed -i -e '\|<?php // gpio|, /?>/ d
 ' -e '/id="ond"/, /id="offd"/ d
 ' -e '/gpio.css/ d
 ' -e '/id="gpio"/ d
-' -e '/id="/gpiosettings"/ d
+' -e '/gpiosettings.php/ d
 ' $header
 
 footer=/srv/http/app/templates/footer.php
