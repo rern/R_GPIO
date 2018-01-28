@@ -4,25 +4,24 @@ var timer = false; // for 'setInterval' status check
 ond = $( '#ond' ).val() * 1000;
 offd = $( '#offd' ).val() * 1000;
 
-function buttonOnOff( enable, pullup ) {
-	if ( pullup == 0 || pullup == 'ON' ) { // R pulldown low > trigger signal = relay on
+function buttonOnOff( pullup ) {
+	if ( pullup == 0 || pullup == 'ON' ) { // R pullup = 0V > low trigger relay ON
 		$( '#gpio' ).addClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-off' ).addClass( 'fa-volume-up' );
 	} else {
 		$( '#gpio' ).removeClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-up' ).addClass( 'fa-volume-off' );
 	}
-	if ( enable == 1 ) {
+	if ( $( '#enable' ).val() == 1 ) {
 		$( '#gpio' ).show();
 	} else {
 		$( '#gpio' ).hide();
 	}
 }
 function gpioOnOff() {
-	var path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
-	$.get( path +'gpioexec.php?gpio=gpio.py status', function( status ) {
+	$.get( '/gpioexec.php?onoffpy=gpio.py status', function( status ) {
 		var json = $.parseJSON( status );
-		buttonOnOff( json.enable, json.pullup );
+		buttonOnOff( json.pullup );
 	} );
 }
 gpioOnOff();
@@ -40,6 +39,7 @@ var pushstreamGPIO = new PushStream( {
 	port: window.location.port,
 	modes: GUI.mode
 } );
+pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var sec = response[ 0 ].sec;
@@ -67,7 +67,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			, cancel      : 1
 			, oklabel     : 'Reset'
 			, ok          : function() {
-				$.get( 'gpiotimerreset.php' );
+				$.get( '/gpioexec.php?onoffpy=timerreset' );
 			}
 		} );
 		timer = setInterval( function() {
@@ -91,8 +91,14 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			if ( state == 'FAIL' ) gpioOnOff();
 		}
 	} );
+
+	if ( state != 'FAIL' ) {
+		buttonOnOff( state );
+	} else {
+		gpioOnOff();
+	}
+	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
-pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.connect();
 
 $( '#gpio' ).click( function() {
@@ -102,9 +108,8 @@ $( '#gpio' ).click( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, on ? offd : ond );
 	
-	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
-	$.get( path +'gpioexec.php?gpio='+ py,
+	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
 			var json = $.parseJSON( status );
 			if ( json.pullup == on ? 1 : 0 ) {
@@ -118,22 +123,14 @@ $( '#gpio' ).click( function() {
 				} );
 				gpioOnOff();
 			}
-			if ( json.conf == 1 ) location.reload();
 		}
 	);
 } );
 
-// gpiosettings menu
-$( '#gpiosettings' ).click( function() {
-	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
-	window.location.href = path +'gpiosettings.php';
-});
-	
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
-	path = /\/.*\//.test( window.location.pathname ) ? '../../' : '';
 	py = ( this.id == 'reboot' ) ? 'gpiopower.py reboot' : 'gpiopower.py';
-	$.get( path +'gpioexec.php?gpio='+ py );
+	$.get( '/gpioexec.php?gpio='+ py );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)

@@ -1,9 +1,11 @@
 #!/usr/bin/python
-from gpio import timer
 import time
+import sys
 import os
 import mpd
 import requests
+
+timer = int( sys.argv[ 1 ] )
 
 if timer == 0:
 	exit()
@@ -24,4 +26,4 @@ while i >= 0:
 		if i == 1: # broadcast last loop
 			requests.post( 'http://localhost/pub?id=gpio', json={ 'sec': 60, 'state': 'IDLE' } )
 		if i == 0:
-			os.system( '/usr/bin/sudo /root/gpiooff.py' )
+			os.system( '/root/gpiooff.py' )

@@ -18,21 +18,21 @@ var timer = $( '#timer' ).val();
 $( '#close' ).click( function() {
 	window.location.href = '/';
 } );
+$( '#gpioimgtxt' ).click( function() {
+	$( this ).parent().next().slideToggle();
+	$( this ).find( 'i' ).toggleClass('fa-chevron-circle-down fa-chevron-circle-up')
+} );
 $( '#gpio-enable' ).click( function() {
 	if ( this.value == 1 ) {
 		$( this ).val( 0 );
-		if ( enable == 0 ) {
-			$( '#gpio-group' ).hide();
-			$( '#divgpio' ).removeClass( 'boxed-group' );
-		}
+		if ( enable == 0 ) $( '#audiolabel, #audioout, #gpio-group' ).hide();
 	} else {
-		$( '#gpio-group' ).show();
-		$( '#divgpio' ).addClass( 'boxed-group' );
 		$( this ).val( 1 );
+		$( '#audiolabel, #audioout, #gpio-group' ).show();
 	}
 } );
-$( '#gpioimgtxt' ).click( function() {
-	$( this ).parent().next().slideToggle();
+$( '#aogpio' ).on( 'changed.bs.select', function() {
+	window.location.href = '/mpd/';
 } );
 
 function txtcolorpin() {
@@ -76,13 +76,6 @@ function txtcolordelay() {
 }
 function txtcolor() {
 	$( '.timer, .delay, .on, .off' )
-		.selectpicker( 'render' )
-		.find( 'option, span' )
-		.css( 'color', '#e0e7ee' ); // default color text
-	$( '.timer, .delay, .on, .off' ) // 'selected' option blue text
-		.find( 'option:selected' )
-		.css( 'color', '#0095d8' );
-	$( '.timer, .delay, .on, .off' )
 		.find( 'span:contains("none"), option[value=0]' )
 		.css( 'color', '#587ca0' ); // 'none' gray text
 	$( '.timer, .delay, .on, .off' ).selectpicker( 'refresh' );
@@ -93,6 +86,10 @@ txtcolorname();
 txtcolordelay();
 txtcolor();
 
+$( '.selectpicker' ).selectpicker( {
+	  iconBase: 'fontawesome'
+	, tickIcon: 'fa fa-check'
+} );
 $( '.selectpicker.pin' ).change( function() { // 'object' by 'class' must add class '.selectpicker' to suppress twice firing events
 	var pnew = this.value;
 	var n = this.id.slice( -1 ); // get number
@@ -162,6 +159,7 @@ $( '.selectpicker.on, .selectpicker.off' ).change( function() {
 } );
 
 $( '#gpiosave' ).click( function() {
+	enable = $( '#gpio-enable' ).val();
 	var on = [ 
 		  $( '#on1' ).val()
 		, $( '#on2' ).val()
@@ -179,12 +177,13 @@ $( '#gpiosave' ).click( function() {
 	} else {
 		$( '.delay' ).prop( 'disabled', false ); // for serialize
 		$.post( 'gpiosave.php',
-			$( '#gpioform').serialize() +'&enable='+ $( '#gpio-enable' ).val(),
+			$( '#gpioform').serialize() +'&enable='+ enable,
 			function( data ) {
 				if ( data ) {
 					var icon = 'fa fa-info-circle fa-lg';
 					var result = 'Settings saved'; 
 					$.get( 'gpiotimerreset.php' );
+					if ( enable == 0 ) $( '#audiolabel, #audioout, #gpio-group' ).hide();
 				} else {
 					var icon = 'fa fa-warning fa-lg';
 					var result = 'Settings FAILED!';

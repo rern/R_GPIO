@@ -4,6 +4,9 @@ import json
 import sys
 import os
 
+ON = 0
+OFF = 1
+
 with open( '/srv/http/gpio.json' ) as jsonfile:
 	gpio = json.load( jsonfile )
 
@@ -20,7 +23,7 @@ GPIO.setup( pinx, GPIO.OUT )
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'set':
 	os.system( '/bin/chmod g+rw /dev/gpiomem' ) # fix permission every boot
-	GPIO.output( pinx, 1 )
+	GPIO.output( pinx, 1 ) # to be remove for high trigger relay
 	exit()
 
 on   = gpio[ 'on' ]
@@ -35,8 +38,7 @@ onx  = [ on1, on2, on3, on4 ]
 onx  = [ i for i in onx if i != 0 ]
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'status':
-	data = { 'enable': gpio[ 'enable' ][ 'enable' ], 'pullup': GPIO.input( onx[ 1 ] ) }
-	print( json.dumps( data ) )
+	print( json.dumps( { 'pullup': GPIO.input( onx[ 1 ] ) } ) )
 	exit()
 
 off   = gpio[ 'off' ]

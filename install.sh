@@ -31,6 +31,10 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
+file=/etc/mpd.conf
+echo $file
+chmod 666 $file
+
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
 sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $file
@@ -40,6 +44,10 @@ file=/srv/http/app/templates/header.php
 echo $file
 sed -i -e $'1 i\
 <?php // gpio\
+$redis = new Redis();\
+$redis->pconnect( \'127.0.0.1\' );\
+$enable = $redis->get( \'enablegpio\' );\
+\
 $file = \'/srv/http/gpio.json\';\
 $fileopen = fopen($file, \'r\');\
 $gpio = fread($fileopen, filesize($file));\
@@ -53,10 +61,11 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ' -e $'/runeui.css/ a\
     <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
+<input id="enable" type="hidden" value=<?=$enable ?>>\
 <input id="ond" type="hidden" value=<?=$ond ?>>\
 <input id="offd" type="hidden" value=<?=$offd ?>>
 ' -e '/Credits/ a\
-            <li style="cursor: pointer;"><a id="gpiosettings"><i class="fa fa-volume-off" style="width: 18px; font-size: 20px;"></i> GPIO</a></li>
+            <li style="cursor: pointer;"><a href="/gpiosettings.php"><i class="fa fa-volume-off" style="width: 18px; font-size: 20px;"></i> GPIO</a></li>
 ' -e '/class="home"/ a\
     <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
 ' $file
@@ -68,8 +77,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e $'$ a\
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
-
-[[ ! -f /etc/mpd.conf.gpio ]] && cp -fv /etc/mpd.conf{,.gpio}
 
 # for nginx svg support
 file=/etc/nginx/nginx.conf
@@ -105,7 +112,8 @@ installfinish $@
 
 clearcache
 
-title -nt "$info Menu > GPIO for settings."
+echo -e "$info Menu > GPIO for settings."
+title -nt "$info USB DAC not listed: power on > reboot"
 
 # refresh svg support last for webui installation
 [[ $svg == 0 ]] && systemctl reload nginx

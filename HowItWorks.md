@@ -1,7 +1,7 @@
 How It Works
 ---
 
-- set gpio initial state to off on boot with `systemd`
+- use only GPIOs with initial boot 0V pulldown, not BCM #0-#8, to avoid flash on-off
 - set `/etc/sudoers.d/http` to allow root command without password
 - run `sudo` commands
 	- **jquery** `$.get(...);` >> **php** `exec(...);` >> **python** `os.system(...)`

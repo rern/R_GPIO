@@ -1,3 +1,7 @@
+### to be revised for high trigger relay board
+- gpio.py L#7-8, 26
+- gpio.js L#8
+
 RuneUI GPIO
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
@@ -30,13 +34,13 @@ Features
 - reset on play or `reset` button during warning
 
 **Integrated into existing RuneUI**
-- auto enable custom configured MPD on power on
+- auto load MPD settings on power on (no need to reboot for power-off-to-on USB DAC)
 - `GPIO` (speaker icon) button on the left of top bar
 - change button icon and color on `on` `off`
 - show button only when enable
-- setting in `Menu` > `GPIO` (local browser: right click > `Fullscreen` (exit) > click `GPIO` tab)
+- setting in `Menu` > `GPIO`
 - instantly update all fields on changing pins or names
-- `RPi pin numbering` diagram included, show / hide on click
+- `RPi J8` pin numbering diagram included, show / hide on click
 - Auto power off on reboot / shutdown
 - Can be used with [**USB PC Remote**](https://github.com/rern/Rune_USB_PC_Remote)
 
@@ -52,7 +56,7 @@ Features
 
 Things to get
 ---
-Dirt cheap on ebay
+Dirt cheap on ebay (choose 'high/low level trigger' and set jumpers to 'high')
 
 ![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay.jpg)
 ![jumper](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/jumper.jpg)
