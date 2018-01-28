@@ -56,7 +56,9 @@ Features
 
 Things to get
 ---
-Dirt cheap on ebay (choose 'high/low level trigger' and set jumpers to 'high')
+Dirt cheap on ebay (choose 'high/low level trigger')
+    - 'low trigger' causes on-off flash at boot
+    - scripts to be revised to 'high trigger' soon
 
 ![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay.jpg)
 ![jumper](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/jumper.jpg)
