@@ -20,7 +20,7 @@ $( '#close' ).click( function() {
 } );
 $( '#gpioimgtxt' ).click( function() {
 	$( this ).parent().next().slideToggle();
-	$( this ).find( 'i' ).toggleClass('fa-caret-down fa-caret-up')
+	$( this ).find( 'i' ).toggleClass('fa-chevron-circle-down fa-chevron-circle-up')
 } );
 $( '#gpio-enable' ).click( function() {
 	if ( this.value == 1 ) {
