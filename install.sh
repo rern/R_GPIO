@@ -47,7 +47,7 @@ sed -i -e $'1 i\
 $redis = new Redis();\
 $redis->pconnect( \'127.0.0.1\' );\
 $enable = $redis->get( \'enablegpio\' );\
-
+\
 $file = \'/srv/http/gpio.json\';\
 $fileopen = fopen($file, \'r\');\
 $gpio = fread($fileopen, filesize($file));\
