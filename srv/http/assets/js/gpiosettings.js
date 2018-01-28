@@ -182,7 +182,7 @@ $( '#gpiosave' ).click( function() {
 				if ( data ) {
 					var icon = 'fa fa-info-circle fa-lg';
 					var result = 'Settings saved'; 
-					$.get( 'gpiotimerreset.php' );
+					$.get( '/gpioexec.php?onoffpy=timerreset' );
 					if ( enable == 0 ) $( '#audiolabel, #audioout, #gpio-group' ).hide();
 				} else {
 					var icon = 'fa fa-warning fa-lg';
