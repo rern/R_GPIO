@@ -18,7 +18,7 @@ if pullup == ON:
 		GPIO.output( off4, OFF )
 
 	if GPIO.input( offx[ 1 ] ) != OFF:
-		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED', 'delay': 8 } )
+		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED !', 'delay': 8 } )
 		exit()
 
 	if timer > 0:
