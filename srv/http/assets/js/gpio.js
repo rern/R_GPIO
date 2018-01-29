@@ -1,8 +1,6 @@
 $( document ).ready( function() {
 // document ready start********************************************************************
 var timer = false; // for 'setInterval' status check
-ond = $( '#ond' ).val() * 1000;
-offd = $( '#offd' ).val() * 1000;
 
 function buttonOnOff( pullup ) {
 	if ( pullup == 0 || pullup == 'ON' ) { // R pullup = 0V > low trigger relay ON
@@ -42,17 +40,12 @@ var pushstreamGPIO = new PushStream( {
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
-	var sec = response[ 0 ].sec;
 	var state = response[ 0 ].state;
+	var sec = response[ 0 ].delay * 1000;
 	var txt = {
 		  ON    : 'Powering ON ...'
 		, OFF   : 'Powering OFF ...'
 		, FAILED: 'Powering FAILED !'
-	};
-	var dly = {
-		  ON    : ond
-		, OFF   : offd
-		, FAILED: 8000
 	};
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
@@ -84,7 +77,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
 		, title   : 'GPIO'
 		, text    : txt[ state ]
-		, delay   : dly[ state ]
+		, delay   : sec
 		, addclass: 'pnotify_custom'
 		, after_close: function() {
 			if ( state == 'ON' || state == 'OFF' ) buttonOnOff( 1, state );
@@ -111,7 +104,7 @@ $( '#gpio' ).click( function() {
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
-			//var json = $.parseJSON( status ); // already json format
+			//var json = $.parseJSON( status );
 			if ( status.pullup == on ? 1 : 0 ) {
 				PNotify.removeAll();
 				new PNotify( {
