@@ -92,7 +92,7 @@ $( '#gpio' ).click( function() {
 	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
-	}, on ? offd : ond );
+	}, 10000 );
 	
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
