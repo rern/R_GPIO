@@ -41,12 +41,7 @@ pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var state = response[ 0 ].state;
-	var sec = response[ 0 ].delay * 1000;
-	var txt = {
-		  ON    : 'Powering ON ...'
-		, OFF   : 'Powering OFF ...'
-		, FAILED: 'Powering FAILED !'
-	};
+	var delay = response[ 0 ].delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
@@ -55,7 +50,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : '<i class="fa fa-cog fa-spin fa-2x"></i>'
 			, title       : 'GPIO Timer'
-			, message     : 'IDLE Timer OFF<br>in <white>'+ sec +'</white> sec ...'
+			, message     : 'IDLE Timer OFF<br>in <white>'+ delay +'</white> sec ...'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
@@ -64,29 +59,29 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			}
 		} );
 		timer = setInterval( function() {
-			if ( sec == 1 ) {
+			if ( delay == 1 ) {
 				$( '#infoOverlay' ).hide();
 				clearInterval( timer );
 			}
-			$( '#infoMessage white' ).text( sec-- );
+			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
 		return
 	} else {
 		PNotify.removeAll();
 		new PNotify( {
-			  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
+			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
 			, title   : 'GPIO'
-			, text    : txt[ state ]
-			, delay   : sec
+			, text    : 'Powering '+ state
+			, delay   : delay * 1000
 			, addclass: 'pnotify_custom'
-			, after_close: function() {
-				if ( state != 'FAIL' ) {
-					buttonOnOff( state );
-				} else {
-					gpioOnOff();
-				}
-			}
 		} );
+		setTimeout( function() {  // no 'after_close' in this version of pnotify
+			if ( state != 'FAILED !' ) {
+				buttonOnOff( state );
+			} else {
+				gpioOnOff();
+			}
+		}, delay * 1000 );
 	}
 	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
