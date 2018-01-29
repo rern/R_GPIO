@@ -1,7 +1,6 @@
 #!/usr/bin/python
 from gpioff import *
 
-offdx = offd1 + offd2 + offd3
 time.sleep( offdx )
 
 if len( sys.argv ) == 1:

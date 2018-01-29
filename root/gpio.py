@@ -39,6 +39,8 @@ on4  = int( on[ 'on4' ] )
 onx  = [ on1, on2, on3, on4 ]
 onx  = [ i for i in onx if i != 0 ]
 
+ondx = ond1 + ond2 + ond3
+
 pullup = GPIO.input( onx[ 1 ] )
 print( json.dumps( { 'pullup': pullup } ) )
 
@@ -55,5 +57,7 @@ offd3 = int( off[ 'offd3' ] )
 off4  = int( off[ 'off4' ] )
 offx  = [ off1, off2, off3, off4 ]
 offx  = [ i for i in offx if i != 0 ]
+
+offdx = offd1 + offd2 + offd3
 
 timer = int( gpio[ 'timer' ][ 'timer' ] )
