@@ -71,24 +71,22 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			$( '#infoMessage white' ).text( sec-- );
 		}, 1000 );
 		return
-	} 
-	PNotify.removeAll();
-	new PNotify( {
-		  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
-		, title   : 'GPIO'
-		, text    : txt[ state ]
-		, delay   : sec
-		, addclass: 'pnotify_custom'
-		, after_close: function() {
-			if ( state == 'ON' || state == 'OFF' ) buttonOnOff( 1, state );
-			if ( state == 'FAIL' ) gpioOnOff();
-		}
-	} );
-
-	if ( state != 'FAIL' ) {
-		buttonOnOff( state );
 	} else {
-		gpioOnOff();
+		PNotify.removeAll();
+		new PNotify( {
+			  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
+			, title   : 'GPIO'
+			, text    : txt[ state ]
+			, delay   : sec
+			, addclass: 'pnotify_custom'
+			, after_close: function() {
+				if ( state != 'FAIL' ) {
+					buttonOnOff( state );
+				} else {
+					gpioOnOff();
+				}
+			}
+		} );
 	}
 	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
