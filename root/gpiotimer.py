@@ -1,10 +1,6 @@
 #!/usr/bin/python
-from gpio import timer
-import time
-import sys
-import os
+from gpio import *
 import mpd
-import requests
 
 if timer == 0:
 	exit()

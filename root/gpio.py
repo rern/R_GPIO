@@ -3,6 +3,8 @@ import RPi.GPIO as GPIO
 import json
 import sys
 import os
+import time
+import requests
 
 ON = 0
 OFF = 1
@@ -38,9 +40,9 @@ onx  = [ on1, on2, on3, on4 ]
 onx  = [ i for i in onx if i != 0 ]
 
 pullup = GPIO.input( onx[ 1 ] )
+print( json.dumps( { 'pullup': pullup } ) )
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'status':
-	print( json.dumps( { 'pullup': pullup } ) )
 	exit()
 
 off   = gpio[ 'off' ]

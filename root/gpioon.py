@@ -1,10 +1,5 @@
 #!/usr/bin/python
 from gpio import *
-import time
-import os
-import requests
-
-print( json.dumps( { 'pullup': pullup } ) )
 
 if pullup == OFF:
 	# broadcast pushstream (message non-char in curl must be escaped)
