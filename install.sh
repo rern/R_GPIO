@@ -76,7 +76,7 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-# for nginx svg support
+# for nginx svg support for gpio diagram
 file=/etc/nginx/nginx.conf
 if ! grep '|ico' $file | grep -q 'svg'; then
 	echo $file
