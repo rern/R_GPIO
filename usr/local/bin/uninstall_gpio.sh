@@ -25,21 +25,18 @@ rm -v $path/js/vendor/bootstrap-select-1.12.1.min.js
 
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
-header=/srv/http/app/templates/header.php
-echo $header
+file=/srv/http/app/templates/header.php
+echo $file
 sed -i -e '\|<?php // gpio|, /?>/ d
-' -e '/id="enable"/, /id="offd"/ d
-' -e '/gpio.css/ d
-' -e '/id="gpio"/ d
-' -e '/gpiosettings.php/ d
-' $header
+' -e '/gpio.css\|id="enable"\|id="gpio"\|gpiosettings.php/ d
+' $file
 
-footer=/srv/http/app/templates/footer.php
+file=/srv/http/app/templates/footer.php
 echo $footer
 sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e 's/id="reboot"/id="syscmd-reboot"/
 ' -e '/gpio.js/ d
-' $footer
+' $file
 
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
@@ -51,9 +48,9 @@ if [[ $1 != u ]]; then
 	systemctl restart mpd
 fi
 
-udev=/etc/udev/rules.d/rune_usb-audio.rules
-echo $udev
-sed -i '/SUBSYSTEM=="sound"/ s/^#//' $udev
+file=/etc/udev/rules.d/rune_usb-audio.rules
+echo $file
+sed -i '/SUBSYSTEM=="sound"/ s/^#//' $file
 udevadm control --reload
 
 echo -e "$bar Remove service ..."
