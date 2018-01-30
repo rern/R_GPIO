@@ -1,7 +1,7 @@
 #!/usr/bin/python
-from gpiooff import *
-import sys
-import os
+from gpioff import *
+
+time.sleep( offdx )
 
 if len( sys.argv ) == 1:
 	os.system( '/var/www/command/rune_shutdown' )

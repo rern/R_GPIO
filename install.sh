@@ -61,9 +61,7 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ' -e $'/runeui.css/ a\
     <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
-<input id="enable" type="hidden" value=<?=$enable ?>>\
-<input id="ond" type="hidden" value=<?=$ond ?>>\
-<input id="offd" type="hidden" value=<?=$offd ?>>
+<input id="enable" type="hidden" value=<?=$enable ?>>
 ' -e '/Credits/ a\
             <li style="cursor: pointer;"><a href="/gpiosettings.php"><i class="fa fa-volume-off" style="width: 18px; font-size: 20px;"></i> GPIO</a></li>
 ' -e '/class="home"/ a\
@@ -78,7 +76,7 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-# for nginx svg support
+# for nginx svg support for gpio diagram
 file=/etc/nginx/nginx.conf
 if ! grep '|ico' $file | grep -q 'svg'; then
 	echo $file

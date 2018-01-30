@@ -1,12 +1,8 @@
 #!/usr/bin/python
-from gpio import timer
-import time
-import sys
-import os
+from gpio import *
 import mpd
-import requests
 
-if timer == 0:
+if timer == 0 || pullup == OFF:
 	exit()
 	
 i = timer
@@ -23,6 +19,6 @@ while i >= 0:
 	else:
 		i -= 1
 		if i == 1: # broadcast last loop
-			requests.post( 'http://localhost/pub?id=gpio', json={ 'sec': 60, 'state': 'IDLE' } )
+			requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'IDLE', 'delay': 60 } )
 		if i == 0:
 			os.system( '/root/gpiooff.py' )

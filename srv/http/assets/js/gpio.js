@@ -1,8 +1,6 @@
 $( document ).ready( function() {
 // document ready start********************************************************************
 var timer = false; // for 'setInterval' status check
-ond = $( '#ond' ).val() * 1000;
-offd = $( '#offd' ).val() * 1000;
 
 function buttonOnOff( pullup ) {
 	if ( pullup == 0 || pullup == 'ON' ) { // R pullup = 0V > low trigger relay ON
@@ -42,18 +40,8 @@ var pushstreamGPIO = new PushStream( {
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
-	var sec = response[ 0 ].sec;
 	var state = response[ 0 ].state;
-	var txt = {
-		  ON    : 'Powering ON ...'
-		, OFF   : 'Powering OFF ...'
-		, FAILED: 'Powering FAILED !'
-	};
-	var dly = {
-		  ON    : ond
-		, OFF   : offd
-		, FAILED: 8000
-	};
+	var delay = response[ 0 ].delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
@@ -62,7 +50,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : '<i class="fa fa-cog fa-spin fa-2x"></i>'
 			, title       : 'GPIO Timer'
-			, message     : 'IDLE Timer OFF<br>in <white>'+ sec +'</white> sec ...'
+			, message     : 'IDLE Timer OFF<br>in <white>'+ delay +'</white> sec ...'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
@@ -71,31 +59,29 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			}
 		} );
 		timer = setInterval( function() {
-			if ( sec == 1 ) {
+			if ( delay == 1 ) {
 				$( '#infoOverlay' ).hide();
 				clearInterval( timer );
 			}
-			$( '#infoMessage white' ).text( sec-- );
+			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
 		return
-	} 
-	PNotify.removeAll();
-	new PNotify( {
-		  icon    : ( state != 'FAILED' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
-		, title   : 'GPIO'
-		, text    : txt[ state ]
-		, delay   : dly[ state ]
-		, addclass: 'pnotify_custom'
-		, after_close: function() {
-			if ( state == 'ON' || state == 'OFF' ) buttonOnOff( 1, state );
-			if ( state == 'FAIL' ) gpioOnOff();
-		}
-	} );
-
-	if ( state != 'FAIL' ) {
-		buttonOnOff( state );
 	} else {
-		gpioOnOff();
+		PNotify.removeAll();
+		new PNotify( {
+			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
+			, title   : 'GPIO'
+			, text    : 'Powering '+ state
+			, delay   : delay * 1000
+			, addclass: 'pnotify_custom'
+		} );
+		setTimeout( function() {  // no 'after_close' in this version of pnotify
+			if ( state != 'FAILED !' ) {
+				buttonOnOff( state );
+			} else {
+				gpioOnOff();
+			}
+		}, delay * 1000 );
 	}
 	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
@@ -106,12 +92,12 @@ $( '#gpio' ).click( function() {
 	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
-	}, on ? offd : ond );
+	}, 10000 );
 	
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( status ) {
-			//var json = $.parseJSON( status ); // already json format
+			//var json = $.parseJSON( status );
 			if ( status.pullup == on ? 1 : 0 ) {
 				PNotify.removeAll();
 				new PNotify( {

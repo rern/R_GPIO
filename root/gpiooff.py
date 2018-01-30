@@ -1,14 +1,9 @@
 #!/usr/bin/python
 from gpio import *
-import time
-import os
-import requests
-
-print( json.dumps( { 'pullup': pullup } ) )
 
 if pullup == ON:
 	# broadcast message
-	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'OFF' } )
+	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'OFF', 'delay': offdx } )
 
 	if off1 != 0:
 		GPIO.output( off1, OFF )
@@ -23,7 +18,7 @@ if pullup == ON:
 		GPIO.output( off4, OFF )
 
 	if GPIO.input( offx[ 1 ] ) != OFF:
-		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED' } )
+		requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED !', 'delay': 8 } )
 		exit()
 
 	if timer > 0:
