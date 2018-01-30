@@ -78,9 +78,10 @@ function optname( $n ) {
 	}
 	echo $option;
 }
-function opttime( $n ) {
+function opttime( $n, $min ) {
+	$min = !isset( $min ) ? 1 : $min;
 	$option = '<option value="0">none</option>';
-	foreach ( range( 1, 10 ) as $num ) {
+	foreach ( range( $min, 10 ) as $num ) {
 		$selected = ( $num == $n ) ? ' selected' : '';
 		$option.= '<option value='.$num.$selected.'>'.$num.'</option>';
 	}
@@ -155,7 +156,7 @@ $optao = '
 						</select>
 						<span class="gpio-text"><i class="fa fa-clock-o fa-lg yellow"></i> &nbsp; Idle</span>
 						<select id="timer" name="timer" class="selectpicker timer">
-							<?php opttime( $timer )?>
+							<?php opttime( $timer, 2 )?>
 						</select>
 					</div>
 					<div class="col-sm-10" id="gpio-name">
