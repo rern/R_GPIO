@@ -24,6 +24,7 @@ if ( $onoffpy === 'gpioon.py' ) {
 	include( '/srv/http/app/libs/runeaudio.php' );
 	
 	wrk_mpdconf( $redis, 'switchao', $aogpio );
+	wrk_mpdconf( $redis, 'restart' );
 }
 
 $pullup = exec( '/usr/bin/sudo /root/'.$onoffpy );
