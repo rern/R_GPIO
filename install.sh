@@ -62,7 +62,7 @@ $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
     <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
 <input id="enable" type="hidden" value=<?=$enable ?>>
-' -e '/Credits/ a\
+' -e '/poweroff-modal/ i\
             <li style="cursor: pointer;"><a href="/gpiosettings.php"><i class="fa fa-volume-off" style="width: 18px; font-size: 20px;"></i> GPIO</a></li>
 ' -e '/class="home"/ a\
     <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
