@@ -11,7 +11,11 @@ installstart $@
 ln -sf /usr/bin/python{2.7,}
 
 rankmirrors
-	
+
+# remove if DAC Reloader installed
+file=/usr/local/bin/uninstall_xdac.sh
+[[ -e $file ]] && $file u
+
 echo -e "$bar Install Pip ..."
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
