@@ -127,7 +127,7 @@ $optao = '
 			</div>
 			<div class="gpio-float-r" <?=$enable == 0 ? 'style="display:none"' : ''?> id="audioout">
 				<div class="col-sm-10">
-					<span class="gpio-text"><i class="fa fa-sign-out fa-lg blue"></i> &nbsp; Audio Output</span>
+					<span class="gpio-text"><i class="fa fa-sign-out fa-lg fa-rotate-270 blue"></i> &nbsp; Audio Output</span>
 					<select id="aogpio" class="selectpicker">
 						<?=$optao?>
 					</select>
