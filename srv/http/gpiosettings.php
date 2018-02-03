@@ -219,7 +219,7 @@ $optao = '
 							<select id="off4" name="off4" class="selectpicker off">
 								<?php optname( $off4 )?>
 							</select>
-							<a id="gpiosave" class="btn btn-primary">Apply</a>
+							<a id="gpiosave" class="btn btn-primary">Save</a>
 						</div>
 				</div>
 			</form>
