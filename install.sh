@@ -89,7 +89,7 @@ sed -i -e '/This switches output/{n;n;n;n; i\
                     <a class="btn btn-primary btn-lg" id="dacsave">Save</a>\
                     <span class="help-block">\
 					    Configure the rest of this page and save for <strong>RuneUI GPIO</strong> reloading when power on.<br>\
-						If your DAC was not in the above list, power on the DAC and reboot.\
+						If your DAC was not in above list, power on the DAC and reboot.\
 					</span>\
                 </div>\
             </div> <?php /* gpio1 */?>
