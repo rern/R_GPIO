@@ -181,15 +181,18 @@ $( '#gpiosave' ).click( function() {
 					var result = 'Settings saved'; 
 					$.get( '/gpioexec.php?onoffpy=timerreset' );
 					if ( enable == 0 ) $( '#audiolabel, #audioout, #gpio-group' ).hide();
+					info( {
+						  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
+						, title  : 'RuneUI GPIO'
+						, message: 'Setting saved.'
+					} );
 				} else {
-					var icon = 'fa fa-warning fa-lg';
-					var result = 'Settings FAILED!';
+					info( {
+						  icon   : '<i class=\"fa fa-info-warning fa-2x\"></i>'
+						, title  : 'RuneUI GPIO'
+						, message: 'Settings FAILED!'
+					} );
 				}
-				info( {
-					  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
-					, title  : 'RuneUI GPIO'
-					, message: "Setting saved."
-				} );
 			}
 		);
 	}
