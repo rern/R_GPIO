@@ -138,7 +138,7 @@ if ( ( "standalone" in window.navigator ) && window.navigator.standalone ) {
 }
 
 $( "#dacsave" ).click( function() {
-	$.get( "/gpiodac.php", function() {
+	$.get( "/gpiosave.php?ao=1", function() {
 		info( {
 			  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
 			, title  : 'GPIO'
