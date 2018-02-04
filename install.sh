@@ -63,7 +63,8 @@ $ond = $on[\'ond1\'] + $on[\'ond2\'] + $on[\'ond3\'];\
 $offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
 ?>
 ' -e $'/runeui.css/ a\
-    <link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
+    <link rel="stylesheet" href="<?=$this->asset(\'/css/addonsinfo.css\')?>">\
+	<link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
 ' -e '/id="menu-top"/ i\
 <input id="enable" type="hidden" value=<?=$enable ?>>
 ' -e '/poweroff-modal/ i\
@@ -77,6 +78,7 @@ echo $file
 sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e 's/id="syscmd-reboot"/id="reboot"/
 ' -e $'$ a\
+<script src="<?=$this->asset(\'/js/addonsinfo.js\')?>"></script>\
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
