@@ -141,7 +141,7 @@ $( "#dacsave" ).click( function() {
 	$.get( "/gpiosave.php?ao=1", function() {
 		info( {
 			  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
-			, title  : 'GPIO'
+			, title  : 'RuneUI GPIO'
 			, message: "MPD configuration saved."
 		} );
 	} );

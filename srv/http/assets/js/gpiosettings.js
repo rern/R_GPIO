@@ -31,6 +31,9 @@ $( '#gpio-enable' ).click( function() {
 		$( '#audiolabel, #audioout, #gpio-group' ).show();
 	}
 } );
+$( '#aogpio' ).on( 'changed.bs.select', function() {
+	window.location.href = '/mpd/';
+} );
 
 function txtcolorpin() {
 	$( '.pin, .on, .off' )
