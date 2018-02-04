@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="stylesheet" href="assets/css/runeui.css">
+	<link rel="stylesheet" href="assets/css/addonsinfo.css">
     <link rel="stylesheet" href="assets/css/gpiosettings.css">
     <link rel="shortcut icon" href="assets/img/favicon.ico">
 </head>
@@ -235,6 +236,7 @@ foreach ( $acardsarray as $acard => $prop ) {
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/vendor/bootstrap-select-1.12.1.min.js"></script>
 <script src="assets/js/vendor/pnotify.custom.min.js"></script>
+<script src="assets/js/vendor/addonsinfo.js"></script>
 <script src="assets/js/gpiosettings.js"></script>
 
 </body>
