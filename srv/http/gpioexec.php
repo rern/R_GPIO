@@ -11,20 +11,27 @@ if ( $onoffpy === 'gpioon.py' ) {
 	$redis = new Redis(); 
 	$redis->pconnect( '127.0.0.1' );
 	
+	$ao = $redis->get( 'ao' );
+	$volume = $redis->get( 'volume' );
+	$mpdconf = $redis->hGetAll( 'mpdconf' );
+
 	$aogpio = $redis->get( 'aogpio' );
 	$volumegpio = $redis->get( 'volumegpio' );
-	$acardsgpio = $redis->hGetAll( 'acardsgpio' );
 	$mpdconfgpio = $redis->hGetAll( 'mpdconfgpio' );
 	
-	$redis->set( 'ao', $aogpio );
-	$redis->set( 'volume', $volumegpio );
-	$redis->hMset( 'acards', $acardsgpio );
-	$redis->hMset( 'mpdconf', $mpdconfgpio );
-	
-	include( '/srv/http/app/libs/runeaudio.php' );
-	
-	wrk_mpdconf( $redis, 'switchao', $aogpio );
-	wrk_mpdconf( $redis, 'restart' );
+	if ( $ao !== $aogpio || $volume !== $volumegpio || $mpdconf !== $mpdconfgpio ) {
+		$acardsgpio = $redis->hGetAll( 'acardsgpio' );
+		
+		$redis->set( 'ao', $aogpio );
+		$redis->set( 'volume', $volumegpio );
+		$redis->hMset( 'acards', $acardsgpio );
+		$redis->hMset( 'mpdconf', $mpdconfgpio );
+		
+		include( '/srv/http/app/libs/runeaudio.php' );
+		
+		wrk_mpdconf( $redis, 'switchao', $aogpio );
+		wrk_mpdconf( $redis, 'restart' );
+	}
 }
 
 $pullup = exec( '/usr/bin/sudo /root/'.$onoffpy );
