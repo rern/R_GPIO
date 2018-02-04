@@ -80,6 +80,12 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
+# fix non-unique id
+file=/srv/http/app/templates/mpd.php
+sed -i -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
+' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
+' $file
+
 # for nginx svg support for gpio diagram
 file=/etc/nginx/nginx.conf
 if ! grep -q 'ico|svg' $file; then
