@@ -16,7 +16,6 @@ if ( isset( $_GET[ "ao" ] ) ) {
 	
 	die();
 }
-
 $gpio = array(
 	  'pin'    => array(
 		  'pin1'   => $_POST[ 'pin1' ]

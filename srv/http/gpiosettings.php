@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="stylesheet" href="assets/css/runeui.css">
-	<link rel="stylesheet" href="assets/css/addonsinfo.css">
+    <link rel="stylesheet" href="assets/css/addonsinfo.css">
     <link rel="stylesheet" href="assets/css/gpiosettings.css">
     <link rel="shortcut icon" href="assets/img/favicon.ico">
 </head>
@@ -94,13 +94,12 @@ $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
 $enable = $redis->get( 'enablegpio' );
 $aogpio = $redis->get( 'aogpio' );
-$acardsarray = $redis->hGetall( 'acards' );
-$optao = '';
-foreach ( $acardsarray as $acard => $prop ) {
-	$selected = ( $acard == $aogpio ) ? ' selected' : '';
-	$name = json_decode($prop, true)[ 'extlabel' ];
-	$optao.= '<option value="'.$acard.'"'.$selected.'>'.$name.'</option>';
-}
+$acardsarray = $redis->hGetAll( 'acards' );
+$acardprop = json_decode( $acardsarray[ $aogpio ], true );
+$optao = '
+	<option>'.$acardprop[ 'extlabel' ].'</option>
+	<option>Change &gt;&gt;</option>
+';
 ?>
 
 <body>
