@@ -115,7 +115,7 @@ sed -i -e '/echo/ s/^/#/g
 
 if [[ $1 != u ]]; then
 	ao=$( redis-cli get ao )
-	redis-cli set aogpio $ao &> /dev/null
+	redis-cli set aogpio "$ao" &> /dev/null
 fi
 
 # set initial gpio #######################################
