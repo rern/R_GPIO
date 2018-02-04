@@ -137,5 +137,15 @@ if ( ( "standalone" in window.navigator ) && window.navigator.standalone ) {
 	}, false );
 }
 
+$( "#dacsave" ).click( function() {
+	$.get( "/gpiodac.php", function() {
+		info( {
+			  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
+			, title  : 'GPIO'
+			, message: "Configuration saved."
+		} );
+	} );
+} );
+
 // document ready end *********************************************************************
 } );
