@@ -80,9 +80,18 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-# fix non-unique id
 file=/srv/http/app/templates/mpd.php
-sed -i -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
+echo $file
+sed -i -e '/This switches output/{n;n;n;n; i\
+            <div class="form-group"> <?php /* gpio0 */?>\
+                <label class="col-sm-2 control-label" for="audio-output-interface">RuneUI GPIO</label>\
+                <div class="col-sm-10">\
+                    <a class="btn btn-primary btn-lg" id="udacsave">Save</a>\
+                    <span class="help-block">Configure the rest of this page and save for <strong>RuneUI GPIO</strong> reloading.</span>\
+                </div>\
+            </div> <?php /* gpio1 */?>
+}
+' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
 ' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
 ' $file
 
