@@ -113,6 +113,9 @@ sed -i -e '/echo/ s/^/#/g
 "/root/gpiopower.py 8"
 ' /root/.xbindkeysrc
 
+ao=$( redis-cli get ao )
+redis-cli set aogpio $ao &> /dev/null
+
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."
 systemctl daemon-reload
