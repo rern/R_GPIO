@@ -1,7 +1,9 @@
 <?php
+$redis = new Redis(); 
+$redis->pconnect( '127.0.0.1' );
+$redis->set( 'enablegpio', $_POST[ 'enable' ] );
+
 if ( isset( $_GET[ "ao" ] ) ) {
-	$redis = new Redis(); 
-	$redis->pconnect( "127.0.0.1" );
 	$aogpio = $redis->get( "ao" );
 	$volume = $redis->get( "volume" );
 	$acards = $redis->hGetAll( "acards" );
@@ -14,6 +16,7 @@ if ( isset( $_GET[ "ao" ] ) ) {
 	
 	die();
 }
+
 $gpio = array(
 	  'pin'    => array(
 		  'pin1'   => $_POST[ 'pin1' ]
