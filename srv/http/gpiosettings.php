@@ -93,12 +93,13 @@ $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
 $enable = $redis->get( 'enablegpio' );
 $aogpio = $redis->get( 'aogpio' );
-if (! $aogpio ) $aogpio = $redis->get( 'ao' );
-
-$optao = '
-	<option>'.$aogpio.'</option>
-	<option>Change &gt;&gt;</option>
-';
+$acardsarray = $redis->hGetall( 'acards' );
+$optao = '';
+foreach ( $acardsarray as $acard => $prop ) {
+	$selected = ( $acard == $aogpio ) ? ' selected' : '';
+	$name = json_decode($prop, true)[ 'extlabel' ];
+	$optao.= '<option value="'.$acard.'"'.$selected.'>'.$name.'</option>';
+}
 ?>
 
 <body>
