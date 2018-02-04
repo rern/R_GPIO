@@ -236,7 +236,7 @@ foreach ( $acardsarray as $acard => $prop ) {
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/vendor/bootstrap-select-1.12.1.min.js"></script>
 <script src="assets/js/vendor/pnotify.custom.min.js"></script>
-<script src="assets/js/vendor/addonsinfo.js"></script>
+<script src="assets/js/addonsinfo.js"></script>
 <script src="assets/js/gpiosettings.js"></script>
 
 </body>
