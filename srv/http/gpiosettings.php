@@ -93,11 +93,12 @@ function opttime( $n, $min ) {
 $redis = new Redis(); 
 $redis->pconnect( '127.0.0.1' );
 $enable = $redis->get( 'enablegpio' );
-$aogpio = $redis->get( 'aogpio' );
-$acardsarray = $redis->hGetAll( 'acards' );
-$acardprop = json_decode( $acardsarray[ $aogpio ], true );
+$ao = $redis->get( 'aogpio' );
+$acardsarray = $redis->hGetAll( 'acardsgpio' );
+$acardprop = json_decode( $acardsarray[ $ao ], true );
+$acard = $acardprop[ 'extlabel' ] ? $acardprop[ 'extlabel' ] : $ao;
 $optao = '
-	<option>'.$acardprop[ 'extlabel' ].'</option>
+	<option>'.$acard.'</option>
 	<option>Change &gt;&gt;</option>
 ';
 ?>
