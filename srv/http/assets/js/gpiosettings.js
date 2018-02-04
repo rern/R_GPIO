@@ -185,12 +185,10 @@ $( '#gpiosave' ).click( function() {
 					var icon = 'fa fa-warning fa-lg';
 					var result = 'Settings FAILED!';
 				}
-				new PNotify( {
-					  icon    : icon
-					, title   : 'GPIO'
-					, text    : result
-					, delay   : 3000
-					, addclass: 'pnotify_custom'
+				info( {
+					  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
+					, title  : 'RuneUI GPIO'
+					, message: "Setting saved."
 				} );
 			}
 		);
