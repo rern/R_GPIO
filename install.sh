@@ -86,7 +86,7 @@ sed -i -e '/This switches output/{n;n;n;n; i\
             <div class="form-group"> <?php /* gpio0 */?>\
                 <label class="col-sm-2 control-label" for="audio-output-interface">RuneUI GPIO</label>\
                 <div class="col-sm-10">\
-                    <a class="btn btn-primary btn-lg" id="udacsave">Save</a>\
+                    <a class="btn btn-primary btn-lg" id="dacsave">Save</a>\
                     <span class="help-block">Configure the rest of this page and save for <strong>RuneUI GPIO</strong> reloading when power on.</span>\
                 </div>\
             </div> <?php /* gpio1 */?>
