@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from gpioff import *
+from gpiooff import *
 
 time.sleep( offdx )
 
