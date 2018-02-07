@@ -143,6 +143,7 @@ $( '.name' ).click( function() {
 	txtcolorname();
 } );
 $( '.selectpicker.timer, .selectpicker.delay' ).change( function() {
+	txtcolordelay();
 	txtcolor();
 } );
 $( '.selectpicker.on, .selectpicker.off' ).change( function() {
