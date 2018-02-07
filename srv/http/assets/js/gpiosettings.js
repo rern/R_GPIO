@@ -75,6 +75,7 @@ function txtcolordelay() {
 	// 'render' & 'refresh' in textcolor()
 }
 function txtcolor() {
+	$( '.timer, .delay, .on, .off' ).find( 'span' ).css( 'color', '#e0e7ee' );
 	$( '.timer, .delay, .on, .off' )
 		.find( 'span:contains("none"), option[value=0]' )
 		.css( 'color', '#587ca0' ); // 'none' gray text
@@ -143,7 +144,6 @@ $( '.name' ).click( function() {
 	txtcolorname();
 } );
 $( '.selectpicker.timer, .selectpicker.delay' ).change( function() {
-	txtcolordelay();
 	txtcolor();
 } );
 $( '.selectpicker.on, .selectpicker.off' ).change( function() {
