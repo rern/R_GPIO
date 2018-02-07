@@ -11,7 +11,7 @@ arg = sys.argv[ 1 ]
 if arg != 'reboot':
 	kernel = os.system( '/usr/bin/uname -r | cut -d"-" -f1' )
 	if kernel > '4.4.39':
-		os.system( '/var/www/command/rune_shutdown; reboot ' arg )
+		os.system( '/var/www/command/rune_shutdown; reboot '+ arg )
 		exit()
 	else:
 		os.system( '/bin/echo '+ arg +' > /sys/module/bcm2709/parameters/reboot_part' )
