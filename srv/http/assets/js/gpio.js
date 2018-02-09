@@ -2,8 +2,8 @@ $( document ).ready( function() {
 // document ready start********************************************************************
 var timer = false; // for 'setInterval' status check
 
-function buttonOnOff( pullup ) {
-	if ( pullup == 1 || pullup == 'ON' ) { // R pullup = 3.3V > high trigger > relay ON
+function buttonOnOff( state ) {
+	if ( state == 'ON' ) {
 		$( '#gpio' ).addClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-off' ).addClass( 'fa-volume-up' );
 	} else {
@@ -17,9 +17,9 @@ function buttonOnOff( pullup ) {
 	}
 }
 function gpioOnOff() {
-	$.get( '/gpioexec.php?onoffpy=gpio.py status', function( status ) {
-		var json = $.parseJSON( status );
-		buttonOnOff( json.pullup );
+	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
+		var json = $.parseJSON( state );
+		buttonOnOff( json.state );
 	} );
 }
 gpioOnOff();
@@ -96,9 +96,9 @@ $( '#gpio' ).click( function() {
 	
 	var py = on ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
-		function( status ) {
-			//var json = $.parseJSON( status );
-			if ( status.pullup == on ? 1 : 0 ) {
+		function( state ) {
+			//var json = $.parseJSON( state );
+			if ( state.state == on ? 1 : 0 ) {
 				PNotify.removeAll();
 				new PNotify( {
 					  icon : 'fa fa-warning fa-lg'
