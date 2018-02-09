@@ -18,8 +18,9 @@ function buttonOnOff( state ) {
 }
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		var json = $.parseJSON( state );
-		buttonOnOff( json.state );
+		//var json = $.parseJSON( state );
+		console.log(state +' | '+ state.state);
+		buttonOnOff( state.state );
 	} );
 }
 gpioOnOff();
@@ -55,7 +56,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			, cancel      : 1
 			, oklabel     : 'Reset'
 			, ok          : function() {
-				$.get( '/gpioexec.php?onoffpy=timerreset' );
+				$.get( '/gpioexec.php?onoffpy=gpiotimer.py' );
 			}
 		} );
 		timer = setInterval( function() {
@@ -88,17 +89,18 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 pushstreamGPIO.connect();
 
 $( '#gpio' ).click( function() {
-	var on = $( this ).hasClass( 'btn-primary' );
+	var on = $( this ).hasClass( 'btn-primary' ) ? 'ON' : 'OFF';
 	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, 10000 );
 	
-	var py = on ? 'gpiooff.py' : 'gpioon.py';
+	var py = ( on == 'ON' ) ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( state ) {
 			//var json = $.parseJSON( state );
-			if ( state.state == on ? 1 : 0 ) {
+			
+			if ( state.state == on ) {
 				PNotify.removeAll();
 				new PNotify( {
 					  icon : 'fa fa-warning fa-lg'
@@ -115,8 +117,8 @@ $( '#gpio' ).click( function() {
 
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
-	py = ( this.id == 'reboot' ) ? 'gpiopower.py reboot' : 'gpiopower.py';
-	$.get( '/gpioexec.php?gpio='+ py );
+	reboot = ( this.id == 'reboot' ) ? '&reboot=1' : '';
+	$.get( '/gpioexec.php?onoffpy=gpiopower.py'+ reboot );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
