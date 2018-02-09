@@ -3,7 +3,7 @@ $( document ).ready( function() {
 var timer = false; // for 'setInterval' status check
 
 function buttonOnOff( pullup ) {
-	if ( pullup == 0 || pullup == 'ON' ) { // R pullup = 0V > low trigger relay ON
+	if ( pullup == 1 || pullup == 'ON' ) { // R pullup = 3.3V > high trigger > relay ON
 		$( '#gpio' ).addClass( 'btn-primary' );
 		$( '#gpio i' ).removeClass( 'fa-volume-off' ).addClass( 'fa-volume-up' );
 	} else {
