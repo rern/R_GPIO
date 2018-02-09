@@ -57,15 +57,12 @@ Features
 Things to get
 ---
 Dirt cheap on ebay
-	- choose **high/low level trigger** and set to **high**
-    - 'low trigger' causes on-off flash at boot
-
 ![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay.jpg)
 ![jumper](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/jumper.jpg)
 
 - [Relay module](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2055119.m570.l1313.TR0.TRC0.H0.Xrelay+low+high+trigger.TRS0&_nkw=relay+low+high+trigger&_sacat=0)
-    - with high/low trigger jumpers
-	- 'low trigger' code to be revised to 'high trigger' to fix initial boot flash on-off
+    - choose **high/low level trigger** and set to **high**
+	- **low trigger** causes on-off flash at boot
 - [GPIO jumper wires](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.X10pcs+2pin+jumper.TRS0&_nkw=10pcs+2pin+jumper&_sacat=0)
 - Power cables
 - DIY enclosure
