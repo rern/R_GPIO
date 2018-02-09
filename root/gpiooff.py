@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from gpio import *
 
-if pullup != ON:
+if state != ON:
 	exit()
 	
 # broadcast message

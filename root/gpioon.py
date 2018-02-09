@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from gpio import *
 
-if pullup == OFF:
+if state != OFF:
 	exit()
 	
 # broadcast pushstream (message non-char in curl must be escaped)

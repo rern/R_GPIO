@@ -40,10 +40,16 @@ onx  = [ i for i in onx if i != 0 ]
 
 ondx = ond1 + ond2 + ond3
 
-pullup = GPIO.input( onx[ 1 ] )
-print( json.dumps( { 'pullup': pullup } ) )
+state = GPIO.input( onx[ 1 ] )
 
-if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'status':
+if state == ON:
+	onoff = 'ON'
+else:
+	onoff = 'OFF'
+
+print( json.dumps( { 'state': onoff } ) )
+
+if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state':
 	exit()
 
 off   = gpio[ 'off' ]
