@@ -7,7 +7,6 @@ if ( $onoffpy === 'gpiotimer.py' ) {
 	die();
 }
 
-
 if ( $onoffpy === 'gpioon.py' ) {
 	$redis = new Redis(); 
 	$redis->pconnect( '127.0.0.1' );
@@ -23,7 +22,7 @@ if ( $onoffpy === 'gpioon.py' ) {
 	
 	if ( $mpdconf === $mpdconfgpio ) die();
 	
-	$redis->set( 'ao0', $redis->get( 'ao' ) );
+	$redis->set( 'ao0', $redis->get( 'ao' ) ); // save current acard before switch
 	$aogpio = $redis->get( 'aogpio' );
 	$volumegpio = $redis->get( 'volumegpio' );
 	$redis->set( 'ao', $aogpio );
