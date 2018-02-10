@@ -82,18 +82,8 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 
 file=/srv/http/app/templates/mpd.php
 echo $file
-sed -i -e '/This switches output/{n;n;n;n; i\
-            <div class="form-group"> <?php /* gpio0 */?>\
-                <label class="col-sm-2 control-label" for="audio-output-interface">RuneUI GPIO</label>\
-                <div class="col-sm-10">\
-                    <a class="btn btn-primary btn-lg" id="dacsave">Save</a>\
-                    <span class="help-block">\
-					    Configure the rest of this page and save for <strong>RuneUI GPIO</strong> auto-reloading when power on.<br>\
-						If your DAC was not in above list, power on the DAC and reboot.\
-					</span>\
-                </div>\
-            </div> <?php /* gpio1 */?>
-}
+sed -i -e '/This switches output/ i\
+                        <a class="btn btn-primary btn-lg" id="udacgpio"><i class="fa fa-refresh fa-lg" style="margin-top: -10px;"></i></a>
 ' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
 ' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
 ' $file
