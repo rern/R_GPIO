@@ -40,7 +40,9 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 
 file=/srv/http/app/templates/mpd.php
 echo $file
-sed -i -e '/gpio0/,/gpio1/ d' $file
+sed -i -e '/id="gpioudac"/ d
+' -e '/gpio0/,/gpio1/ d
+' $file
 
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
