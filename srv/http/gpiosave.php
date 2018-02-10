@@ -1,21 +1,34 @@
 <?php
 $redis = new Redis(); 
 $redis->pconnect( '127.0.0.1' );
+
+if ( isset( $_GET[ 'udac' ] ) ) {
+	include( '/srv/http/app/libs/runeaudio.php' );
+	wrk_audioOutput($redis, 'refresh');
+	die();
+}
+
 $redis->set( 'enablegpio', $_POST[ 'enable' ] );
 
-if ( isset( $_GET[ "ao" ] ) ) {
-	$aogpio = $redis->get( "ao" );
-	$volume = $redis->get( "volume" );
-	$acards = $redis->hGetAll( "acards" );
-	$mpdconf = $redis->hGetAll( "mpdconf" );
+if ( isset( $_GET[ 'ao' ] ) ) {
+	$aogpio = $redis->get( 'ao' );
+	$volume = $redis->get( 'volume' );
+	$acards = $redis->hGetAll( 'acards' );
+	$mpdconf = $redis->hGetAll( 'mpdconf' );
 	
-	$redis->set( "aogpio", $aogpio );
-	$redis->set( "volumegpio", $volume );
-	$redis->hMset( "acardsgpio", $acards );
-	$redis->hMset( "mpdconfgpio", $mpdconf );
+	$redis->set( 'aogpio', $aogpio );
+	$redis->set( 'volumegpio', $volume );
+	
+	foreach ( $acards as $key => $value ) {
+		$redis->hSet( 'acardsgpio', $key, $value );
+	}
+	foreach ( $mpdconf as $key => $value ) {
+		$redis->hSet( 'mpdconfgpio', $key, $value );
+	}
 	
 	die();
 }
+
 $gpio = array(
 	  'pin'    => array(
 		  'pin1'   => $_POST[ 'pin1' ]
