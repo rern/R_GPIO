@@ -18,11 +18,10 @@ function buttonOnOff( state ) {
 }
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		//var json = $.parseJSON( state );
-		console.log(state +' | '+ state.state);
-		buttonOnOff( state.state );
+		buttonOnOff( state );
 	} );
 }
+
 gpioOnOff();
 
 document.addEventListener( 'visibilitychange', function( change ) {
@@ -32,6 +31,7 @@ document.addEventListener( 'visibilitychange', function( change ) {
 		if ( timer ) $( '#infoMessage' ).hide();
 	}
 } );
+
 // nginx pushstream websocket (broadcast)
 var pushstreamGPIO = new PushStream( {
 	host: window.location.hostname,
@@ -72,7 +72,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		new PNotify( {
 			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
 			, title   : 'GPIO'
-			, text    : 'Powering '+ state
+			, text    : 'Powering '+ state +' ...'
 			, delay   : delay * 1000
 			, addclass: 'pnotify_custom'
 		} );
@@ -98,8 +98,6 @@ $( '#gpio' ).click( function() {
 	var py = ( on == 'ON' ) ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( state ) {
-			//var json = $.parseJSON( state );
-			
 			if ( state.state == on ) {
 				PNotify.removeAll();
 				new PNotify( {
@@ -117,19 +115,19 @@ $( '#gpio' ).click( function() {
 
 // power off menu
 $( '#reboot, #poweroff' ).click( function() {
-	reboot = ( this.id == 'reboot' ) ? '&reboot=1' : '';
+	reboot = ( this.id == 'reboot' ) ? ' reboot' : '';
 	$.get( '/gpioexec.php?onoffpy=gpiopower.py'+ reboot );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
-if ( ( "standalone" in window.navigator ) && window.navigator.standalone ) {
+if ( ( 'standalone' in window.navigator ) && window.navigator.standalone ) {
 	// If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
 	var noddy, remotes = true;
 	
 	document.addEventListener( 'click', function( event ) {
 		noddy = event.target;
 		// Bubble up until we hit link or top HTML element. Warning: BODY element is not compulsory so better to stop on HTML
-		while ( noddy.nodeName !== "A" && noddy.nodeName !== "HTML" ) {
+		while ( noddy.nodeName !== 'A' && noddy.nodeName !== 'HTML' ) {
 	        noddy = noddy.parentNode;
 	    }
 		if ( 'href' in noddy && noddy.href.indexOf( 'http' ) !== -1 && ( noddy.href.indexOf( document.location.host ) !== -1 || remotes ) ) {
@@ -139,7 +137,12 @@ if ( ( "standalone" in window.navigator ) && window.navigator.standalone ) {
 	}, false );
 }
 
-$( "#dacsave" ).click( function() {
+$( '#gpioudac' ).click( function() {
+	$.get( '/gpiosave.php?udac=1', function() {
+		location.reload();
+	} );
+} );
+$( "#gpioudacsave" ).click( function() {
 	$.get( "/gpiosave.php?ao=1", function() {
 		info( {
 			  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
@@ -148,6 +151,5 @@ $( "#dacsave" ).click( function() {
 		} );
 	} );
 } );
-
 // document ready end *********************************************************************
 } );
