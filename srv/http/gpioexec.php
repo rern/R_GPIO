@@ -10,7 +10,8 @@ if ( $onoffpy === 'gpiotimer.py' ) {
 if ( $onoffpy === 'gpioon.py' ) {
 	$redis = new Redis(); 
 	$redis->pconnect( '127.0.0.1' );
-	$redis->set( 'asound0', shell_exec( '/usr/bin/cat /proc/asound/cards' ) ); // save asound before power on
+	$asound0 = shell_exec( '/usr/bin/cat /proc/asound/cards' );
+	$redis->set( 'asound0', $asound0 ); // save asound before power on
 }
 
 echo exec( '/usr/bin/sudo /root/'.$onoffpy );
@@ -34,6 +35,11 @@ if ( $onoffpy === 'gpioon.py' ) {
 	include( '/srv/http/app/libs/runeaudio.php' );
 	
 	wrk_audioOutput($redis, 'refresh');         // refresh acards list: cat /proc/asound/cards
+	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
+	$analog = $redis->hGet( 'acards', 'bcm2835 ALSA_1' );
+	$hdmi = $redis->hGet( 'acards', 'bcm2835 ALSA_2' );
+	$redis->hSet( 'acards', 'bcm2835 ALSA_1', str_replace( 'hw:0,', 'hw:0,0', $analog ) );
+	$redis->hSet( 'acards', 'bcm2835 ALSA_2', str_replace( 'hw:0,', 'hw:0,1', $hdmi ) );
 	wrk_mpdconf( $redis, 'switchao', $aogpio ); // select acard + writecfg
 	wrk_mpdconf( $redis, 'restart' );           // restart mpd
 } else if ( $onoffpy === 'gpiooff.py' ) {

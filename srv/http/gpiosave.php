@@ -5,6 +5,11 @@ $redis->pconnect( '127.0.0.1' );
 if ( isset( $_GET[ 'udac' ] ) ) {
 	include( '/srv/http/app/libs/runeaudio.php' );
 	wrk_audioOutput($redis, 'refresh');
+	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
+	$analog = $redis->hGet( 'acards', 'bcm2835 ALSA_1' );
+	$hdmi = $redis->hGet( 'acards', 'bcm2835 ALSA_2' );
+	$redis->hSet( 'acards', 'bcm2835 ALSA_1', str_replace( 'hw:0,', 'hw:0,0', $analog ) );
+	$redis->hSet( 'acards', 'bcm2835 ALSA_2', str_replace( 'hw:0,', 'hw:0,1', $hdmi ) );
 	die();
 }
 
@@ -13,15 +18,10 @@ $redis->set( 'enablegpio', $_POST[ 'enable' ] );
 if ( isset( $_GET[ 'ao' ] ) ) {
 	$aogpio = $redis->get( 'ao' );
 	$volume = $redis->get( 'volume' );
-	$acards = $redis->hGetAll( 'acards' );
 	$mpdconf = $redis->hGetAll( 'mpdconf' );
 	
 	$redis->set( 'aogpio', $aogpio );
 	$redis->set( 'volumegpio', $volume );
-	
-	foreach ( $acards as $key => $value ) {
-		$redis->hSet( 'acardsgpio', $key, $value );
-	}
 	foreach ( $mpdconf as $key => $value ) {
 		$redis->hSet( 'mpdconfgpio', $key, $value );
 	}
