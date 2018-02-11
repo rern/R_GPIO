@@ -9,7 +9,6 @@ if ( isset( $_GET[ 'udac' ] ) ) {
 	
 	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
 	$acards = $redis->hGetAll( 'acards' );
-	
 	foreach ( $acards as $key => $value ) {
 		preg_match( '/"id":"."/', $value, $match );
 		$id = preg_replace( '/"id":"(.)"/', '${1}', $match[ 0 ] );
@@ -17,7 +16,6 @@ if ( isset( $_GET[ 'udac' ] ) ) {
 		$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
 		$redis->hSet( 'acards', $key, $value1 );
 	}
-	
 	die();
 }
 
