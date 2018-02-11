@@ -6,10 +6,14 @@ if ( isset( $_GET[ 'udac' ] ) ) {
 	include( '/srv/http/app/libs/runeaudio.php' );
 	wrk_audioOutput($redis, 'refresh');
 	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
-	$analog = $redis->hGet( 'acards', 'bcm2835 ALSA_1' );
-	$hdmi = $redis->hGet( 'acards', 'bcm2835 ALSA_2' );
-	$redis->hSet( 'acards', 'bcm2835 ALSA_1', str_replace( 'hw:0,', 'hw:0,0', $analog ) );
-	$redis->hSet( 'acards', 'bcm2835 ALSA_2', str_replace( 'hw:0,', 'hw:0,1', $hdmi ) );
+	$acards = $redis->hGetAll( 'acards' );
+	foreach ( $acards as $key => $value ) {
+		$valuearray = json_decode( $value, true );
+		$id = $valuearray[ 'id' ];
+		$subdevice = isset( $id ) ? $id - 1 : 0;
+		$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
+		$redis->hSet( 'acards', $key, $value1 );
+	}
 	die();
 }
 
