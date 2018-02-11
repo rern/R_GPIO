@@ -25,7 +25,8 @@ How It Works
 **`gpioon.py`**
 - broadcast
 	- `requests.post('http://localhost/pub?id=gpio', json='ON')` ( retrive by `data[0]` )
-- gpio pulldown
+- gpio > +3.3V 
+    - `GPIO.output( <pin>, 1 )`
 
 **`gpiotimer.py`**
 - poll idle state
@@ -39,4 +40,15 @@ How It Works
 	- `requests.post('http://localhost/pub?id=gpio', json='OFF')`
 - kill idle timer process
 	- `os.system('killall -9 gpiotimer.py')`
-- gpio pullup
+- gpio > 0V
+    - `GPIO.output( <pin>, 0 )`
+	
+### MPD configuration auto loding
+- save redis data
+    - `ao` - Audio output
+	- `volume` - Volume control
+	- `mpdconf` - MPD configuration
+- refresh Audio output list at power on (USB DAC only)
+- switch output
+- write `mpd.conf`
+- restart MPD
