@@ -4,9 +4,12 @@ $redis->pconnect( '127.0.0.1' );
 
 if ( isset( $_GET[ 'udac' ] ) ) {
 	include( '/srv/http/app/libs/runeaudio.php' );
+	
 	wrk_audioOutput($redis, 'refresh');
+	
 	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
 	$acards = $redis->hGetAll( 'acards' );
+	
 	foreach ( $acards as $key => $value ) {
 		$valuearray = json_decode( $value, true );
 		$id = $valuearray[ 'id' ];
@@ -14,6 +17,7 @@ if ( isset( $_GET[ 'udac' ] ) ) {
 		$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
 		$redis->hSet( 'acards', $key, $value1 );
 	}
+	
 	die();
 }
 
