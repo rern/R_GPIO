@@ -7,54 +7,38 @@ if ( $onoffpy === 'gpiotimer.py' ) {
 	die();
 }
 
-if ( $onoffpy === 'gpioon.py' ) {
-	$redis = new Redis(); 
-	$redis->pconnect( '127.0.0.1' );
-	$asound0 = shell_exec( '/usr/bin/cat /proc/asound/cards' );
-	$redis->set( 'asound0', $asound0 ); // save asound before power on
-}
-
 echo exec( '/usr/bin/sudo /root/'.$onoffpy );
 
-if ( $onoffpy === 'gpioon.py' ) {
-	// set mpd.conf
-	$mpdconf = $redis->hGetAll( 'mpdconf' );
-	$mpdconfgpio = $redis->hGetAll( 'mpdconfgpio' );
-	
-	if ( $mpdconf === $mpdconfgpio ) die();
-	
-	$redis->set( 'ao0', $redis->get( 'ao' ) ); // save current acard before switch
-	$aogpio = $redis->get( 'aogpio' );
-	$volumegpio = $redis->get( 'volumegpio' );
-	$redis->set( 'ao', $aogpio );
-	$redis->set( 'volume', $volumegpio );
-	foreach ( $mpdconfgpio as $key => $value ) {
-		$redis->hSet( 'mpdconf', $key, $value );
-	}
-	
-	include( '/srv/http/app/libs/runeaudio.php' );
-	
-	wrk_audioOutput($redis, 'refresh');         // refresh acards list: cat /proc/asound/cards
-	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
-	$analog = $redis->hGet( 'acards', 'bcm2835 ALSA_1' );
-	$hdmi = $redis->hGet( 'acards', 'bcm2835 ALSA_2' );
-	$redis->hSet( 'acards', 'bcm2835 ALSA_1', str_replace( 'hw:0,', 'hw:0,0', $analog ) );
-	$redis->hSet( 'acards', 'bcm2835 ALSA_2', str_replace( 'hw:0,', 'hw:0,1', $hdmi ) );
-	wrk_mpdconf( $redis, 'switchao', $aogpio ); // select acard + writecfg
-	wrk_mpdconf( $redis, 'restart' );           // restart mpd
-} else if ( $onoffpy === 'gpiooff.py' ) {
-	$redis = new Redis(); 
-	$redis->pconnect( '127.0.0.1' );
-	$asound0 = $redis->get( 'asound0' );
-	$redis->del( 'asound0' );
-	$asound1 = shell_exec( '/usr/bin/cat /proc/asound/cards' );
-	
-	if ( $asound0 === $asound1 ) die();
+if ( $onoffpy !== 'gpioon.py' ) die();
 
-	$ao0 = $redis->get( 'ao0' );
-	$redis->del( 'ao0' );
+$redis = new Redis(); 
+$redis->pconnect( '127.0.0.1' );
 
-	wrk_audioOutput($redis, 'refresh');
-	wrk_mpdconf( $redis, 'switchao', $ao0 );
-	wrk_mpdconf( $redis, 'restart' );
+$ao = $redis->get( 'ao' );
+$aogpio = $redis->get( 'aogpio' );
+
+if ( $ao === $aogpio ) die();
+
+$volumegpio = $redis->get( 'volumegpio' );
+$mpdconfgpio = $redis->hGetAll( 'mpdconfgpio' );
+
+$redis->set( 'ao', $aogpio );
+$redis->set( 'volume', $volumegpio );
+foreach ( $mpdconfgpio as $key => $value ) {
+	$redis->hSet( 'mpdconf', $key, $value );
+
+include( '/srv/http/app/libs/runeaudio.php' );
+
+wrk_audioOutput($redis, 'refresh'); // refresh acards list: cat /proc/asound/cards
+
+// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
+$acards = $redis->hGetAll( 'acards' );
+foreach ( $acards as $key => $value ) {
+	preg_match( '/"id":"."/', $value, $match );
+	$id = preg_replace( '/"id":"(.)"/', '${1}', $match[ 0 ] );
+	$subdevice = $id ? $id - 1 : 0;
+	$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
+	$redis->hSet( 'acards', $key, $value1 );
 }
+wrk_mpdconf( $redis, 'switchao', $aogpio ); // select acard + writecfg
+wrk_mpdconf( $redis, 'restart' );           // restart mpd

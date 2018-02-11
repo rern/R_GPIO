@@ -5,7 +5,7 @@ $redis->pconnect( '127.0.0.1' );
 if ( isset( $_GET[ 'udac' ] ) ) {
 	include( '/srv/http/app/libs/runeaudio.php' );
 	
-	wrk_audioOutput($redis, 'refresh');
+	wrk_audioOutput($redis, 'refresh'); // refresh acards list: cat /proc/asound/cards
 	
 	// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
 	$acards = $redis->hGetAll( 'acards' );
@@ -16,6 +16,14 @@ if ( isset( $_GET[ 'udac' ] ) ) {
 		$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
 		$redis->hSet( 'acards', $key, $value1 );
 	}
+	
+	$ao = $redis->get( 'ao' );
+	if ( !$acards[ $ao ] ) {
+		$redis->set( 'ao', 'bcm2835 ALSA_1' );
+		wrk_mpdconf( $redis, 'switchao', 'bcm2835 ALSA_1' );
+		wrk_mpdconf( $redis, 'restart' );
+	}
+	
 	die();
 }
 
