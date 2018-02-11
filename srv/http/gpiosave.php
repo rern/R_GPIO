@@ -11,9 +11,9 @@ if ( isset( $_GET[ 'udac' ] ) ) {
 	$acards = $redis->hGetAll( 'acards' );
 	
 	foreach ( $acards as $key => $value ) {
-		$valuearray = json_decode( $value, true );
-		$id = $valuearray[ 'id' ];
-		$subdevice = isset( $id ) ? $id - 1 : 0;
+		preg_match( '/"id":"."/', $value, $match );
+		$id = preg_replace( '/"id":"(.)"/', '${1}', $match[ 0 ] );
+		$subdevice = $id ? $id - 1 : 0;
 		$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
 		$redis->hSet( 'acards', $key, $value1 );
 	}
