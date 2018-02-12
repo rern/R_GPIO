@@ -26,6 +26,7 @@ $redis->set( 'ao', $aogpio );
 $redis->set( 'volume', $volumegpio );
 foreach ( $mpdconfgpio as $key => $value ) {
 	$redis->hSet( 'mpdconf', $key, $value );
+}
 
 include( '/srv/http/app/libs/runeaudio.php' );
 
