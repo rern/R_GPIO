@@ -22,14 +22,6 @@ rm -v $path/js/vendor/bootstrap-select-1.12.1.min.js
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
 
-file=/etc/udev/rules.d/rune_usb-audio.rules
-echo $file
-sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
-' -e '/^ACTION/ d
-' $file
-
-udevadm control --reload-rules && udevadm trigger
-
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i -e '\|<?php // gpio|, /?>/ d
@@ -41,12 +33,6 @@ echo $footer
 sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e 's/id="reboot"/id="syscmd-reboot"/
 ' -e '/gpio.js/ d
-' $file
-
-file=/srv/http/command/refresh_ao
-echo $file
-sed -i -e '/ui_notify/ s|^//||
-' -e '/udac0/,/udac1/ d
 ' $file
 
 # Dual boot
