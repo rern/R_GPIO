@@ -7,10 +7,6 @@ alias=gpio
 # gpio off #######################################
 ./gpiooff.py &> /dev/null &
 
-if [[ $1 != u ]]; then
-	redis-cli del enablegpio aogpio volumegpio acardsgpio mpdconfgpio &> /dev/null
-fi
-
 uninstallstart $@
 
 # remove files #######################################
@@ -38,26 +34,18 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e '/gpio.js/ d
 ' $file
 
-file=/srv/http/app/templates/mpd.php
-echo $file
-sed -i -e '/id="gpioudac"/ d
-' -e '/gpio0/,/gpio1/ d
-' $file
-
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
 ' -e '/gpiopower.py/d
 ' /root/.xbindkeysrc
 
-if [[ $1 != u ]]; then
-	cp -vf /etc/mpd.conf{.pacorig,}
-	systemctl restart mpd
-fi
-
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
-sed -i '/SUBSYSTEM=="sound"/ s/^#//' $file
-udevadm control --reload
+sed -i '/SUBSYSTEM=="sound"/ s/^#//
+' -e '/^ACTION/ d
+' $file
+
+udevadm control --reload-rules && udevadm trigger
 
 echo -e "$bar Remove service ..."
 systemctl disable gpioset
