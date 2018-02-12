@@ -40,7 +40,7 @@ file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
 sed -i '/SUBSYSTEM=="sound"/ s/^/#/
 ' -e '$ \a
-ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"
+ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"\
 ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao"
 ' $file
 
