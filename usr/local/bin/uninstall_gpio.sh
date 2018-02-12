@@ -24,7 +24,7 @@ echo -e "$bar Restore modified files ..."
 
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
-sed -i '/SUBSYSTEM=="sound"/ s/^#//
+sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 ' -e '/^ACTION/ d
 ' $file
 
@@ -45,7 +45,8 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 
 file=/srv/http/command/refresh_ao
 echo $file
-sed -i '/udac0/,/udac1/ d' $file
+sed -i -e '/ui_notify/ s|^//||
+' -e '/udac0/,/udac1/ d' $file
 
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
