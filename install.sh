@@ -39,18 +39,19 @@ file=/etc/mpd.conf
 echo $file
 chmod 666 $file
 
-file=/etc/udev/rules.d/rune_usb-audio.rules
-echo $file
-sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $file
-udevadm control --reload
+#file=/etc/udev/rules.d/rune_usb-audio.rules
+#echo $file
+#sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $file
+#udevadm control --reload
 
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i -e $'1 i\
 <?php // gpio\
 $redis = new Redis();\
-$redis->pconnect( \'127.0.0.1\' );\
+$redis->connect('/tmp/redis.sock');\
 $enable = $redis->get( \'enablegpio\' );\
+$redis->close();\
 \
 $file = \'/srv/http/gpio.json\';\
 $fileopen = fopen($file, \'r\');\
