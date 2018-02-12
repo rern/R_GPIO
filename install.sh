@@ -35,33 +35,32 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
-file=/etc/mpd.conf
-echo $file
-chmod 666 $file
 
-#file=/etc/udev/rules.d/rune_usb-audio.rules
-#echo $file
-#sed -i '/SUBSYSTEM=="sound"/ s/^/#/' $file
-#udevadm control --reload
+file=/etc/udev/rules.d/rune_usb-audio.rules
+echo $file
+sed -i '/SUBSYSTEM=="sound"/ s/^/#/
+' -e '$ \a
+ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"
+ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao"
+' $file
+
+udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i -e $'1 i\
+sed -i -e '1 i\
 <?php // gpio\
-$redis = new Redis();\
-$redis->connect('/tmp/redis.sock');\
-$enable = $redis->get( \'enablegpio\' );\
-$redis->close();\
+$file = "/srv/http/gpio.json";\
+$fileopen = fopen( $file, "r" );\
+$gpio = fread( $fileopen, filesize( $file ) );\
+fclose( $fileopen );\
 \
-$file = \'/srv/http/gpio.json\';\
-$fileopen = fopen($file, \'r\');\
-$gpio = fread($fileopen, filesize($file));\
-fclose($fileopen);\
-$gpio = json_decode($gpio, true);\
-$on = $gpio[\'on\'];\
-$off = $gpio[\'off\'];\
-$ond = $on[\'ond1\'] + $on[\'ond2\'] + $on[\'ond3\'];\
-$offd = $off[\'offd1\'] + $off[\'offd2\'] + $off[\'offd3\'];\
+$gpio = json_decode( $gpio, true );\
+$enable = $gpio[ "enable" ];\
+$on = $gpio[ "on" ];\
+$off = $gpio[ "off" ];\
+$ond = $on[ "ond1" ] + $on[ "ond2" ] + $on[ "ond3" ];\
+$offd = $off[ "offd1" ] + $off[ "offd2" ] + $off[ "offd3" ];\
 ?>
 ' -e $'/runeui.css/ a\
 	<link rel="stylesheet" href="<?=$this->asset(\'/css/gpio.css\')?>">
@@ -79,26 +78,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 ' -e 's/id="syscmd-reboot"/id="reboot"/
 ' -e $'$ a\
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
-' $file
-
-file=/srv/http/app/templates/mpd.php
-echo $file
-sed -i -e '/This switches output/{
-i\
-                        <a class="btn btn-primary btn-lg" id="gpioudac"><i class="fa fa-refresh fa-lg" style="margin-top: -10px;"></i></a>
-n;n;n;n; i\
-            <div class="form-group"> <?php /* gpio0 */?>\
-                <label class="col-sm-2 control-label" for="audio-output-interface">RuneUI GPIO</label>\
-                <div class="col-sm-10">\
-                    <a class="btn btn-primary btn-lg" id="gpiodacsave">Save</a>\
-                    <span class="help-block">\
-                        Configure the rest of this page and save for <strong>RuneUI GPIO</strong> auto-reloading when power on.\
-                    </span>\
-                </div>\
-            </div> <?php /* gpio1 */?>
-}
-' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
-' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
 ' $file
 
 # for nginx svg support for gpio diagram
@@ -123,7 +102,7 @@ sed -i -e '/echo/ s/^/#/g
 echo -e "$bar GPIO service ..."
 systemctl daemon-reload
 systemctl enable gpioset
-systemctl start gpioset
+/root/gpio.py set
 
 # set permission #######################################
 echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
