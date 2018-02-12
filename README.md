@@ -34,7 +34,6 @@ Features
 - reset on play or `reset` button during warning
 
 **Integrated into existing RuneUI**
-- auto load MPD settings on power on (no need to reboot for power-off-to-on USB DAC)
 - `GPIO` (speaker icon) button on the left of top bar
 - change button icon and color on `on` `off`
 - show button only when enable
@@ -78,16 +77,6 @@ Things to do
 [![5](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/5.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/5.jpg?raw=1)
 [![6](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/6.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/6.jpg?raw=1)
 [![7](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/7.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/7.jpg?raw=1)
-
-Before install
----
-- No need to connect relay module before install
-- Power on DAC if external powered
-- `Menu` > `MPD` complete all settings
-- Make sure it works properly
-- GPIO will enforce this setting every power on
-
-_(MPD configuration can still be reset to default and setup manually.)_
 
 Install
 ---
