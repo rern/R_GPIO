@@ -38,7 +38,7 @@ echo -e "$bar Modify files ..."
 
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
-sed -i '/SUBSYSTEM=="sound"/ s/^/#/
+sed -i -e '/SUBSYSTEM=="sound"/ s/^/#/
 ' -e '$ \a
 ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"\
 ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao"
@@ -82,7 +82,8 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 
 file=/srv/http/command/refresh_ao
 echo $file
-sed -i $'/close Redis/ i\
+sed -i -e '/ui_notify/ s|^|//|
+' -e $'/close Redis/ i\
 // udac0\
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
