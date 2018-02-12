@@ -34,6 +34,10 @@ sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
 ' -e '/gpio.js/ d
 ' $file
 
+file=/srv/http/command/refresh_ao
+echo $file
+sed -i '/argc > 1/,/^}/ d' $file
+
 # Dual boot
 sed -i -e '/^#"echo/ s/^#//g
 ' -e '/gpiopower.py/d
