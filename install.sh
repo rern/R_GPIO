@@ -80,6 +80,17 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
+file=/srv/http/command/refresh_ao
+echo $file
+sed $'/close Redis/ i\
+if ( $argc > 1 ) {\
+	// "exec" gets only last line which is new power-on card\
+	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
+	$redis->set( "ao", $ao );\
+	wrk_mpdconf( $redis, "switchao", $ao );\
+}
+' $file
+
 # for nginx svg support for gpio diagram
 file=/etc/nginx/nginx.conf
 if ! grep -q 'ico|svg' $file; then
