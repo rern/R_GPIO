@@ -137,19 +137,5 @@ if ( ( 'standalone' in window.navigator ) && window.navigator.standalone ) {
 	}, false );
 }
 
-$( '#gpioudac' ).click( function() {
-	$.get( '/gpiosave.php?udac=1', function() {
-		location.reload();
-	} );
-} );
-$( "#gpioudacsave" ).click( function() {
-	$.get( "/gpiosave.php?ao=1", function() {
-		info( {
-			  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
-			, title  : 'RuneUI GPIO'
-			, message: "MPD configuration saved."
-		} );
-	} );
-} );
 // document ready end *********************************************************************
 } );
