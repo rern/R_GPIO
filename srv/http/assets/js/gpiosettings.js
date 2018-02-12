@@ -25,14 +25,11 @@ $( '#gpioimgtxt' ).click( function() {
 $( '#gpio-enable' ).click( function() {
 	if ( this.value == 1 ) {
 		$( this ).val( 0 );
-		if ( enable == 0 ) $( '#audiolabel, #audioout, #gpio-group' ).hide();
+		if ( enable == 0 ) $( '#gpio-group' ).hide();
 	} else {
 		$( this ).val( 1 );
-		$( '#audiolabel, #audioout, #gpio-group' ).show();
+		$( '#gpio-group' ).show();
 	}
-} );
-$( '#aogpio' ).on( 'changed.bs.select', function() {
-	window.location.href = '/mpd/';
 } );
 
 function txtcolorpin() {
@@ -160,7 +157,7 @@ $( '.selectpicker.on, .selectpicker.off' ).change( function() {
 } );
 
 $( '#gpiosave' ).click( function() {
-	enable = $( '#gpio-enable' ).val();
+	var enable = $( '#gpio-enable' ).val();
 	var on = [ 
 		  $( '#on1' ).val()
 		, $( '#on2' ).val()
@@ -184,7 +181,7 @@ $( '#gpiosave' ).click( function() {
 					var icon = 'fa fa-info-circle fa-lg';
 					var result = 'Settings saved'; 
 					$.get( '/gpioexec.php?onoffpy=timerreset' );
-					if ( enable == 0 ) $( '#audiolabel, #audioout, #gpio-group' ).hide();
+					if ( enable == 0 ) $( '#gpio-group' ).hide();
 					info( {
 						  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
 						, title  : 'RuneUI GPIO'
