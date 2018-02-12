@@ -21,6 +21,15 @@ rm -v $path/js/vendor/bootstrap-select-1.12.1.min.js
 
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
+
+file=/etc/udev/rules.d/rune_usb-audio.rules
+echo $file
+sed -i '/SUBSYSTEM=="sound"/ s/^#//
+' -e '/^ACTION/ d
+' $file
+
+udevadm control --reload-rules && udevadm trigger
+
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i -e '\|<?php // gpio|, /?>/ d
@@ -42,14 +51,6 @@ sed -i '/argc > 1/,/^}/ d' $file
 sed -i -e '/^#"echo/ s/^#//g
 ' -e '/gpiopower.py/d
 ' /root/.xbindkeysrc
-
-file=/etc/udev/rules.d/rune_usb-audio.rules
-echo $file
-sed -i '/SUBSYSTEM=="sound"/ s/^#//
-' -e '/^ACTION/ d
-' $file
-
-udevadm control --reload-rules && udevadm trigger
 
 echo -e "$bar Remove service ..."
 systemctl disable gpioset
