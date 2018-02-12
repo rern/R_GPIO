@@ -12,10 +12,6 @@ ln -sf /usr/bin/python{2.7,}
 
 rankmirrors
 
-# remove if DAC Reloader installed
-file=/usr/local/bin/uninstall_udac.sh
-[[ -e $file ]] && $file u
-
 echo -e "$bar Install Pip ..."
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
@@ -35,16 +31,6 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
-
-file=/etc/udev/rules.d/rune_usb-audio.rules
-echo $file
-sed -i -e '/SUBSYSTEM=="sound"/ s/^/#/
-' -e '$ \a
-ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"\
-ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao"
-' $file
-
-udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/app/templates/header.php
 echo $file
@@ -80,24 +66,6 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 <script src="<?=$this->asset(\'/js/gpio.js\')?>"></script>
 ' $file
 
-file=/srv/http/command/refresh_ao
-echo $file
-sed -i -e '/ui_notify/ s|^|//|
-' -e $'/close Redis/ i\
-// udac0\
-if ( $argc > 1 ) {\
-	// "exec" gets only last line which is new power-on card\
-	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
-	ui_notify( "Audio Output", "Switch to ".$ao );\
-} else {\
-	$ao = "bcm2835 ALSA_1";\
-	ui_notify( "Audio Output", "Switch to RaspberryPi Analog Out" );\
-}\
-$redis->set( "ao", $ao );\
-wrk_mpdconf( $redis, "switchao", $ao );\
-// udac1
-' $file
-
 # for nginx svg support for gpio diagram
 file=/etc/nginx/nginx.conf
 if ! grep -q 'ico|svg' $file; then
@@ -126,7 +94,7 @@ systemctl enable gpioset
 echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/http
 chmod 4755 /usr/bin/sudo
 usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem access
-#chmod g+rw /dev/gpiomem # allow group to access set in gpioset.py for every boot
+#chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
 
 installfinish $@
 
