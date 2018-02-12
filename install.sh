@@ -83,12 +83,18 @@ sed -i -e 's/id="syscmd-poweroff"/id="poweroff"/
 file=/srv/http/command/refresh_ao
 echo $file
 sed -i $'/close Redis/ i\
+// udac0\
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
 	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
-	$redis->set( "ao", $ao );\
-	wrk_mpdconf( $redis, "switchao", $ao );\
-}
+	ui_notify( "Audio Output", "Switch to ".$ao );\
+} else {\
+	$ao = "bcm2835 ALSA_1";\
+	ui_notify( "Audio Output", "Switch to RaspberryPi Analog Out" );\
+}\
+$redis->set( "ao", $ao );\
+wrk_mpdconf( $redis, "switchao", $ao );\
+// udac1
 ' $file
 
 # for nginx svg support for gpio diagram
