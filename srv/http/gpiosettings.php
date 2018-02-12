@@ -21,6 +21,8 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
+$enable = $gpio[ 'enable' ][ 'enable' ];
+
 $pin  = $gpio[ 'pin' ];
 $pin1 = $pin[ 'pin1' ];
 $pin2 = $pin[ 'pin2' ];
@@ -88,19 +90,6 @@ function opttime( $n, $min ) {
 	}
 	echo $option;
 }
-
-// audio output select
-$redis = new Redis(); 
-$redis->pconnect( '127.0.0.1' );
-$enable = $redis->get( 'enablegpio' );
-$ao = $redis->get( 'aogpio' );
-$acardsarray = $redis->hGetAll( 'acardsgpio' );
-$acardprop = json_decode( $acardsarray[ $ao ], true );
-$acard = $acardprop[ 'extlabel' ] ? $acardprop[ 'extlabel' ] : $ao;
-$optao = '
-	<option>'.$acard.'</option>
-	<option>Change &gt;&gt;</option>
-';
 ?>
 
 <body>
@@ -117,24 +106,12 @@ $optao = '
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="boxed-group">
 	<div class="form-group">
-		<div class="col-sm-10 section">
-			<div class="gpio-float-l">
-				<div class="col-sm-10">
-					<span class="gpio-text"><i class="fa fa-check-circle fa-lg blue"></i> &nbsp; Enable</span>
-					<label class="switch-light">
-						<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
-						<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
-					</label>
-				</div>
-			</div>
-			<div class="gpio-float-r" <?=$enable == 0 ? 'style="display:none"' : ''?> id="audioout">
-				<div class="col-sm-10">
-					<span class="gpio-text"><i class="fa fa-sign-out fa-lg fa-rotate-270 blue"></i> &nbsp; Audio Output</span>
-					<select id="aogpio" class="selectpicker">
-						<?=$optao?>
-					</select>
-				</div>
-			</div>
+		<label for="gpio" class="col-sm-2 control-label">Enable</label>
+		<div class="col-sm-10">
+			<label class="switch-light well" onclick="">
+				<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
+				<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
+			</label>
 		</div>
 	</div>
 	<div class="form-group" <?=$enable == 0 ? 'style="display:none"' : ''?> id="gpio-group">
