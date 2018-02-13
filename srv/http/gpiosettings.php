@@ -21,7 +21,7 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
-$enable = $gpio[ 'enable' ][ 'enable' ];
+$enable = $gpio[ 'enable' ];
 
 $pin  = $gpio[ 'pin' ];
 $pin1 = $pin[ 'pin1' ];
