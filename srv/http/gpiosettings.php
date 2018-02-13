@@ -106,8 +106,8 @@ function opttime( $n, $min ) {
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="boxed-group">
 	<div class="form-group">
-		<label for="gpio" class="col-sm-2 control-label">Enable</label>
-		<div class="col-sm-10">
+		<label for="gpio" class="gpio-float-l">&nbsp;Enable</label>
+		<div class="gpio-float-r">
 			<label class="switch-light well" onclick="">
 				<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
 				<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
