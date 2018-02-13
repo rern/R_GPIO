@@ -1,6 +1,6 @@
 <?php
 $gpio = array(
-	  'enable'  => array( 'enable'  => $_POST[ 'enable' ] )
+	  'enable' => $_POST[ 'enable' ]
 	, 'pin'    => array(
 		  'pin1'   => $_POST[ 'pin1' ]
 		, 'pin2'   => $_POST[ 'pin2' ]
@@ -31,7 +31,7 @@ $gpio = array(
 		, 'offd3'  => $_POST[ 'offd3' ]
 		, 'off4'   => $_POST[ 'off4' ]
 	)
-	, 'timer'  => array( 'timer'  => $_POST[ 'timer' ] )
+	, 'timer'  => $_POST[ 'timer' ]
 );
 $jsonfile = fopen( '/srv/http/gpio.json', 'w' );
 $set = fwrite( $jsonfile, json_encode( $gpio ) );
