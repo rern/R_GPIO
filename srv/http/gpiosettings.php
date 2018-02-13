@@ -54,7 +54,7 @@ $off3  = $off[ 'off3' ];
 $offd3 = $off[ 'offd3' ];
 $off4  = $off[ 'off4' ];
 
-$timer = $gpio[ 'timer' ][ 'timer' ];
+$timer = $gpio[ 'timer' ];
 
 function optpin( $n ) {
 	// omit pins: on-boot-pullup, uart, I2S
