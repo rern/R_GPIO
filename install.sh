@@ -42,7 +42,7 @@ $gpio = fread( $fileopen, filesize( $file ) );\
 fclose( $fileopen );\
 \
 $gpio = json_decode( $gpio, true );\
-$enable = $gpio[ "enable" ];\
+$enable = $gpio[ "enable" ][ "enable" ];\
 $on = $gpio[ "on" ];\
 $off = $gpio[ "off" ];\
 $ond = $on[ "ond1" ] + $on[ "ond2" ] + $on[ "ond3" ];\
