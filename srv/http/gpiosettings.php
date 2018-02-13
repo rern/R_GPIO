@@ -81,10 +81,10 @@ function optname( $n ) {
 	}
 	echo $option;
 }
-function opttime( $n, $min ) {
-	$min = !isset( $min ) ? 1 : $min;
+function opttime( $n, $minimum ) {
+	$minimum = !isset( $minimum ) ? 1 : $minimum;
 	$option = '<option value="0">none</option>';
-	foreach ( range( $min, 10 ) as $num ) {
+	foreach ( range( $minimum, 10 ) as $num ) {
 		$selected = ( $num == $n ) ? ' selected' : '';
 		$option.= '<option value='.$num.$selected.'>'.$num.'</option>';
 	}
