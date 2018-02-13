@@ -43,11 +43,9 @@ ondx = ond1 + ond2 + ond3
 state = GPIO.input( onx[ 1 ] )
 
 if state == ON:
-	onoff = 'ON'
+	print( 'ON' )
 else:
-	onoff = 'OFF'
-
-print( state )
+	print( 'OFF' )
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state':
 	exit()
