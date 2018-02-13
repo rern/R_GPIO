@@ -2,7 +2,7 @@
 from gpio import *
 import mpd
 
-if timer == 0 or pullup == OFF:
+if timer == 0 or state == OFF:
 	exit()
 	
 i = timer
