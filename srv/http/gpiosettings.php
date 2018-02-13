@@ -106,12 +106,14 @@ function opttime( $n, $min ) {
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="boxed-group">
 	<div class="form-group">
-		<label for="gpio" class="gpio-float-l">&nbsp;Enable</label>
 		<div class="gpio-float-r">
-			<label class="switch-light well" onclick="">
-				<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
-				<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
-			</label>
+			<div class="col-sm-10">
+				<span class="gpio-text"><i class="fa fa-check-circle fa-lg blue"></i> &nbsp; Enable</span>
+				<label class="switch-light">
+					<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
+					<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
+				</label>
+			</div>
 		</div>
 	</div>
 	<div class="form-group" <?=$enable == 0 ? 'style="display:none"' : ''?> id="gpio-group">
