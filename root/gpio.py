@@ -47,7 +47,7 @@ if state == ON:
 else:
 	onoff = 'OFF'
 
-print( json.dumps( { 'state': onoff } ) )
+print( state )
 
 if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state':
 	exit()
