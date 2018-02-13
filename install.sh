@@ -100,7 +100,7 @@ installfinish $@
 
 clearcache
 
-title -nt "$info Menu > GPIO for settings."
+title -nt "$info Settings: Menu > GPIO."
 
 # refresh svg support last for webui installation
 [[ $svg == 0 ]] && systemctl reload nginx
