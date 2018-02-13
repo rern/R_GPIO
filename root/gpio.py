@@ -63,4 +63,4 @@ offx  = [ i for i in offx if i != 0 ]
 
 offdx = offd1 + offd2 + offd3
 
-timer = int( gpio[ 'timer' ][ 'timer' ] )
+timer = int( gpio[ 'timer' ] )
