@@ -79,6 +79,18 @@ Things to do
 [![6](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/6.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/6.jpg?raw=1)
 [![7](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/7.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/7.jpg?raw=1)
 
+Improved vrsion: 
+- Add LEDs for GPIO 3.3V status
+- Add switches
+	- Normal : GPIO 3.3V > LED ON, relay ON
+	- Off : GPIO 3.3V > LED ON, relay OFF
+	- Bypass : Direct 5V > LED OFF, relay ON
+	
+[![11](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/11.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/11.jpg?raw=1)
+[![8](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/08.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/08.jpg?raw=1)
+[![9](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/09.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/09.jpg?raw=1)
+[![10](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/10.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/10.jpg?raw=1)
+
 Install
 ---
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
