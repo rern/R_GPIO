@@ -7,4 +7,4 @@ if ( $onoffpy === 'gpiotimer.py' ) {
 	die();
 }
 
-echo exec( '/root/'.$onoffpy );
+echo exec( '/usr/bin/sudo /root/'.$onoffpy );
