@@ -15,9 +15,6 @@ var name = {
 };
 var timer = $( '#timer' ).val();
 
-$( '#close' ).click( function() {
-	window.location.href = '/';
-} );
 $( '#gpioimgtxt' ).click( function() {
 	$( this ).parent().next().slideToggle();
 	$( this ).find( 'i' ).toggleClass('fa-chevron-circle-down fa-chevron-circle-up')
