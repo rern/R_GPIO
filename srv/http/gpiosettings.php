@@ -95,7 +95,7 @@ function opttime( $n, $minimum ) {
 <body>
 
 <div class="container">
-<h1>GPIO</h1><a id="close"><i class="fa fa-times fa-2x"></i></a>
+<h1>GPIO</h1><a href="/" class="close-root"><i class="fa fa-times fa-2x"></i></a>
 <legend>Settings</legend>
 <form class="form-horizontal">
 
