@@ -7,12 +7,15 @@ if timer == 0 or state == OFF:
 i = timer
 while i >= 0:
 	time.sleep( 60 )
-	status = os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) # state: RUNNING
-	if status == 0:
+	status = os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' )
+	if status == 0: # state: RUNNING
 		i = timer
 	else:
 		i -= 1
 		if i == 1: # broadcast last loop
-			requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'IDLE', 'delay': 60 } )
+			data = { 'state': 'IDLE', 'delay': 60 }
+			req = urllib2.Request( url, json.dumps( data ), headers = headerdata )
+			response = urllib2.urlopen( req )
+			
 		if i == 0:
 			os.system( '/root/gpiooff.py' )

@@ -5,7 +5,9 @@ if state != OFF:
 	exit()
 	
 # broadcast pushstream (message non-char in curl must be escaped)
-requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'ON', 'delay': ondx } )
+data = { 'state': 'ON', 'delay': ondx }
+req = urllib2.Request( url, json.dumps( data ), headers = headerdata )
+response = urllib2.urlopen( req )
 
 if on1 != 0:
 	GPIO.output( on1, ON )

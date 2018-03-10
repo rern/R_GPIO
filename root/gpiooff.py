@@ -3,8 +3,10 @@ from gpio import *
 
 if state == ON:
 	# broadcast message
-	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'OFF', 'delay': offdx } )
-
+	data = { 'state': 'OFF', 'delay': offdx }
+	req = urllib2.Request( url, json.dumps( data ), headers = headerdata )
+	response = urllib2.urlopen( req )
+	
 	if off1 != 0:
 		GPIO.output( off1, OFF )
 	if off2 != 0:

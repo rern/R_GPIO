@@ -1,8 +1,6 @@
 #!/usr/bin/python
 from gpiooff import *
 
-#time.sleep( offdx )
-
 if len( sys.argv ) == 1:
 	os.system( '/var/www/command/rune_shutdown' )
 	exit()
