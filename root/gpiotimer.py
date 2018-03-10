@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from gpio import *
-import mpd
 
 if timer == 0 or state == OFF:
 	exit()
@@ -8,13 +7,8 @@ if timer == 0 or state == OFF:
 i = timer
 while i >= 0:
 	time.sleep( 60 )
-	client = mpd.MPDClient( use_unicode=True )
-	client.connect( 'localhost', 6600 )
-	state = client.status()[ 'state' ]
-	status = os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) # airplay
-	client.close()
-	client.disconnect()
-	if state == 'play' or status == 0:
+	status = os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) # state: RUNNING
+	if status == 0:
 		i = timer
 	else:
 		i -= 1
