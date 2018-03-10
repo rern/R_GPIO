@@ -15,9 +15,6 @@ rankmirrors
 echo -e "$bar Install Pip ..."
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
-	
-echo -e "$bar Install Python-MPD ..."
-pip -q install python-mpd2
 
 echo -e "$bar Install Python-Requests ..."
 pip -q install requests
