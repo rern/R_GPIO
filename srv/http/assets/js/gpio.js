@@ -1,5 +1,5 @@
-$( document ).ready( function() {
-// document ready start********************************************************************
+$( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 var timer = false; // for 'setInterval' status check
 
 function buttonOnOff( state ) {
@@ -137,5 +137,4 @@ if ( ( 'standalone' in window.navigator ) && window.navigator.standalone ) {
 	}, false );
 }
 
-// document ready end *********************************************************************
-} );
+} ); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
