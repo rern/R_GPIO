@@ -74,6 +74,16 @@ sed -i -e '/echo/ s/^/#/g
 
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."
+
+echo '[Unit]
+Description=GPIO initial setup
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /root/gpio.py set
+[Install]
+WantedBy=multi-user.target
+' > /etc/systemd/system/gpioset.service
+
 systemctl daemon-reload
 systemctl enable gpioset
 /root/gpio.py set
