@@ -84,8 +84,8 @@ ExecStart=/usr/bin/python /root/gpio.py set
 WantedBy=multi-user.target
 ' > /etc/systemd/system/gpioset.service
 
-systemctl daemon-reload
 systemctl enable gpioset
+systemctl daemon-reload
 /root/gpio.py set
 
 # set permission #######################################
