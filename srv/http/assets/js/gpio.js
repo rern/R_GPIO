@@ -28,7 +28,7 @@ document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
 		//pushstreamGPIO.connect(); // force reconnect
 		gpioOnOff(); // update gpio button on reopen page
-		if ( timer ) $( '#infoMessage' ).hide();
+		if ( timer ) $( '#infoX' ).click();
 	}
 } );
 
@@ -47,7 +47,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		clearInterval( timer );
 		timer = false;
 	}
-	if ( state == 'IDLE' ) {
+	if ( state == 'RESET' ) {
+		$( '#infoX' ).click();
+	} else if ( state == 'IDLE' ) {
 		info( {
 			  icon        : '<i class="fa fa-cog fa-spin fa-2x"></i>'
 			, title       : 'GPIO Timer'
@@ -66,7 +68,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			}
 			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
-		return
 	} else {
 		PNotify.removeAll();
 		new PNotify( {
