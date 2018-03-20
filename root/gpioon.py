@@ -22,7 +22,9 @@ if on4 != 0:
 	GPIO.output( on4, ON )
 
 if GPIO.input( onx[ 1 ] ) != ON:
-	requests.post( 'http://localhost/pub?id=gpio', json={ 'state': 'FAILED !', 'delay': 8 } )
+	data = { 'state': 'FAILED !', 'delay': 8 }
+	req = urllib2.Request( url, json.dumps( data ), headers = headerdata )
+	response = urllib2.urlopen( req )
 	exit()
 
 if timer > 0:
