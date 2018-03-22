@@ -27,7 +27,6 @@ if ( !timer ) $( '#infoX' ).click();
 
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
-		//pushstreamGPIO.connect(); // force reconnect
 		gpioOnOff(); // update gpio button on reopen page
 		if ( !timer ) $( '#infoX' ).click();
 	}
