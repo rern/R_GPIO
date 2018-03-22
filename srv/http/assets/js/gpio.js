@@ -23,6 +23,7 @@ function gpioOnOff() {
 }
 
 gpioOnOff();
+if ( !timer ) $( '#infoX' ).click();
 
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
