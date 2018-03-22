@@ -1,7 +1,3 @@
-### to be revised for high trigger relay board
-- gpio.py L#7-8, 26
-- gpio.js L#8
-
 RuneUI GPIO
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
