@@ -28,6 +28,7 @@ if ( !timer ) $( '#infoX' ).click();
 document.addEventListener( 'visibilitychange', function( change ) {
 	if ( document.visibilityState === 'visible' ) {
 		gpioOnOff(); // update gpio button on reopen page
+		PNotify.removeAll();
 		if ( !timer ) $( '#infoX' ).click();
 	}
 } );
