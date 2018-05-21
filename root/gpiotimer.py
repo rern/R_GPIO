@@ -7,8 +7,7 @@ if timer == 0 or state == OFF:
 i = timer
 while i >= 0:
 	time.sleep( 60 )
-	status = os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' )
-	if status == 0: # state: RUNNING
+	if os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) == 0: # state: RUNNING
 		i = timer
 	else:
 		i -= 1
@@ -18,4 +17,7 @@ while i >= 0:
 			response = urllib2.urlopen( req )
 			
 		if i == 0:
-			os.system( '/root/gpiooff.py' )
+			if os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) != 0: # all 'closed' - no 'state'
+				os.system( '/root/gpiooff.py' )
+			else:
+				i = timer
