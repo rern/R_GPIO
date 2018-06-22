@@ -14,7 +14,7 @@ echo -e "$bar Remove files ..."
 rm -v /root/gpio*.py
 rm -v /srv/http/gpio*.php
 path=/srv/http/assets
-rm -v $path/css/gpio.css
+rm -v $path/css/gpio*
 rm -v $path/img/RPi3_GPIOs.png
 rm -v $path/js/gpio*
 rm -v $path/js/vendor/bootstrap-select-1.12.1.min.js
