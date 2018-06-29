@@ -175,18 +175,16 @@ $( '#gpiosave' ).click( function() {
 			$( '#gpioform').serialize() +'&enable='+ enable,
 			function( data ) {
 				if ( data ) {
-					var icon = 'fa fa-info-circle fa-lg';
-					var result = 'Settings saved'; 
 					$.get( '/gpioexec.php?onoffpy=timerreset' );
 					if ( enable == 0 ) $( '#gpio-group' ).hide();
 					info( {
-						  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
+						  icon   : 'fa-info-circle'
 						, title  : 'RuneUI GPIO'
 						, message: 'Setting saved.'
 					} );
 				} else {
 					info( {
-						  icon   : '<i class=\"fa fa-info-warning fa-2x\"></i>'
+						  icon   : 'fa-info-warning'
 						, title  : 'RuneUI GPIO'
 						, message: 'Settings FAILED!'
 					} );
