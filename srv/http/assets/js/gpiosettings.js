@@ -171,8 +171,8 @@ $( '#gpiosave' ).click( function() {
 		info( {
 			  icon   : 'info-circle'
 			, title  : 'RuneUI GPIO'
-			, message:on +' On : '+ off +' Off \nNumber of equipments not matched !'
-		});
+			, message: on +' On : '+ off +' Off \nNumber of equipments not matched !'
+		} );
 	} else {
 		$( '.delay' ).prop( 'disabled', false ); // for serialize
 		$.post( 'gpiosave.php',
