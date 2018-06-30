@@ -168,25 +168,27 @@ $( '#gpiosave' ).click( function() {
 		, $( '#off4' ).val()
 	].filter( function( x ) { return x != 0; } ).length;
 	if ( on !== off ) {
-		alert( on +' On : '+ off +' Off \nNumber of equipments not matched !' );
+		info( {
+			  icon   : 'info-circle'
+			, title  : 'RuneUI GPIO'
+			, message: on +' On : '+ off +' Off \nNumber of equipments not matched !'
+		} );
 	} else {
 		$( '.delay' ).prop( 'disabled', false ); // for serialize
 		$.post( 'gpiosave.php',
 			$( '#gpioform').serialize() +'&enable='+ enable,
 			function( data ) {
 				if ( data ) {
-					var icon = 'fa fa-info-circle fa-lg';
-					var result = 'Settings saved'; 
 					$.get( '/gpioexec.php?onoffpy=timerreset' );
 					if ( enable == 0 ) $( '#gpio-group' ).hide();
 					info( {
-						  icon   : '<i class=\"fa fa-info-circle fa-2x\"></i>'
+						  icon   : 'info-circle'
 						, title  : 'RuneUI GPIO'
 						, message: 'Setting saved.'
 					} );
 				} else {
 					info( {
-						  icon   : '<i class=\"fa fa-info-warning fa-2x\"></i>'
+						  icon   : 'info-warning'
 						, title  : 'RuneUI GPIO'
 						, message: 'Settings FAILED!'
 					} );
