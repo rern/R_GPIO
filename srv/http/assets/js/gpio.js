@@ -52,7 +52,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		$( '#infoX' ).click();
 	} else if ( state == 'IDLE' ) {
 		info( {
-			  icon        : 'fa-cog fa-spin'
+			  icon        : 'cog fa-spin'
 			, title       : 'GPIO Timer'
 			, message     : 'Idel Off Countdown:<br><white>'+ delay +'</white> s ...'
 			, cancellabel : 'Hide'
