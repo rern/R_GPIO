@@ -13,11 +13,10 @@ uninstallstart $@
 echo -e "$bar Remove files ..."
 rm -v /root/gpio*.py
 rm -v /srv/http/gpio*.php
-path=/srv/http/assets
-rm -v $path/css/gpio*
-rm -v $path/img/RPi3_GPIO.svg
-rm -v $path/js/gpio*
-rm -v $path/js/vendor/bootstrap-select-1.12.1.min.js
+rm -v /srv/http/assets/css/gpio*
+rm -v /srv/http/assets/img/RPi3_GPIO.svg
+rm -v /srv/http/assets/js/gpio*
+rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
