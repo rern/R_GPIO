@@ -188,7 +188,7 @@ $( '#gpiosave' ).click( function() {
 					} );
 				} else {
 					info( {
-						  icon   : 'info-warning'
+						  icon   : 'info-circle'
 						, title  : 'RuneUI GPIO'
 						, message: 'Settings FAILED!'
 					} );
