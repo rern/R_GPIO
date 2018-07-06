@@ -1,7 +1,3 @@
-.playback-controls {
-    margin-left: 60px;
-}
-
 .pnotify_custom {
     top: 60px !important;
     bottom: auto !important;
@@ -11,5 +7,5 @@
 }
 
 #dropdownbg {
-	height: 408px;
+	height: 408px !important;
 }
