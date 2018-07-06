@@ -91,22 +91,24 @@ EOF
 appendH '$'
 
 # Dual boot
-file=/root/.xbindkeysrc
-echo $file
+if [[ -e /usr/local/bin/hardreset ]]; then
+    file=/root/.xbindkeysrc
+    echo $file
 
-commentS 'echo'
+    commentS 'echo'
 
-string=$( cat <<'EOF'
+    string=$( cat <<'EOF'
 "/root/gpiopower.py 6"
 EOF
 )
-appendS 'echo 6'
+    appendS 'echo 6'
 
-string=$( cat <<'EOF'
+    string=$( cat <<'EOF'
 "/root/gpiopower.py 8"
 EOF
 )
-appendS 'echo 8'
+    appendS 'echo 8'
+fi
 
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."
