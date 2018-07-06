@@ -21,23 +21,12 @@ rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
 
-file=/srv/http/app/templates/header.php
-echo $file
-sed -i -e '\|<?php // gpio|, /?>/ d
-' -e '/gpio.css\|id="enable"\|id="gpio"\|gpiosettings.php/ d
-' $file
-
-file=/srv/http/app/templates/footer.php
-echo $footer
-sed -i -e 's/id="poweroff"/id="syscmd-poweroff"/
-' -e 's/id="reboot"/id="syscmd-reboot"/
-' -e '/gpio.js/ d
-' $file
-
-# Dual boot
-sed -i -e '/^#"echo/ s/^#//g
-' -e '/gpiopower.py/d
-' /root/.xbindkeysrc
+files="
+/srv/http/app/templates/header.php
+/srv/http/app/templates/footer.php
+/root/.xbindkeysrc
+"
+restorefile $files
 
 echo -e "$bar Remove service ..."
 systemctl disable gpioset
