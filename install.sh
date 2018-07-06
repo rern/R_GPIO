@@ -68,22 +68,6 @@ appendH 'class="home"'
 file=/srv/http/app/templates/footer.php
 echo $file
 
-commentH 'id="syscmd-poweroff"'
-
-string=$( cat <<'EOF'
-                <button id="poweroff" name="syscmd" value="poweroff" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-power-off sx"></i> Power off</button>
-EOF
-)
-appendH 'id="syscmd-poweroff"'
-
-commentH 'id="syscmd-reboot"
-
-string=$( cat <<'EOF'
-                <button id="reboot" name="syscmd" value="reboot" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot</button>
-EOF
-)
-appendH 'id="syscmd-reboot"'
-
 string=$( cat <<'EOF'
 <script src="<?=$this->asset('/js/gpio.js')?>"></script>
 EOF
