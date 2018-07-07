@@ -1,5 +1,9 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+var stopwatch = '<span id="stopwatch" class="fa-stack fa-2x">'
+				+'<i class="fa fa-stopwatch-i fa-spin fa-stack-1x"></i>'
+				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
+				+'</span>'
 var timer = false; // for 'setInterval' status check
 
 function gpioOnOff() {
@@ -39,10 +43,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		$( '#infoX' ).click();
 	} else if ( state == 'IDLE' ) {
 		info( {
-			  icon        : '<span id="stopwatch" class="fa-stack fa-2x">'
-							+'<i class="fa fa-stopwatch-i fa-spin fa-stack-1x"></i>'
-							+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
-							+'</span>'
+			  icon        : stopwatch
 			, title       : 'GPIO Timer'
 			, message     : 'Idel Off Countdown:<br><white>'+ delay +'</white> s ...'
 			, cancellabel : 'Hide'
@@ -62,7 +63,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	} else {
 		PNotify.removeAll();
 		new PNotify( {
-			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
+			  icon    : ( state != 'FAILED !' ) ? stopwatch : 'fa fa-warning fa-lg'
 			, title   : 'GPIO'
 			, text    : 'Powering '+ state +' ...'
 			, delay   : delay * 1000
@@ -85,7 +86,9 @@ pushstreamGPIO.connect();
 
 var clickdelay = 0;
 var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
-$hammergpio.on( 'tap',  function( e ) {
+$hammergpio.on( 'press', function() {
+	window.location.href = 'gpiosettings.php';
+} ).on( 'tap',  function() {
 	// prevent instant on/off
 	if ( clickdelay ) {
 		info( {
@@ -98,14 +101,11 @@ $hammergpio.on( 'tap',  function( e ) {
 
 	$( '#settings' ).hide();
 	$.get( '/gpioexec.php?onoffpy='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
-} ).on( 'press', function() {
-	window.location.href = 'gpiosettings.php';
 } );
 
 // power off menu
 $( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
-	reboot = ( this.id == 'syscmd-reboot' ) ? ' reboot' : '';
-	$.get( '/gpioexec.php?onoffpy=gpiopower.py'+ reboot );
+	$.get( '/gpioexec.php?onoffpy=gpiopower.py'+ ( this.id == 'syscmd-reboot' ? ' reboot' : '' ) );
 });
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
