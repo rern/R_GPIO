@@ -4,8 +4,8 @@ var timer = false; // for 'setInterval' status check
 
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		gpioon = state === 'ON' ? 1 : 0;
-		$( '#gpio' ).css( 'background', gpioon ? '#0095d8' : '#34495e' );
+		gpioon = state === 'ON' ? 'ON' : 'OFF';
+		$( '#gpio' ).css( 'background', gpioon === 'ON' ? '#0095d8' : '#34495e' );
 	} );
 }
 
@@ -67,7 +67,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				$( '#gpio' ).css( 'background', gpioon ? '#0095d8' : '#34495e' );
+				$( '#gpio' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
 			} else {
 				gpioOnOff();
 			}
@@ -80,22 +80,21 @@ pushstreamGPIO.connect();
 var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
 
 $hammergpio.on( 'tap',  function( e ) {
-	var on = gpioon ? 'ON' : 'OFF';
 	$( '#settings' ).hide();
 /*	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, 10000 );*/
 	
-	var py = ( on == 'ON' ) ? 'gpiooff.py' : 'gpioon.py';
+	var py = gpioon === 'ON' ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
 		function( state ) {
-			if ( state.state == on ) {
+			if ( state.state == gpioon ) {
 				PNotify.removeAll();
 				new PNotify( {
 					  icon : 'fa fa-warning fa-lg'
 					, title: 'GPIO'
-					, text : on ? 'Already ON' : 'Already OFF'
+					, text : gpioon === 'ON' ? 'Already ON' : 'Already OFF'
 					, delay: 4000
 					, addclass: 'pnotify_custom'
 				} );
