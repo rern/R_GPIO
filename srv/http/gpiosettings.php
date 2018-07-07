@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>RuneGPIO</title>
+    <title>GPIO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -96,20 +96,20 @@ function opttime( $n, $minimum ) {
 
 <div class="container">
 <a href="/" class="close-root"><i class="fa fa-times fa-2x"></i></a>
-<h1>GPIO</h1>
+<h1><i class="fa fa-gpio"></i> GPIO</h1>
 <legend>Settings</legend>
 <form class="form-horizontal">
 
 <p>
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
-	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-circle-down fa-lg"></i></a>
+	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-down fa-lg"></i></a>
 </p>
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="boxed-group">
 	<div class="form-group">
 		<div class="gpio-float-r">
 			<div class="col-sm-10">
-				<span class="gpio-text"><i class="fa fa-check-circle fa-lg blue"></i> &nbsp; Enable</span>
+				<span class="gpio-text"><i class="fa fa-check fa-lg blue"></i> &nbsp; Enable</span>
 				<label class="switch-light">
 					<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
 					<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
