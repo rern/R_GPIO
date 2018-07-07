@@ -2,23 +2,9 @@ $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 var timer = false; // for 'setInterval' status check
 
-function buttonOnOff( state ) {
-	if ( state == 'ON' ) {
-		$( '#gpio' ).addClass( 'btn-primary' );
-		$( '#gpio i' ).removeClass( 'fa-volume-off' ).addClass( 'fa-volume-up' );
-	} else {
-		$( '#gpio' ).removeClass( 'btn-primary' );
-		$( '#gpio i' ).removeClass( 'fa-volume-up' ).addClass( 'fa-volume-off' );
-	}
-	if ( $( '#enable' ).val() == 1 ) {
-		$( '#gpio' ).show();
-	} else {
-		$( '#gpio' ).hide();
-	}
-}
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		buttonOnOff( state );
+		$( '#gpio a' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
 	} );
 }
 
@@ -80,7 +66,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				buttonOnOff( state );
+				$( '#gpio i' ).css( 'color', state == 'ON' ? '#0095d8' : '#e0e7ee' );
 			} else {
 				gpioOnOff();
 			}
@@ -90,7 +76,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 };
 pushstreamGPIO.connect();
 
-$( '#gpio' ).click( function() {
+var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
+
+$hammergpio.on( 'tap',  function() {
 	var on = $( this ).hasClass( 'btn-primary' ) ? 'ON' : 'OFF';
 	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
@@ -113,6 +101,8 @@ $( '#gpio' ).click( function() {
 			}
 		}
 	);
+} ).on( 'press', function() {
+	window.location.href = 'gpiosettings.php';
 } );
 
 // power off menu
