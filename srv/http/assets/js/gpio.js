@@ -4,7 +4,8 @@ var timer = false; // for 'setInterval' status check
 
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		$( '#gpio' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
+		gpioon = state === 'ON' ? 1 : 0;
+		$( '#gpio' ).css( 'background', gpioon ? '#0095d8' : '#34495e' );
 	} );
 }
 
@@ -78,8 +79,9 @@ pushstreamGPIO.connect();
 
 var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
 
-$hammergpio.on( 'tap',  function() {
-	var on = $( this ).hasClass( 'btn-primary' ) ? 'ON' : 'OFF';
+$hammergpio.on( 'tap',  function( e ) {
+	var on = gpioon ? 'ON' : 'OFF';
+	$( '#settings' ).hide();
 	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
