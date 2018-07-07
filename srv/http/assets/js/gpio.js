@@ -4,7 +4,7 @@ var timer = false; // for 'setInterval' status check
 
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		$( '#gpio a' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
+		$( '#gpio' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
 	} );
 }
 
