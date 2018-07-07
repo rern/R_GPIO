@@ -4,8 +4,8 @@ var timer = false; // for 'setInterval' status check
 
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		gpiostate = state === 'ON' ? 'ON' : 'OFF';
-		$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '#34495e' );
+		$( '#gpio' ).toggleClass( 'gpioon', state === 'ON' );
+		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
 	} );
 }
 
@@ -39,7 +39,10 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		$( '#infoX' ).click();
 	} else if ( state == 'IDLE' ) {
 		info( {
-			  icon        : 'cog fa-spin'
+			  icon        : '<span id="stopwatch" class="fa-stack fa-2x">'
+							+'<i class="fa fa-stopwatch-i fa-spin fa-stack-1x"></i>'
+							+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
+							+'</span>'
 			, title       : 'GPIO Timer'
 			, message     : 'Idel Off Countdown:<br><white>'+ delay +'</white> s ...'
 			, cancellabel : 'Hide'
@@ -67,25 +70,34 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				$( '#gpio' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
-				gpiostate = state;
+				$( '#gpio' ).toggleClass( 'gpioon', state == 'ON' );
+				$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
 			}
 		}, delay * 1000 );
+		
+		setTimeout( function() {
+			clickdelay = 0;
+		}, ( delay + 10 ) * 1000 );
 	}
 	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
 pushstreamGPIO.connect();
 
+var clickdelay = 0;
 var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
-
 $hammergpio.on( 'tap',  function( e ) {
+	// prevent instant on/off
+	if ( clickdelay ) {
+		info( {
+			  icon    : 'info-circle'
+			, message :'Please wait 10 seconds between on / off'
+		} );
+		return;
+	}
+	clickdelay = 1;
+
 	$( '#settings' ).hide();
-/*	$( this ).prop( 'disabled', true );
-	setTimeout( function() {
-		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
-	}, 10000 );*/
-	
-	$.get( '/gpioexec.php?onoffpy='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
+	$.get( '/gpioexec.php?onoffpy='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
 } ).on( 'press', function() {
 	window.location.href = 'gpiosettings.php';
 } );
