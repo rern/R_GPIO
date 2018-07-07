@@ -4,8 +4,8 @@ var timer = false; // for 'setInterval' status check
 
 function gpioOnOff() {
 	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
-		gpioon = state === 'ON' ? 'ON' : 'OFF';
-		$( '#gpio' ).css( 'background', gpioon === 'ON' ? '#0095d8' : '#34495e' );
+		gpiostate = state === 'ON' ? 'ON' : 'OFF';
+		$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '#34495e' );
 	} );
 }
 
@@ -68,8 +68,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
 				$( '#gpio' ).css( 'background', state == 'ON' ? '#0095d8' : '#34495e' );
-			} else {
-				gpioOnOff();
+				gpiostate = state;
 			}
 		}, delay * 1000 );
 	}
@@ -86,22 +85,7 @@ $hammergpio.on( 'tap',  function( e ) {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
 	}, 10000 );*/
 	
-	var py = gpioon === 'ON' ? 'gpiooff.py' : 'gpioon.py';
-	$.get( '/gpioexec.php?onoffpy='+ py,
-		function( state ) {
-			if ( state.state == gpioon ) {
-				PNotify.removeAll();
-				new PNotify( {
-					  icon : 'fa fa-warning fa-lg'
-					, title: 'GPIO'
-					, text : gpioon === 'ON' ? 'Already ON' : 'Already OFF'
-					, delay: 4000
-					, addclass: 'pnotify_custom'
-				} );
-				gpioOnOff();
-			}
-		}
-	);
+	$.get( '/gpioexec.php?onoffpy='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
 } ).on( 'press', function() {
 	window.location.href = 'gpiosettings.php';
 } );
