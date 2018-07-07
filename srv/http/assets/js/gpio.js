@@ -67,7 +67,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				$( '#gpio i' ).css( 'color', state == 'ON' ? '#0095d8' : '#e0e7ee' );
+				$( '#gpio' ).css( 'background', gpioon ? '#0095d8' : '#34495e' );
 			} else {
 				gpioOnOff();
 			}
