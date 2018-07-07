@@ -57,13 +57,6 @@ string=$( cat <<'EOF'
 EOF
 )
 insertH 'poweroff-modal'
-			
-string=$( cat <<'EOF'
-    <button id="gpio" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
-EOF
-)
-appendH 'class="home"'
-
 
 file=/srv/http/app/templates/footer.php
 echo $file
