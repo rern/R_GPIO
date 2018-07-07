@@ -116,8 +116,8 @@ $( '#gpio' ).click( function() {
 } );
 
 // power off menu
-$( '#reboot, #poweroff' ).click( function() {
-	reboot = ( this.id == 'reboot' ) ? ' reboot' : '';
+$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
+	reboot = ( this.id == 'syscmd-reboot' ) ? ' reboot' : '';
 	$.get( '/gpioexec.php?onoffpy=gpiopower.py'+ reboot );
 });
 
