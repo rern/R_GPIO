@@ -53,7 +53,7 @@ EOF
 insertH 'id="menu-top"'
 
 string=$( cat <<'EOF'
-            <li><a id="gpio"><img src="/img/gpio.svg" style="width: 20px;margin: -5px 10px 0 5px;"> GPIO</a></li>
+            <li><a id="gpio"><i class="fa"></i> GPIO</a></li>
 EOF
 )
 insertH 'poweroff-modal'
