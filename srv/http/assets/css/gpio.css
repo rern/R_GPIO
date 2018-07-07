@@ -5,6 +5,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+.fa-gpio:before,
 #gpio i:before {
 	font-family: addons;
 	content: "\f547";
