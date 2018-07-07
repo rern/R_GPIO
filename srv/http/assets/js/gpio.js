@@ -82,10 +82,10 @@ var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
 $hammergpio.on( 'tap',  function( e ) {
 	var on = gpioon ? 'ON' : 'OFF';
 	$( '#settings' ).hide();
-	$( this ).prop( 'disabled', true );
+/*	$( this ).prop( 'disabled', true );
 	setTimeout( function() {
 		$( '#gpio' ).prop( 'disabled', false ); // $(this) not work
-	}, 10000 );
+	}, 10000 );*/
 	
 	var py = ( on == 'ON' ) ? 'gpiooff.py' : 'gpioon.py';
 	$.get( '/gpioexec.php?onoffpy='+ py,
