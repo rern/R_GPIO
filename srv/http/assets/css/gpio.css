@@ -18,6 +18,10 @@
 	font-family: addons;
 	content: "\f54F";
 }
+#stopwatch {
+	margin: -35px -20px 0 -15px;
+	padding: 0;
+}
 .pnotify_custom {
     top: 60px !important;
     bottom: auto !important;
