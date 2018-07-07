@@ -10,6 +10,14 @@
 	font-family: addons;
 	content: "\f547";
 }
+.fa-stopwatch-o:before {
+	font-family: addons;
+	content: "\f54E";
+}
+.fa-stopwatch-i:before {
+	font-family: addons;
+	content: "\f54F";
+}
 .pnotify_custom {
     top: 60px !important;
     bottom: auto !important;
@@ -20,4 +28,7 @@
 
 #dropdownbg {
 	height: 408px !important;
+}
+.gpioon {
+	background: #0095d8 !important;
 }
