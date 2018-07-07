@@ -1,3 +1,29 @@
+@font-face {
+	font-family: addons;
+	src: url( '../fonts/addons.woff' ) format( 'woff' ),
+		url( '../fonts/addons.ttf' ) format( 'truetype' );
+	font-weight: normal;
+	font-style: normal;
+}
+.fa {
+	font-family: FontAwesome, addons;
+}
+.fa-gpio:before {
+	content: "\f547";
+	color: #7795b4;
+}
+.fa-times:before { content: "\f51A" }
+.fa-check:before { content: "\f51B" }
+.fa-chevron-down:before { content: "\f568" }
+
+.fa-ellipsis-v:before { content: "\f546" }
+.fa-tag:before { content: "\f544" }
+.fa-power-off:before { content: "\f562" }
+.fa-clock-o:before { content: "\f545" }
+
+.fa-info-circle:before { content: "\f560" }
+.fa-question-circle:before { content: "\f561" }
+
 .pnotify_custom {
     top: 60px !important;
     bottom: auto !important;
