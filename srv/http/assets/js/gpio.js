@@ -73,12 +73,16 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			if ( state != 'FAILED !' ) {
 				$( '#gpio' ).toggleClass( 'gpioon', state == 'ON' );
 				$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
+				//$( '#imode' ).show();
 			}
 		}, delay * 1000 );
 		
 		setTimeout( function() {
 			clickdelay = 0;
 		}, ( delay + 10 ) * 1000 );
+		setTimeout( function() {
+			imodedelay = 0;
+		}, 5000 );
 	}
 	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
@@ -98,6 +102,7 @@ $hammergpio.on( 'press', function() {
 		return;
 	}
 	clickdelay = 1;
+	imodedelay = 1; // fix imode flashing on usb dac switching
 
 	$( '#settings' ).hide();
 	$.get( '/gpioexec.php?onoffpy='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
