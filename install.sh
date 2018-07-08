@@ -45,12 +45,6 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH 'runeui.css'
-	
-string=$( cat <<'EOF'
-<input id="enable" type="hidden" value=<?=$enable ?>>
-EOF
-)
-insertH 'id="menu-top"'
 
 string=$( cat <<'EOF'
             <li><a id="gpio"><i class="fa"></i> GPIO</a></li>
