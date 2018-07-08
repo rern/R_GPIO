@@ -63,7 +63,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	} else {
 		PNotify.removeAll();
 		new PNotify( {
-			  icon    : ( state != 'FAILED !' ) ? stopwatch : 'fa fa-warning fa-lg'
+			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
 			, title   : 'GPIO'
 			, text    : 'Powering '+ state +' ...'
 			, delay   : delay * 1000
