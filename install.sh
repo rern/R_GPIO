@@ -56,7 +56,7 @@ string=$( cat <<'EOF'
             <li><a id="gpio"><i class="fa"></i> GPIO</a></li>
 EOF
 )
-insertH 'poweroff-modal'
+appendH 'poweroff-modal'
 
 file=/srv/http/app/templates/footer.php
 echo $file
