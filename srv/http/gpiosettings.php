@@ -148,7 +148,7 @@ function opttime( $n, $minimum ) {
 						<input id="name3" name="name3" type="text" class="form-control osk-trigger input-lg name" value="<?=$name3?>">
 						<input id="name4" name="name4" type="text" class="form-control osk-trigger input-lg name" value="<?=$name4?>">
 						<br>
-						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power-off red"></i> &nbsp;Off</span>
+						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power-off fa-lg red"></i></span>
 					</div>
 				</div>
 				<div class="gpio-float-r">
