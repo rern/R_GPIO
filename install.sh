@@ -107,4 +107,4 @@ installfinish $@
 
 clearcache
 
-title -nt "$info Settings: Menu > GPIO."
+title -nt "$info Menu > GPIO: long-press = setting, tap = on/off"
