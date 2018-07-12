@@ -55,6 +55,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		timer = setInterval( function() {
 			if ( delay == 1 ) {
+				imodedelay = 1;
 				$( '#infoOverlay' ).hide();
 				clearInterval( timer );
 			}
