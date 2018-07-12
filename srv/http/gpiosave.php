@@ -1,7 +1,6 @@
 <?php
 $gpio = array(
-	  'enable' => $_POST[ 'enable' ]
-	, 'pin'    => array(
+	  'pin'    => array(
 		  'pin1'   => $_POST[ 'pin1' ]
 		, 'pin2'   => $_POST[ 'pin2' ]
 		, 'pin3'   => $_POST[ 'pin3' ]

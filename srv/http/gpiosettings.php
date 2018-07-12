@@ -21,8 +21,6 @@ $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
-$enable = $gpio[ 'enable' ];
-
 $pin  = $gpio[ 'pin' ];
 $pin1 = $pin[ 'pin1' ];
 $pin2 = $pin[ 'pin2' ];
@@ -106,18 +104,7 @@ function opttime( $n, $minimum ) {
 </p>
 <img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
 <div id="divgpio" class="boxed-group">
-	<div class="form-group">
-		<div class="gpio-float-r">
-			<div class="col-sm-10">
-				<span class="gpio-text"><i class="fa fa-check fa-lg blue"></i> &nbsp; Enable</span>
-				<label class="switch-light">
-					<input id="gpio-enable" type="checkbox" <?=$enable == 1 ? 'value="1" checked="checked"' : 'value="0"';?>>
-					<span><span>OFF</span><span>ON</span></span><a class="btn btn-primary"></a>
-				</label>
-			</div>
-		</div>
-	</div>
-	<div class="form-group" <?=$enable == 0 ? 'style="display:none"' : ''?> id="gpio-group">
+	<div class="form-group" id="gpio-group">
 		<div class="col-sm-10 section" id="gpio">
 			<form></form> <!-- dummy for bypass 1st form not serialize -->
 			<form id="gpioform">
