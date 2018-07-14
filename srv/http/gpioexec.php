@@ -7,6 +7,7 @@ if ( $command === 'timer' ) {
 	// broadcast to remove idle reset infobox
 	exec( '/usr/bin/curl -s -v -X POST "http://localhost/pub?id=gpio" -d "{ \"state\": \"RESET\" }"' );
 } else if ( $command === 'reboot' ) {
+	exec( '/usr/bin/sudo /root/gpiooff.py' );
 	$part = exec( '/usr/bin/sudo /usr/bin/mount | grep "on / " | cut -d" " -f1' );
 	$bootpart = substr( $part, -1 ) - 1;
 	$kernel = exec( '/usr/bin/sudo /usr/bin/uname -r | cut -d"-" -f1' );
