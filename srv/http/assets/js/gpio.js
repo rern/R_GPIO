@@ -1,11 +1,11 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-var stopwatch = '<span id="stopwatch" class="fa-stack fa-2x">'
+var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'<i class="fa fa-stopwatch-i fa-spin fa-stack-1x"></i>'
 				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
-
+		
 function gpioOnOff() {
 	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
 		$( '#gpio' ).toggleClass( 'gpioon', state === 'ON' );
@@ -45,7 +45,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : stopwatch
 			, title       : 'GPIO Timer'
-			, message     : 'Idel Off Countdown:<br>'+ stopwatch +'&emsp;<white>'+ delay +'</white> s ...'
+			, message     : 'Idle Off Countdown:<br>'+ stopwatch +'<white>'+ delay +'</white>'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
