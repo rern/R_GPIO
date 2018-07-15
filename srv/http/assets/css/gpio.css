@@ -18,7 +18,7 @@
 	font-family: addons;
 	content: "\f54F";
 }
-#stopwatch {
+#infoIcon .stopwatch {
 	margin: -35px -20px 0 -15px;
 	padding: 0;
 }

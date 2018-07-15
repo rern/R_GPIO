@@ -1,13 +1,13 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-var stopwatch = '<span id="stopwatch" class="fa-stack fa-2x">'
+var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'<i class="fa fa-stopwatch-i fa-spin fa-stack-1x"></i>'
 				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
-
+		
 function gpioOnOff() {
-	$.get( '/gpioexec.php?onoffpy=gpio.py state', function( state ) {
+	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
 		$( '#gpio' ).toggleClass( 'gpioon', state === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
 	} );
@@ -45,12 +45,12 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : stopwatch
 			, title       : 'GPIO Timer'
-			, message     : 'Idel Off Countdown:<br><white>'+ delay +'</white> s ...'
+			, message     : 'Idle Off Countdown:<br>'+ stopwatch +'<white>'+ delay +'</white>'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
 			, ok          : function() {
-				$.get( '/gpioexec.php?onoffpy=gpiotimer.py' );
+				$.get( '/gpioexec.php?command=timer' );
 			}
 		} );
 		timer = setInterval( function() {
@@ -106,7 +106,7 @@ $hammergpio.on( 'press', function() {
 	imodedelay = 1; // fix imode flashing on usb dac switching
 
 	$( '#settings' ).hide();
-	$.get( '/gpioexec.php?onoffpy='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
+	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
 
 if ( $( '#turnoff' ).length ) {
@@ -118,13 +118,13 @@ if ( $( '#turnoff' ).length ) {
 			, oklabel     : 'Power off'
 			, okcolor     : '#bb2828'
 			, ok          : function() {
-				$.get( '/gpioexec.php?onoffpy=gpiopower.py' );
+				$.get( '/gpioexec.php?command=poweroff' );
 				toggleLoader();
 			}
 			, buttonlabel : 'Reboot'
 			, buttoncolor : '#9a9229'
 			, button      : function() {
-				$.get( '/gpioexec.php?onoffpy=gpiopower.py reboot' );
+				$.get( '/gpioexec.php?command=reboot' );
 				toggleLoader();
 			}
 		} );
@@ -132,7 +132,7 @@ if ( $( '#turnoff' ).length ) {
 } else {
 	// default power off menu
 	$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
-		$.get( '/gpioexec.php?onoffpy=gpiopower.py'+ ( this.id == 'syscmd-reboot' ? ' reboot' : '' ) );
+		$.get( '/gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
 		toggleLoader();
 	});
 }
