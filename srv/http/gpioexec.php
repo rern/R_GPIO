@@ -11,8 +11,8 @@ if ( $command === 'timer' ) {
 	$part = exec( '/usr/bin/sudo /usr/bin/mount | grep "on / " | cut -d" " -f1' );
 	$bootpart = substr( $part, -1 ) - 1;
 	// for older kernel
-	exec( "/bin/echo $bootpart > /sys/module/bcm2709/parameters/reboot_part" );
-	exec( "/var/www/command/rune_shutdown; /usr/bin/reboot $bootpart" );
+	exec( "/usr/bin/sudo /bin/echo $bootpart > /sys/module/bcm2709/parameters/reboot_part" );
+	exec( "/usr/bin/sudo /var/www/command/rune_shutdown; /usr/bin/reboot $bootpart" );
 } else if ( $command === 'poweroff' ) {
 	exec( '/usr/bin/sudo /root/gpiooff.py; /var/www/command/rune_shutdown;' );
 } else {
