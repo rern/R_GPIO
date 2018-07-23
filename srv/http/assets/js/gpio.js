@@ -90,10 +90,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 pushstreamGPIO.connect();
 
 var clickdelay = 0;
-var $hammergpio = new Hammer( document.getElementById( 'gpio' ) );
-$hammergpio.on( 'press', function() {
+$( '#gpio' ).on( 'taphold', function() {
 	window.location.href = 'gpiosettings.php';
-} ).on( 'tap',  function() {
+} ).click( function() {
 	// prevent instant on/off
 	if ( clickdelay ) {
 		info( {
