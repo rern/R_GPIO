@@ -38,7 +38,7 @@ if [[ enha ]]; then
 fi
 
 string=$( cat <<'EOF'
-    <a id="gpio"><i class="fa"></i>GPIO</a>
+    <li><a id="gpio"><i class="fa"></i>GPIO</a></li>
 EOF
 )
 appendH 'poweroff-modal'
