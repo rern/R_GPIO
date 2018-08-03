@@ -32,7 +32,7 @@ EOF
 )
 appendH 'runeui.css'
 if [[ enha ]]; then
-    file=$file.backup
+	file=$file.backup
 	appendH 'runeui.css'
 	file=${file/.backup/}
 fi
