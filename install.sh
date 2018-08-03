@@ -21,6 +21,8 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 # modify files #######################################
 echo -e "$bar Modify files ..."
 
+[[ -e /usr/local/bin/uninstall_enha.sh ]] && enha=1
+
 file=/srv/http/app/templates/header.php
 echo $file
 
@@ -39,18 +41,21 @@ $offd = $off[ "offd1" ] + $off[ "offd2" ] + $off[ "offd3" ];
 EOF
 )
 insertH '1'
+[[ enha ]] && file=$file.backup; insertH '1'
 
 string=$( cat <<'EOF'
 	<link rel="stylesheet" href="<?=$this->asset('/css/gpio.css')?>">
 EOF
 )
 appendH 'runeui.css'
+[[ enha ]] && file=${file/.backup/}; appendH 'runeui.css'
 
 string=$( cat <<'EOF'
             <li><a id="gpio"><i class="fa"></i> GPIO</a></li>
 EOF
 )
 appendH 'poweroff-modal'
+[[ enha ]] && file=$file.backup; appendH 'poweroff-modal'
 
 file=/srv/http/app/templates/footer.php
 echo $file
@@ -60,6 +65,7 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH '$'
+[[ enha ]] && file=$file.backup; appendH '$'
 
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
