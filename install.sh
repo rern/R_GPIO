@@ -31,21 +31,12 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH 'runeui.css'
-if [[ enha ]]; then
-	file=$file.backup
-	appendH 'runeui.css'
-	file=${file/.backup/}
-fi
 
 string=$( cat <<'EOF'
     <li><a id="gpio"><i class="fa"></i>GPIO</a></li>
 EOF
 )
 appendH 'poweroff-modal'
-if [[ enha ]]; then
-	file=$file.backup
-	appendH 'poweroff-modal'
-fi
 
 file=/srv/http/app/templates/footer.php
 echo $file
