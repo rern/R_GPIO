@@ -43,7 +43,7 @@ EOF
 )
 appendH 'poweroff-modal'
 if [[ enha ]]; then
-    file=$file.backup
+	file=$file.backup
 	appendH 'poweroff-modal'
 fi
 
