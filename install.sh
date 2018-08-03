@@ -27,35 +27,18 @@ file=/srv/http/app/templates/header.php
 echo $file
 
 string=$( cat <<'EOF'
-$file = "/srv/http/gpio.json";
-$fileopen = fopen( $file, "r" );
-$gpio = fread( $fileopen, filesize( $file ) );
-fclose( $fileopen );
-
-$gpio = json_decode( $gpio, true );
-$enable = $gpio[ "enable" ];
-$on = $gpio[ "on" ];
-$off = $gpio[ "off" ];
-$ond = $on[ "ond1" ] + $on[ "ond2" ] + $on[ "ond3" ];
-$offd = $off[ "offd1" ] + $off[ "offd2" ] + $off[ "offd3" ];
-EOF
-)
-insertH '1'
-[[ enha ]] && file=$file.backup; insertH '1'
-
-string=$( cat <<'EOF'
 	<link rel="stylesheet" href="<?=$this->asset('/css/gpio.css')?>">
 EOF
 )
 appendH 'runeui.css'
-[[ enha ]] && file=${file/.backup/}; appendH 'runeui.css'
+[[ enha ]] && file=$file.backup; appendH 'runeui.css'
 
 string=$( cat <<'EOF'
     <a id="gpio"><i class="fa"></i>GPIO</a>
 EOF
 )
 appendH 'poweroff-modal'
-[[ enha ]] && file=$file.backup; appendH 'poweroff-modal'
+[[ enha ]] && file=${file/.backup/}; appendH 'poweroff-modal'
 
 file=/srv/http/app/templates/footer.php
 echo $file
