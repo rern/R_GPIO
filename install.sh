@@ -21,9 +21,12 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 # modify files #######################################
 echo -e "$bar Modify files ..."
 
-[[ -e /usr/local/bin/uninstall_enha.sh ]] && enha=1
+if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
+	backup=backup
+	restorefile /srv/http/app/templates/header.php /srv/http/app/templates/footer.php
+fi
 
-file=/srv/http/app/templates/header.php
+file=/srv/http/app/templates/header.php.$backup
 echo $file
 
 string=$( cat <<'EOF'
@@ -31,23 +34,14 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH 'runeui.css'
-if [[ enha ]]; then
-	file=$file.backup
-	appendH 'runeui.css'
-	file=${file/.backup/}
-fi
 
 string=$( cat <<'EOF'
     <a id="gpio"><i class="fa"></i>GPIO</a>
 EOF
 )
 appendH 'poweroff-modal'
-if [[ enha ]]; then
-	file=$file.backup
-	appendH 'poweroff-modal'
-fi
 
-file=/srv/http/app/templates/footer.php
+file=/srv/http/app/templates/footer.php.$backup
 echo $file
 
 string=$( cat <<'EOF'
