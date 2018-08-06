@@ -25,7 +25,16 @@ if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
 	backup=backup
 	restorefile /srv/http/app/templates/header.php /srv/http/app/templates/footer.php
 fi
+#----------------------------------------------------------------------------------
+file=/srv/http/index.php
+echo $file
 
+string=$( cat <<'EOF'
+    'goiosettings',
+EOF
+)
+append 'controllers = array'
+#----------------------------------------------------------------------------------
 file=/srv/http/app/templates/header.php.$backup
 echo $file
 
@@ -40,7 +49,7 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH 'poweroff-modal'
-
+#----------------------------------------------------------------------------------
 file=/srv/http/app/templates/footer.php.$backup
 echo $file
 
@@ -49,8 +58,7 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH '$'
-[[ enha ]] && file=$file.backup; appendH '$'
-
+#----------------------------------------------------------------------------------
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
     file=/root/.xbindkeysrc
