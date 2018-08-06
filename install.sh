@@ -22,7 +22,7 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 echo -e "$bar Modify files ..."
 
 if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
-	backup=backup
+	backup=.backup
 	restorefile /srv/http/app/templates/header.php /srv/http/app/templates/footer.php
 fi
 #----------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ EOF
 )
 append 'controllers = array'
 #----------------------------------------------------------------------------------
-file=/srv/http/app/templates/header.php.$backup
+file=/srv/http/app/templates/header.php$backup
 echo $file
 
 appendAsset 'runeui.css' 'gpio.css'
@@ -46,7 +46,7 @@ EOF
 )
 appendH 'poweroff-modal'
 #----------------------------------------------------------------------------------
-file=/srv/http/app/templates/footer.php.$backup
+file=/srv/http/app/templates/footer.php$backup
 echo $file
 
 appendAsset '$' 'gpio.js'
