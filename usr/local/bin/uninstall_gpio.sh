@@ -22,11 +22,9 @@ rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
 
-[[ -e /usr/local/bin/uninstall_enha.sh ]] && backup=.backup
-
 files="
-/srv/http/app/templates/header.php$backup
-/srv/http/app/templates/footer.php$backup
+/srv/http/app/templates/header.php
+/srv/http/app/templates/footer.php
 /root/.xbindkeysrc
 "
 restorefile $files
