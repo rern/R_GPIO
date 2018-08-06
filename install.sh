@@ -11,7 +11,6 @@ installstart $@
 
 ln -sf /usr/bin/python{2.7,}
 
-# install RuneUI GPIO #######################################
 mv /srv/http/gpio.json{,.backup} &> /dev/null
 
 getinstallzip
@@ -21,7 +20,7 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 # modify files #######################################
 echo -e "$bar Modify files ..."
 
-if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
+if [[ -e /srv/http/app/templates/header.php.backup ]]; then
 	backup=.backup
 	restorefile /srv/http/app/templates/header.php /srv/http/app/templates/footer.php
 fi
