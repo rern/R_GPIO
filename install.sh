@@ -38,11 +38,7 @@ append 'controllers = array'
 file=/srv/http/app/templates/header.php.$backup
 echo $file
 
-string=$( cat <<'EOF'
-	<link rel="stylesheet" href="<?=$this->asset('/css/gpio.css')?>">
-EOF
-)
-appendH 'runeui.css'
+appendAsset 'runeui.css' 'gpio.css'
 
 string=$( cat <<'EOF'
     <a id="gpio"><i class="fa"></i>GPIO</a>
@@ -53,11 +49,7 @@ appendH 'poweroff-modal'
 file=/srv/http/app/templates/footer.php.$backup
 echo $file
 
-string=$( cat <<'EOF'
-<script src="<?=$this->asset('/js/gpio.js')?>"></script>
-EOF
-)
-appendH '$'
+appendAsset '$' 'gpio.js'
 #----------------------------------------------------------------------------------
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
