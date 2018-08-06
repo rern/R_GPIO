@@ -91,7 +91,7 @@ pushstreamGPIO.connect();
 
 var clickdelay = 0;
 $( '#gpio' ).on( 'taphold', function() {
-	window.location.href = 'gpiosettings.php';
+	window.location.href = 'gpiosettings';
 } ).click( function() {
 	// prevent instant on/off
 	if ( clickdelay ) {
