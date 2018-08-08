@@ -89,6 +89,18 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 };
 pushstreamGPIO.connect();
 
+var formtemp = heredoc( function() { /*
+		<form id="formtemp" action="gpiosettings.php" method="post">
+			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">
+			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">
+			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">
+			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">
+			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">
+			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">
+			<input type="hidden" name="gpiopin" value="'+ $( '#gpiopin' ).val() +'">
+		</form>
+*/ } );
+
 var clickdelay = 0;
 $( '#gpio' ).on( 'taphold', function() {
 	$( 'body' ).append( '\
@@ -99,6 +111,7 @@ $( '#gpio' ).on( 'taphold', function() {
 			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">\
 			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">\
 			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">\
+			<input type="hidden" name="gpiopin" value="'+ $( '#gpiopin' ).val() +'">\
 		</form>\
 	' );
 	$( '#formtemp' ).submit();
