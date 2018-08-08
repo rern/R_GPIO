@@ -38,6 +38,13 @@
 .boxed-group {
 	padding: 5px 15px;
 }
+#gpiopin {
+	display: none;
+	margin-bottom: 10px;
+	width: 100%;
+	border-radius: 6px;
+	background: #e0e7ee;
+}
 #divgpio div.col-sm-10 {
 	padding: 0;
 }
