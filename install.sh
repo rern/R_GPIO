@@ -29,7 +29,7 @@ file=/srv/http/index.php
 echo $file
 
 string=$( cat <<'EOF'
-    'goiosettings',
+    'gpiosettings',
 EOF
 )
 append 'controllers = array'
