@@ -47,11 +47,22 @@ appendH 'poweroff-modal'
 file=/srv/http/app/templates/footer.php
 echo $file
 
+string=$( cat <<'EOF'
+<input id="gpiosettingscss" type="hidden" value="<?=$this->asset('/css/gpiosettings.css')?>">
+<input id="gpiosettingsjs" type="hidden" value="<?=$this->asset('/js/gpiosettings.js')?>">
+<input id="gpiopin" type="hidden" value="<?=$this->asset('/img/RPi3_GPIO.svg')?>">
+EOF
+)
+
 if [[ -e $file.backup ]]; then
-	appendAsset 'enhance.css' 'gpio.js'
+	appendAsset 'enhance.js' 'gpio.js'
+	
+	appendH 'id="addonsinfojs"'
 	
 	file=$file.backup
 fi
+
+appendH 'id="addonsinfojs"'
 
 appendAsset '$' 'gpio.js'
 #----------------------------------------------------------------------------------
