@@ -1,21 +1,12 @@
-@font-face {
-	font-family: addons;
-	src: url( '../fonts/addons.woff' ) format( 'woff' ),
-		url( '../fonts/addons.ttf' ) format( 'truetype' );
-	font-weight: normal;
-	font-style: normal;
-}
+/* 'addons' declared in <head> for cache busting */
 .fa-gpio:before,
 #gpio i:before {
-	font-family: addons;
 	content: "\f547";
 }
 .fa-stopwatch-o:before {
-	font-family: addons;
 	content: "\f54E";
 }
 .fa-stopwatch-i:before {
-	font-family: addons;
 	content: "\f54F";
 }
 #infoIcon .stopwatch {
