@@ -24,15 +24,7 @@ if [[ -e /srv/http/app/templates/header.php.backup ]]; then
 	backup=.backup
 	restorefile /srv/http/app/templates/header.php /srv/http/app/templates/footer.php
 fi
-#----------------------------------------------------------------------------------
-file=/srv/http/index.php
-echo $file
 
-string=$( cat <<'EOF'
-    'gpiosettings',
-EOF
-)
-append 'controllers = array'
 #----------------------------------------------------------------------------------
 file=/srv/http/app/templates/header.php$backup
 echo $file
@@ -40,7 +32,7 @@ echo $file
 appendAsset 'runeui.css' 'gpio.css'
 
 string=$( cat <<'EOF'
-    <a id="gpio"><i class="fa"></i>GPIO</a>
+    <li><a id="gpio"><i class="fa fa-addons"></i>GPIO</a></li>
 EOF
 )
 appendH 'poweroff-modal'
