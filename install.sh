@@ -25,7 +25,7 @@ file=/srv/http/app/templates/header.php
 echo $file
 
 if [[ -e $file.backup ]]; then
-	appendAsset 'roundslider.min.css' 'gpio.css'
+	appendAsset 'enhance.css' 'gpio.css'
 	
 	string=$( cat <<'EOF'
     <a id="gpio"><i class="fa fa-addons"></i>GPIO</a>
@@ -48,7 +48,7 @@ file=/srv/http/app/templates/footer.php
 echo $file
 
 if [[ -e $file.backup ]]; then
-	appendAsset 'roundslider.min.css' 'gpio.js'
+	appendAsset 'enhance.css' 'gpio.js'
 	
 	file=$file.backup
 fi
