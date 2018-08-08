@@ -20,14 +20,21 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 # modify files #######################################
 echo -e "$bar Modify files ..."
 
-if [[ -e /srv/http/app/templates/header.php.backup ]]; then
-	backup=.backup
-	restorefile /srv/http/app/templates/header.php /srv/http/app/templates/footer.php
-fi
-
 #----------------------------------------------------------------------------------
-file=/srv/http/app/templates/header.php$backup
+file=/srv/http/app/templates/header.php
 echo $file
+
+if [[ -e $file.backup ]]; then
+	appendAsset 'roundslider.min.css' 'gpio.css'
+	
+	string=$( cat <<'EOF'
+    <a id="gpio"><i class="fa fa-addons"></i>GPIO</a>
+EOF
+)
+	appendH 'poweroff-modal'
+	
+	file=$file.backup
+fi
 
 appendAsset 'runeui.css' 'gpio.css'
 
@@ -37,8 +44,14 @@ EOF
 )
 appendH 'poweroff-modal'
 #----------------------------------------------------------------------------------
-file=/srv/http/app/templates/footer.php$backup
+file=/srv/http/app/templates/footer.php
 echo $file
+
+if [[ -e $file.backup ]]; then
+	appendAsset 'roundslider.min.css' 'gpio.js'
+	
+	file=$file.backup
+fi
 
 appendAsset '$' 'gpio.js'
 #----------------------------------------------------------------------------------
