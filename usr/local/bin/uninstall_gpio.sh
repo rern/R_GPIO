@@ -14,7 +14,6 @@ uninstallstart $@
 echo -e "$bar Remove files ..."
 rm -v /root/gpio*.py
 rm -v /srv/http/gpio*.php
-rm -v /srv/http/app/templates/gpio*
 rm -v /srv/http/assets/css/gpio*
 rm -v /srv/http/assets/img/RPi3_GPIO.svg
 rm -v /srv/http/assets/js/gpio*
@@ -31,7 +30,6 @@ file=/srv/http/app/templates/footer.php
 commentH 'gpio'
 fi
 files="
-/srv/http/index.php
 /srv/http/app/templates/header.php$backup
 /srv/http/app/templates/footer.php$backup
 /root/.xbindkeysrc
