@@ -62,7 +62,7 @@ if [[ -e $file.backup ]]; then
 	file=$file.backup
 fi
 
-appendH 'id="addonsinfojs"'
+insertH 'jquery-2.1.0.min.js'
 
 appendAsset '$' 'gpio.js'
 #----------------------------------------------------------------------------------
