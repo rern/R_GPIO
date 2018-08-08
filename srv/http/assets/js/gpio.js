@@ -91,7 +91,17 @@ pushstreamGPIO.connect();
 
 var clickdelay = 0;
 $( '#gpio' ).on( 'taphold', function() {
-	window.location.href = 'gpiosettings';
+	$( 'body' ).append( '\
+		<form id="formtemp" action="gpiosettings.php" method="post">\
+			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">\
+			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">\
+			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">\
+			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">\
+			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">\
+			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">\
+		</form>\
+	' );
+	$( '#formtemp' ).submit();
 } ).click( function() {
 	// prevent instant on/off
 	if ( clickdelay ) {
@@ -104,7 +114,7 @@ $( '#gpio' ).on( 'taphold', function() {
 	clickdelay = 1;
 	imodedelay = 1; // fix imode flashing on usb dac switching
 
-	$( '#settings' ).hide();
+	$( '#settings' ).addClass( 'hide' );
 	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
 
