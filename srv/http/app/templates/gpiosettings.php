@@ -73,9 +73,6 @@ function opttime( $n, $minimum ) {
 	echo $option;
 }
 ?>
-
-<body>
-
 <div class="container">
 <a href="/" class="close-root"><i class="fa fa-times fa-2x"></i></a>
 <h1><i class="fa fa-gpio"></i> GPIO</h1>
