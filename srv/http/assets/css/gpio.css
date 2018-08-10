@@ -1,6 +1,5 @@
 /* 'addons' declared in <head> for cache busting */
-.fa-gpio:before,
-#gpio i:before {
+.fa-gpio:before {
 	content: "\f547";
 }
 .fa-stopwatch-o:before {
@@ -23,7 +22,4 @@
 
 #dropdownbg {
 	height: 408px !important;
-}
-.gpioon {
-	background: #0095d8 !important;
 }
