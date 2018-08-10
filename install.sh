@@ -53,18 +53,26 @@ string=$( cat <<'EOF'
 <input id="gpiopin" type="hidden" value="<?=$this->asset('/img/RPi3_GPIO.svg')?>">
 EOF
 )
+insertH 'jquery-2.1.0.min.js'
 
-if [[ -e $file.backup ]]; then
+if [[ ! -e $file.backup ]]; then
+	insertH 'jquery-2.1.0.min.js'
+	
+	appendAsset '$' 'gpio.js'
+else
+	insertH 'jquery-2.1.0.min.js'
+	
+	string0=$string
+	
 	appendAsset 'enhance.js' 'gpio.js'
+	
+	string=$string0
+	file=$file.backup
 	
 	insertH 'jquery-2.1.0.min.js'
 	
-	file=$file.backup
+	appendAsset '$' 'gpio.js'
 fi
-
-insertH 'jquery-2.1.0.min.js'
-
-appendAsset '$' 'gpio.js'
 #----------------------------------------------------------------------------------
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
