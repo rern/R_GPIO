@@ -5,16 +5,18 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
-		
-function gpioOnOff() {
-	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
-		$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
-		$( '#gpio i' ).css( 'color', state === 'ON' ? '#34495e' : '' );
-		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-	} );
-}
 
-gpioOnOff();
+function gpioOnOff() {
+	$( '#gpio' ).css( 'background', gpiostate === 'ON' ? '#0095d8' : '' );
+	$( '#gpio i' ).css( 'color', gpiostate === 'ON' ? '#34495e' : '' );
+	$( '#igpio' ).toggleClass( 'hide', gpiostate === 'OFF' );
+}
+gpiostate = '';
+$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
+	gpiostate = state;
+	gpioOnOff();
+} );	
+
 if ( !timer ) $( '#infoX' ).click();
 
 document.addEventListener( 'visibilitychange', function( change ) {
@@ -36,6 +38,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var state = response[ 0 ].state;
 	var delay = response[ 0 ].delay;
+	gpiostate = state;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
@@ -129,7 +132,10 @@ $( '#gpio' ).on( 'taphold', function() {
 	imodedelay = 1; // fix imode flashing on usb dac switching
 
 	$( '#settings' ).addClass( 'hide' );
-	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
+	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ), function( state ) {
+		gpiostate = state;
+		gpioOnOff();
+	} );
 } );
 
 if ( $( '#turnoff' ).length ) {
