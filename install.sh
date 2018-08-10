@@ -25,7 +25,7 @@ file=/srv/http/app/templates/header.php
 echo $file
 
 if [[ -e $file.backup ]]; then
-	appendAsset 'runeui.css' 'gpio.css'
+	appendAsset 'runeui.min.css' 'gpio.css'
 	
 	string=$( cat <<'EOF'
     <a id="gpio"><i class="fa fa-addons"></i>GPIO</a>
@@ -43,36 +43,30 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH 'poweroff-modal'
+
 #----------------------------------------------------------------------------------
 file=/srv/http/app/templates/footer.php
 echo $file
 
-string=$( cat <<'EOF'
+string0=$( cat <<'EOF'
 <input id="gpiosettingscss" type="hidden" value="<?=$this->asset('/css/gpiosettings.css')?>">
 <input id="gpiosettingsjs" type="hidden" value="<?=$this->asset('/js/gpiosettings.js')?>">
 <input id="gpiopin" type="hidden" value="<?=$this->asset('/img/RPi3_GPIO.svg')?>">
 EOF
 )
-insertH 'jquery-2.1.0.min.js'
-
-if [[ ! -e $file.backup ]]; then
-	insertH 'jquery-2.1.0.min.js'
-	
-	appendAsset '$' 'gpio.js'
-else
-	insertH 'jquery-2.1.0.min.js'
-	
-	string0=$string
-	
+if [[ -e $file.backup ]]; then
 	appendAsset 'enhance.js' 'gpio.js'
 	
 	string=$string0
-	file=$file.backup
-	
 	insertH 'jquery-2.1.0.min.js'
 	
-	appendAsset '$' 'gpio.js'
+	file=$file.backup
 fi
+appendAsset '$' 'gpio.js'
+
+string=$string0
+insertH 'jquery-2.1.0.min.js'
+
 #----------------------------------------------------------------------------------
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
