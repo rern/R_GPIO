@@ -28,7 +28,7 @@ if [[ -e $file.backup ]]; then
 	appendAsset 'runeui.min.css' 'gpio.css'
 	
 	string=$( cat <<'EOF'
-    <a id="gpio"><i class="fa fa-addons"></i>GPIO</a>
+    <a id="gpio"><i class="fa fa-gpio"></i>GPIO</a>
 EOF
 )
 	insertH 'id="addons"'
