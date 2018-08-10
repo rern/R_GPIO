@@ -6,12 +6,12 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
 
+gpiostate = '';
 function gpioOnOff() {
 	$( '#gpio' ).css( 'background', gpiostate === 'ON' ? '#0095d8' : '' );
 	$( '#gpio i' ).css( 'color', gpiostate === 'ON' ? '#34495e' : '' );
 	$( '#igpio' ).toggleClass( 'hide', gpiostate === 'OFF' );
 }
-gpiostate = '';
 $.get( '/gpioexec.php?command=gpio.py state', function( state ) {
 	gpiostate = state;
 	gpioOnOff();
@@ -76,9 +76,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				$( '#gpio' ).toggleClass( 'gpioon', state == 'ON' );
-				$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-				//$( '#imode' ).show();
+				gpiostate = state;
+				gpioOnOff()
+				if ( state == 'OFF' ) $( '#infoX' ).click();
 			}
 		}, delay * 1000 );
 		
@@ -89,21 +89,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			imodedelay = 0;
 		}, 5000 );
 	}
-	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
 pushstreamGPIO.connect();
-
-var formtemp = heredoc( function() { /*
-		<form id="formtemp" action="gpiosettings.php" method="post">
-			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">
-			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">
-			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">
-			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">
-			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">
-			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">
-			<input type="hidden" name="gpiopin" value="'+ $( '#gpiopin' ).val() +'">
-		</form>
-*/ } );
 
 var clickdelay = 0;
 $( '#gpio' ).on( 'taphold', function() {
