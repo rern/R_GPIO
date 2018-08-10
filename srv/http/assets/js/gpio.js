@@ -8,7 +8,8 @@ var timer = false; // for 'setInterval' status check
 		
 function gpioOnOff() {
 	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
-		$( '#gpio' ).toggleClass( 'gpioon', state === 'ON' );
+		$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
+		$( '#gpio i' ).css( 'color', state === 'ON' ? '#34495e' : '' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
 	} );
 }
