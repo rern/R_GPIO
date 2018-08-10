@@ -25,13 +25,13 @@ file=/srv/http/app/templates/header.php
 echo $file
 
 if [[ -e $file.backup ]]; then
-	appendAsset 'enhance.css' 'gpio.css'
+	appendAsset 'runeui.css' 'gpio.css'
 	
 	string=$( cat <<'EOF'
     <a id="gpio"><i class="fa fa-addons"></i>GPIO</a>
 EOF
 )
-	appendH 'poweroff-modal'
+	insertH 'id="addons"'
 	
 	file=$file.backup
 fi
@@ -57,7 +57,7 @@ EOF
 if [[ -e $file.backup ]]; then
 	appendAsset 'enhance.js' 'gpio.js'
 	
-	appendH 'id="addonsinfojs"'
+	insertH 'jquery-2.1.0.min.js'
 	
 	file=$file.backup
 fi
