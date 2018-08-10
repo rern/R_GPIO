@@ -91,14 +91,17 @@ fi
 # set initial gpio #######################################
 echo -e "$bar GPIO service ..."
 
-echo '[Unit]
+string=$( cat <<'EOF'
+[Unit]
 Description=GPIO initial setup
 [Service]
 Type=idle
 ExecStart=/usr/bin/python /root/gpio.py set
 [Install]
 WantedBy=multi-user.target
-' > /etc/systemd/system/gpioset.service
+EOF
+)
+echo "$string" > /etc/systemd/system/gpioset.service
 
 systemctl enable gpioset
 systemctl daemon-reload
@@ -112,6 +115,6 @@ usermod -a -G root http # add user osmc to group root to allow /dev/gpiomem acce
 
 installfinish $@
 
-clearcache
-
 title -nt "$info Menu > GPIO: long-press = setting, tap = on/off"
+
+clearcache
