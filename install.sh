@@ -24,17 +24,7 @@ echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
 echo $file
 
-if [[ -e $file.backup ]]; then
-	appendAsset 'enhance.css' 'gpio.css'
-	
-	string=$( cat <<'EOF'
-    <a id="gpio"><i class="fa fa-gpio"></i>GPIO</a>
-EOF
-)
-	insertH 'id="addons"'
-	
-	file=$file.backup
-fi
+[[ -e $file.backup ]] && file=$file.backup
 
 appendAsset 'runeui.css' 'gpio.css'
 
@@ -48,25 +38,17 @@ appendH 'poweroff-modal'
 file=/srv/http/app/templates/footer.php
 echo $file
 
-string0=$( cat <<'EOF'
+string=$( cat <<'EOF'
 <input id="gpiosettingscss" type="hidden" value="<?=$this->asset('/css/gpiosettings.css')?>">
 <input id="gpiosettingsjs" type="hidden" value="<?=$this->asset('/js/gpiosettings.js')?>">
 <input id="gpiopin" type="hidden" value="<?=$this->asset('/img/RPi3_GPIO.svg')?>">
 EOF
 )
-if [[ -e $file.backup ]]; then
-	appendAsset 'enhance.js' 'gpio.js'
-	
-	string=$string0
-	insertH 'jquery-2.1.0.min.js'
-	
-	file=$file.backup
-fi
-appendAsset '$' 'gpio.js'
+[[ -e $file.backup ]] && file=$file.backup
 
-string=$string0
 insertH 'jquery-2.1.0.min.js'
 
+appendAsset '$' 'gpio.js'
 #----------------------------------------------------------------------------------
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
