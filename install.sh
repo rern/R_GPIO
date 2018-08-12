@@ -25,7 +25,7 @@ file=/srv/http/app/templates/header.php
 echo $file
 
 if [[ -e $file.backup ]]; then
-	appendAsset 'runeui.min.css' 'gpio.css'
+	appendAsset 'enhance.css' 'gpio.css'
 	
 	string=$( cat <<'EOF'
     <a id="gpio"><i class="fa fa-gpio"></i>GPIO</a>
