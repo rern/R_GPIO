@@ -26,6 +26,7 @@ echo -e "$bar Restore modified files ..."
 files="
 /srv/http/app/templates/header.php$backup
 /srv/http/app/templates/footer.php$backup
+/root/.xbindkeysrc
 "
 
 restorefile $files
