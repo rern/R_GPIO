@@ -6,22 +6,22 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
 
-gpiostate = '';
-function gpioOnOff() {
-	$( '#gpio' ).css( 'background', gpiostate === 'ON' ? '#0095d8' : '' );
-	$( '#gpio i' ).css( 'color', gpiostate === 'ON' ? '#34495e' : '' );
-	$( '#igpio' ).toggleClass( 'hide', gpiostate === 'OFF' );
+function gpioOnOff( state ) {
+	gpiostate = state;
+	$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
+	$( '#gpio i' ).css( 'color', state === 'ON' ? '#34495e' : '' );
+	$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
 }
 $.get( '/gpioexec.php?command=gpio.py state', function( state ) {
 	gpiostate = state;
-	gpioOnOff();
+	gpioOnOff( state );
 } );	
 
 if ( !timer ) $( '#infoX' ).click();
 
-document.addEventListener( 'visibilitychange', function( change ) {
+document.addEventListener( 'visibilitychange', function() {
 	if ( document.visibilityState === 'visible' ) {
-		gpioOnOff(); // update gpio button on reopen page
+		gpioOnOff( gpiostate ); // update gpio button on reopen page
 		PNotify.removeAll();
 		if ( !timer ) $( '#infoX' ).click();
 	}
@@ -38,7 +38,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var state = response[ 0 ].state;
 	var delay = response[ 0 ].delay;
-	gpiostate = state;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
@@ -76,15 +75,11 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				gpiostate = state;
-				gpioOnOff()
+				gpioOnOff( state )
 				if ( state == 'OFF' ) $( '#infoX' ).click();
 			}
 		}, delay * 1000 );
 		
-		setTimeout( function() {
-			clickdelay = 0;
-		}, ( delay + 10 ) * 1000 );
 		setTimeout( function() {
 			imodedelay = 0;
 		}, 5000 );
@@ -92,7 +87,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 };
 pushstreamGPIO.connect();
 
-var clickdelay = 0;
 $( '#gpio' ).on( 'taphold', function() {
 	$( 'body' ).append( '\
 		<form id="formtemp" action="gpiosettings.php" method="post">\
@@ -107,22 +101,9 @@ $( '#gpio' ).on( 'taphold', function() {
 	' );
 	$( '#formtemp' ).submit();
 } ).click( function() {
-	// prevent instant on/off
-	if ( clickdelay ) {
-		info( {
-			  icon    : 'info-circle'
-			, message :'Please wait 10 seconds between on / off'
-		} );
-		return;
-	}
-	clickdelay = 1;
 	imodedelay = 1; // fix imode flashing on usb dac switching
-
 	$( '#settings' ).addClass( 'hide' );
-	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ), function( state ) {
-		gpiostate = state;
-		gpioOnOff();
-	} );
+	$.get( '/gpioexec.php?command='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
 
 if ( $( '#turnoff' ).length ) {
