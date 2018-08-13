@@ -9,8 +9,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="stylesheet" href="assets/css/runeui.css">
-    <link rel="stylesheet" href="assets/css/addonsinfo.css">
-    <link rel="stylesheet" href="assets/css/gpiosettings.css">
+	<style>
+		@font-face {
+			font-family: addons;
+			src        : url( '<?=$_POST[ 'addonswoff' ]?>' ) format( 'woff' ), url( '<?=$_POST[ 'addonsttf' ]?>' ) format( 'truetype' );
+			font-weight: normal;
+			font-style : normal;
+		}
+	</style>
+    <link rel="stylesheet" href="<?=$_POST[ 'addonsinfocss' ]?>">
+    <link rel="stylesheet" href="<?=$_POST[ 'gpiosettingscss' ]?>">
     <link rel="shortcut icon" href="assets/img/favicon.ico">
 </head>
 
@@ -102,7 +110,7 @@ function opttime( $n, $minimum ) {
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
 	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-down fa-lg"></i></a>
 </p>
-<img src="assets/img/RPi3_GPIO.svg" style="display: none; margin-bottom: 10px; width: 100%; max-width: 600px; background: #ffffff;">
+<img id="gpiopin" src="<?=$_POST[ 'gpiopin' ]?>">
 <div id="divgpio" class="boxed-group">
 	<div class="form-group" id="gpio-group">
 		<div class="col-sm-10 section" id="gpio">
@@ -199,12 +207,12 @@ function opttime( $n, $minimum ) {
 </form>
 </div>
 
-<script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/vendor/bootstrap-select-1.12.1.min.js"></script>
-<script src="assets/js/vendor/pnotify.custom.min.js"></script>
-<script src="assets/js/addonsinfo.js"></script>
-<script src="assets/js/gpiosettings.js"></script>
+<script src="/js/vendor/jquery-2.1.0.min.js"></script>
+<script src="/js/vendor/bootstrap.min.js"></script>
+<script src="/js/vendor/bootstrap-select-1.12.1.min.js"></script>
+<script src="/js/vendor/pnotify.custom.min.js"></script>
+<script src="<?=$_POST[ 'addonsinfojs' ]?>"></script>
+<script src="<?=$_POST[ 'gpiosettingsjs' ]?>"></script>
 
 </body>
 </html>

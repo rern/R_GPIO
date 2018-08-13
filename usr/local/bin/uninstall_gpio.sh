@@ -22,11 +22,13 @@ rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
 
+[[ -e /srv/http/app/templates/header.php.backup ]] && backup=.backup
 files="
-/srv/http/app/templates/header.php
-/srv/http/app/templates/footer.php
+/srv/http/app/templates/header.php$backup
+/srv/http/app/templates/footer.php$backup
 /root/.xbindkeysrc
 "
+
 restorefile $files
 
 echo -e "$bar Remove service ..."

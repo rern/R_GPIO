@@ -5,15 +5,18 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
-		
-function gpioOnOff() {
-	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
-		$( '#gpio' ).toggleClass( 'gpioon', state === 'ON' );
-		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-	} );
-}
 
-gpioOnOff();
+gpiostate = '';
+function gpioOnOff() {
+	$( '#gpio' ).css( 'background', gpiostate === 'ON' ? '#0095d8' : '' );
+	$( '#gpio i' ).css( 'color', gpiostate === 'ON' ? '#34495e' : '' );
+	$( '#igpio' ).toggleClass( 'hide', gpiostate === 'OFF' );
+}
+$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
+	gpiostate = state;
+	gpioOnOff();
+} );	
+
 if ( !timer ) $( '#infoX' ).click();
 
 document.addEventListener( 'visibilitychange', function( change ) {
@@ -35,6 +38,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var state = response[ 0 ].state;
 	var delay = response[ 0 ].delay;
+	gpiostate = state;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
@@ -72,9 +76,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				$( '#gpio' ).toggleClass( 'gpioon', state == 'ON' );
-				$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-				//$( '#imode' ).show();
+				gpiostate = state;
+				gpioOnOff()
+				if ( state == 'OFF' ) $( '#infoX' ).click();
 			}
 		}, delay * 1000 );
 		
@@ -85,13 +89,23 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			imodedelay = 0;
 		}, 5000 );
 	}
-	if ( state == 'OFF' ) $( '#infoX' ).click();
 };
 pushstreamGPIO.connect();
 
 var clickdelay = 0;
 $( '#gpio' ).on( 'taphold', function() {
-	window.location.href = 'gpiosettings.php';
+	$( 'body' ).append( '\
+		<form id="formtemp" action="gpiosettings.php" method="post">\
+			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">\
+			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">\
+			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">\
+			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">\
+			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">\
+			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">\
+			<input type="hidden" name="gpiopin" value="'+ $( '#gpiopin' ).val() +'">\
+		</form>\
+	' );
+	$( '#formtemp' ).submit();
 } ).click( function() {
 	// prevent instant on/off
 	if ( clickdelay ) {
@@ -104,8 +118,11 @@ $( '#gpio' ).on( 'taphold', function() {
 	clickdelay = 1;
 	imodedelay = 1; // fix imode flashing on usb dac switching
 
-	$( '#settings' ).hide();
-	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ) );
+	$( '#settings' ).addClass( 'hide' );
+	$.get( '/gpioexec.php?command='+ ( $( '#gpio' ).hasClass( 'gpioon' ) ? 'gpiooff.py' : 'gpioon.py' ), function( state ) {
+		gpiostate = state;
+		gpioOnOff();
+	} );
 } );
 
 if ( $( '#turnoff' ).length ) {
