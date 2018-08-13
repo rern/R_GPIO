@@ -20,11 +20,10 @@ mv /srv/http/gpio.json{.backup,} &> /dev/null
 # modify files #######################################
 echo -e "$bar Modify files ..."
 
+[[ -e /srv/http/app/templates/header.php.backup ]] && backup=.backup
 #----------------------------------------------------------------------------------
-file=/srv/http/app/templates/header.php
+file=/srv/http/app/templates/header.php$backup
 echo $file
-
-[[ -e $file.backup ]] && file=$file.backup
 
 appendAsset 'runeui.css' 'gpio.css'
 
@@ -33,9 +32,8 @@ string=$( cat <<'EOF'
 EOF
 )
 appendH 'poweroff-modal'
-
 #----------------------------------------------------------------------------------
-file=/srv/http/app/templates/footer.php
+file=/srv/http/app/templates/footer.php$backup
 echo $file
 
 string=$( cat <<'EOF'
@@ -44,8 +42,6 @@ string=$( cat <<'EOF'
 <input id="gpiopin" type="hidden" value="<?=$this->asset('/img/RPi3_GPIO.svg')?>">
 EOF
 )
-[[ -e $file.backup ]] && file=$file.backup
-
 insertH 'jquery-2.1.0.min.js'
 
 appendAsset '$' 'gpio.js'
