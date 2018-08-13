@@ -1,7 +1,8 @@
 /* 'addons' declared in <head> for cache busting */
-
 .fa-gpio:before {
 	content: "\f547";
+}
+#settings .fa-gpio:before {
 	color: #7795b4;
 }
 .fa-stopwatch-o:before {
