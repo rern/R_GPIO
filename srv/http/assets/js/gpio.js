@@ -7,7 +7,6 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 var timer = false; // for 'setInterval' status check
 
 function gpioOnOff( state ) {
-	gpiostate = state;
 	$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
 	$( '#gpio i' ).css( 'color', state === 'ON' ? '#34495e' : '' );
 	$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
@@ -75,7 +74,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				gpioOnOff( state )
+				gpiostate = state;
+				gpioOnOff( state );
 				if ( state == 'OFF' ) $( '#infoX' ).click();
 			}
 		}, delay * 1000 );
