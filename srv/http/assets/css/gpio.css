@@ -2,7 +2,7 @@
 .fa-gpio:before {
 	content: "\f547";
 }
-#settings .fa-gpio:before {
+#settings .fa-gpio {
 	color: #7795b4;
 }
 .fa-stopwatch-o:before {
