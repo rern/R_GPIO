@@ -5,6 +5,7 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
+GUI.imodedelay = 0;
 
 function gpioOnOff( state ) {
 	$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
@@ -57,7 +58,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		timer = setInterval( function() {
 			if ( delay == 1 ) {
-				imodedelay = 1;
+				GUI.imodedelay = 1;
 				$( '#infoOverlay' ).hide();
 				clearInterval( timer );
 			}
@@ -81,7 +82,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		}, delay * 1000 );
 		
 		setTimeout( function() {
-			imodedelay = 0;
+			GUI.imodedelay = 0;
 		}, 5000 );
 	}
 };
@@ -101,7 +102,7 @@ $( '#gpio' ).on( 'taphold', function() {
 	' );
 	$( '#formtemp' ).submit();
 } ).click( function() {
-	imodedelay = 1; // fix imode flashing on usb dac switching
+	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	$( '#settings' ).addClass( 'hide' );
 	$.get( '/gpioexec.php?command='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
