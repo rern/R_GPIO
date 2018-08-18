@@ -7,21 +7,21 @@ var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
 var timer = false; // for 'setInterval' status check
 GUI.imodedelay = 0;
 
-function gpioOnOff( state ) {
-	$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
-	$( '#gpio i' ).css( 'color', state === 'ON' ? '#34495e' : '' );
-	$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
+function gpioOnOff() {
+	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
+		gpiostate = state;
+		$( '#gpio' ).css( 'background', state === 'ON' ? '#0095d8' : '' );
+		$( '#gpio i' ).css( 'color', state === 'ON' ? '#34495e' : '' );
+		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
+	} );
 }
-$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
-	gpiostate = state;
-	gpioOnOff( state );
-} );	
+gpioOnOff();
 
 if ( !timer ) $( '#infoX' ).click();
 
 document.addEventListener( 'visibilitychange', function() {
 	if ( document.visibilityState === 'visible' ) {
-		gpioOnOff( gpiostate ); // update gpio button on reopen page
+		gpioOnOff();
 		PNotify.removeAll();
 		if ( !timer ) $( '#infoX' ).click();
 	}
@@ -75,8 +75,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
-				gpiostate = state;
-				gpioOnOff( state );
+				gpioOnOff();
 				if ( state == 'OFF' ) $( '#infoX' ).click();
 			}
 		}, delay * 1000 );
