@@ -47,7 +47,7 @@ EOF
 )
 insertH 'jquery-2.1.0.min.js'
 
-appendAsset '$' 'gpio.js'
+appendAsset 'fastclick.min.js' 'gpio.js'
 #----------------------------------------------------------------------------------
 # Dual boot
 if [[ -e /usr/local/bin/hardreset ]]; then
