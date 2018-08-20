@@ -29,7 +29,7 @@ echo $file
 appendAsset 'runeui.css' 'gpio.css'
 
 string=$( cat <<'EOF'
-    <li><a id="gpio"><i class="fa fa-addons"></i>GPIO</a></li>
+    <li><a id="gpio"><i class="fa fa-gpio"></i>GPIO</a></li>
 EOF
 )
 appendH 'poweroff-modal'
