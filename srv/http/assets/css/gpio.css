@@ -2,8 +2,15 @@
 .fa-gpio:before {
 	content: "\f547";
 }
-#settings .fa-gpio {
+#settings .fa-gpio,
+#menu-settings .fa-gpio {
 	color: #7795b4;
+}
+#menu-settings a.active i,	
+	color: #34495e !important;
+}
+#menu-settings a.active {
+	background: #0095d8;
 }
 .fa-stopwatch-o:before {
 	content: "\f54E";
