@@ -129,7 +129,7 @@ if ( $( '#turnoff' ).length ) {
 	// default power off menu
 	$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
 		$.get( 'gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
-		$( '#loader' ).removeClass( 'hide' );
+		toggleLoader();
 	});
 }
 
