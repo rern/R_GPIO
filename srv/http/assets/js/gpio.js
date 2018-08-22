@@ -8,7 +8,7 @@ var timer = false; // for 'setInterval' status check
 GUI.imodedelay = 0;
 
 function gpioOnOff() {
-	$.get( '/gpioexec.php?command=gpio.py state', function( state ) {
+	$.get( 'gpioexec.php?command=gpio.py state', function( state ) {
 		gpiostate = state;
 		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
@@ -102,7 +102,7 @@ $( '#gpio' ).on( 'taphold', function() {
 } ).click( function() {
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	$( '#settings' ).addClass( 'hide' );
-	$.get( '/gpioexec.php?command='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
+	$.get( 'gpioexec.php?command='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
 
 if ( $( '#turnoff' ).length ) {
@@ -114,13 +114,13 @@ if ( $( '#turnoff' ).length ) {
 			, oklabel     : 'Power off'
 			, okcolor     : '#bb2828'
 			, ok          : function() {
-				$.get( '/gpioexec.php?command=poweroff' );
+				$.get( 'gpioexec.php?command=poweroff' );
 				$( '#loader' ).removeClass( 'hide' );
 			}
 			, buttonlabel : 'Reboot'
 			, buttoncolor : '#9a9229'
 			, button      : function() {
-				$.get( '/gpioexec.php?command=reboot' );
+				$.get( 'gpioexec.php?command=reboot' );
 				$( '#loader' ).removeClass( 'hide' );
 			}
 		} );
@@ -128,8 +128,8 @@ if ( $( '#turnoff' ).length ) {
 } else {
 	// default power off menu
 	$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
-		$.get( '/gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
-		toggleLoader();
+		$.get( 'gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
+		$( '#loader' ).removeClass( 'hide' );
 	});
 }
 
