@@ -115,13 +115,13 @@ if ( $( '#turnoff' ).length ) {
 			, okcolor     : '#bb2828'
 			, ok          : function() {
 				$.get( '/gpioexec.php?command=poweroff' );
-				toggleLoader();
+				$( '#loader' ).removeClass( 'hide' );
 			}
 			, buttonlabel : 'Reboot'
 			, buttoncolor : '#9a9229'
 			, button      : function() {
 				$.get( '/gpioexec.php?command=reboot' );
-				toggleLoader();
+				$( '#loader' ).removeClass( 'hide' );
 			}
 		} );
 	} );
