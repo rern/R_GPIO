@@ -118,7 +118,7 @@ function opttime( $n, $minimum ) {
 			<form id="gpioform">
 				<div class="gpio-float-l">
 					<div class="col-sm-10" id="gpio-num">
-						<span class="gpio-text"><i class="fa fa-ellipsis-v fa-lg blue"></i> &nbsp; Pin</span>
+						<span class="gpio-text"><i class="fa fa-gpiopins fa-lg blue"></i> &nbsp; Pin</span>
 						<select id="pin1" name="pin1" class="selectpicker pin">
 							<?php optpin( $pin1 )?>
 						</select>
@@ -131,7 +131,7 @@ function opttime( $n, $minimum ) {
 						<select id="pin4" name="pin4" class="selectpicker pin">
 							<?php optpin( $pin4 )?>
 						</select>
-						<span class="gpio-text"><i class="fa fa-clock-o fa-lg yellow"></i> &nbsp; Idle</span>
+						<span class="gpio-text"><i class="fa fa-stopwatch fa-lg yellow"></i> &nbsp; Idle</span>
 						<select id="timer" name="timer" class="selectpicker timer">
 							<?php opttime( $timer, 2 )?>
 						</select>
