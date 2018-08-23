@@ -1,19 +1,20 @@
 <?php
 $command = $_GET[ 'command' ];
-
+$sudo = '/usr/bin/sudo /usr/bin/';
+$sudoS = '/usr/bin/sudo ';
 if ( $command === 'timer' ) {
-	exec( '/usr/bin/sudo /usr/bin/killall -9 gpiotimer.py &> /dev/null' );
-	exec( '/usr/bin/sudo /root/gpiotimer.py &> /dev/null &' );
+	exec( $sudo.'killall -9 gpiotimer.py &> /dev/null' );
+	exec( $sudoS.'/root/gpiotimer.py &> /dev/null &' );
 	// broadcast to remove idle reset infobox
-	exec( '/usr/bin/curl -s -v -X POST "http://localhost/pub?id=gpio" -d "{ \"state\": \"RESET\" }"' );
+	exec( $sudo.'curl -s -v -X POST "http://localhost/pub?id=gpio" -d "{ \"state\": \"RESET\" }"' );
 } else if ( $command === 'reboot' ) {
-	exec( '/usr/bin/sudo /root/gpiooff.py' );
-	$part = exec( '/usr/bin/sudo /usr/bin/mount | grep "on / " | cut -d" " -f1' );
+	exec( $sudoS.'/root/gpiooff.py' );
+	$part = exec( $sudo.'mount | grep "on / " | cut -d" " -f1' );
 	$bootpart = substr( $part, -1 ) - 1;
-	exec( "/usr/bin/sudo /bin/echo $bootpart > /sys/module/bcm2709/parameters/reboot_part" );
-	exec( "/usr/bin/sudo /var/www/command/rune_shutdown; /usr/bin/sudo /usr/bin/reboot $bootpart" );
+	exec( $sudo.'echo '.$bootpart.' > /sys/module/bcm2709/parameters/reboot_part' );
+	exec( $sudoS.'/var/www/command/rune_shutdown; '.$sudo.'reboot '.$bootpart );
 } else if ( $command === 'poweroff' ) {
-	exec( '/usr/bin/sudo /root/gpiooff.py; /var/www/command/rune_shutdown;' );
+	exec( $sudoS.'/root/gpiooff.py; '.$sudoS.'/var/www/command/rune_shutdown' );
 } else {
-	echo exec( '/usr/bin/sudo /root/'.$command );
+	echo exec( $sudoS.'/root/'.$command );
 }
