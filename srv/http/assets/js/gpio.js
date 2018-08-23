@@ -12,7 +12,7 @@ function gpioOnOff() {
 		gpiostate = state;
 		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-	} );
+	}, 'text' );
 }
 gpioOnOff();
 
