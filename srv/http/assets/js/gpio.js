@@ -105,33 +105,10 @@ $( '#gpio' ).on( 'taphold', function() {
 	$.get( 'gpioexec.php?command='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
 
-if ( $( '#turnoff' ).length ) {
-	$( '#turnoff' ).off( 'click' ).on( 'click', function() {
-		info( {
-			  icon        : 'power-off'
-			, title       : 'Power'
-			, message     : 'Select mode:'
-			, oklabel     : 'Power off'
-			, okcolor     : '#bb2828'
-			, ok          : function() {
-				$.get( 'gpioexec.php?command=poweroff' );
-				$( '#loader' ).removeClass( 'hide' );
-			}
-			, buttonlabel : 'Reboot'
-			, buttoncolor : '#9a9229'
-			, button      : function() {
-				$.get( 'gpioexec.php?command=reboot' );
-				$( '#loader' ).removeClass( 'hide' );
-			}
-		} );
-	} );
-} else {
-	// default power off menu
-	$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
-		$.get( 'gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
-		toggleLoader();
-	});
-}
+$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
+	$.get( 'gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
+	toggleLoader();
+});
 
 // force href open in web app window (from: https://gist.github.com/kylebarrow/1042026)
 if ( ( 'standalone' in window.navigator ) && window.navigator.standalone ) {
