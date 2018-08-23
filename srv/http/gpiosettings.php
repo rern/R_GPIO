@@ -143,12 +143,12 @@ function opttime( $n, $minimum ) {
 						<input id="name3" name="name3" type="text" class="form-control osk-trigger input-lg name" value="<?=$name3?>">
 						<input id="name4" name="name4" type="text" class="form-control osk-trigger input-lg name" value="<?=$name4?>">
 						<br>
-						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power-off fa-lg red"></i></span>
+						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power fa-lg red"></i></span>
 					</div>
 				</div>
 				<div class="gpio-float-r">
 					<div class="col-sm-10">
-						<span class="gpio-text"><i class="fa fa-power-off fa-lg green"></i> &nbsp; On Sequence</span>
+						<span class="gpio-text"><i class="fa fa-power fa-lg green"></i> &nbsp; On Sequence</span>
 						<select id="on1" name="on1" class="selectpicker on">
 							<?php optname( $on1 )?>
 						</select>
@@ -174,7 +174,7 @@ function opttime( $n, $minimum ) {
 					<div class="col-sm-10" style="width: 20px;">
 					</div>
 						<div class="col-sm-10">
-							<span class="gpio-text"><i class="fa fa-power-off fa-lg red"></i> &nbsp; Off Sequence</span>
+							<span class="gpio-text"><i class="fa fa-power fa-lg red"></i> &nbsp; Off Sequence</span>
 							<select id="off1" name="off1" class="selectpicker off">
 								<?php optname( $off1 )?>
 							</select>
