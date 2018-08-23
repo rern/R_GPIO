@@ -1,6 +1,6 @@
 /* 'addons' declared in <head> for cache busting */
 .fa-gpio:before {
-	content: "\f547";
+	content: "\f529";
 }
 #settings .fa-gpio,
 .dropdown-menu .fa-gpio {
@@ -13,10 +13,10 @@
 	background: #0095d8;
 }
 .fa-stopwatch-o:before {
-	content: "\f54E";
+	content: "\f548";
 }
 .fa-stopwatch-i:before {
-	content: "\f54F";
+	content: "\f549";
 }
 #infoIcon .stopwatch {
 	margin: -35px -20px 0 -15px;
