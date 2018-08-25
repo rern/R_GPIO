@@ -43,6 +43,14 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	}
 	if ( state == 'RESET' ) {
 		$( '#infoX' ).click();
+	} else if ( state === 'AO' ) {
+		info( {
+			  icon      : 'output'
+			, title     : 'Audio Output Switch'
+			, message   : state
+			, nobutton  : 1
+			, autoclose : 3000
+		} );
 	} else if ( state == 'IDLE' ) {
 		info( {
 			  icon        : stopwatch
@@ -63,7 +71,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			}
 			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
-	} else if ( state === 'ON' || state === 'OFF' || state === 'FAILED !' ) {
+	} else {
 		info( {
 			  icon      : ( state != 'FAILED !' ) ? stopwatch : 'warning'
 			, title     : 'GPIO'
@@ -78,14 +86,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		setTimeout( function() {
 			GUI.imodedelay = 0;
 		}, 5000 );
-	} else {
-		info( {
-			  icon      : 'output'
-			, title     : 'Audio Output Switch'
-			, message   : state
-			, nobutton  : 1
-			, autoclose : 3000
-		} );
 	}
 };
 pushstreamGPIO.connect();
