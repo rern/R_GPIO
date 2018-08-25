@@ -47,7 +47,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon      : 'output'
 			, title     : 'Audio Output Switch'
-			, message   : state
+			, message   : response.name
 			, nobutton  : 1
 			, autoclose : 3000
 		} );
