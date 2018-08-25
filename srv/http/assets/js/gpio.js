@@ -48,8 +48,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		PNotify.removeAll();
 		new PNotify( {
 			  icon    : 'fa fa-cog fa-spin fa-lg'
-			, title   : 'Audio Output'
-			, text    : 'Switch to: '+ response.name
+			, title   : 'Audio Output Switch'
+			, text    : response.name
 			, addclass: 'pnotify_custom'
 		} );
 	} else if ( state == 'IDLE' ) {
