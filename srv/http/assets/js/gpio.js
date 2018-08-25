@@ -21,7 +21,6 @@ if ( !timer ) $( '#infoX' ).click();
 document.addEventListener( 'visibilitychange', function() {
 	if ( document.visibilityState === 'visible' ) {
 		gpioOnOff();
-		PNotify.removeAll();
 		if ( !timer ) $( '#infoX' ).click();
 	}
 } );
@@ -49,6 +48,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			  icon      : 'output'
 			, title     : 'Audio Output Switch'
 			, message   : response.name
+			, nobutton  : 1
 			, autoclose : 3000
 		} );
 	} else if ( state == 'IDLE' ) {
@@ -76,13 +76,11 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			  icon      : ( state != 'FAILED !' ) ? stopwatch : 'warning'
 			, title     : 'GPIO'
 			, message   : 'Powering '+ state +' ...'
+			, nobutton  : 1
 			, autoclose : delay * 1000
 		} );
-		setTimeout( function() {  // no 'after_close' in this version of pnotify
-			if ( state != 'FAILED !' ) {
-				gpioOnOff();
-				if ( state == 'OFF' ) $( '#infoX' ).click();
-			}
+		setTimeout( function() {
+			gpioOnOff();
 		}, delay * 1000 );
 		
 		setTimeout( function() {
