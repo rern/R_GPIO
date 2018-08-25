@@ -18,12 +18,28 @@ gpioOnOff();
 
 if ( !timer ) $( '#infoX' ).click();
 
-document.addEventListener( 'visibilitychange', function() {
-	if ( document.visibilityState === 'visible' ) {
+if ( 'hidden' in document ) {
+	var visibilityevent = 'visibilitychange';
+	var hiddenstate = 'hidden';
+} else { // cross-browser document.visibilityState must be prefixed
+	var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
+	for ( var i = 0; i < 4; i++ ) {
+		var p = prefixes[ i ];
+		if ( p +'Hidden' in document ) {
+			var visibilityevent = p +'visibilitychange';
+			var hiddenstate = p +'Hidden';
+			break;
+		}
+	}
+}
+document.addEventListener( visibilityevent, function() {
+	if ( document[ hiddenstate ] ) {
+		pushstreamGPIO.disconnect();
+	} else {
 		gpioOnOff();
 		if ( !timer ) $( '#infoX' ).click();
+		pushstreamGPIO.connect();
 	}
-} );
 
 // nginx pushstream websocket (broadcast)
 var pushstreamGPIO = new PushStream( {
