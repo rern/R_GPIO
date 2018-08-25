@@ -34,23 +34,14 @@ var pushstreamGPIO = new PushStream( {
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
-	var response = response[ 0 ];
-	var state = response.state;
-	var delay = response.delay;
+	var state = response[ 0 ].state;
+	var delay = response[ 0 ].delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
 	}
 	if ( state == 'RESET' ) {
 		$( '#infoX' ).click();
-	} else if ( state === 'AO' ) {
-		info( {
-			  icon      : 'output'
-			, title     : 'Audio Output Switch'
-			, message   : response.name
-			, nobutton  : 1
-			, autoclose : 3000
-		} );
 	} else if ( state == 'IDLE' ) {
 		info( {
 			  icon        : stopwatch
@@ -72,22 +63,24 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
 	} else {
-		info( {
-			  icon      : ( state != 'FAILED !' ) ? stopwatch : 'warning'
-			, title     : 'GPIO'
-			, message   : 'Powering '+ state +' ...'
-			, nobutton  : 1
-			, autoclose : delay * 1000
+		PNotify.removeAll();
+		new PNotify( {
+			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
+			, title   : 'GPIO'
+			, text    : 'Powering '+ state +' ...'
+			, delay   : delay * 1000
+			, addclass: 'pnotify_custom'
 		} );
-		setTimeout( function() {
+		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			gpioOnOff();
+			if ( state == 'OFF' ) $( '#infoX' ).click();
 		}, delay * 1000 );
 		
 		setTimeout( function() {
 			GUI.imodedelay = 0;
 		}, 5000 );
 	}
-};
+}
 pushstreamGPIO.connect();
 
 $( '#gpio' ).on( 'taphold', function() {
