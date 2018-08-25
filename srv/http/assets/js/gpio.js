@@ -45,12 +45,11 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	if ( state == 'RESET' ) {
 		$( '#infoX' ).click();
 	} else if ( state == 'AO' ) {
-		PNotify.removeAll();
-		new PNotify( {
-			  icon    : 'fa fa-cog fa-spin fa-lg'
-			, title   : 'Audio Output Switch'
-			, text    : response.name
-			, addclass: 'pnotify_custom'
+		info( {
+			  icon      : 'output'
+			, title     : 'Audio Output Switch'
+			, message   : response.name
+			, autoclose : 3000
 		} );
 	} else if ( state == 'IDLE' ) {
 		info( {
@@ -73,13 +72,11 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
 	} else {
-		PNotify.removeAll();
-		new PNotify( {
-			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
-			, title   : 'GPIO'
-			, text    : 'Powering '+ state +' ...'
-			, delay   : delay * 1000
-			, addclass: 'pnotify_custom'
+		info( {
+			  icon      : ( state != 'FAILED !' ) ? stopwatch : 'warning'
+			, title     : 'GPIO'
+			, message   : 'Powering '+ state +' ...'
+			, autoclose : delay * 1000
 		} );
 		setTimeout( function() {  // no 'after_close' in this version of pnotify
 			if ( state != 'FAILED !' ) {
