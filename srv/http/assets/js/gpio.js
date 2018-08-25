@@ -35,14 +35,23 @@ var pushstreamGPIO = new PushStream( {
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
-	var state = response[ 0 ].state;
-	var delay = response[ 0 ].delay;
+	var response = response[ 0 ];
+	var state = response.state;
+	var delay = response.delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
 	}
 	if ( state == 'RESET' ) {
 		$( '#infoX' ).click();
+	} else if ( state == 'AO' ) {
+		PNotify.removeAll();
+		new PNotify( {
+			  icon    : 'fa fa-cog fa-spin fa-lg'
+			, title   : 'Audio Output'
+			, text    : 'Switch to: '+ response.name
+			, addclass: 'pnotify_custom'
+		} );
 	} else if ( state == 'IDLE' ) {
 		info( {
 			  icon        : stopwatch
