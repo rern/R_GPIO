@@ -18,6 +18,13 @@ i.fa {
 .fa-info-circle:before { content: "\f560" }
 .fa-question-circle:before { content: "\f561" }
 
+.close-root i {
+	font-size: 2em;
+}
+#gpioform i {
+    font-size: 18px;
+}
+
 .btn-default {
 	border: none;
 }
@@ -45,13 +52,6 @@ select {
 	color: #34495e !important;
 }
 
-.close-root i {
-	font-size: 2em;
-}
-#gpioform i {
-    font-size: 18px;
-}
-
 .pnotify_custom {
     top: 60px !important;
     bottom: auto !important;
@@ -68,7 +68,7 @@ select {
 	float: right;
 	margin-top: 20px;
 }
-.close-root:hover {
+a:hover {
 	text-decoration: none;
 }
 .form-group {
