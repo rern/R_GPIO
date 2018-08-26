@@ -7,9 +7,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-tap-highlight" content="no">
+<?php if ( file_exists( '/srv/http/enhance.php' ) ) { ?>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/rune.css">
+<?php } else { ?>
     <link rel="stylesheet" href="assets/css/runeui.css">
+<?php } ?>
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
 	<style>
 		@font-face {
