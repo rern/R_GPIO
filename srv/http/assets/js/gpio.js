@@ -40,7 +40,7 @@ document.addEventListener( visibilityevent, function() {
 		if ( !timer ) $( '#infoX' ).click();
 		pushstreamGPIO.connect();
 	}
-
+} );
 // nginx pushstream websocket (broadcast)
 var pushstreamGPIO = new PushStream( {
 	host: window.location.hostname,
@@ -121,6 +121,6 @@ $( '#gpio' ).on( 'taphold', function() {
 $( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
 	$.get( 'gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
 	toggleLoader();
-});
+} );
 
 } ); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
