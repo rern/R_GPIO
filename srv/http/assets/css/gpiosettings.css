@@ -1,5 +1,7 @@
 /* 'addons' declared in <head> for cache busting */
-
+i.fa {
+	font-style: normal;
+}
 .fa-gpio:before {
 	content: "\f529";
 	color: #7795b4;
@@ -15,6 +17,13 @@
 
 .fa-info-circle:before { content: "\f560" }
 .fa-question-circle:before { content: "\f561" }
+
+.close-root i {
+	font-size: 2em;
+}
+#gpioform i {
+    font-size: 18px;
+}
 
 .pnotify_custom {
     top: 60px !important;
@@ -110,7 +119,7 @@ div#gpio-num.col-sm-10,
 .gpio-text {
 	display: block;
 	width: 100%;
-	padding: 0 0 0 10px;
+	padding: 0 0 0 5px;
 	line-height: 40px;
 	color: #e0e7ee;
 }
