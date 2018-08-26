@@ -8,12 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
-<?php if ( file_exists( '/srv/http/enhance.php' ) ) { ?>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/rune.css">
-<?php } else { ?>
-    <link rel="stylesheet" href="assets/css/runeui.css">
-<?php } ?>
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
 	<style>
 		@font-face {
@@ -108,7 +103,7 @@ function opttime( $n, $minimum ) {
 
 <div class="container">
 <a href="/" class="close-root"><i class="fa fa-times fa-2x"></i></a>
-<h1><i class="fa fa-gpio"></i> GPIO</h1>
+<h1><i class="fa fa-gpio"></i>&nbsp; GPIO</h1>
 <legend>Settings</legend>
 <form class="form-horizontal">
 
