@@ -18,6 +18,32 @@ i.fa {
 .fa-info-circle:before { content: "\f560" }
 .fa-question-circle:before { content: "\f561" }
 
+.btn-default {
+	border: none;
+}
+select {
+	display: none;
+}
+.dropdown-menu {
+	background: #34495e;
+}
+.dropdown-menu>li>a {
+	line-height: 31px;
+	color: #e0e7ee;
+}
+.dropdown-menu>li.selected a {
+	color: #e0e7ee;
+	background: #222f3d;
+	outline: none;
+}
+.dropdown-menu>li>a:hover {
+	color: #e0e7ee !important;
+	background: #0095d8;
+}
+.dropdown-menu>li.selected a:hover {
+	color: #34495e !important;
+}
+
 .close-root i {
 	font-size: 2em;
 }
@@ -40,6 +66,9 @@ i.fa {
 .close-root {
 	float: right;
 	margin-top: 20px;
+}
+.close-root:hover {
+	text-decoration: none;
 }
 .form-group {
 	margin-top: 10px;
@@ -69,9 +98,6 @@ i.fa {
 .gpio-float-r {
 	float: left;
 	min-width: 320px;
-}
-.bootstrap-select.btn-group .dropdown-menu li.selected .text {
-  color: #0095d8;
 }
 
 div#gpio-num.col-sm-10,
@@ -133,6 +159,7 @@ div#gpio-num.col-sm-10,
 #gpio input[type=text],
 #gpio input[type=number] {
 	padding: 10px !important;
+	border-width: 2px;
 }
 div#gpio-num.col-sm-10 {
 	margin-right: 5px;
@@ -160,6 +187,12 @@ button {
 }
 .blue {
 	color: #0095d8;
+}
+.green {
+    color: #0f0
+}
+.red {
+    color: #f00
 }
 .yellow {
 	color: yellow;
