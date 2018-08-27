@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Rune GPIO</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="msapplication-tap-highlight" content="no">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+	<meta charset="utf-8">
+	<title>Rune GPIO</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
 	<style>
 		@font-face {
 			font-family: addons;
@@ -19,8 +19,8 @@
 		}
 	</style>
 	<link rel="stylesheet" href="<?=$_POST[ 'favicon' ]?>">
-    <link rel="stylesheet" href="<?=$_POST[ 'addonsinfocss' ]?>">
-    <link rel="stylesheet" href="<?=$_POST[ 'gpiosettingscss' ]?>">
+	<link rel="stylesheet" href="<?=$_POST[ 'addonsinfocss' ]?>">
+	<link rel="stylesheet" href="<?=$_POST[ 'gpiosettingscss' ]?>">
 </head>
 
 <?php
@@ -155,19 +155,19 @@ function opttime( $n, $minimum ) {
 						</select>
 						<select id="ond1" name="ond1" class="selectpicker ond delay">
 							<?php opttime( $ond1 )?>
-						</select> &nbsp; sec.
+						</select><span>sec.</span>
 						<select id="on2" name="on2" class="selectpicker on">
 							<?php optname( $on2 )?>
 						</select>
 						<select id="ond2" name="ond2" class="selectpicker ond delay">
 							<?php opttime( $ond2 )?>
-						</select> &nbsp; sec.
+						</select><span>sec.</span>
 						<select id="on3" name="on3" class="selectpicker on">
 							<?php optname( $on3 )?>
 						</select>
 						<select id="ond3" name="ond3" class="selectpicker ond delay">
 							<?php opttime( $ond3 )?>
-						</select> &nbsp; sec.
+						</select><span>sec.</span>
 						<select id="on4" name="on4" class="selectpicker on">
 							<?php optname( $on4 )?>
 						</select>
@@ -181,19 +181,19 @@ function opttime( $n, $minimum ) {
 							</select>
 							<select id="offd1" name="offd1" class="selectpicker offd delay">
 								<?php opttime( $offd1 )?>
-							</select> &nbsp; sec.
+							</select><span>sec.</span>
 							<select id="off2" name="off2" class="selectpicker off">
 								<?php optname( $off2 )?>
 							</select>
 							<select id="offd2" name="offd2" class="selectpicker offd delay">
 								<?php opttime( $offd2 )?>
-							</select> &nbsp; sec.
+							</select><span>sec.</span>
 							<select id="off3" name="off3" class="selectpicker off">
 								<?php optname( $off3 )?>
 							</select>
 							<select id="offd3" name="offd3" class="selectpicker offd delay">
 								<?php opttime( $offd3 )?>
-							</select> &nbsp; sec.
+							</select><span>sec.</span>
 							<select id="off4" name="off4" class="selectpicker off">
 								<?php optname( $off4 )?>
 							</select>
