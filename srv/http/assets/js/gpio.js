@@ -102,6 +102,7 @@ pushstreamGPIO.connect();
 $( '#gpio' ).on( 'taphold', function() {
 	$( 'body' ).append( '\
 		<form id="formtemp" action="gpiosettings.php" method="post">\
+			<input type="hidden" name="favicon" value="'+ $( '#favicon' ).val() +'">\
 			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">\
 			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">\
 			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">\
