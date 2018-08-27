@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>GPIO</title>
+    <title>Rune GPIO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -18,9 +18,9 @@
 			font-style : normal;
 		}
 	</style>
+	<link rel="stylesheet" href="<?=$_POST[ 'favicon' ]?>">
     <link rel="stylesheet" href="<?=$_POST[ 'addonsinfocss' ]?>">
     <link rel="stylesheet" href="<?=$_POST[ 'gpiosettingscss' ]?>">
-    <link rel="shortcut icon" href="assets/img/favicon.ico">
 </head>
 
 <?php
@@ -102,14 +102,14 @@ function opttime( $n, $minimum ) {
 <body>
 
 <div class="container">
-<a href="/" class="close-root"><i class="fa fa-times fa-2x"></i></a>
+<a href="/" class="close-root"><i class="fa fa-times"></i></a>
 <h1><i class="fa fa-gpio"></i>&nbsp; GPIO</h1>
 <legend>Settings</legend>
 <form class="form-horizontal">
 
 <p>
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
-	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-down fa-lg"></i></a>
+	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-down"></i></a>
 </p>
 <img id="gpiopin" src="<?=$_POST[ 'gpiopin' ]?>">
 <div id="divgpio" class="boxed-group">
@@ -119,7 +119,7 @@ function opttime( $n, $minimum ) {
 			<form id="gpioform">
 				<div class="gpio-float-l">
 					<div class="col-sm-10" id="gpio-num">
-						<span class="gpio-text"><i class="fa fa-gpiopins fa-lg blue"></i> &nbsp; Pin</span>
+						<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
 						<select id="pin1" name="pin1" class="selectpicker pin">
 							<?php optpin( $pin1 )?>
 						</select>
@@ -132,24 +132,24 @@ function opttime( $n, $minimum ) {
 						<select id="pin4" name="pin4" class="selectpicker pin">
 							<?php optpin( $pin4 )?>
 						</select>
-						<span class="gpio-text"><i class="fa fa-stopwatch fa-lg yellow"></i> &nbsp; Idle</span>
+						<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
 						<select id="timer" name="timer" class="selectpicker timer">
 							<?php opttime( $timer, 2 )?>
 						</select>
 					</div>
 					<div class="col-sm-10" id="gpio-name">
 						<span class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</span>
-						<input id="name1" name="name1" type="text" class="form-control osk-trigger input-lg name" value="<?=$name1?>">
-						<input id="name2" name="name2" type="text" class="form-control osk-trigger input-lg name" value="<?=$name2?>">
-						<input id="name3" name="name3" type="text" class="form-control osk-trigger input-lg name" value="<?=$name3?>">
-						<input id="name4" name="name4" type="text" class="form-control osk-trigger input-lg name" value="<?=$name4?>">
+						<input id="name1" name="name1" type="text" class="form-control input-lg name" value="<?=$name1?>">
+						<input id="name2" name="name2" type="text" class="form-control input-lg name" value="<?=$name2?>">
+						<input id="name3" name="name3" type="text" class="form-control input-lg name" value="<?=$name3?>">
+						<input id="name4" name="name4" type="text" class="form-control input-lg name" value="<?=$name4?>">
 						<br>
-						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power fa-lg red"></i></span>
+						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power red"></i></span>
 					</div>
 				</div>
 				<div class="gpio-float-r">
 					<div class="col-sm-10">
-						<span class="gpio-text"><i class="fa fa-power fa-lg green"></i> &nbsp; On Sequence</span>
+						<span class="gpio-text"><i class="fa fa-power green"></i> &nbsp; On Sequence</span>
 						<select id="on1" name="on1" class="selectpicker on">
 							<?php optname( $on1 )?>
 						</select>
@@ -175,7 +175,7 @@ function opttime( $n, $minimum ) {
 					<div class="col-sm-10" style="width: 20px;">
 					</div>
 						<div class="col-sm-10">
-							<span class="gpio-text"><i class="fa fa-power fa-lg red"></i> &nbsp; Off Sequence</span>
+							<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
 							<select id="off1" name="off1" class="selectpicker off">
 								<?php optname( $off1 )?>
 							</select>
