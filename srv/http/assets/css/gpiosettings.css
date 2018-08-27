@@ -19,7 +19,7 @@ i.fa {
 .fa-question-circle:before { content: "\f561" }
 
 .close-root i {
-	font-size: 2em;
+	font-size: 28px;
 }
 #gpioform i {
     font-size: 18px;
