@@ -18,6 +18,35 @@ i.fa {
 .fa-info-circle:before { content: "\f560" }
 .fa-question-circle:before { content: "\f561" }
 
+@font-face {
+	font-family: Lato;
+	src: url( '../fonts/lato/lato-regular-webfont.woff' ) format( 'woff' ),
+		url( '../fonts/lato/lato-regular-webfont.ttf' ) format( 'truetype' );
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: Lato;
+	src: url( '../fonts/lato/lato-light-webfont.woff' ) format( 'woff' ),
+		url( '../fonts/lato/lato-light-webfont.ttf' ) format( 'truetype' );
+	font-weight: 300;
+	font-style: normal;
+}
+body {
+	font-family: "Lato";
+	font-size: 14px;
+}
+h1 {
+	font-weight: 300;
+}
+p,
+span.timer,
+.gpio-float-r span:not(:first-of-type) {
+	color: #587ca0;
+}
+span {
+	margin-left: 5px;
+}
 .close-root i {
 	font-size: 28px;
 }
@@ -77,6 +106,8 @@ a:hover {
 }
 .boxed-group {
 	padding: 5px 15px;
+	background: #19232d;
+	border-radius: 6px;
 }
 #gpiopin {
 	display: none;
