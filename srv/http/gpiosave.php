@@ -6,6 +6,12 @@ $gpio = array(
 		, 'pin3'   => array( 'pin' => $_POST[ 'pin3' ], 'name' => $_POST[ 'name3' ] )
 		, 'pin4'   => array( 'pin' => $_POST[ 'pin4' ], 'name' => $_POST[ 'name4' ] )
 	)
+	, 'name'   => array(
+		  $_POST[ 'pin1' ] => $_POST[ 'name1' ]
+		, $_POST[ 'pin2' ] => $_POST[ 'name2' ]
+		, $_POST[ 'pin3' ] => $_POST[ 'name3' ]
+		, $_POST[ 'pin4' ] => $_POST[ 'name4' ]
+	)
 	, 'on'    => array(
 		  'on1'    => $_POST[ 'on1' ]
 		, 'ond1'   => $_POST[ 'ond1' ]
