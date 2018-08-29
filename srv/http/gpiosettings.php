@@ -18,7 +18,7 @@
 			font-style : normal;
 		}
 	</style>
-	<link rel="stylesheet" href="<?=$_POST[ 'favicon' ]?>">
+	<link rel="shortcut icon" href="<?=$_POST[ 'favicon' ]?>">
 	<link rel="stylesheet" href="<?=$_POST[ 'addonsinfocss' ]?>">
 	<link rel="stylesheet" href="<?=$_POST[ 'gpiosettingscss' ]?>">
 </head>
@@ -31,17 +31,15 @@ fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
 
 $pin  = $gpio[ 'pin' ];
-$pin1 = $pin[ 'pin1' ];
-$pin2 = $pin[ 'pin2' ];
-$pin3 = $pin[ 'pin3' ];
-$pin4 = $pin[ 'pin4' ];
-$pincount = ( $pin1 == 0 ? 0 : 1 ) + ( $pin2 == 0 ? 0 : 1 ) + ( $pin3 == 0 ? 0 : 1 ) + ( $pin4 == 0 ? 0 : 1 );
+$pin1 = $pin[ 'pin1' ][ 'pin' ];
+$pin2 = $pin[ 'pin2' ][ 'pin' ];
+$pin3 = $pin[ 'pin3' ][ 'pin' ];
+$pin4 = $pin[ 'pin4' ][ 'pin' ];
 
-$name  = $gpio[ 'name' ];
-$name1 = $name[ 'name1' ];
-$name2 = $name[ 'name2' ];
-$name3 = $name[ 'name3' ];
-$name4 = $name[ 'name4' ];
+$name1 = $pin[ 'pin1' ][ 'name' ];
+$name2 = $pin[ 'pin2' ][ 'name' ];
+$name3 = $pin[ 'pin3' ][ 'name' ];
+$name4 = $pin[ 'pin4' ][ 'name' ];
 
 $on   = $gpio[ 'on' ];
 $on1  = $on[ 'on1' ];
