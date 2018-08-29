@@ -1,6 +1,5 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-var enable = $( '#gpio-enable' ).val();
 var pin = {
 	  1: $( '#pin1' ).val()
 	, 2: $( '#pin2' ).val()
@@ -154,7 +153,6 @@ $( '.selectpicker.on, .selectpicker.off' ).change( function() {
 } );
 
 $( '#gpiosave' ).click( function() {
-	var enable = $( '#gpio-enable' ).val();
 	var on = [ 
 		  $( '#on1' ).val()
 		, $( '#on2' ).val()
@@ -176,11 +174,10 @@ $( '#gpiosave' ).click( function() {
 	} else {
 		$( '.delay' ).prop( 'disabled', false ); // for serialize
 		$.post( 'gpiosave.php',
-			$( '#gpioform').serialize() +'&enable='+ enable,
+			$( '#gpioform').serialize(),
 			function( data ) {
 				if ( data ) {
-					$.get( '/gpioexec.php?onoffpy=timerreset' );
-					if ( enable == 0 ) $( '#gpio-group' ).hide();
+					$.get( 'gpioexec.php?onoffpy=timerreset' );
 					info( {
 						  icon   : 'info-circle'
 						, title  : 'RuneUI GPIO'
