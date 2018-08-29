@@ -14,10 +14,10 @@ with open( '/srv/http/gpio.json' ) as jsonfile:
 	gpio = json.load( jsonfile )
 
 pin  = gpio[ 'pin' ] # get data as key[ 'value' ]
-pin1 = int( pin[ 'pin1' ] ) # convert to integer
-pin2 = int( pin[ 'pin2' ] )
-pin3 = int( pin[ 'pin3' ] )
-pin4 = int( pin[ 'pin4' ] )
+pin1 = int( pin[ 'pin1' ][ 'pin' ] ) # convert to integer
+pin2 = int( pin[ 'pin2' ][ 'pin' ] )
+pin3 = int( pin[ 'pin3' ][ 'pin' ] )
+pin4 = int( pin[ 'pin4' ][ 'pin' ] )
 pinx = [ pin1, pin2, pin3, pin4 ]
 
 GPIO.setwarnings( 0 )
@@ -44,6 +44,20 @@ ondx = ond1 + ond2 + ond3
 
 state = GPIO.input( onx[ 1 ] )
 
+name = gpio[ 'name' ]
+onorder = []
+if on1 != 0:
+	onorder.append( name[ str( on1 ) ] )
+
+if on2 != 0:
+	onorder.extend( [ ond1, name[ str( on2 ) ] ] )
+
+if on3 != 0:
+	onorder.extend( [ ond2, name[ str( on3 ) ] ] )
+
+if on4 != 0:
+	onorder.extend( [ ond3, name[ str( on4 ) ] ] )
+
 if state == ON:
 	print( 'ON' )
 else:
@@ -69,3 +83,16 @@ timer = int( gpio[ 'timer' ] )
 
 url = 'http://localhost/pub?id=gpio'
 headerdata = { 'Content-type': 'application/json', 'Accept': 'application/json' }
+
+offorder = []
+if off1 != 0:
+	offorder.append( name[ str( off1 ) ] )
+
+if off2 != 0:
+	offorder.extend( [ offd1, name[ str( off2 ) ] ] )
+
+if off3 != 0:
+	offorder.extend( [ offd2, name[ str( off3 ) ] ] )
+
+if off4 != 0:
+	offorder.extend( [ offd3, name[ str( off4 ) ] ] )

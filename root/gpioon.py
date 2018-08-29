@@ -3,9 +3,9 @@ from gpio import *
 
 if state != OFF:
 	exit()
-	
-# broadcast pushstream (message non-char in curl must be escaped)
-data = { 'state': 'ON', 'delay': ondx }
+
+# broadcast pushstream
+data = { 'state': 'ON', 'delay': ondx, 'order': onorder }
 req = urllib2.Request( url, json.dumps( data ), headers = headerdata )
 response = urllib2.urlopen( req )
 
@@ -29,4 +29,3 @@ if GPIO.input( onx[ 1 ] ) != ON:
 
 if timer > 0:
 	os.system( '/root/gpiotimer.py &> /dev/null &' )
-			
