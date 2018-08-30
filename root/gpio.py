@@ -34,8 +34,8 @@ ond2 = on[ 'ond2' ]
 on3  = on[ 'on3' ]
 ond3 = on[ 'ond3' ]
 on4  = on[ 'on4' ]
-onar  = [ on1, on2, on3, on4 ]
-onenable  = [ n for n in onar if n != 0 ]
+onar = [ on1, on2, on3, on4 ]
+onenable = [ n for n in onar if n != 0 ]
 
 ond = ond1 + ond2 + ond3
 
@@ -53,8 +53,8 @@ offd2 = off[ 'offd2' ]
 off3  = off[ 'off3' ]
 offd3 = off[ 'offd3' ]
 off4  = off[ 'off4' ]
-offar  = [ off1, off2, off3, off4 ]
-offenable  = [ n for n in offarr if i != 0 ]
+offar = [ off1, off2, off3, off4 ]
+offenable = [ n for n in offar if n != 0 ]
 
 offd = offd1 + offd2 + offd3
 
@@ -64,13 +64,13 @@ url = 'http://localhost/pub?id=gpio'
 headerdata = { 'Content-type': 'application/json', 'Accept': 'application/json' }
 
 onorder = []
-on1 != 0 and onorder.append( name[ on1 ] )
-on2 != 0 and onorder.extend( [ ond1, name[ on2 ] ] )
-on3 != 0 and onorder.extend( [ ond2, name[ on3 ] ] )
-on4 != 0 and onorder.extend( [ ond3, name[ on4 ] ] )
+on1 != 0 and onorder.append( name[ str( on1 ) ] )
+on2 != 0 and onorder.extend( [ ond1, name[ str( on2 ) ] ] )
+on3 != 0 and onorder.extend( [ ond2, name[ str( on3 ) ] ] )
+on4 != 0 and onorder.extend( [ ond3, name[ str( on4 ) ] ] )
 
 offorder = []
-off1 != 0 and offorder.append( name[ off1 ] )
-off2 != 0 and offorder.extend( [ offd1, name[ off2 ] ] )
-off3 != 0 and offorder.extend( [ offd2, name[ off3 ] ] )
-off4 != 0 and offorder.extend( [ offd3, name[ off4 ] ] )
+off1 != 0 and offorder.append( name[ str( off1 ) ] )
+off2 != 0 and offorder.extend( [ offd1, name[ str( off2 ) ] ] )
+off3 != 0 and offorder.extend( [ offd2, name[ str( off3 ) ] ] )
+off4 != 0 and offorder.extend( [ offd3, name[ str( off4 ) ] ] )
