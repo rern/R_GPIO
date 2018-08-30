@@ -44,27 +44,9 @@ ondx = ond1 + ond2 + ond3
 
 state = GPIO.input( onx[ 1 ] )
 
-name = gpio[ 'name' ]
-onorder = []
-if on1 != 0:
-	onorder.append( name[ str( on1 ) ] )
+print( 'ON' if state == 1 else 'OFF' )
 
-if on2 != 0:
-	onorder.extend( [ ond1, name[ str( on2 ) ] ] )
-
-if on3 != 0:
-	onorder.extend( [ ond2, name[ str( on3 ) ] ] )
-
-if on4 != 0:
-	onorder.extend( [ ond3, name[ str( on4 ) ] ] )
-
-if state == ON:
-	print( 'ON' )
-else:
-	print( 'OFF' )
-
-if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state':
-	exit()
+len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state' and exit()
 
 off   = gpio[ 'off' ]
 off1  = int( off[ 'off1' ] )
@@ -84,15 +66,17 @@ timer = int( gpio[ 'timer' ] )
 url = 'http://localhost/pub?id=gpio'
 headerdata = { 'Content-type': 'application/json', 'Accept': 'application/json' }
 
+name = gpio[ 'name' ]
+
+onorder = []
+on1 != 0 and onorder.append( name[ str( on1 ) ] )
+on2 != 0 and onorder.extend( [ ond1, name[ str( on2 ) ] ] )
+on3 != 0 and onorder.extend( [ ond2, name[ str( on3 ) ] ] )
+on4 != 0 and onorder.extend( [ ond3, name[ str( on4 ) ] ] )
+
+
 offorder = []
-if off1 != 0:
-	offorder.append( name[ str( off1 ) ] )
-
-if off2 != 0:
-	offorder.extend( [ offd1, name[ str( off2 ) ] ] )
-
-if off3 != 0:
-	offorder.extend( [ offd2, name[ str( off3 ) ] ] )
-
-if off4 != 0:
-	offorder.extend( [ offd3, name[ str( off4 ) ] ] )
+off1 != 0 and offorder.append( name[ str( off1 ) ] )
+off2 != 0 and offorder.extend( [ offd1, name[ str( off2 ) ] ] )
+off3 != 0 and offorder.extend( [ offd2, name[ str( off3 ) ] ] )
+off4 != 0 and offorder.extend( [ offd3, name[ str( off4 ) ] ] )

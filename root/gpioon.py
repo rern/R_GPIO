@@ -1,8 +1,7 @@
 #!/usr/bin/python
 from gpio import *
 
-if state != OFF:
-	exit()
+state != OFF and exit()
 
 # broadcast pushstream
 data = { 'state': 'ON', 'delay': ondx, 'order': onorder }
@@ -27,5 +26,4 @@ if GPIO.input( onx[ 1 ] ) != ON:
 	response = urllib2.urlopen( req )
 	exit()
 
-if timer > 0:
-	os.system( '/root/gpiotimer.py &> /dev/null &' )
+timer > 0 and os.system( '/root/gpiotimer.py &> /dev/null &' )
