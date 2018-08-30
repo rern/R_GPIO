@@ -64,7 +64,7 @@ url = 'http://localhost/pub?id=gpio'
 headerdata = { 'Content-type': 'application/json', 'Accept': 'application/json' }
 
 onorder = []
-on1 != 0 and onorder.append( name[ str( on1 ) ] )
+on1 != 0 and onorder.append( name[ str( on1 ) ] ) # name[ key ] - keys are strings
 on2 != 0 and onorder.extend( [ ond1, name[ str( on2 ) ] ] )
 on3 != 0 and onorder.extend( [ ond2, name[ str( on3 ) ] ] )
 on4 != 0 and onorder.extend( [ ond3, name[ str( on4 ) ] ] )
