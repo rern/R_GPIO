@@ -2,11 +2,6 @@
 .fa-gpio:before {
 	content: "\f529";
 }
-.stopwatch {
-	width: 1em;
-	height: 1em;
-	line-height: 1em;
-}
 #settings .fa-gpio {
 	color: #7795b4;
 }
