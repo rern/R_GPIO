@@ -2,11 +2,16 @@
 .fa-gpio:before {
 	content: "\f529";
 }
-#settings .fa-gpio,
-.dropdown-menu .fa-gpio {
+.stopwatch {
+	width: 1em;
+	height: 1em;
+	line-height: 1em;
+}
+#settings .fa-gpio {
 	color: #7795b4;
 }
-#menu-settings a.active i,	
+#settings a.active i,
+#menu-settings a.active i {
 	color: #34495e !important;
 }
 #menu-settings a.active {
