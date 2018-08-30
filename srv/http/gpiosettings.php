@@ -29,41 +29,29 @@ $fileopen = fopen( $file, 'r' );
 $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
 $gpio = json_decode( $gpio, true );
+$name = $gpio[ 'name' ];
 
-$pin  = $gpio[ 'pin' ];
-$pin1 = $pin[ 'pin1' ][ 'pin' ];
-$pin2 = $pin[ 'pin2' ][ 'pin' ];
-$pin3 = $pin[ 'pin3' ][ 'pin' ];
-$pin4 = $pin[ 'pin4' ][ 'pin' ];
-
-$name1 = $pin[ 'pin1' ][ 'name' ];
-$name2 = $pin[ 'pin2' ][ 'name' ];
-$name3 = $pin[ 'pin3' ][ 'name' ];
-$name4 = $pin[ 'pin4' ][ 'name' ];
+$pin = array_keys( $name );
+$pin1 = $pin[ 0 ];
+$pin2 = $pin[ 1 ];
+$pin3 = $pin[ 2 ];
+$pin4 = $pin[ 3 ];
+$name1 = $name[ $pin1 ];
+$name2 = $name[ $pin2 ];
+$name3 = $name[ $pin3 ];
+$name4 = $name[ $pin4 ];
 
 $on   = $gpio[ 'on' ];
-$on1  = $on[ 'on1' ];
-$ond1 = $on[ 'ond1' ];
-$on2  = $on[ 'on2' ];
-$ond2 = $on[ 'ond2' ];
-$on3  = $on[ 'on3' ];
-$ond3 = $on[ 'ond3' ];
-$on4  = $on[ 'on4' ];
-
+$onlist = [ 'on1', 'ond1', 'on2', 'ond2', 'on3', 'ond3', 'on4' ];
+foreach( $onlist as $o ) $$o = $on[ $o ];
 $off   = $gpio[ 'off' ];
-$off1  = $off[ 'off1' ];
-$offd1 = $off[ 'offd1' ];
-$off2  = $off[ 'off2' ];
-$offd2 = $off[ 'offd2' ];
-$off3  = $off[ 'off3' ];
-$offd3 = $off[ 'offd3' ];
-$off4  = $off[ 'off4' ];
+$offlist = [ 'off1', 'offd1', 'off2', 'offd2', 'off3', 'offd3', 'off4' ];
+foreach( $offlist as $o ) $$o = $off[ $o ];
 
 $timer = $gpio[ 'timer' ];
-
 function optpin( $n ) {
 	// omit pins: on-boot-pullup, uart, I2S
-	$pinarray = array( 11,13,15,16,18,19,21,22,23,32,33,36,37 );
+	$pinarray = array( 11, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 36, 37 );
 	$option = '';
 	foreach ( $pinarray as $pin ) {
 		$selected = ( $pin == $n ) ? ' selected' : '';
@@ -71,18 +59,12 @@ function optpin( $n ) {
 	}
 	echo $option;
 }
-$parray = array(
-	  $pin1 => $name1
-	, $pin2 => $name2
-	, $pin3 => $name3
-	, $pin4 => $name4
-);
-function optname( $n ) {
-	global $parray;
+function optname( $pin ) {
+	global $name;
 	$option = '<option value="0">none</option>';
-	foreach ( $parray as $pin => $name ) {
-		$selected = ( $pin == $n ) ? ' selected' : '';
-		$option.= '<option value='.$pin.$selected.'>'.$name.' - '.$pin.'</option>';
+	foreach ( $name as $p => $n ) {
+		$selected = ( $p == $pin ) ? ' selected' : '';
+		$option.= '<option value='.$p.$selected.'>'.$n.' - '.$p.'</option>';
 	}
 	echo $option;
 }

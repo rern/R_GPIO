@@ -1,12 +1,6 @@
 <?php
 $gpio = array(
-	  'pin'   => array(
-		  'pin1'   => array( 'pin' => $_POST[ 'pin1' ], 'name' => $_POST[ 'name1' ] )
-		, 'pin2'   => array( 'pin' => $_POST[ 'pin2' ], 'name' => $_POST[ 'name2' ] )
-		, 'pin3'   => array( 'pin' => $_POST[ 'pin3' ], 'name' => $_POST[ 'name3' ] )
-		, 'pin4'   => array( 'pin' => $_POST[ 'pin4' ], 'name' => $_POST[ 'name4' ] )
-	)
-	, 'name'   => array(
+	 'name'   => array(
 		  $_POST[ 'pin1' ] => $_POST[ 'name1' ]
 		, $_POST[ 'pin2' ] => $_POST[ 'name2' ]
 		, $_POST[ 'pin3' ] => $_POST[ 'name3' ]
@@ -33,6 +27,6 @@ $gpio = array(
 	, 'timer' => $_POST[ 'timer' ]
 );
 $jsonfile = fopen( '/srv/http/gpio.json', 'w' );
-$set = fwrite( $jsonfile, json_encode( $gpio ) );
+$set = fwrite( $jsonfile, json_encode( $gpio, JSON_NUMERIC_CHECK ) );
 fclose( $jsonfile );
 echo $set;
