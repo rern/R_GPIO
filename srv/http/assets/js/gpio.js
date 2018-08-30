@@ -1,8 +1,8 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-var stopwatch = '<span class="stopwatch fa-stack fa-2x">'
-				+'<i class="fa fa-stopwatch-i fa-spin fa-stack-1x"></i>'
-				+'<i class="fa fa-stopwatch-o fa-stack-1x"></i>'
+var stopwatch = '<span id="stopwatch" class="fa-stack">'
+				+'<i class="fa fa-stopwatch-i fa-spin fa-stack-2x"></i>'
+				+'<i class="fa fa-stopwatch-o fa-stack-2x"></i>'
 				+'</span>'
 var timer = false; // for 'setInterval' status check
 GUI.imodedelay = 0;
@@ -50,8 +50,9 @@ var pushstreamGPIO = new PushStream( {
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
-	var state = response[ 0 ].state;
-	var delay = response[ 0 ].delay;
+	var response = response[ 0 ];
+	var state = response.state;
+	var delay = response.delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
@@ -60,9 +61,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		$( '#infoX' ).click();
 	} else if ( state == 'IDLE' ) {
 		info( {
-			  icon        : stopwatch
-			, title       : 'GPIO Timer'
-			, message     : 'Idle Off Countdown:<br>'+ stopwatch +'<white>'+ delay +'</white>'
+			  icon        : 'gpio'
+			, title       : 'GPIO Idle Timer'
+			, message     : 'Power Off Countdown:<br>'+ stopwatch +'&emsp;<white>'+ delay +'</white>'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
@@ -71,25 +72,27 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			}
 		} );
 		timer = setInterval( function() {
-			if ( delay == 1 ) {
+			if ( delay === 1 ) {
 				GUI.imodedelay = 1;
-				$( '#infoOverlay' ).hide();
+				$( '#infoX' ).click();
 				clearInterval( timer );
 			}
 			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
 	} else {
-		PNotify.removeAll();
-		new PNotify( {
-			  icon    : ( state != 'FAILED !' ) ? 'fa fa-cog fa-spin fa-lg' : 'fa fa-warning fa-lg'
-			, title   : 'GPIO'
-			, text    : 'Powering '+ state +' ...'
-			, delay   : delay * 1000
-			, addclass: 'pnotify_custom'
+		var order = response.order;
+		info( {
+			  icon      : ( state != 'FAILED !' ) ? 'gpio' : 'warning'
+			, title     : 'GPIO Power '+ state
+			, message   : stopwatch +'&ensp;Power '+ state +': <a id="ordersec"><a><br><white>'+ order[ 0 ] +'</white>'
+			, autoclose : ( delay + 4 ) * 1000
+			, nobutton  : 1
 		} );
-		setTimeout( function() {  // no 'after_close' in this version of pnotify
+		order.shift();
+		countdownOrder( order );
+		
+		setTimeout( function() {
 			gpioOnOff();
-			if ( state == 'OFF' ) $( '#infoX' ).click();
 		}, delay * 1000 );
 		
 		setTimeout( function() {
@@ -98,6 +101,32 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	}
 }
 pushstreamGPIO.connect();
+function countdownOrder( order ) {
+	if ( !order.length ) {
+		$( '#stopwatch' ).remove();
+		setTimeout( function() {
+			$( '#infoMessage white' ).append( '<br><a>Done</a>' );
+		}, 1000 );
+		return;
+	}
+	var orderdelay = order[ 0 ] - 1;
+	if ( orderdelay > 1 ) {
+		var ordertimer = setInterval( function() {
+			$( '#ordersec' ).html( orderdelay );
+			if ( orderdelay ) {
+				$( '#ordersec' ).html( orderdelay-- );
+			} else {
+				clearInterval( ordertimer );
+				$( '#ordersec' ).remove();
+			}
+		}, 1000 );
+	}
+	setTimeout( function() {
+		$( '#infoMessage white' ).append( '<br>'+ order[ 1 ] );
+		order.splice( 0, 2 );
+		countdownOrder( order );
+	}, order[ 0 ] * 1000 );
+}
 
 $( '#gpio' ).on( 'taphold', function() {
 	$( 'body' ).append( '\
