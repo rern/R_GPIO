@@ -20,7 +20,7 @@ if on4 != 0:
 	time.sleep( ond3 )
 	GPIO.output( on4, ON )
 
-if GPIO.input( onenable[ 1 ] ) != ON:
+if GPIO.input( onenable[ 0 ] ) != ON:
 	data = { 'state': 'FAILED !', 'delay': 8 }
 	req = urllib2.Request( url, json.dumps( data ), headers = headerdata )
 	response = urllib2.urlopen( req )

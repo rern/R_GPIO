@@ -35,11 +35,11 @@ on3  = on[ 'on3' ]
 ond3 = on[ 'ond3' ]
 on4  = on[ 'on4' ]
 onar = [ on1, on2, on3, on4 ]
-onenable = [ n for n in onar if n != 0 ]
+onenable = [ int( n ) for n in onar if n != 0 ]
 
 ond = ond1 + ond2 + ond3
 
-state = GPIO.input( onenable[ 1 ] )
+state = GPIO.input( onenable[ 0 ] )
 
 print( 'ON' if state == 1 else 'OFF' )
 
@@ -54,7 +54,7 @@ off3  = off[ 'off3' ]
 offd3 = off[ 'offd3' ]
 off4  = off[ 'off4' ]
 offar = [ off1, off2, off3, off4 ]
-offenable = [ n for n in offar if n != 0 ]
+offenable = [ int( n ) for n in offar if n != 0 ]
 
 offd = offd1 + offd2 + offd3
 
