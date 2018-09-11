@@ -15,7 +15,7 @@ with open( '/srv/http/gpio.json' ) as jsonfile:
 
 name = gpio[ 'name' ]
 pin = name.keys();
-pin = [ int( p ) for p in pin ]
+pin = [ int( n ) for n in pin ]
 
 GPIO.setwarnings( 0 )
 GPIO.setmode( GPIO.BOARD )
@@ -34,8 +34,8 @@ ond2 = on[ 'ond2' ]
 on3  = on[ 'on3' ]
 ond3 = on[ 'ond3' ]
 on4  = on[ 'on4' ]
-onar = [ on1, on2, on3, on4 ]
-onenable = [ int( n ) for n in onar if n != 0 ]
+onpins = [ on1, on2, on3, on4 ]
+onenable = [ n for n in onpins if n != 0 ]
 
 ond = ond1 + ond2 + ond3
 
@@ -53,8 +53,8 @@ offd2 = off[ 'offd2' ]
 off3  = off[ 'off3' ]
 offd3 = off[ 'offd3' ]
 off4  = off[ 'off4' ]
-offar = [ off1, off2, off3, off4 ]
-offenable = [ int( n ) for n in offar if n != 0 ]
+offpins = [ off1, off2, off3, off4 ]
+offenable = [ n for n in offpins if n != 0 ]
 
 offd = offd1 + offd2 + offd3
 
