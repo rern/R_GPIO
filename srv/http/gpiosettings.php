@@ -8,8 +8,8 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-tap-highlight" content="no">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="<?=$_POST[ 'bootstrapmincss' ]?>">
+	<link rel="stylesheet" href="<?=$_POST[ 'bootstrapselectmincss' ]?>">
 	<style>
 		@font-face {
 			font-family: addons;
