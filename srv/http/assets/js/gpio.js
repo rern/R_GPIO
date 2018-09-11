@@ -45,7 +45,7 @@ document.addEventListener( visibilityevent, function() {
 var pushstreamGPIO = new PushStream( {
 	host: window.location.hostname,
 	port: window.location.port,
-	modes: GUI.mode
+	modes: 'websocket'
 } );
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
@@ -101,6 +101,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	}
 }
 pushstreamGPIO.connect();
+
 function countdownOrder( order ) {
 	if ( !order.length ) {
 		$( '#stopwatch' ).remove();
