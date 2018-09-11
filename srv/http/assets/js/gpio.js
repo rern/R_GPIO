@@ -134,6 +134,8 @@ $( '#gpio' ).on( 'taphold', function() {
 			<input type="hidden" name="favicon" value="'+ $( '#favicon' ).val() +'">\
 			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">\
 			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">\
+			<input type="hidden" name="bootstrapmincss" value="'+ $( '#bootstrapmincss' ).val() +'">\
+			<input type="hidden" name="bootstrapselectmincss" value="'+ $( '#bootstrapselectmincss' ).val() +'">\
 			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">\
 			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">\
 			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">\
