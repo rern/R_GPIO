@@ -38,3 +38,5 @@ systemctl daemon-reload
 rm -v /etc/systemd/system/gpioset.service
 
 uninstallfinish $@
+
+restartlocalbrowser
