@@ -63,7 +63,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : 'gpio'
 			, title       : 'GPIO Idle Timer'
-			, message     : 'Power Off Countdown:<br>'+ stopwatch +'&emsp;<white>'+ delay +'</white>'
+			, message     : 'Power Off Countdown:<br><br>'+ stopwatch +'&emsp;<white>'+ delay +'</white>'
 			, cancellabel : 'Hide'
 			, cancel      : 1
 			, oklabel     : 'Reset'
