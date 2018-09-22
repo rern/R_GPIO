@@ -81,15 +81,26 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		}, 1000 );
 	} else {
 		var order = response.order;
+		var delays = [];
+		var devices = ''
+		$.each( order, function( i, val ) {
+			if ( i % 2 ) {
+				delays.push( val );
+			} else {
+				var color = state === 'ON' ? 'gr' : 'wh'
+				devices += '<br><'+ color +' id="device'+ i / 2 +'">'+ val +'</'+ color +'>';
+			}
+		} );
 		info( {
 			  icon      : ( state != 'FAILED !' ) ? 'gpio' : 'warning'
 			, title     : 'GPIO Power '+ state
-			, message   : stopwatch +'&ensp;Power '+ state +': <a id="ordersec"><a><br><white>'+ order[ 0 ] +'</white>'
+			, message   : stopwatch +'&ensp;Power <wh>'+ state +'</wh>:<br>'+ devices
 			, autoclose : ( delay + 4 ) * 1000
 			, nobutton  : 1
 		} );
-		order.shift();
-		countdownOrder( order );
+		var iL = delays.length;
+		var i = 0
+		countdowngpio( i, iL, delays, state );
 		
 		setTimeout( function() {
 			gpioOnOff();
@@ -102,31 +113,15 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 }
 pushstreamGPIO.connect();
 
-function countdownOrder( order ) {
-	if ( !order.length ) {
-		$( '#stopwatch' ).remove();
-		setTimeout( function() {
-			$( '#infoMessage white' ).append( '<br><a>Done</a>' );
-		}, 1000 );
-		return;
-	}
-	var orderdelay = order[ 0 ] - 1;
-	if ( orderdelay > 1 ) {
-		var ordertimer = setInterval( function() {
-			$( '#ordersec' ).html( orderdelay );
-			if ( orderdelay ) {
-				$( '#ordersec' ).html( orderdelay-- );
-			} else {
-				clearInterval( ordertimer );
-				$( '#ordersec' ).remove();
-			}
-		}, 1000 );
-	}
+function countdowngpio( i, iL, delays, state ) {
+	var color = state === 'ON' ? '#e0e7ee' : '#587ca0'
+	$( '#device'+ i ).css( 'color', color );
 	setTimeout( function() {
-		$( '#infoMessage white' ).append( '<br>'+ order[ 1 ] );
-		order.splice( 0, 2 );
-		countdownOrder( order );
-	}, order[ 0 ] * 1000 );
+		$( '#device'+ i ).css( 'color', color );
+		i++;
+		if ( i <= iL ) countdowngpio( i, iL, delays, state );
+	}, delays[ i ] * 1000 );
+	
 }
 
 $( '#gpio' ).on( 'taphold', function() {
