@@ -18,7 +18,6 @@ rm -v /srv/http/assets/css/gpio*
 rm -v /srv/http/assets/img/RPi3_GPIO.svg
 rm -v /srv/http/assets/js/gpio*
 rm -v /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
-[[ ! -e /srv/http/enhance.php ]] && rm -v /srv/http/assets/css/bootstrap.min.css
 
 # restore modified files #######################################
 echo -e "$bar Restore modified files ..."
