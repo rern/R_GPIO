@@ -1,8 +1,6 @@
 /* 'addons' declared in <head> for cache busting */
 .fa-gpio:before {
 	content: "\f529";
-}
-#settings .fa-gpio {
 	color: #7795b4;
 }
 #settings a.active i,
