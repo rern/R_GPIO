@@ -13,6 +13,11 @@
 #menu-settings a.active {
 	background: #0095d8;
 }
+#infoMessage wh,
+#infoMessage gr {
+	font-weight: normal;
+}
+
 .fa-stopwatch-o:before {
 	content: "\f548";
 }
