@@ -28,8 +28,8 @@
 	margin: -35px -20px 0 -15px;
 	padding: 0;
 }
-#dropdownbg {
-	height: 368px !important;
+#settings .menushadow {
+	height: 330px;
 }
 /* fix - missing spin */
 .fa-spin {
