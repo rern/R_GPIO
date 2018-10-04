@@ -28,9 +28,6 @@
 	margin: -35px -20px 0 -15px;
 	padding: 0;
 }
-#settings .menushadow {
-	height: 327px;
-}
 /* fix - missing spin */
 .fa-spin {
 	animation: fa-spin 2s infinite linear;
