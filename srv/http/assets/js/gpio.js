@@ -11,7 +11,8 @@ function gpioOnOff() {
 	$.get( 'gpioexec.php?command=gpio.py state', function( state ) {
 		gpiostate = state;
 		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
-		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
+		$gpio = GUI.display.time ? $( '#igpio' ) : $( '#posgpio' );
+		$gpio.toggleClass( 'hide', state === 'OFF' );
 	}, 'text' );
 }
 gpioOnOff();
