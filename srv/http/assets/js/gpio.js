@@ -9,10 +9,8 @@ GUI.imodedelay = 0;
 
 function gpioOnOff() {
 	$.get( 'gpioexec.php?command=gpio.py state', function( state ) {
-		gpiostate = state;
+		GUI.gpio = state;
 		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
-		$gpio = GUI.display.time ? $( '#igpio' ) : $( '#posgpio' );
-		$gpio.toggleClass( 'hide', state === 'OFF' );
 	}, 'text' );
 }
 gpioOnOff();
@@ -53,6 +51,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var response = response[ 0 ];
 	var state = response.state;
+	GUI.gpio = state;
 	var delay = response.delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
@@ -144,7 +143,7 @@ $( '#gpio' ).on( 'taphold', function() {
 } ).click( function() {
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	$( '#settings' ).addClass( 'hide' );
-	$.get( 'gpioexec.php?command='+ ( gpiostate === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
+	$.get( 'gpioexec.php?command='+ ( GUI.gpio === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
 } );
 
 $( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
