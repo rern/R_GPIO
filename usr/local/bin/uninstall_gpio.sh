@@ -12,7 +12,7 @@ uninstallstart $@
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
-rm -v /root/gpio*.py
+rm -v /root/gpio*
 rm -v /srv/http/gpio*.php
 rm -v /srv/http/assets/css/gpio*
 rm -v /srv/http/assets/img/RPi3_GPIO.svg
