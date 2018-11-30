@@ -32,20 +32,13 @@ if ( 'hidden' in document ) {
 	}
 }
 document.addEventListener( visibilityevent, function() {
-	if ( document[ hiddenstate ] ) {
-		pushstreamGPIO.disconnect();
-	} else {
+	if ( !document[ hiddenstate ] ) {
 		gpioOnOff();
 		if ( !timer ) $( '#infoX' ).click();
-		pushstreamGPIO.connect();
 	}
 } );
 // nginx pushstream websocket (broadcast)
-var pushstreamGPIO = new PushStream( {
-	host: window.location.hostname,
-	port: window.location.port,
-	modes: 'websocket'
-} );
+var pushstreamGPIO = new PushStream( { modes: 'websocket' } );
 pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
