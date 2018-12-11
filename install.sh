@@ -59,13 +59,13 @@ if [[ -e /usr/local/bin/hardreset ]]; then
     commentS 'echo'
 
     string=$( cat <<'EOF'
-"/root/gpiopower.py 6"
+"/root/gpiooff.py; echo 6 > /sys/module/bcm2709/parameters/reboot_part; /var/www/command/rune_shutdown; reboot"
 EOF
 )
     appendS 'echo 6'
 
     string=$( cat <<'EOF'
-"/root/gpiopower.py 8"
+"/root/gpiooff.py; echo 8 > /sys/module/bcm2709/parameters/reboot_part; /var/www/command/rune_shutdown; reboot"
 EOF
 )
     appendS 'echo 8'
