@@ -12,6 +12,7 @@ function gpioOnOff() {
 		GUI.gpio = state;
 		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
+		if ( state === 'OFF' ) $( '#infoX' ).click();
 	}, 'text' );
 }
 gpioOnOff();
@@ -33,10 +34,7 @@ if ( 'hidden' in document ) {
 	}
 }
 document.addEventListener( visibilityevent, function() {
-	if ( !document[ hiddenstate ] ) {
-		gpioOnOff();
-		if ( !timer ) $( '#infoX' ).click();
-	}
+	if ( !document[ hiddenstate ] ) gpioOnOff();
 } );
 // nginx pushstream websocket (broadcast)
 var pushstreamGPIO = new PushStream( { modes: 'websocket' } );
