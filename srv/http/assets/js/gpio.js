@@ -110,7 +110,7 @@ function countdowngpio( i, iL, delays, state ) {
 	setTimeout( function() {
 		$( '#device'+ i ).css( 'color', color );
 		i++;
-		i <= iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 500 );
+		i <= iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 1000 );
 	}, delays[ i ] * 1000 );
 	
 }
