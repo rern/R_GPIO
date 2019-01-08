@@ -87,7 +87,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			  icon      : ( state != 'FAILED !' ) ? 'gpio' : 'warning'
 			, title     : 'GPIO Power '+ state
 			, message   : stopwatch +'&ensp;Power <wh>'+ state +'</wh>:<br>'+ devices
-			, autoclose : ( delay + 4 ) * 1000
 			, nobutton  : 1
 		} );
 		var iL = delays.length;
@@ -111,7 +110,7 @@ function countdowngpio( i, iL, delays, state ) {
 	setTimeout( function() {
 		$( '#device'+ i ).css( 'color', color );
 		i++;
-		if ( i <= iL ) countdowngpio( i, iL, delays, state );
+		i <= iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 500 );
 	}, delays[ i ] * 1000 );
 	
 }
