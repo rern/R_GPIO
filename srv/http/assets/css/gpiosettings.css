@@ -42,7 +42,7 @@ h1 {
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
-	color: #587ca0;
+	color: #7795b4;
 }
 span {
 	margin-left: 5px;
