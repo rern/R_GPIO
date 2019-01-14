@@ -47,9 +47,6 @@ span.timer,
 span {
 	margin-left: 5px;
 }
-.close-root i {
-	font-size: 28px;
-}
 #gpioform i {
     font-size: 18px;
 }
@@ -97,6 +94,17 @@ select {
 	float: right;
 	margin-top: 20px;
 }
+.close-root,
+#close-img {
+	font-size: 28px;
+	cursor: pointer;
+}
+#close-img {
+	display: none;
+	position: absolute;
+	right: 15px;
+	top: 5px;
+}
 a:hover {
 	text-decoration: none;
 }
@@ -109,7 +117,11 @@ a:hover {
 	background: #19232d;
 	border-radius: 6px;
 }
-#gpiopin {
+#fliptxt {
+	display: none;
+}
+#gpiopin,
+#gpiopin1 {
 	display: none;
 	margin-bottom: 10px;
 	width: 100%;
