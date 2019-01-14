@@ -14,9 +14,14 @@ var name = {
 };
 var timer = $( '#timer' ).val();
 
-$( '#gpioimgtxt' ).click( function() {
-	$( this ).parent().next().slideToggle();
+$( '#gpioimgtxt, #close-img' ).click( function() {
+	if ( $( '#gpiopin, #gpiopin1' ).is( ':visible' ) && $( '#gpiopin' ).is( ':hidden' ) ) $( '#gpiopin, #gpiopin1' ).toggle();
+	$( '#gpiopin' ).slideToggle();
+	$( '#fliptxt, #close-img' ).toggle();
 	$( this ).find( 'i' ).toggleClass('fa-chevron-circle-down fa-chevron-circle-up')
+} );
+$( '#gpiopin, #gpiopin1' ).click( function() {
+	$( '#gpiopin, #gpiopin1' ).toggle();
 } );
 $( '#gpio-enable' ).click( function() {
 	if ( this.value == 1 ) {

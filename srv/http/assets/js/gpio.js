@@ -128,6 +128,7 @@ $( '#gpio' ).on( 'taphold', function() {
 			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">\
 			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">\
 			<input type="hidden" name="gpiopin" value="'+ $( '#gpiopin' ).val() +'">\
+			<input type="hidden" name="gpiopin1" value="'+ $( '#gpiopin1' ).val() +'">\
 		</form>\
 	' );
 	$( '#formtemp' ).submit();
