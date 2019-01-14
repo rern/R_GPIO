@@ -119,6 +119,7 @@ a:hover {
 }
 #fliptxt {
 	display: none;
+	color: #e0e7ee;
 }
 #gpiopin,
 #gpiopin1 {
