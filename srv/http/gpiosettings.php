@@ -50,8 +50,8 @@ foreach( $offlist as $o ) $$o = $off[ $o ];
 
 $timer = $gpio[ 'timer' ];
 function optpin( $n ) {
-	// omit pins: on-boot-pullup, uart, I2S
-	$pinarray = array( 11, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 36, 37 );
+	// omit pins: on-boot-pullup
+	$pinarray = array( 8, 10, 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 );
 	$option = '';
 	foreach ( $pinarray as $pin ) {
 		$selected = ( $pin == $n ) ? ' selected' : '';
