@@ -1,3 +1,4 @@
+<?php $time = time(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,19 +9,19 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-tap-highlight" content="no">
-	<link rel="stylesheet" href="<?=$_POST[ 'bootstrapmincss' ]?>">
-	<link rel="stylesheet" href="<?=$_POST[ 'bootstrapselectmincss' ]?>">
+	<link rel="stylesheet" href="/css/bootstrap.min.<?=$time?>.css">
+	<link rel="stylesheet" href="/css/bootstrap-select.min.<?=$time?>.css">
 	<style>
 		@font-face {
 			font-family: addons;
-			src        : url( '<?=$_POST[ 'addonswoff' ]?>' ) format( 'woff' ), url( '<?=$_POST[ 'addonsttf' ]?>' ) format( 'truetype' );
+			src        : url( '/fonts/addons.<?=$time?>.woff' ) format( 'woff' ), url( '/fonts/addons.<?=$time?>.ttf' ) format( 'truetype' );
 			font-weight: normal;
 			font-style : normal;
 		}
 	</style>
-	<link rel="shortcut icon" href="<?=$_POST[ 'favicon' ]?>">
-	<link rel="stylesheet" href="<?=$_POST[ 'addonsinfocss' ]?>">
-	<link rel="stylesheet" href="<?=$_POST[ 'gpiosettingscss' ]?>">
+	<link rel="shortcut icon" href="/img/favicon.<?=$time?>.ico">
+	<link rel="stylesheet" href="/css/addonsinfo.<?=$time?>.css">
+	<link rel="stylesheet" href="/css/gpiosettings.<?=$time?>.css">
 </head>
 
 <?php
@@ -92,8 +93,8 @@ function opttime( $n, $minimum ) {
 	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-down"></i></a><a id="fliptxt">&emsp;(Tap image to flip)</a>
 </p>
 <div style="position: relative">
-<img id="gpiopin" src="<?=$_POST[ 'gpiopin' ]?>" usemap="#map">
-<img id="gpiopin1" src="<?=$_POST[ 'gpiopin1' ]?>" usemap="#map">
+<img id="gpiopin" src="/img/RPi3_GPIO-flip.<?=$time?>.svg">
+<img id="gpiopin1" src="/img/RPi3_GPIO.<?=$time?>.svg">
 <a id="close-img"><i class="fa fa-times"></i></a>
 </div>
 <div id="divgpio" class="boxed-group">
@@ -192,12 +193,12 @@ function opttime( $n, $minimum ) {
 </form>
 </div>
 
-<script src="/js/vendor/jquery-2.1.0.min.js"></script>
-<script src="/js/vendor/bootstrap.min.js"></script>
-<script src="/js/vendor/bootstrap-select-1.12.1.min.js"></script>
-<script src="/js/vendor/pnotify.custom.min.js"></script>
-<script src="<?=$_POST[ 'addonsinfojs' ]?>"></script>
-<script src="<?=$_POST[ 'gpiosettingsjs' ]?>"></script>
+<script src="/js/vendor/jquery-2.1.0.min.<?=$time?>.js"></script>
+<script src="/js/vendor/bootstrap.min.<?=$time?>.js"></script>
+<script src="/js/vendor/bootstrap-select-1.12.1.min.<?=$time?>.js"></script>
+<script src="/js/vendor/pnotify.custom.min.<?=$time?>.js"></script>
+<script src="/js/addonsinfo.<?=$time?>.js"></script>
+<script src="/js/gpiosettings.<?=$time?>.js"></script>
 
 </body>
 </html>
