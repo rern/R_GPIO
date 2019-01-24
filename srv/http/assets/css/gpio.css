@@ -3,7 +3,7 @@
 	content: "\f529";
 }
 #settings .fa-gpio,
-#menu-settings .fa-gpio {
+.dropdown-menu .fa-gpio {
 	color: #7795b4;
 }
 #settings a.active .fa-gpio,
