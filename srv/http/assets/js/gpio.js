@@ -120,13 +120,13 @@ $( '#gpio' ).taphold( function() {
 } ).tap( function() {
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	if ( GUI.gpio === 'ON' ) {
-		var py = 'gpiooff.py';
-		$.get( 'gpioexec.php?command=gpiooff.py' );
 		$( '#stop' ).click();
+		setTimeout( function() {
+			$.get( 'gpioexec.php?command=gpiooff.py'  );
+		}, 300 );
 	} else {
 		$.get( 'gpioexec.php?command=gpioon.py' );
 	}
-	$.get( 'gpioexec.php?command='+ py );
 } );
 
 $( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
