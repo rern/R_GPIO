@@ -119,8 +119,14 @@ $( '#gpio' ).taphold( function() {
 	location.href = 'gpiosettings.php';
 } ).tap( function() {
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
-	$( '#settings' ).addClass( 'hide' );
-	$.get( 'gpioexec.php?command='+ ( GUI.gpio === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
+	if ( GUI.gpio === 'ON' ) {
+		var py = 'gpiooff.py';
+		$.get( 'gpioexec.php?command=gpiooff.py' );
+		$( '#stop' ).click();
+	} else {
+		$.get( 'gpioexec.php?command=gpioon.py' );
+	}
+	$.get( 'gpioexec.php?command='+ py );
 } );
 
 $( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
