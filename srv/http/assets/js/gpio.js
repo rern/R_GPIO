@@ -115,24 +115,9 @@ function countdowngpio( i, iL, delays, state ) {
 	
 }
 
-$( '#gpio' ).on( 'taphold', function() {
-	$( 'body' ).append( '\
-		<form id="formtemp" action="gpiosettings.php" method="post">\
-			<input type="hidden" name="favicon" value="'+ $( '#favicon' ).val() +'">\
-			<input type="hidden" name="addonswoff" value="'+ $( '#addonswoff' ).val() +'">\
-			<input type="hidden" name="addonsttf" value="'+ $( '#addonsttf' ).val() +'">\
-			<input type="hidden" name="bootstrapmincss" value="'+ $( '#bootstrapmincss' ).val() +'">\
-			<input type="hidden" name="bootstrapselectmincss" value="'+ $( '#bootstrapselectmincss' ).val() +'">\
-			<input type="hidden" name="addonsinfocss" value="'+ $( '#addonsinfocss' ).val() +'">\
-			<input type="hidden" name="gpiosettingscss" value="'+ $( '#gpiosettingscss' ).val() +'">\
-			<input type="hidden" name="addonsinfojs" value="'+ $( '#addonsinfojs' ).val() +'">\
-			<input type="hidden" name="gpiosettingsjs" value="'+ $( '#gpiosettingsjs' ).val() +'">\
-			<input type="hidden" name="gpiopin" value="'+ $( '#gpiopin' ).val() +'">\
-			<input type="hidden" name="gpiopin1" value="'+ $( '#gpiopin1' ).val() +'">\
-		</form>\
-	' );
-	$( '#formtemp' ).submit();
-} ).click( function() {
+$( '#gpio' ).taphold( function() {
+	location.href = 'gpiosettings.php';
+} ).tap( function() {
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	$( '#settings' ).addClass( 'hide' );
 	$.get( 'gpioexec.php?command='+ ( GUI.gpio === 'ON' ? 'gpiooff.py' : 'gpioon.py' ) );
