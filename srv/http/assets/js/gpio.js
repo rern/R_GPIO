@@ -12,12 +12,10 @@ function gpioOnOff() {
 		GUI.gpio = state;
 		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-		if ( state === 'OFF' ) $( '#infoX' ).click();
+		if ( $( '#infoIcon i.fa-gpio' ).length && state === 'OFF' ) $( '#infoX' ).click();
 	}, 'text' );
 }
 gpioOnOff();
-
-if ( !timer ) $( '#infoX' ).click();
 
 if ( 'hidden' in document ) {
 	var visibilityevent = 'visibilitychange';
