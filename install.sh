@@ -62,9 +62,10 @@ EOF
 fi
 
 # set initial gpio #######################################
-echo -e "$bar GPIO service ..."
+file= /etc/systemd/system/gpioset.service
+echo $file
 
-string=$( cat <<'EOF'
+cat << 'EOF' > $file
 [Unit]
 Description=GPIO initial setup
 [Service]
@@ -73,8 +74,6 @@ ExecStart=/usr/bin/python /root/gpio.py set
 [Install]
 WantedBy=multi-user.target
 EOF
-)
-echo "$string" > /etc/systemd/system/gpioset.service
 
 systemctl enable gpioset
 systemctl daemon-reload
