@@ -62,7 +62,7 @@ EOF
 fi
 
 # set initial gpio #######################################
-file= /etc/systemd/system/gpioset.service
+file=/etc/systemd/system/gpioset.service
 echo $file
 
 cat << 'EOF' > $file
