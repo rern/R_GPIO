@@ -37,6 +37,7 @@ document.addEventListener( visibilityevent, function() {
 // nginx pushstream websocket (broadcast)
 var pushstreamGPIO = new PushStream( { modes: 'websocket' } );
 pushstreamGPIO.addChannel( 'gpio' );
+pushstreamGPIO.connect();
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var response = response[ 0 ];
@@ -101,7 +102,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		}, 5000 );
 	}
 }
-pushstreamGPIO.connect();
 
 function countdowngpio( i, iL, delays, state ) {
 	var color = state === 'ON' ? '#e0e7ee' : '#7795b4'
@@ -119,10 +119,14 @@ $( '#gpio' ).taphold( function() {
 } ).tap( function() {
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	if ( GUI.gpio === 'ON' ) {
-		$( '#stop' ).click();
-		setTimeout( function() {
+		if ( GUI.status.state !== 'stop' ) {
+			$( '#stop' ).click();
+			setTimeout( function() {
+				$.get( 'gpioexec.php?command=gpiooff.py'  );
+			}, 300 );
+		} else {
 			$.get( 'gpioexec.php?command=gpiooff.py'  );
-		}, 300 );
+		}
 	} else {
 		$.get( 'gpioexec.php?command=gpioon.py' );
 	}
