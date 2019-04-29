@@ -85,6 +85,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			  icon      : ( state != 'FAILED !' ) ? 'gpio' : 'warning'
 			, title     : 'GPIO Power '+ state
 			, message   : stopwatch +'Power <wh>'+ state +'</wh>:<br>'+ devices
+			, msgalign  : 'center'
 			, nobutton  : 1
 		} );
 		var iL = delays.length;
