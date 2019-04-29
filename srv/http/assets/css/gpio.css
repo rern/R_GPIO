@@ -18,6 +18,9 @@
 	font-weight: normal;
 }
 
+#stopwatch {
+	vertical-align: -50%;
+}
 .fa-stopwatch-o:before {
 	content: "\f548";
 }
