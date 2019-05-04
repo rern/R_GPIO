@@ -104,7 +104,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 }
 
 function countdowngpio( i, iL, delays, state ) {
-	var color = state === 'ON' ? '#e0e7ee' : '#7795b4'
+	var color = state === 'ON' ? '#e0e7ee' : '#7795b4';
 	$( '#device'+ i ).css( 'color', color );
 	setTimeout( function() {
 		$( '#device'+ i ).css( 'color', color );
