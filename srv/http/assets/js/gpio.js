@@ -70,14 +70,14 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		}, 1000 );
 	} else {
 		var order = response.order;
-		var delays = [];
+		var delays = [ 0 ];
 		var devices = ''
 		$.each( order, function( i, val ) {
 			if ( i % 2 ) {
 				delays.push( val );
 			} else {
-				var color = state === 'ON' ? 'gr' : 'wh'
-				devices += '<br><'+ color +' id="device'+ i / 2 +'">'+ val +'</'+ color +'>';
+				var color = state === 'ON' ? '#7795b4' : '#e0e7ee'
+				devices += '<br><a id="device'+ i / 2 +'" style="color: '+ color +'">'+ val +'</a>';
 			}
 		} );
 		info( {
@@ -89,11 +89,9 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		var iL = delays.length;
 		var i = 0
 		countdowngpio( i, iL, delays, state );
-		
 		setTimeout( function() {
 			gpioOnOff();
 		}, delay * 1000 );
-		
 		setTimeout( function() {
 			GUI.imodedelay = 0;
 		}, 5000 );
@@ -102,11 +100,10 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 
 function countdowngpio( i, iL, delays, state ) {
 	var color = state === 'ON' ? '#e0e7ee' : '#7795b4';
-	$( '#device'+ i ).css( 'color', color );
 	setTimeout( function() {
 		$( '#device'+ i ).css( 'color', color );
 		i++;
-		i <= iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 1000 );
+		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 1000 );
 	}, delays[ i ] * 1000 );
 	
 }
