@@ -18,8 +18,8 @@
 	font-weight: normal;
 }
 
-#stopwatch {
-	vertical-align: -50%;
+#stopwatch i {
+	font-size: 28px;
 }
 .fa-stopwatch-o:before {
 	content: "\f548";
@@ -27,15 +27,7 @@
 .fa-stopwatch-i:before {
 	content: "\f549";
 }
-#infoIcon .stopwatch {
-	margin: -35px -20px 0 -15px;
-	padding: 0;
-}
 /* fix - missing spin */
 .fa-spin {
 	animation: fa-spin 2s infinite linear;
-}
-@keyframes fa-spin {
-	0%   { transform: rotate( 0deg ) }
-	100% { transform: rotate( 359deg ) }
 }
