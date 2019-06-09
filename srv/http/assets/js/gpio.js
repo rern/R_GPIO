@@ -108,9 +108,12 @@ function countdowngpio( i, iL, delays, state ) {
 	
 }
 
-$( '#gpio' ).taphold( function() {
-	location.href = 'gpiosettings.php';
-} ).tap( function() {
+$( '#gpio' ).click( function( e ) {
+	if ( $( e.target ).hasClass( 'submenu' ) ) {
+		location.href = 'gpiosettings.php';
+		return
+	}
+	
 	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
 	if ( GUI.gpio === 'ON' ) {
 		if ( GUI.status.state !== 'stop' ) {
