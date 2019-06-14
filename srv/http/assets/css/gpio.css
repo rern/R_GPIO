@@ -10,9 +10,6 @@
 #menu-settings a.active .fa-gpio {
 	color: #34495e !important;
 }
-#menu-settings a.active {
-	background: #0095d8;
-}
 #infoMessage wh,
 #infoMessage gr {
 	font-weight: normal;
