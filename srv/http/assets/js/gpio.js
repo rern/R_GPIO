@@ -10,7 +10,7 @@ GUI.imodedelay = 0;
 function gpioOnOff() {
 	$.get( 'gpioexec.php?command=gpio.py state', function( state ) {
 		GUI.gpio = state;
-		$( '#gpio' ).toggleClass( 'active', state === 'ON' );
+		$( '#gpio' ).toggleClass( 'on', state === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
 		if ( $( '#infoIcon i.fa-gpio' ).length && state === 'OFF' ) $( '#infoX' ).click();
 	}, 'text' );
