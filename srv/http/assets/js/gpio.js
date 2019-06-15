@@ -76,7 +76,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			if ( i % 2 ) {
 				delays.push( val );
 			} else {
-				var color = state === 'ON' ? '#7795b4' : '#e0e7ee'
+				var color = state === 'ON' ? '#7795b4/*cl*/' : '#e0e7ee'
 				devices += '<br><a id="device'+ i / 2 +'" style="color: '+ color +'">'+ val +'</a>';
 			}
 		} );
@@ -99,7 +99,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 }
 
 function countdowngpio( i, iL, delays, state ) {
-	var color = state === 'ON' ? '#e0e7ee' : '#7795b4';
+	var color = state === 'ON' ? '#e0e7ee' : '#7795b4/*cl*/';
 	setTimeout( function() {
 		$( '#device'+ i ).css( 'color', color );
 		i++;
