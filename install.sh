@@ -85,7 +85,7 @@ usermod -a -G root http # add user http to group root to allow /dev/gpiomem acce
 
 # set color
 color=$( redis-cli hget display color )
-[[ -n $color ]] && sed -i "s|#......\(/\*c\*/\)|$color\1|g" /srv/http/assets/css/gpio.css
+[[ -n $color ]] && sed -i "s|#......\(/\*c\*/\)|$color\1|g" /srv/http/assets/css/gpio.css /srv/http/assets/js/gpio.js /srv/http/assets/js/gpiosettings.js
 
 installfinish $@
 
