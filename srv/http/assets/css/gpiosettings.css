@@ -67,12 +67,12 @@ select {
 }
 .dropdown-menu>li.selected a {
 	color: #e0e7ee;
-	background: #222f3d;
+	background: #0095d8/*c*/;
 	outline: none;
 }
 .dropdown-menu>li>a:hover {
 	color: #e0e7ee !important;
-	background: #0095d8/*c*/;
+	opacity: 0.85;
 }
 .dropdown-menu>li.selected a:hover {
 	color: #303030/*cg*/ !important;
@@ -114,7 +114,7 @@ a:hover {
 }
 .boxed-group {
 	padding: 5px 15px;
-	background: #19232d;
+	background: #202020/*cd*/;
 	border-radius: 6px;
 }
 #fliptxt {
@@ -194,17 +194,10 @@ div#gpio-num.col-sm-10,
 	line-height: 40px;
 	color: #e0e7ee;
 }
-#gpio .bootstrap-select,
-#gpio input[type=text],
-#gpio input[type=number] {
+#gpio .bootstrap-select {
 	margin: 0 0 5px 0;
 	height: 41px;
 	color: #e0e7ee;
-}
-#gpio input[type=text],
-#gpio input[type=number] {
-	padding: 10px !important;
-	border-width: 2px;
 }
 div#gpio-num.col-sm-10 {
 	margin-right: 5px;
@@ -215,10 +208,21 @@ button {
 #audioout button {
 	width: 200px;
 }
-#gpio-name,
-#gpio-name input[type=text] {
+#gpio-name {
 	margin: 0 20px 5px 0 !important;
-	font-size: 1em;
+}
+input {
+	margin: 2px 5px;
+	height: 36px;
+	padding: 0 10px;
+	font-size: 14px !important;
+	color: #e0e7ee;
+	background-color: #10161c;
+	border-radius: 4px;
+	border: 1px solid #303030/*cg*/;
+}
+input:focus {
+	outline: none;
 }
 #gpio div.text {
 	margin: 0 5px 0 0;
@@ -230,6 +234,15 @@ button {
 .clear {
 	clear: both;
 }
+.btn-default {
+	background: #303030/*cg*/;
+}
+.btn-primary {
+	background: #0095d8/*c*/;
+	border: none;
+}
+.close-root,
+#gpioimgtxt,
 .blue {
 	color: #0095d8/*c*/;
 }
