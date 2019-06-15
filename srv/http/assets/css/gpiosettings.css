@@ -4,7 +4,7 @@ i.fa {
 }
 .fa-gpio:before {
 	content: "\f529";
-	color: #7795b4/*cl*/;
+	color: #808080/*cl*/;
 }
 .fa-times:before { content: "\f51A" }
 .fa-check:before { content: "\f51B" }
@@ -42,7 +42,7 @@ h1 {
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
-	color: #7795b4/*cl*/;
+	color: #808080/*cl*/;
 }
 span {
 	margin-left: 5px;
@@ -58,7 +58,7 @@ select {
 	display: none;
 }
 .dropdown-menu {
-	background: #34495e/*cg*/;
+	background: #303030/*cg*/;
 	box-shadow: 4px 4px 10px #000000;
 }
 .dropdown-menu>li>a {
@@ -75,7 +75,7 @@ select {
 	background: #0095d8/*c*/;
 }
 .dropdown-menu>li.selected a:hover {
-	color: #34495e/*cg*/ !important;
+	color: #303030/*cg*/ !important;
 }
 
 .pnotify_custom {
