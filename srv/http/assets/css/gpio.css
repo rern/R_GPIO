@@ -4,7 +4,7 @@
 }
 #settings .fa-gpio,
 .dropdown-menu .fa-gpio {
-	color: #7795b4;
+	color: #7795b4/*cl*/;
 }
 #settings a.on .fa-gpio,
 #menu-settings a.on .fa-gpio {
