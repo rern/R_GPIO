@@ -84,10 +84,8 @@ usermod -a -G root http # add user http to group root to allow /dev/gpiomem acce
 #chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
 
 # set color
-if [[ $1 != u ]]; then
-	color=$( redis-cli hget display color )
-	[[ -n $color ]] && sed -i "s|#......\(/\*c\*/\)|$color\1|g" /srv/http/assets/css/gpio.css
-fi
+color=$( redis-cli hget display color )
+[[ -n $color ]] && sed -i "s|#......\(/\*c\*/\)|$color\1|g" /srv/http/assets/css/gpio.css
 
 installfinish $@
 
