@@ -2,11 +2,9 @@
 .fa-gpio:before {
 	content: "\f529";
 }
-#settings .fa-gpio,
 .dropdown-menu .fa-gpio {
 	color: #7795b4/*cl*/;
 }
-#settings a.on .fa-gpio,
 #menu-settings a.on .fa-gpio {
 	color: #0f0 !important;
 }
