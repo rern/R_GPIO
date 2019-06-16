@@ -108,7 +108,9 @@ function countdowngpio( i, iL, delays, state ) {
 	
 }
 
-$( '#gpio' ).click( function( e ) {
+$( '#gpio' ).taphold( function() {
+	location.href = 'gpiosettings.php';
+} ).tap( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
 		return
