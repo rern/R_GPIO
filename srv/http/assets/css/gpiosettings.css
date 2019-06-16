@@ -258,6 +258,8 @@ select {
 .blue {
 	color: #0095d8/*c*/;
 }
+a.active,
+a:focus { color: red !important;}
 .green {
     color: #0f0
 }
