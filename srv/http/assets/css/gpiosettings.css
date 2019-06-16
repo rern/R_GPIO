@@ -75,7 +75,8 @@ select {
 	opacity: 0.85;
 }
 .dropdown-menu>li.selected a:hover {
-	color: #444444/*cg*/ !important;
+	background: #0095d8/*c*/ !important;
+	opacity: 0.85 !important;
 }
 
 .container {
@@ -172,6 +173,7 @@ div#gpio-num.col-sm-10,
 #gpio a:hover {
 	text-decoration: none;
 	color: #e0e7ee;
+	background: #333333;
 }
 #gpio div.col-sm-10 {
 	float: left;
@@ -197,6 +199,10 @@ div#gpio-num.col-sm-10 {
 button {
 	height: 40px;
 }
+.btn,
+.input-lg {
+	border-radius: 4px;
+}
 #gpiosave {
 	width: 75px;
 }
@@ -207,7 +213,7 @@ button {
 	margin: 0 20px 5px 0 !important;
 }
 input {
-	margin: 1px 5px 6px 0;
+	margin-bottom: 5px;
 	height: 38px;
 	padding: 0 10px !important;
 	font-size: 14px !important;
@@ -229,9 +235,18 @@ input:focus {
 .clear {
 	clear: both;
 }
-.btn-default,
+.btn-default {
+	background: #444444/*cg*/ !important;
+}
+.btn-default:active,
+.dropdown-toggle.btn-default:active,
 .dropdown-toggle.btn-default:hover {
-	background: #444444/*cg*/;
+	background: #888888/*cl*/ !important;
+}
+.btn-default:focus,
+.dropdown-toggle.btn-default:focus {
+	background: #888888/*cl*/ !important;
+	outline: none !important;
 }
 .btn-primary {
 	background: #0095d8/*c*/;
