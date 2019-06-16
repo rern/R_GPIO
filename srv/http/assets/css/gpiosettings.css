@@ -39,6 +39,9 @@ body {
 h1 {
 	font-weight: 300;
 }
+legend {
+	border-bottom: 1px solid #444444/*cg*/;
+}
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
