@@ -256,21 +256,19 @@ select {
 
 @media( hover:hover ) {
 	.close-root:hover,
-	#gpioimgtxt:hover,
-	#gpio a:hover {
+	#gpioimgtxt:hover {
 		color: #00a3ed/*ch*/;
 	}
 	.dropdown-menu > li > a:hover,
-	.dropdown-menu > li.selected a:hover {
-		background: #666666/*cgh*/ !important;
-	}
 	.btn-default:active,
-	.dropdown-toggle.btn-default:active {
-		background: #333333/*cga*/ !important;
-	}
+	.dropdown-toggle.btn-default:active,
 	.btn-default:hover,
 	.dropdown-menu > li.selected > a,
 	.dropdown-toggle.btn-default:hover {
 		background: #333333/*cga*/ !important;
+		color: #e0e7ee;
+	}
+	.dropdown-menu > li.selected a:hover {
+		background: #111111/*cda*/ !important;
 	}
 }
