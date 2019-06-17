@@ -32,6 +32,23 @@ i.fa {
 	font-weight: 300;
 	font-style: normal;
 }
+a,
+a:hover {
+	text-decoration: none;
+}
+.btn-default {
+	background: #444444/*cg*/ !important;
+}
+.btn-default:focus,
+.dropdown-toggle.btn-default:focus {
+	background: #888888/*cl*/ !important;
+	outline: none !important;
+}
+.btn-primary {
+	background: #0095d8/*c*/;
+	border: none;
+}
+
 body {
 	font-family: "Lato";
 	font-size: 14px;
@@ -67,11 +84,6 @@ span {
 	margin-top: 20px;
 	font-size: 28px;
 }
-.close-root:hover,
-#gpioimgtxt:hover,
-#gpio a:hover {
-	opacity: 0.85;
-}
 .close-root,
 #gpioimgtxt,
 #close-img {
@@ -83,9 +95,6 @@ span {
 	right: 15px;
 	top: 5px;
 	font-size: 28px;
-}
-a:hover {
-	text-decoration: none;
 }
 .form-group {
 	margin-top: 10px;
@@ -230,31 +239,6 @@ select {
 	color: #e0e7ee;
 	outline: none;
 }
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li.selected a:hover {
-	background: #222222/*cd*/ !important;
-}
-.btn-default {
-	background: #444444/*cg*/ !important;
-}
-.btn-default:active,
-.dropdown-toggle.btn-default:active {
-	background: #888888/*cl*/ !important;
-}
-.btn-default:focus,
-.dropdown-toggle.btn-default:focus {
-	background: #888888/*cl*/ !important;
-	outline: none !important;
-}
-.btn-primary {
-	background: #0095d8/*c*/;
-	border: none;
-}
-.btn-default:hover,
-.dropdown-menu > li.selected > a,
-.dropdown-toggle.btn-default:hover {
-	background: #333333 !important;
-}
 .close-root,
 #gpioimgtxt,
 .blue {
@@ -268,4 +252,25 @@ select {
 }
 .yellow {
 	color: yellow;
+}
+
+@media( hover:hover ) {
+	.close-root:hover,
+	#gpioimgtxt:hover,
+	#gpio a:hover {
+		color: #00a3ed/*ch*/;
+	}
+	.dropdown-menu > li > a:hover,
+	.dropdown-menu > li.selected a:hover {
+		background: #666666/*cgh*/ !important;
+	}
+	.btn-default:active,
+	.dropdown-toggle.btn-default:active {
+		background: #333333/*cga*/ !important;
+	}
+	.btn-default:hover,
+	.dropdown-menu > li.selected > a,
+	.dropdown-toggle.btn-default:hover {
+		background: #333333/*cga*/ !important;
+	}
 }
