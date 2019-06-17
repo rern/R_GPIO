@@ -65,10 +65,16 @@ span {
 .close-root {
 	float: right;
 	margin-top: 20px;
+	font-size: 28px;
+}
+.close-root:hover,
+#gpioimgtxt:hover,
+#gpio a:hover {
+	opacity: 0.85;
 }
 .close-root,
+#gpioimgtxt,
 #close-img {
-	font-size: 28px;
 	cursor: pointer;
 }
 #close-img {
@@ -76,6 +82,7 @@ span {
 	position: absolute;
 	right: 15px;
 	top: 5px;
+	font-size: 28px;
 }
 a:hover {
 	text-decoration: none;
@@ -148,11 +155,6 @@ div#gpio-num.col-sm-10,
 	height: 40px;
 	line-height: 30px;
 	padding: 5px 15px;
-}
-#gpio a:hover {
-	text-decoration: none;
-	color: #e0e7ee;
-	background: #333333;
 }
 #gpio div.col-sm-10 {
 	float: left;
