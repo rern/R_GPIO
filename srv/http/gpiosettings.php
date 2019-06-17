@@ -90,7 +90,7 @@ function opttime( $n, $minimum ) {
 
 <p>
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
-	Pin number: <a id="gpioimgtxt" style="cursor: pointer">RPi J8 &ensp;<i class="fa fa-chevron-down"></i></a><a id="fliptxt">&emsp;(Tap image to flip)</a>
+	Pin number: <a id="gpioimgtxt">RPi J8 &ensp;<i class="fa fa-chevron-down"></i></a><a id="fliptxt">&emsp;(Tap image to flip)</a>
 </p>
 <div style="position: relative">
 <img id="gpiopin" src="/img/RPi3_GPIO-flip.<?=$time?>.svg">
