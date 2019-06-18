@@ -102,7 +102,7 @@ span {
 }
 .boxed-group {
 	padding: 5px 15px;
-	background: hsl(0,0%,15%)/*cd*/;
+	background: hsl(0,0%,20%)/*cd*/;
 	border-radius: 6px;
 }
 #fliptxt {
@@ -204,7 +204,7 @@ button {
 }
 input {
 	margin-bottom: 5px;
-	height: 38px;
+	height: 42px !important;
 	padding: 0 10px !important;
 	font-size: 14px !important;
 	color: #e0e7ee;
@@ -237,6 +237,7 @@ select {
 }
 .dropdown-menu >li.selected a {
 	color: #e0e7ee;
+	background: hsl(0,0%,20%);
 	outline: none;
 }
 .close-root,
@@ -269,6 +270,6 @@ select {
 		color: #e0e7ee;
 	}
 	.dropdown-menu > li.selected a:hover {
-		background: hsl(0,0%,5%)/*cda*/ !important;
+		background: hsl(0,0%,10%)/*cda*/ !important;
 	}
 }
