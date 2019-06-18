@@ -4,7 +4,7 @@ i.fa {
 }
 .fa-gpio:before {
 	content: "\f529";
-	color: #888888/*cl*/;
+	color: hsl(0,0%,50%)/*cl*/;
 }
 .fa-times:before { content: "\f51A" }
 .fa-check:before { content: "\f51B" }
@@ -37,11 +37,11 @@ a:hover {
 	text-decoration: none;
 }
 .btn-default {
-	background: #444444/*cg*/ !important;
+	background: hsl(0,0%,30%)/*cg*/ !important;
 }
 .btn-default:focus,
 .dropdown-toggle.btn-default:focus {
-	background: #888888/*cl*/ !important;
+	background: hsl(0,0%,50%)/*cl*/ !important;
 	outline: none !important;
 }
 .btn-primary {
@@ -57,12 +57,12 @@ h1 {
 	font-weight: 300;
 }
 legend {
-	border-bottom: 1px solid #444444/*cg*/;
+	border-bottom: 1px solid hsl(0,0%,30%)/*cg*/;
 }
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
-	color: #888888/*cl*/;
+	color: hsl(0,0%,50%)/*cl*/;
 }
 span {
 	margin-left: 5px;
@@ -102,7 +102,7 @@ span {
 }
 .boxed-group {
 	padding: 5px 15px;
-	background: #222222/*cd*/;
+	background: hsl(0,0%,15%)/*cd*/;
 	border-radius: 6px;
 }
 #fliptxt {
@@ -209,7 +209,7 @@ input {
 	font-size: 14px !important;
 	color: #e0e7ee;
 	background-color: #000000 !important;
-	border: 1px solid #444444/*cg*/ !important;
+	border: 1px solid hsl(0,0%,30%)/*cg*/ !important;
 }
 input:focus {
 	outline: none;
@@ -228,7 +228,7 @@ select {
 	display: none;
 }
 .dropdown-menu {
-	background: #444444/*cg*/;
+	background: hsl(0,0%,30%)/*cg*/;
 	box-shadow: 4px 4px 10px #000000;
 }
 .dropdown-menu > li > a {
@@ -265,10 +265,10 @@ select {
 	.btn-default:hover,
 	.dropdown-menu > li.selected > a,
 	.dropdown-toggle.btn-default:hover {
-		background: #333333/*cga*/ !important;
+		background: hsl(0,0%,20%)/*cga*/ !important;
 		color: #e0e7ee;
 	}
 	.dropdown-menu > li.selected a:hover {
-		background: #111111/*cda*/ !important;
+		background: hsl(0,0%,5%)/*cda*/ !important;
 	}
 }
