@@ -45,7 +45,7 @@ a:hover {
 	outline: none !important;
 }
 .btn-primary {
-	background:hsl(200,100%,40%)/*c*/;
+	background: hsl(200,100%,40%)/*c*/;
 	border: none;
 }
 
@@ -242,7 +242,7 @@ select {
 .close-root,
 #gpioimgtxt,
 .blue {
-	color:hsl(200,100%,40%)/*c*/;
+	color: hsl(200,100%,40%)/*c*/;
 }
 .green {
     color: #0f0
@@ -257,7 +257,7 @@ select {
 @media( hover:hover ) {
 	.close-root:hover,
 	#gpioimgtxt:hover {
-		color:hsl(200,100%,50%)/*ch*/;
+		color: hsl(200,100%,50%)/*ch*/;
 	}
 	.dropdown-menu > li > a:hover,
 	.btn-default:active,
