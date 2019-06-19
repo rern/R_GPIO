@@ -83,15 +83,7 @@ systemctl daemon-reload
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
 
-# set color
-c=$( redis-cli hget display color )
-if [[ -n $c && $c != 'hsl(200,100%,40%)' ]]; then
-	l=$( echo $c | cut -d'%' -f2 | tr -d ',' )
-	ch=$( echo $c | sed "s/%.*%/%,$(( l + 10 ))%/" )
-	ca=$( echo $c | sed "s/%.*%/%,$(( l - 20 ))%/" )
-	sed -i "s|hsl(*\(/\*c\*/\)|$c\1|g; s|hsl(.*\(/\*ch\*/\)|$ch\1|g; s|hsl(.*\(/\*ca\*/\)|$ca\1|g
-	" $( grep -ril '\/\*c' /srv/http/assets/{css,js} )
-fi
+setColor
 
 installfinish $@
 
