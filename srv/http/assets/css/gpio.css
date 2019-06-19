@@ -3,7 +3,7 @@
 	content: "\f529";
 }
 .dropdown-menu .fa-gpio {
-	color: hsl(0,0%,50%)/*cl*/;
+	color: hsl(0,0%,60%)/*cl*/;
 }
 #menu-settings a.on .fa-gpio {
 	color: #0f0 !important;

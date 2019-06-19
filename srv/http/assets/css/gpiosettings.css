@@ -4,7 +4,7 @@ i.fa {
 }
 .fa-gpio:before {
 	content: "\f529";
-	color: hsl(0,0%,50%)/*cl*/;
+	color: hsl(0,0%,60%)/*cl*/;
 }
 .fa-times:before { content: "\f51A" }
 .fa-check:before { content: "\f51B" }
@@ -41,7 +41,7 @@ a:hover {
 }
 .btn-default:focus,
 .dropdown-toggle.btn-default:focus {
-	background: hsl(0,0%,50%)/*cl*/ !important;
+	background: hsl(0,0%,60%)/*cl*/ !important;
 	outline: none !important;
 }
 .btn-primary {
@@ -62,7 +62,7 @@ legend {
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
-	color: hsl(0,0%,50%)/*cl*/;
+	color: hsl(0,0%,60%)/*cl*/;
 }
 span {
 	margin-left: 5px;
