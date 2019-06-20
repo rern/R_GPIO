@@ -53,7 +53,7 @@ function txtcolorname() {
 		.filter( function() { // .find('input[value="(no name)"]') not work
 			return this.value == '(no name)';
 		})
-		.css( 'color', 'hsl(200,5%,60%)/*cgl*/' ); // '(no name)' gray text
+		.addClass( 'cgl' ); // '(no name)' gray text
 	$( '.name, .on, .off' ).selectpicker( 'refresh' );
 }
 function txtcolordelay() {
@@ -79,7 +79,7 @@ function txtcolor() {
 	$( '.timer, .delay, .on, .off' ).find( 'span' ).css( 'color', '#e0e7ee' );
 	$( '.timer, .delay, .on, .off' )
 		.find( 'span:contains("none"), option[value=0]' )
-		.css( 'color', 'hsl(200,5%,60%)/*cgl*/' ); // 'none' gray text
+		.addClass( 'cgl' );
 	$( '.timer, .delay, .on, .off' ).selectpicker( 'refresh' );
 }
 
