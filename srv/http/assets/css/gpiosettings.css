@@ -4,7 +4,7 @@ i.fa {
 }
 .fa-gpio:before {
 	content: "\f529";
-	color: hsl(0,0%,60%)/*cl*/;
+	color: hsl(200,5%,60%)/*cgl*/;
 }
 .fa-times:before { content: "\f51A" }
 .fa-check:before { content: "\f51B" }
@@ -37,11 +37,11 @@ a:hover {
 	text-decoration: none;
 }
 .btn-default {
-	background: hsl(0,0%,30%)/*cg*/ !important;
+	background: hsl(200,5%,30%)/*cg*/ !important;
 }
 .btn-default:focus,
 .dropdown-toggle.btn-default:focus {
-	background: hsl(0,0%,60%)/*cl*/ !important;
+	background: hsl(200,5%,60%)/*cgl*/ !important;
 	outline: none !important;
 }
 .btn-primary {
@@ -57,12 +57,12 @@ h1 {
 	font-weight: 300;
 }
 legend {
-	border-bottom: 1px solid hsl(0,0%,30%)/*cg*/;
+	border-bottom: 1px solid hsl(200,5%,30%)/*cg*/;
 }
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
-	color: hsl(0,0%,60%)/*cl*/;
+	color: hsl(200,5%,60%)/*cgl*/;
 }
 span {
 	margin-left: 5px;
@@ -102,7 +102,7 @@ span {
 }
 .boxed-group {
 	padding: 5px 15px;
-	background: hsl(0,0%,20%)/*cd*/;
+	background: hsl(200,5%,20%)/*cd*/;
 	border-radius: 6px;
 }
 #fliptxt {
@@ -209,7 +209,7 @@ input {
 	font-size: 14px !important;
 	color: #e0e7ee;
 	background-color: #000000 !important;
-	border: 1px solid hsl(0,0%,30%)/*cg*/ !important;
+	border: 1px solid hsl(200,5%,30%)/*cg*/ !important;
 }
 input:focus {
 	outline: none;
@@ -228,7 +228,7 @@ select {
 	display: none;
 }
 .dropdown-menu {
-	background: hsl(0,0%,30%)/*cg*/;
+	background: hsl(200,5%,30%)/*cg*/;
 	box-shadow: 4px 4px 10px #000000;
 }
 .dropdown-menu > li > a {
@@ -258,7 +258,7 @@ select {
 @media( hover:hover ) {
 	.close-root:hover,
 	#gpioimgtxt:hover {
-		color: hsl(200,100%,50%)/*ch*/;
+		color: hsl(200,100%,45%)/*ch*/;
 	}
 	.dropdown-menu > li > a:hover,
 	.btn-default:active,
@@ -266,10 +266,10 @@ select {
 	.btn-default:hover,
 	.dropdown-menu > li.selected > a,
 	.dropdown-toggle.btn-default:hover {
-		background: hsl(0,0%,20%)/*cga*/ !important;
+		background: hsl(200,5%,20%)/*cga*/ !important;
 		color: #e0e7ee;
 	}
 	.dropdown-menu > li.selected a:hover {
-		background: hsl(0,0%,10%)/*cda*/ !important;
+		background: hsl(200,5%,10%)/*cda*/ !important;
 	}
 }
