@@ -26,3 +26,6 @@
 .fa-spin {
 	animation: fa-spin 2s infinite linear;
 }
+.cgl {
+	color: hsl(200,5%,60%)/*cgl*/ !important;
+}

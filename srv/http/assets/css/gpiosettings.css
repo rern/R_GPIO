@@ -245,6 +245,9 @@ select {
 .blue {
 	color: hsl(200,100%,40%)/*c*/;
 }
+.cgl {
+	color: hsl(200,5%,60%)/*cgl*/ !important;
+}
 .green {
     color: #0f0
 }
