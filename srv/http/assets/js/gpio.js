@@ -99,7 +99,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 
 function countdowngpio( i, iL, delays, state ) {
 	setTimeout( function() {
-		$( '#device'+ i ).toggleClass( '', 'cgl' );
+		$( '#device'+ i ).toggleClass( 'cgl' );
 		i++;
 		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 1000 );
 	}, delays[ i ] * 1000 );
