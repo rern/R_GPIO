@@ -3,7 +3,7 @@
 	content: "\f529";
 }
 .dropdown-menu .fa-gpio {
-	color: hsl(200,5%,60%)/*cgl*/;
+	color: hsl(200,3%,60%)/*cgl*/;
 }
 #menu-settings a.on .fa-gpio {
 	color: #0f0 !important;
@@ -27,5 +27,5 @@
 	animation: fa-spin 2s infinite linear;
 }
 .cgl {
-	color: hsl(200,5%,60%)/*cgl*/ !important;
+	color: hsl(200,3%,60%)/*cgl*/ !important;
 }
