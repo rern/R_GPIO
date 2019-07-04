@@ -25,7 +25,7 @@
 </head>
 
 <?php
-$file = '/srv/http/gpio.json';
+$file = '/srv/http/assets/gpio/gpio.json';
 $fileopen = fopen( $file, 'r' );
 $gpio = fread( $fileopen, filesize( $file ) );
 fclose( $fileopen );
