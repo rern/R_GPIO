@@ -11,11 +11,17 @@ installstart $@
 
 ln -sf /usr/bin/python{2.7,}
 
-mv /srv/http/gpio.json{,.backup} &> /dev/null
-
 getinstallzip
 
-mv /srv/http/gpio.json{.backup,} &> /dev/null
+makeDirLink gpio
+
+file=/srv/http/assets/img/gpio/gpio.json
+if [[ ! -e $( ls -A $file ) ]]; then
+    echo '{"name":{"11":"DAC","13":"PreAmp","15":"Amp","16":"Subwoofer"},
+"on":{"on1":11,"ond1":2,"on2":13,"ond2":2,"on3":15,"ond3":2,"on4":16},
+"off":{"off1":16,"offd1":2,"off2":15,"offd2":2,"off3":13,"offd3":2,"off4":11},
+"timer":5}' > $file
+fi
 
 # modify files #######################################
 echo -e "$bar Modify files ..."
