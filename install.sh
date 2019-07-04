@@ -17,10 +17,14 @@ makeDirLink gpio
 
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
-    echo '{"name":{"11":"DAC","13":"PreAmp","15":"Amp","16":"Subwoofer"},
+    cat << 'EOF' > $file
+{
+"name":{"11":"DAC","13":"PreAmp","15":"Amp","16":"Subwoofer"},
 "on":{"on1":11,"ond1":2,"on2":13,"ond2":2,"on3":15,"ond3":2,"on4":16},
 "off":{"off1":16,"offd1":2,"off2":15,"offd2":2,"off3":13,"offd3":2,"off4":11},
-"timer":5}' > $file
+"timer":5
+}
+EOF
     chown http:http $file
 fi
 
