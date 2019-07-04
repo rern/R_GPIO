@@ -10,7 +10,7 @@ import urllib2
 ON = 1
 OFF = 0
 
-with open( '/srv/http/assets/gpio/gpio.json' ) as jsonfile:
+with open( '/srv/http/assets/img/gpio/gpio.json' ) as jsonfile:
 	gpio = json.load( jsonfile )
 
 name = gpio[ 'name' ]
