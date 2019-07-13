@@ -71,25 +71,6 @@ EOF
 )
     appendS 'echo 8'
 fi
-
-# set initial gpio #######################################
-file=/etc/systemd/system/gpioset.service
-echo $file
-
-cat << 'EOF' > $file
-[Unit]
-Description=GPIO initial setup
-[Service]
-Type=idle
-ExecStart=/usr/bin/python /root/gpio.py set
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl enable gpioset
-systemctl daemon-reload
-/root/gpio.py set
-
 # set permission #######################################
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
