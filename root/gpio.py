@@ -21,11 +21,6 @@ GPIO.setwarnings( 0 )
 GPIO.setmode( GPIO.BOARD )
 GPIO.setup( pin, GPIO.OUT )
 
-if len( sys.argv ) > 1 and sys.argv[ 1 ] == 'set':
-	os.system( '/bin/chmod g+rw /dev/gpiomem' ) # fix permission every boot
-	GPIO.output( pin, OFF )
-	exit()
-
 on   = gpio[ 'on' ]
 on1  = on[ 'on1' ]
 ond1 = on[ 'ond1' ]
