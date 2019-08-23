@@ -54,7 +54,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon        : 'gpio'
 			, title       : 'GPIO Idle Timer'
-			, message     : 'Power Off Countdown:<br><br>'+ stopwatch +'&emsp;<white>'+ delay +'</white>'
+			, message     : 'Power Off Countdown:<br><br>'
+						   + stopwatch +'<white>'+ delay +'</white>'
 			, oklabel     : 'Reset'
 			, ok          : function() {
 				$.get( 'gpioexec.php?command=timer' );
@@ -82,7 +83,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon      : ( state != 'FAILED !' ) ? 'gpio' : 'warning'
 			, title     : 'GPIO Power '+ state
-			, message   : stopwatch +'Power <wh>'+ state +'</wh>:<br>'+ devices
+			, message   : stopwatch +'Power <wh>'+ state +'</wh>:<br>'
+						+ devices
 			, nobutton  : 1
 		} );
 		var iL = delays.length;
@@ -101,7 +103,7 @@ function countdowngpio( i, iL, delays, state ) {
 	setTimeout( function() {
 		$( '#device'+ i ).toggleClass( 'cgl' );
 		i++;
-		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( function() { $( '#infoX' ).click() }, 1000 );
+		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
 	}, delays[ i ] * 1000 );
 	
 }
