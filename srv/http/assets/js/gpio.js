@@ -77,7 +77,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			if ( i % 2 ) {
 				delays.push( val );
 			} else {
-				devices += '<br><a id="device'+ i / 2 +'" class="'+ ( state === 'ON' ? 'cgl' : '' ) +'">'+ val +'</a>';
+				devices += '<br><a id="device'+ i / 2 +'" class="'+ ( state === 'ON' ? 'gr' : '' ) +'">'+ val +'</a>';
 			}
 		} );
 		info( {
@@ -101,7 +101,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 
 function countdowngpio( i, iL, delays, state ) {
 	setTimeout( function() {
-		$( '#device'+ i ).toggleClass( 'cgl' );
+		$( '#device'+ i ).toggleClass( 'gr' );
 		i++;
 		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
 	}, delays[ i ] * 1000 );
