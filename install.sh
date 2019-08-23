@@ -5,7 +5,6 @@
 alias=gpio
 
 . /srv/http/addonstitle.sh
-. /srv/http/addonsedit.sh
 
 installstart $@
 
@@ -28,49 +27,6 @@ EOF
     chown http:http $file
 fi
 
-# modify files #######################################
-echo -e "$bar Modify files ..."
-
-#----------------------------------------------------------------------------------
-file=/srv/http/app/templates/header.php
-echo $file
-
-[[ -e $file.backup ]] && file=$file.backup
-
-appendAsset 'runeui.css' 'gpio.css'
-
-string=$( cat <<'EOF'
-    <li><a id="gpio"><i class="fa fa-gpio"></i>GPIO</a></li>
-EOF
-)
-appendH 'poweroff-modal'
-#----------------------------------------------------------------------------------
-file=/srv/http/app/templates/footer.php
-echo $file
-
-[[ -e $file.backup ]] && file=$file.backup
-
-appendAsset 'fastclick.min.js' 'gpio.js'
-#----------------------------------------------------------------------------------
-# Dual boot
-if [[ -e /usr/local/bin/hardreset ]]; then
-    file=/root/.xbindkeysrc
-    echo $file
-
-    commentS 'echo'
-
-    string=$( cat <<'EOF'
-"/root/gpiooff.py; echo 6 > /sys/module/bcm2709/parameters/reboot_part; /var/www/command/rune_shutdown; reboot"
-EOF
-)
-    appendS 'echo 6'
-
-    string=$( cat <<'EOF'
-"/root/gpiooff.py; echo 8 > /sys/module/bcm2709/parameters/reboot_part; /var/www/command/rune_shutdown; reboot"
-EOF
-)
-    appendS 'echo 8'
-fi
 # set permission #######################################
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
