@@ -9,19 +9,19 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-tap-highlight" content="no">
-	<link rel="shortcut icon" href="/img/favicon.<?=$time?>.ico">
-	<link rel="stylesheet" href="/css/bootstrap.min.<?=$time?>.css">
-	<link rel="stylesheet" href="/css/bootstrap-select.min.<?=$time?>.css">
+	<link rel="shortcut icon" href="/assets/img/favicon.<?=$time?>.ico">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.<?=$time?>.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap-select.min.<?=$time?>.css">
 	<style>
 		@font-face {
 			font-family: addons;
-			src        : url( '/fonts/addons.<?=$time?>.woff' ) format( 'woff' ), url( '/fonts/addons.<?=$time?>.ttf' ) format( 'truetype' );
+			src        : url( '/assets/fonts/addons.<?=$time?>.woff' ) format( 'woff' ), url( '/assets/fonts/addons.<?=$time?>.ttf' ) format( 'truetype' );
 			font-weight: normal;
 			font-style : normal;
 		}
 	</style>
-	<link rel="stylesheet" href="/css/addonsinfo.<?=$time?>.css">
-	<link rel="stylesheet" href="/css/gpiosettings.<?=$time?>.css">
+	<link rel="stylesheet" href="/assets/css/addonsinfo.<?=$time?>.css">
+	<link rel="stylesheet" href="/assets/css/gpiosettings.<?=$time?>.css">
 </head>
 
 <?php
@@ -193,12 +193,11 @@ function opttime( $n, $minimum ) {
 </form>
 </div>
 
-<script src="/js/vendor/jquery-2.1.0.min.<?=$time?>.js"></script>
-<script src="/js/vendor/bootstrap.min.<?=$time?>.js"></script>
-<script src="/js/vendor/bootstrap-select-1.12.1.min.<?=$time?>.js"></script>
-<script src="/js/vendor/pnotify.custom.min.<?=$time?>.js"></script>
-<script src="/js/addonsinfo.<?=$time?>.js"></script>
-<script src="/js/gpiosettings.<?=$time?>.js"></script>
+<script src="/assets/js/vendor/jquery-2.1.0.min.<?=$time?>.js"></script>
+<script src="/assets/js/vendor/bootstrap.min.<?=$time?>.js"></script>
+<script src="/assets/js/vendor/bootstrap-select-1.12.1.min.<?=$time?>.js"></script>
+<script src="/assets/js/banner.<?=$time?>.js"></script>
+<script src="/assets/js/gpiosettings.<?=$time?>.js"></script>
 
 </body>
 </html>
