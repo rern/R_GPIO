@@ -41,6 +41,7 @@ a:hover {
 }
 .btn-default:focus,
 .dropdown-toggle.btn-default:focus {
+	color: #e0e7ee;
 	background: hsl(200,3%,60%)/*cgl*/ !important;
 	outline: none !important;
 }
@@ -68,7 +69,7 @@ span {
 	margin-left: 5px;
 }
 #gpioform i {
-    font-size: 18px;
+	font-size: 18px;
 }
 
 .btn-default {
@@ -248,11 +249,14 @@ select {
 .cgl {
 	color: hsl(200,3%,60%)/*cgl*/ !important;
 }
+.filter-option {
+	color: #e0e7ee !important;
+}
 .green {
-    color: #0f0
+	color: #0f0
 }
 .red {
-    color: #f00
+	color: #f00
 }
 .yellow {
 	color: yellow;
