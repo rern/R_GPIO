@@ -71,10 +71,11 @@ function txtcolordelay() {
 	// 'render' & 'refresh' in textcolor()
 }
 function txtcolor() {
-	$( '.timer, .delay, .on, .off' ).find( 'span' ).css( 'color', '#e0e7ee' );
+	$( '.timer, .delay, .on, .off' ).find( 'span' ).removeClass( 'cgl' );
 	$( '.timer, .delay, .on, .off' )
 		.find( 'span:contains("none"), option[value=0]' )
 		.addClass( 'cgl' );
+	$( '.timer, .delay, .on, .off' ).selectpicker( 'refresh' );
 }
 
 txtcolorpin();
