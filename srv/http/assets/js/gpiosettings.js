@@ -38,27 +38,22 @@ $( '#gpio-enable' ).click( function() {
 
 function txtcolorpin() {
 	$( '.pin, .on, .off' )
-		.selectpicker( 'render' ) // must 'render' after 'value' changed
 		.find( 'option' )
 		.show(); // default show all
 	$( '.pin' ) // hide used pin in options
 		.find( 'option[value='+ pin[ 1 ] +' ], [value='+ pin[ 2 ] +'], [value='+ pin[ 3 ] +'], [value='+ pin[ 4 ] +']')
 		.hide();
-	$( '.pin, .on, .off' ).selectpicker( 'refresh' ); // must 'refresh' after 'css' changed
 }
 function txtcolorname() {
 	$( '.name, .on, .off' )
-		.selectpicker( 'render' )
 		.css( 'color', '#e0e7ee' ) // default color text
 		.filter( function() { // .find('input[value="(no name)"]') not work
 			return this.value == '(no name)';
 		})
 		.addClass( 'cgl' ); // '(no name)' gray text
-	$( '.name, .on, .off' ).selectpicker( 'refresh' );
 }
 function txtcolordelay() {
 	$( '.delay' )
-		.selectpicker( 'render' )
 		.prop( 'disabled', false ); // default enabled
 	$( '.on, .off' ).each( function() { // delay 0 & disabled for 'none' equipment
 		var txt = this.id.slice( 0, -1 );
@@ -80,7 +75,6 @@ function txtcolor() {
 	$( '.timer, .delay, .on, .off' )
 		.find( 'span:contains("none"), option[value=0]' )
 		.addClass( 'cgl' );
-	$( '.timer, .delay, .on, .off' ).selectpicker( 'refresh' );
 }
 
 txtcolorpin();
@@ -88,10 +82,6 @@ txtcolorname();
 txtcolordelay();
 txtcolor();
 
-$( '.selectpicker' ).selectpicker( {
-	  iconBase: 'fontawesome'
-	, tickIcon: 'fa fa-check'
-} );
 $( '.selectpicker.pin' ).change( function() { // 'object' by 'class' must add class '.selectpicker' to suppress twice firing events
 	var pnew = this.value;
 	var n = this.id.slice( -1 ); // get number
