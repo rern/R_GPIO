@@ -249,7 +249,7 @@ select {
 .cgl {
 	color: hsl(200,3%,60%)/*cgl*/ !important;
 }
-.filter-option {
+.btn-default:focus .cgl {
 	color: #e0e7ee !important;
 }
 .green {
