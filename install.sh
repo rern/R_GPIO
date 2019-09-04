@@ -12,8 +12,6 @@ ln -sf /usr/bin/python{2.7,}
 
 getinstallzip
 
-extraDir gpio
-
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
     cat << 'EOF' > $file
