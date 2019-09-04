@@ -36,6 +36,29 @@ $( '#gpio-enable' ).click( function() {
 	}
 } );
 
+function gpioSave() {
+	var on = [ 
+		  $( '#on1' ).val()
+		, $( '#on2' ).val()
+		, $( '#on3' ).val()
+		, $( '#on4' ).val()
+	].filter( function( x ) { return x != 0; } ).length;
+	var off = [
+		  $( '#off1' ).val()
+		, $( '#off2' ).val()
+		, $( '#off3' ).val()
+		, $( '#off4' ).val()
+	].filter( function( x ) { return x != 0; } ).length;
+	if ( on !== off ) {
+		info( {
+			  icon    : 'info-circle'
+			, title   : 'RuneUI GPIO'
+			, message : on +' On : '+ off +' Off \nNumber of equipments not matched !'
+		} );
+	} else {
+		$.post( 'gpiosave.php', $( '#gpioform').serialize() );
+	}
+}
 function txtcolorpin() {
 	$( '.pin, .on, .off' )
 		.find( 'option' )
@@ -104,6 +127,7 @@ $( '.selectpicker.pin' ).change( function() { // 'object' by 'class' must add cl
 		, 4: $( '#pin4' ).val()
 	};
 	txtcolorpin();
+	gpioSave();
 } );
 $( '.name' ).click( function() {
 	if ( $( this ).val() == '(no name)' ) $( this ).val( '' );
@@ -134,9 +158,11 @@ $( '.name' ).click( function() {
 		, 4: $( '#name4' ).val()
 	};
 	txtcolorname();
+	gpioSave();
 } );
 $( '.selectpicker.timer, .selectpicker.delay' ).change( function() {
 	txtcolor();
+	gpioSave();
 } );
 $( '.selectpicker.on, .selectpicker.off' ).change( function() {
 	var on = this.id.slice( 0, 2 ) == 'on'; // get on/off
@@ -149,49 +175,7 @@ $( '.selectpicker.on, .selectpicker.off' ).change( function() {
 //	$(on ? '.ond' : '.offd').val(0);
 	txtcolordelay();
 	txtcolor();
-} );
-
-$( '#gpiosave' ).click( function() {
-	var on = [ 
-		  $( '#on1' ).val()
-		, $( '#on2' ).val()
-		, $( '#on3' ).val()
-		, $( '#on4' ).val()
-	].filter( function( x ) { return x != 0; } ).length;
-	var off = [
-		  $( '#off1' ).val()
-		, $( '#off2' ).val()
-		, $( '#off3' ).val()
-		, $( '#off4' ).val()
-	].filter( function( x ) { return x != 0; } ).length;
-	if ( on !== off ) {
-		info( {
-			  icon   : 'info-circle'
-			, title  : 'RuneUI GPIO'
-			, message: on +' On : '+ off +' Off \nNumber of equipments not matched !'
-		} );
-	} else {
-		$( '.delay' ).prop( 'disabled', false ); // for serialize
-		$.post( 'gpiosave.php',
-			$( '#gpioform').serialize(),
-			function( data ) {
-				if ( data ) {
-					$.get( 'gpioexec.php?onoffpy=timerreset' );
-					info( {
-						  icon   : 'info-circle'
-						, title  : 'RuneUI GPIO'
-						, message: 'Setting saved.'
-					} );
-				} else {
-					info( {
-						  icon   : 'info-circle'
-						, title  : 'RuneUI GPIO'
-						, message: 'Settings FAILED!'
-					} );
-				}
-			}
-		);
-	}
+	gpioSave();
 } );
 
 } ); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
