@@ -14,13 +14,13 @@
 	<link rel="stylesheet" href="/assets/css/bootstrap-select.min.<?=$time?>.css">
 	<style>
 		@font-face {
-			font-family: addons;
-			src        : url( '/assets/fonts/addons.<?=$time?>.woff' ) format( 'woff' ), url( '/assets/fonts/addons.<?=$time?>.ttf' ) format( 'truetype' );
+			font-family: enhance;
+			src        : url( '/assets/fonts/enhance.<?=$time?>.woff' ) format( 'woff' ), url( '/assets/fonts/enhance.<?=$time?>.ttf' ) format( 'truetype' );
 			font-weight: normal;
 			font-style : normal;
 		}
 	</style>
-	<link rel="stylesheet" href="/assets/css/addonsinfo.<?=$time?>.css">
+	<link rel="stylesheet" href="/assets/css/info.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/gpiosettings.<?=$time?>.css">
 </head>
 
@@ -84,7 +84,7 @@ function opttime( $n, $minimum ) {
 
 <div class="container">
 <i class="close-root fa fa-times"></i>
-<h1><i class="fa fa-gpio"></i>&nbsp; GPIO</h1>
+<h1><i class="fa fa-gpio gr"></i>&nbsp; GPIO</h1>
 <legend>Settings</legend>
 <form class="form-horizontal">
 
@@ -182,7 +182,6 @@ function opttime( $n, $minimum ) {
 							<select id="off4" name="off4" class="selectpicker off">
 								<?php optname( $off4 )?>
 							</select>
-							<a id="gpiosave" class="btn btn-primary">Save</a>
 						</div>
 				</div>
 			</form>
