@@ -1,8 +1,8 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-var stopwatch = '<span id="stopwatch" class="fa-stack">'
-				+'<i class="fa fa-stopwatch-i fa-spin fa-stack-2x"></i>'
-				+'<i class="fa fa-stopwatch-o fa-stack-2x"></i>'
+var stopwatch = '<span class="stopwatch">'
+				+'<i class="fa fa-stopwatch-i fa-spin"></i>'
+				+'<i class="fa fa-stopwatch-o"></i>'
 				+'</span>';
 var timer = false; // for 'setInterval' status check
 GUI.imodedelay = 0;
@@ -83,7 +83,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		info( {
 			  icon      : ( state != 'FAILED !' ) ? 'gpio' : 'warning'
 			, title     : 'GPIO Power '+ state
-			, message   : stopwatch +'Power <wh>'+ state +'</wh>:<br>'
+			, message   : stopwatch +' Power <wh>'+ state +'</wh>:<br>'
 						+ devices
 			, nobutton  : 1
 		} );
