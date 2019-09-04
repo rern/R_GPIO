@@ -12,7 +12,7 @@ ln -sf /usr/bin/python{2.7,}
 
 getinstallzip
 
-makeDirLink gpio
+extraDir gpio
 
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
