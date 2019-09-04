@@ -8,12 +8,12 @@ var timer = false; // for 'setInterval' status check
 GUI.imodedelay = 0;
 
 function gpioOnOff() {
-	$.get( 'gpioexec.php?command=gpio.py state', function( state ) {
-		GUI.gpio = state;
-		$( '#gpio' ).toggleClass( 'on', state === 'ON' );
-		$( '#igpio' ).toggleClass( 'hide', state === 'OFF' );
-		if ( $( '#infoIcon i.fa-gpio' ).length && state === 'OFF' ) $( '#infoX' ).click();
-	}, 'text' );
+	$.post( 'commands.php', { bash: '/root/gpio.py state' }, function( state ) {
+		GUI.gpio = state[ 0 ];
+		$( '#gpio' ).toggleClass( 'on', GUI.gpio === 'ON' );
+		$( '#igpio' ).toggleClass( 'hide', GUI.gpio === 'OFF' );
+		if ( $( '#infoIcon i.fa-gpio' ).length && GUI.gpio === 'OFF' ) $( '#infoX' ).click();
+	}, 'json' );
 }
 gpioOnOff();
 
@@ -59,6 +59,11 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			, oklabel     : 'Reset'
 			, ok          : function() {
 				$.get( 'gpioexec.php?command=timer' );
+				$.post( 'commands.php', { bash: [
+					  'killall -9 gpiotimer.py &> /dev/null'
+					, '/root/gpiotimer.py &> /dev/null &'
+					, 'curl -s -X POST "http://localhost/pub?id=gpio" -d \'{ "state": "RESET" }\''
+				] } );
 			}
 		} );
 		timer = setInterval( function() {
@@ -108,34 +113,13 @@ function countdowngpio( i, iL, delays, state ) {
 	
 }
 
-$( '#gpio' ).taphold( function() {
-	location.href = 'gpiosettings.php';
-} ).tap( function( e ) {
+$( '#gpio' ).click( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
-		return
+	} else {
+		GUI.imodedelay = 1; // fix imode flashing on usb dac switching
+		$.post( 'commands.php', { bash: '/root/gpio'+ ( GUI.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
 	}
-	
-	GUI.imodedelay = 1; // fix imode flashing on usb dac switching
-	$.get( 'gpioexec.php?command=gpio.py state', function( state ) {
-		if ( state === 'ON' ) {
-			if ( GUI.status.state !== 'stop' ) {
-				$( '#stop' ).click();
-				setTimeout( function() {
-					$.get( 'gpioexec.php?command=gpiooff.py'  );
-				}, 300 );
-			} else {
-				$.get( 'gpioexec.php?command=gpiooff.py'  );
-			}
-		} else {
-			$.get( 'gpioexec.php?command=gpioon.py' );
-		}
-	} );
-} );
-
-$( '#syscmd-poweroff, #syscmd-reboot' ).off( 'click' ).on( 'click', function() {
-	$.get( 'gpioexec.php?command='+ ( this.id == 'syscmd-reboot' ? ' reboot' : 'poweroff' ) );
-	toggleLoader();
 } );
 
 } ); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
