@@ -21,6 +21,14 @@ EOF
 )
 appendP 'fa-power'
 
+file=/srv/http/index.php
+echo $file
+string=$( cat <<'EOF'
+<script src="/assets/js/gpio.<?=$time?>.js"></script>
+EOF
+)
+appendP 'js/lyrics'
+
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
     cat << 'EOF' > $file
