@@ -47,8 +47,6 @@ chmod 755 /root/gpio*
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
 
-setColor
-
 installfinish $@
 
 title -nt "$info Menu > GPIO: long-press = setting, tap = on/off"
