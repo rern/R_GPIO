@@ -17,6 +17,8 @@ rm -v /srv/http/assets/css/gpio*
 rm -v /srv/http/assets/img/RPi3_GPIO*
 rm -v /srv/http/assets/js/gpio*
 
+restorefile /srv/http/indexbody.php
+
 uninstallfinish $@
 
 restartlocalbrowser
