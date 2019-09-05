@@ -44,7 +44,8 @@ EOF
     chown http:http $file
 fi
 
-echo gpio >> "$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
+file="$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
+! grep -q gpio "$file" && echo gpio >> "$file"
 
 # set permission #######################################
 chmod 755 /root/gpio*
