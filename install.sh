@@ -19,7 +19,7 @@ string=$( cat <<'EOF'
 	<a id="gpio"><i class="fa fa-gpio gr"></i>GPIO<i class="fa fa-gear gr submenu"></i></a>
 EOF
 )
-insertP displaylibrary
+appendP 'fa-power'
 
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
