@@ -13,14 +13,6 @@ ln -sf /usr/bin/python{2.7,}
 
 getinstallzip
 
-file=/srv/http/indexbody.php
-echo $file
-string=$( cat <<'EOF'
-	<a id="gpio"><i class="fa fa-gpio gr"></i>GPIO<i class="fa fa-gear gr submenu"></i></a>
-EOF
-)
-appendP 'fa-power'
-
 file=/srv/http/index.php
 echo $file
 string=$( cat <<'EOF'
@@ -28,6 +20,14 @@ string=$( cat <<'EOF'
 EOF
 )
 appendP 'js/lyrics'
+
+file=/srv/http/indexbody.php
+echo $file
+string=$( cat <<'EOF'
+	<a id="gpio"><i class="fa fa-gpio gr"></i>GPIO<i class="fa fa-gear gr submenu"></i></a>
+EOF
+)
+appendP 'fa-power'
 
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
