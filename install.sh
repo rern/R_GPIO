@@ -5,7 +5,7 @@
 alias=gpio
 
 . /srv/http/addonstitle.sh
-
+. /srv/http/addonsedit.sh
 
 installstart $@
 
