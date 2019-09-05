@@ -19,7 +19,7 @@ string=$( cat <<'EOF'
 <script src="/assets/js/gpio.<?=$time?>.js"></script>
 EOF
 )
-appendP 'js/lyrics'
+appendH 'js/lyrics'
 
 file=/srv/http/indexbody.php
 echo $file
@@ -27,7 +27,7 @@ string=$( cat <<'EOF'
 	<a id="gpio"><i class="fa fa-gpio gr"></i>GPIO<i class="fa fa-gear gr submenu"></i></a>
 EOF
 )
-appendP 'fa-power'
+appendH 'fa-power'
 
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
