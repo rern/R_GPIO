@@ -6,11 +6,20 @@ alias=gpio
 
 . /srv/http/addonstitle.sh
 
+
 installstart $@
 
 ln -sf /usr/bin/python{2.7,}
 
 getinstallzip
+
+file=/srv/http/indexbody.php
+echo $file
+string=$( cat <<'EOF'
+	<a id="gpio"><i class="fa fa-gpio gr"></i>GPIO<i class="fa fa-gear gr submenu"></i></a>
+EOF
+)
+insertP displaylibrary
 
 file=/srv/http/assets/img/gpio/gpio.json
 if [[ ! -e $file ]]; then
