@@ -58,7 +58,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 						   + stopwatch +'<white>'+ delay +'</white>'
 			, oklabel     : 'Reset'
 			, ok          : function() {
-				$.get( 'gpioexec.php?command=timer' );
 				$.post( 'commands.php', { bash: [
 					  'killall -9 gpiotimer.py &> /dev/null'
 					, '/root/gpiotimer.py &> /dev/null &'
