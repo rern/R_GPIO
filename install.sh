@@ -24,7 +24,7 @@ appendH 'js/lyrics'
 file=/srv/http/indexbody.php
 echo $file
 string=$( cat <<'EOF'
-	<a id="gpio"><i class="fa fa-gpio gr"></i>GPIO<i class="fa fa-gear gr submenu"></i></a>
+	<a id="gpio"><i class="fa fa-gpio"></i>GPIO<i class="fa fa-gear submenu"></i></a>
 EOF
 )
 appendH 'fa-power'
