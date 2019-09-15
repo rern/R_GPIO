@@ -5,11 +5,11 @@
 	font-style: normal;
 }
 .fa-check:before { content: "\f51B" }
-.fa-chevron-down:before { content: "\f564" }
+.fa-chevron-down:before { content: "\f605" }
 .fa-gpio:before { content: "\f529" }
 .fa-gpiopins:before { content: "\f546" }
 .fa-info-circle:before { content: "\f560" }
-.fa-power:before { content: "\f527" }
+.fa-power:before { content: "\f520" }
 .fa-question-circle:before { content: "\f561" }
 .fa-stopwatch:before { content: "\f547" }
 .fa-tag:before { content: "\f545" }
