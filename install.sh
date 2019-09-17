@@ -56,6 +56,4 @@ setColor
 
 installfinish $@
 
-title -nt "$info Menu > GPIO: long-press = setting, tap = on/off"
-
 restartlocalbrowser
