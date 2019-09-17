@@ -6,7 +6,7 @@
 }
 .fa-check:before { content: "\f51B" }
 .fa-chevron-down:before { content: "\f605" }
-.fa-gpio:before { content: "\f529" }
+.fa-gpio:before { content: "\f522" }
 .fa-gpiopins:before { content: "\f546" }
 .fa-info-circle:before { content: "\f560" }
 .fa-power:before { content: "\f520" }
@@ -17,15 +17,15 @@
 
 @font-face {
 	font-family: Lato;
-	src: url( '../fonts/lato/lato-regular-webfont.woff' ) format( 'woff' ),
+	src: url( '../fonts/lato-regular-webfont.woff' ) format( 'woff' ),
 		url( '../fonts/lato/lato-regular-webfont.ttf' ) format( 'truetype' );
 	font-weight: normal;
 	font-style: normal;
 }
 @font-face {
 	font-family: Lato;
-	src: url( '../fonts/lato/lato-light-webfont.woff' ) format( 'woff' ),
-		url( '../fonts/lato/lato-light-webfont.ttf' ) format( 'truetype' );
+	src: url( '../fonts/lato-light-webfont.woff' ) format( 'woff' ),
+		url( '../fonts/lato-light-webfont.ttf' ) format( 'truetype' );
 	font-weight: 300;
 	font-style: normal;
 }
