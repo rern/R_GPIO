@@ -25,10 +25,11 @@
 </head>
 
 <?php
-$file = '/srv/http/assets/img/gpio/gpio.json';
+/*$file = '/srv/http/data/gpio/gpio.json';
 $fileopen = fopen( $file, 'r' );
 $gpio = fread( $fileopen, filesize( $file ) );
-fclose( $fileopen );
+fclose( $fileopen );*/
+$gpio = file_get_contents( '/srv/http/data/gpio/gpio.json' );
 $gpio = json_decode( $gpio, true );
 $name = $gpio[ 'name' ];
 
@@ -69,8 +70,7 @@ function optname( $pin ) {
 	}
 	echo $option;
 }
-function opttime( $n, $minimum ) {
-	$minimum = !isset( $minimum ) ? 1 : $minimum;
+function opttime( $n, $minimum = 1 ) {
 	$option = '<option value="0">none</option>';
 	foreach ( range( $minimum, 10 ) as $num ) {
 		$selected = ( $num == $n ) ? ' selected' : '';
