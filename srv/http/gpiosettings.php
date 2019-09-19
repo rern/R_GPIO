@@ -9,7 +9,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-tap-highlight" content="no">
-	<link rel="shortcut icon" href="/assets/img/favicon.<?=$time?>.ico">
+	<link rel="icon" type="image/png" href="/assets/img/favicon-192x192.<?=$time?>.png" sizes="192x192">
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/bootstrap-select.min.<?=$time?>.css">
 	<style>
