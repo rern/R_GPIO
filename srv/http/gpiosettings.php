@@ -192,7 +192,7 @@ function opttime( $n, $minimum = 1 ) {
 </form>
 </div>
 
-<script src="/assets/js/vendor/jquery-2.1.0.min.<?=$time?>.js"></script>
+<script src="/assets/js/vendor/jquery-2.2.4.min.<?=$time?>.js"></script>
 <script src="/assets/js/vendor/bootstrap.min.<?=$time?>.js"></script>
 <script src="/assets/js/vendor/bootstrap-select-1.12.1.min.<?=$time?>.js"></script>
 <script src="/assets/js/banner.<?=$time?>.js"></script>
