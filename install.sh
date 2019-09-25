@@ -29,8 +29,6 @@ EOF
 )
 appendH 'fa-power'
 
-extraDir gpio
-
 file=/srv/http/data/gpio/gpio.json
 if [[ ! -e $file ]]; then
     cat << 'EOF' > $file
