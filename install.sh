@@ -42,9 +42,6 @@ EOF
     chown http:http $file
 fi
 
-file="$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
-! grep -q gpio "$file" && echo gpio >> "$file"
-
 # set permission #######################################
 chmod 755 /root/gpio*
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
