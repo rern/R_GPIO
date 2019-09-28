@@ -12,7 +12,7 @@ function gpioOnOff() {
 		GUI.gpio = state[ 0 ];
 		$( '#gpio' ).toggleClass( 'on', GUI.gpio === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', GUI.gpio === 'OFF' );
-		if ( $( '#infoIcon i.fa-gpio' ).length && GUI.gpio === 'OFF' ) $( '#infoX' ).click();
+		if ( GUI.gpio === 'OFF' && $( '#infoOverlay' ).is( ':visible' ) ) $( '#infoX' ).click();
 	}, 'json' );
 }
 gpioOnOff();
