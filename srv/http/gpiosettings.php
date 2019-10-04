@@ -4,14 +4,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Rune GPIO</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-tap-highlight" content="no">
-	<link rel="icon" type="image/png" href="/assets/img/favicon-192x192.<?=$time?>.png" sizes="192x192">
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.<?=$time?>.css">
-	<link rel="stylesheet" href="/assets/css/bootstrap-select.min.<?=$time?>.css">
 	<style>
 		@font-face {
 			font-family: enhance;
@@ -20,8 +17,10 @@
 			font-style : normal;
 		}
 	</style>
+	<link rel="stylesheet" href="/assets/css/selectric.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/info.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/gpiosettings.<?=$time?>.css">
+	<link rel="icon" type="image/png" href="/assets/img/favicon-192x192.<?=$time?>.png" sizes="192x192">
 </head>
 
 <?php
@@ -85,7 +84,7 @@ function opttime( $n, $minimum = 1 ) {
 <div class="container">
 <i class="close-root fa fa-times"></i>
 <h1><i class="fa fa-gpio gr"></i>&nbsp; GPIO</h1>
-<legend>Settings</legend>
+<heading>Settings</heading>
 <form class="form-horizontal">
 
 <p>
@@ -97,104 +96,98 @@ function opttime( $n, $minimum = 1 ) {
 <img id="gpiopin1" src="/img/RPi3_GPIO.<?=$time?>.svg">
 <a id="close-img"><i class="fa fa-times"></i></a>
 </div>
-<div id="divgpio" class="boxed-group">
-	<div class="form-group" id="gpio-group">
-		<div class="col-sm-10 section" id="gpio">
-			<form></form> <!-- dummy for bypass 1st form not serialize -->
-			<form id="gpioform">
-				<div class="gpio-float-l">
-					<div class="col-sm-10" id="gpio-num">
-						<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
-						<select id="pin1" name="pin1" class="selectpicker pin">
-							<?php optpin( $pin1 )?>
-						</select>
-						<select id="pin2" name="pin2" class="selectpicker pin">
-							<?php optpin( $pin2 )?>
-						</select>
-						<select id="pin3" name="pin3" class="selectpicker pin">
-							<?php optpin( $pin3 )?>
-						</select>
-						<select id="pin4" name="pin4" class="selectpicker pin">
-							<?php optpin( $pin4 )?>
-						</select>
-						<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
-						<select id="timer" name="timer" class="selectpicker timer">
-							<?php opttime( $timer, 2 )?>
-						</select>
-					</div>
-					<div class="col-sm-10" id="gpio-name">
-						<span class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</span>
-						<input id="name1" name="name1" type="text" class="form-control input-lg name" value="<?=$name1?>">
-						<input id="name2" name="name2" type="text" class="form-control input-lg name" value="<?=$name2?>">
-						<input id="name3" name="name3" type="text" class="form-control input-lg name" value="<?=$name3?>">
-						<input id="name4" name="name4" type="text" class="form-control input-lg name" value="<?=$name4?>">
-						<br>
-						<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power red"></i></span>
-					</div>
+	<div class="col-sm-10 section" id="gpio">
+		<form></form> <!-- dummy for bypass 1st form not serialize -->
+		<form id="gpioform">
+			<div class="gpio-float-l">
+				<div class="col-sm-10" id="gpio-num">
+					<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
+					<select id="pin1" name="pin1" class="pin">
+						<?php optpin( $pin1 )?>
+					</select>
+					<select id="pin2" name="pin2" class="pin">
+						<?php optpin( $pin2 )?>
+					</select>
+					<select id="pin3" name="pin3" class="pin">
+						<?php optpin( $pin3 )?>
+					</select>
+					<select id="pin4" name="pin4" class="pin">
+						<?php optpin( $pin4 )?>
+					</select>
+					<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
+					<select id="timer" name="timer" class="timer">
+						<?php opttime( $timer, 2 )?>
+					</select>
 				</div>
-				<div class="gpio-float-r">
+				<div class="col-sm-10" id="gpio-name">
+					<span class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</span>
+					<input id="name1" name="name1" type="text" class="form-control input-lg name" value="<?=$name1?>">
+					<input id="name2" name="name2" type="text" class="form-control input-lg name" value="<?=$name2?>">
+					<input id="name3" name="name3" type="text" class="form-control input-lg name" value="<?=$name3?>">
+					<input id="name4" name="name4" type="text" class="form-control input-lg name" value="<?=$name4?>">
+					<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power red"></i></span>
+				</div>
+			</div>
+			<div class="gpio-float-r">
+				<div class="col-sm-10">
+					<span class="gpio-text"><i class="fa fa-power green"></i> &nbsp; On Sequence</span>
+					<select id="on1" name="on1" class="on">
+						<?php optname( $on1 )?>
+					</select>
+					<select id="ond1" name="ond1" class="ond delay">
+						<?php opttime( $ond1 )?>
+					</select><span>sec.</span>
+					<select id="on2" name="on2" class="on">
+						<?php optname( $on2 )?>
+					</select>
+					<select id="ond2" name="ond2" class="ond delay">
+						<?php opttime( $ond2 )?>
+					</select><span>sec.</span>
+					<select id="on3" name="on3" class="on">
+						<?php optname( $on3 )?>
+					</select>
+					<select id="ond3" name="ond3" class="ond delay">
+						<?php opttime( $ond3 )?>
+					</select><span>sec.</span>
+					<select id="on4" name="on4" class="on">
+						<?php optname( $on4 )?>
+					</select>
+				</div>
+				<div class="col-sm-10" style="width: 20px;">
+				</div>
 					<div class="col-sm-10">
-						<span class="gpio-text"><i class="fa fa-power green"></i> &nbsp; On Sequence</span>
-						<select id="on1" name="on1" class="selectpicker on">
-							<?php optname( $on1 )?>
+						<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
+						<select id="off1" name="off1" class="off">
+							<?php optname( $off1 )?>
 						</select>
-						<select id="ond1" name="ond1" class="selectpicker ond delay">
-							<?php opttime( $ond1 )?>
+						<select id="offd1" name="offd1" class="offd delay">
+							<?php opttime( $offd1 )?>
 						</select><span>sec.</span>
-						<select id="on2" name="on2" class="selectpicker on">
-							<?php optname( $on2 )?>
+						<select id="off2" name="off2" class="off">
+							<?php optname( $off2 )?>
 						</select>
-						<select id="ond2" name="ond2" class="selectpicker ond delay">
-							<?php opttime( $ond2 )?>
+						<select id="offd2" name="offd2" class="offd delay">
+							<?php opttime( $offd2 )?>
 						</select><span>sec.</span>
-						<select id="on3" name="on3" class="selectpicker on">
-							<?php optname( $on3 )?>
+						<select id="off3" name="off3" class="off">
+							<?php optname( $off3 )?>
 						</select>
-						<select id="ond3" name="ond3" class="selectpicker ond delay">
-							<?php opttime( $ond3 )?>
+						<select id="offd3" name="offd3" class="offd delay">
+							<?php opttime( $offd3 )?>
 						</select><span>sec.</span>
-						<select id="on4" name="on4" class="selectpicker on">
-							<?php optname( $on4 )?>
+						<select id="off4" name="off4" class="off">
+							<?php optname( $off4 )?>
 						</select>
 					</div>
-					<div class="col-sm-10" style="width: 20px;">
-					</div>
-						<div class="col-sm-10">
-							<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
-							<select id="off1" name="off1" class="selectpicker off">
-								<?php optname( $off1 )?>
-							</select>
-							<select id="offd1" name="offd1" class="selectpicker offd delay">
-								<?php opttime( $offd1 )?>
-							</select><span>sec.</span>
-							<select id="off2" name="off2" class="selectpicker off">
-								<?php optname( $off2 )?>
-							</select>
-							<select id="offd2" name="offd2" class="selectpicker offd delay">
-								<?php opttime( $offd2 )?>
-							</select><span>sec.</span>
-							<select id="off3" name="off3" class="selectpicker off">
-								<?php optname( $off3 )?>
-							</select>
-							<select id="offd3" name="offd3" class="selectpicker offd delay">
-								<?php opttime( $offd3 )?>
-							</select><span>sec.</span>
-							<select id="off4" name="off4" class="selectpicker off">
-								<?php optname( $off4 )?>
-							</select>
-						</div>
-				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
-</div>
 
 </form>
 </div>
 
 <script src="/assets/js/vendor/jquery-2.2.4.min.<?=$time?>.js"></script>
-<script src="/assets/js/vendor/bootstrap.min.<?=$time?>.js"></script>
-<script src="/assets/js/vendor/bootstrap-select-1.12.1.min.<?=$time?>.js"></script>
+<script src="/assets/js/vendor/jquery.selectric.min.<?=$time?>.js"></script>
 <script src="/assets/js/banner.<?=$time?>.js"></script>
 <script src="/assets/js/gpiosettings.<?=$time?>.js"></script>
 
