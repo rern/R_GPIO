@@ -93,7 +93,7 @@ foreach( range( 1, 4 ) as $i ) {
 
 <heading>Settings</heading>
 
-<span class="help-block hide">Control <wh>GPIO</wh> connected relay module for power on /off equipments in sequence. <a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br></span>
+<span class="help-block hide">Control <wh>GPIO</wh> connected relay module for power on /off equipments in sequence. <a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br><br></span>
 
 <div class="col-sm-10 section" id="gpio">
 	<form></form> <!-- dummy for bypass 1st form not serialize -->
