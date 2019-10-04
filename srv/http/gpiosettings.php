@@ -55,7 +55,7 @@ foreach( range( 1, 4 ) as $i ) {
 	$htmlon.= '<select id="on'.$i.'" name="on'.$i.'" class="on">'.optname( $on[ "on$i" ] ).'</select>';
 	if ( $i === 4 ) break;
 	
-	$htmlon.= '<select id="ond'.$i.'" name="ond'.$i.'" class="ond delay">'.opttime( $on[ "ond$i" ] ).'</select><span>sec.</span>';
+	$htmlon.= '<select id="ond'.$i.'" name="ond'.$i.'" class="ond delay">'.opttime( $on[ "ond$i" ] ).'</select><span class="sec">sec.</span>';
 }
 
 $htmloff = '';
@@ -63,7 +63,7 @@ foreach( range( 1, 4 ) as $i ) {
 	$htmloff.= '<select id="off'.$i.'" name="off'.$i.'" class="off">'.optname( $off[ "off$i" ] ).'</select>';
 	if ( $i === 4 ) break;
 	
-	$htmloff.= '<select id="offd'.$i.'" name="offd'.$i.'" class="offd delay">'.opttime( $off[ "offd$i" ] ).'</select><span>sec.</span>';
+	$htmloff.= '<select id="offd'.$i.'" name="offd'.$i.'" class="offd delay">'.opttime( $off[ "offd$i" ] ).'</select><span class="sec">sec.</span>';
 }
 
 function optname( $pin ) {
