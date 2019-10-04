@@ -33,14 +33,10 @@ $gpio = json_decode( $gpio, true );
 $name = $gpio[ 'name' ];
 
 $pin = array_keys( $name );
-$pin1 = $pin[ 0 ];
-$pin2 = $pin[ 1 ];
-$pin3 = $pin[ 2 ];
-$pin4 = $pin[ 3 ];
-$name1 = $name[ $pin1 ];
-$name2 = $name[ $pin2 ];
-$name3 = $name[ $pin3 ];
-$name4 = $name[ $pin4 ];
+$name1 = $name[ $pin[ 0 ] ];
+$name2 = $name[ $pin[ 1 ] ];
+$name3 = $name[ $pin[ 2 ] ];
+$name4 = $name[ $pin[ 3 ] ];
 
 $on   = $gpio[ 'on' ];
 $onlist = [ 'on1', 'ond1', 'on2', 'ond2', 'on3', 'ond3', 'on4' ];
@@ -58,7 +54,13 @@ function optpin( $n ) {
 		$selected = ( $pin == $n ) ? ' selected' : '';
 		$option.= '<option value='.$pin.$selected.'>'.$pin.'</option>';
 	}
-	echo $option;
+	return $option;
+}
+$htmlpin = '';
+foreach( range( 1, 4 ) as $i ) {
+	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">
+					'.optpin( $pin[ $i - 1 ] ).'
+				</select>';
 }
 function optname( $pin ) {
 	global $name;
@@ -77,15 +79,29 @@ function opttime( $n, $minimum = 1 ) {
 	}
 	echo $option;
 }
+/*$htmlon = '';
+foreach( range( 1, 4 ) as $i ) {
+	$htmlon.= '<select id="on'.$i.'" name="on'.$i.'" class="on">
+					'.optname( $on[ $i - 1 ] ).'
+				</select>';
+	if ( $i === 4 ) break;
+	
+	$htmlon.= '<select id="ond'.$i.'" name="ond'.$i.'" class="ond delay">
+					'.opttime( $ond[ $i - 1 ] ).'
+				</select><span>sec.</span>';
+}*/
 ?>
 
 <body>
 
+<div class="head">
+	<i class="page-icon fa fa-gpio"></i><span class="title">GPIO</span><a href="/"><i id="close" class="fa fa-times"></i></a>
+</div>
+
 <div class="container">
-<i class="close-root fa fa-times"></i>
-<h1><i class="fa fa-gpio gr"></i>&nbsp; GPIO</h1>
-<heading>Settings</heading>
+
 <form class="form-horizontal">
+<heading>Settings</heading>
 
 <p>
 	Control 'GPIO' connected relay module for power on /off equipments in sequence.<br>
@@ -102,18 +118,7 @@ function opttime( $n, $minimum = 1 ) {
 			<div class="gpio-float-l">
 				<div class="col-sm-10" id="gpio-num">
 					<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
-					<select id="pin1" name="pin1" class="pin">
-						<?php optpin( $pin1 )?>
-					</select>
-					<select id="pin2" name="pin2" class="pin">
-						<?php optpin( $pin2 )?>
-					</select>
-					<select id="pin3" name="pin3" class="pin">
-						<?php optpin( $pin3 )?>
-					</select>
-					<select id="pin4" name="pin4" class="pin">
-						<?php optpin( $pin4 )?>
-					</select>
+					<?=$htmlpin?>
 					<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
 					<select id="timer" name="timer" class="timer">
 						<?php opttime( $timer, 2 )?>

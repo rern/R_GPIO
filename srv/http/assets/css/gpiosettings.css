@@ -10,7 +10,7 @@
 .fa-gpiopins:before { content: "\f546" }
 .fa-info-circle:before { content: "\f560" }
 .fa-power:before { content: "\f520" }
-.fa-question-circle:before { content: "\f561" }
+.fa-question-circle:before { content: "\f560" }
 .fa-stopwatch:before { content: "\f547" }
 .fa-tag:before { content: "\f545" }
 .fa-times:before { content: "\f51A" }
@@ -50,7 +50,49 @@ body {
 }
 .container {
 	margin: 0 40px;
-	padding: 40px 15px 100px 15px;
+	max-width: 750px;
+	padding: 60px 15px 100px 15px;
+}
+.head {
+	position: fixed;
+	width: 100%;
+	height: 40px;
+	padding-right: 10px;
+	background: hsl(200,3%,20%)/*cd*/;
+	box-shadow: 0px 4px 10px #000000;
+	z-index: 100;
+}
+.page-icon,
+#close {
+	width: 40px;
+	height: 40px;
+	line-height: 38px;
+	text-align: center;
+	font-size: 24px;
+	text-shadow: 1px 1px 2px #000000;
+	cursor: pointer;
+}
+#close {
+	font-size: 28px;
+}
+.page-icon {
+	float: left;
+	background: hsl(200,100%,40%)/*c*/;
+}
+#close {
+	float: right;
+}
+#close {
+	font-size: 2em !important;
+	color: hsl(200,100%,40%)/*c*/;
+	cursor: pointer;
+}
+.title {
+	margin-left: 15px;
+	line-height: 40px;
+	font-size: 26px;
+	font-weight: 300;
+	letter-spacing: 5px;
 }
 heading {
 	display: inline-block;
@@ -133,10 +175,6 @@ span.timer i {
 }
 .btn-default {
 	border: none;
-}
-.container {
-	max-width: 750px;
-	padding : 0 15px 15px;
 }
 .close-root {
 	float: right;
