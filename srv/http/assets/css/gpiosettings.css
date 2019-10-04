@@ -29,9 +29,49 @@
 	font-weight: 300;
 	font-style: normal;
 }
+*,
+*:before,
+*:after{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+html {
+	padding: env( safe-area-inset ); /* disable iPhone X rounded corner padding */
+}
+body {
+	margin: 0;
+	font-family: "Lato";
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #e0e7ee;
+	background-color: #000;
+	overscroll-behavior: none; /* disable android pull-down refresh */
+}
+.container {
+	margin: 0 40px;
+	padding: 40px 15px 100px 15px;
+}
+heading {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 10px;
+	line-height: 35px;
+	font-size: 24px;
+	font-weight: 300;
+	border-bottom: 1px solid hsl(200,3%,30%)/*cg*/;
+}
 a,
 a:hover {
-	text-decoration: none;
+	color: #e0e7ee;
+	text-decoration: none !important;
+}
+.selectric-wrapper {
+	width: auto;
+}
+.selectric-on,
+.selectric-off {
+	width: 170px;
 }
 .btn-default {
 	background: hsl(200,3%,30%)/*cg*/ !important;
@@ -70,16 +110,23 @@ body {
 h1 {
 	font-weight: 300;
 }
-legend {
-	border-bottom: 1px solid hsl(200,3%,30%)/*cg*/;
-}
 p,
 span.timer,
 .gpio-float-r span:not(:first-of-type) {
 	color: hsl(200,3%,60%)/*cgl*/;
 }
 span {
+	display: inline-block;
 	margin-left: 5px;
+	vertical-align: 15px;
+}
+span.timer {
+	display: block;
+	margin-top: 48px;
+	margin-left: -20px;
+}
+span.timer i {
+	vertical-align: -2px;
 }
 #gpioform i {
 	font-size: 18px;
@@ -114,11 +161,6 @@ span {
 }
 .form-control:focus {
 	box-shadow: none;
-}
-.boxed-group {
-	padding: 5px 15px;
-	background: hsl(200,3%,20%)/*cd*/;
-	border-radius: 6px;
 }
 #fliptxt {
 	display: none;
@@ -159,7 +201,7 @@ div#gpio-num.col-sm-10,
 #gpio .bootstrap-select,
 #gpio input[type=text],
 #gpio input[type=number] {
-	width: 150px;
+	width: 180px;
 }
 @media(max-width: 500px) {
 	#divgpio {
@@ -175,7 +217,6 @@ div#gpio-num.col-sm-10,
 	float: left;
 	margin: 0;
 	padding: 0;
-	line-height: 45px;
 }
 .gpio-text {
 	display: block;
@@ -196,7 +237,7 @@ button {
 	height: 40px;
 }
 .btn,
-.input-lg {
+input {
 	border-radius: 4px;
 }
 #audioout button {
@@ -206,10 +247,11 @@ button {
 	margin: 0 20px 5px 0 !important;
 }
 input {
-	margin-bottom: 5px;
-	height: 42px !important;
+	margin-bottom: 10px;
+	height: 41px !important;
 	padding: 0 10px !important;
-	font-size: 14px !important;
+	font-family: Lato;
+	font-size: 15px !important;
 	color: #e0e7ee;
 	background-color: #000000 !important;
 	border: 1px solid hsl(200,3%,30%)/*cg*/ !important;
