@@ -170,7 +170,7 @@ span.timer,
 .sec {
 	display: inline-block;
 	margin-left: 5px;
-	vertical-align: 15px;
+	vertical-align: 5px;
 }
 span.timer {
 	display: block;
@@ -347,7 +347,7 @@ select {
 @media (min-width:992px) {
 	.container { width:970px; }
 }
-@media (max-width: 500px) {
+@media (max-width: 510px) {
 	.container {
 		margin: 0;
 	}
