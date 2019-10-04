@@ -167,7 +167,7 @@ span.timer,
 .gpio-float-r span:not(:first-of-type) {
 	color: hsl(200,3%,60%)/*cgl*/;
 }
-span {
+.sec {
 	display: inline-block;
 	margin-left: 5px;
 	vertical-align: 15px;
@@ -248,16 +248,6 @@ div#gpio-num.col-sm-10,
 #gpio input[type=number] {
 	width: 190px;
 }
-@media(max-width: 500px) {
-	#divgpio {
-		padding-left: 0;
-	}
-	#gpio div.col-sm-10,
-	#gpio .bootstrap-select {
-		width: 135px;
-	}
-}
-
 #gpio div.col-sm-10 {
 	float: left;
 	margin: 0;
@@ -351,6 +341,21 @@ select {
 	color: yellow;
 }
 
+@media (min-width:1200px) {
+	.container{ width:1170px; }
+}
+@media (min-width:992px) {
+	.container { width:970px; }
+}
+@media (max-width: 500px) {
+	.container {
+		margin: 0;
+	}
+	.col-sm-2 i {
+		float: left;
+		margin: 0 5px 5px;
+	}
+}
 @media( hover:hover ) {
 	.close-root:hover,
 	#gpioimgtxt:hover {
