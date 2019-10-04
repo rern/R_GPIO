@@ -1,5 +1,7 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+$( '#pin1, #pin2, #pin3, #pin4, #timer, #on1, #on2, #on3, #on4, #ond1, #ond2, #ond3, #on4, #off1, #off2, #off3, #off4, #offd1, #offd2, #offd3' ).selectric();
+
 var pin = {
 	  1: $( '#pin1' ).val()
 	, 2: $( '#pin2' ).val()
@@ -91,14 +93,15 @@ function txtcolordelay() {
 			$( dly ).val( 0 ).prop( 'disabled', true );
 		}
 	} );
-	// 'render' & 'refresh' in textcolor()
+	
+	$( '.delay' ).selectric( 'refresh' );
 }
 function txtcolor() {
-	$( '.timer, .delay, .on, .off' ).find( 'span' ).removeClass( 'cgl' );
-	$( '.timer, .delay, .on, .off' )
-		.find( 'span:contains("none"), option[value=0]' )
-		.addClass( 'cgl' );
-	$( '.timer, .delay, .on, .off' ).selectpicker( 'refresh' );
+	$( '.selectric .label' ).removeClass( 'cgl' );
+	$( '.timer, .delay, .on, .off' ).each( function() {
+		$this = $( this );
+		if ( !$this.prop( 'disabled' ) ) $this.parent().next().find( '.label' ).toggleClass( 'cgl', $this.val() == 0 );
+	} );
 }
 
 txtcolorpin();
