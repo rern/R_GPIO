@@ -9,6 +9,7 @@
 .fa-gpio:before { content: "\f522" }
 .fa-gpiopins:before { content: "\f546" }
 .fa-info-circle:before { content: "\f560" }
+.fa-link:before { content: "\f52C" }
 .fa-power:before { content: "\f520" }
 .fa-question-circle:before { content: "\f560" }
 .fa-stopwatch:before { content: "\f547" }
@@ -48,6 +49,7 @@ body {
 	background-color: #000;
 	overscroll-behavior: none; /* disable android pull-down refresh */
 }
+.hide{ display: none !important; }
 .container {
 	margin: 0 40px;
 	max-width: 750px;
@@ -63,6 +65,7 @@ body {
 	z-index: 100;
 }
 .page-icon,
+#help,
 #close {
 	width: 40px;
 	height: 40px;
@@ -72,15 +75,16 @@ body {
 	text-shadow: 1px 1px 2px #000000;
 	cursor: pointer;
 }
-#close {
-	font-size: 28px;
-}
 .page-icon {
 	float: left;
 	background: hsl(200,100%,40%)/*c*/;
 }
+#help,
 #close {
 	float: right;
+}
+#help {
+	color: hsl(200,3%,60%)/*cgl*/
 }
 #close {
 	font-size: 2em !important;
@@ -115,6 +119,11 @@ a:hover {
 .selectric-off {
 	width: 170px;
 }
+.selectric-pin,
+.selectric-timer,
+.selectric-delay {
+	width: 85px;
+}
 .btn-default {
 	background: hsl(200,3%,30%)/*cg*/ !important;
 }
@@ -144,6 +153,7 @@ a.btn-primary {
 }
 wh, .wh { color: #e0e7ee !important; }
 gr, .gr { color: hsl(200,3%,60%)/*cgl*/ !important; }
+.blue, bl { color: hsl(200,100%,40%)/*c*/ !important; }
 
 body {
 	font-family: "Lato";
@@ -165,7 +175,7 @@ span {
 span.timer {
 	display: block;
 	margin-top: 48px;
-	margin-left: -20px;
+	margin-left: 0;
 }
 span.timer i {
 	vertical-align: -2px;
@@ -197,9 +207,6 @@ span.timer i {
 	margin-top: 10px;
 	padding: 0 30px;
 }
-.form-control:focus {
-	box-shadow: none;
-}
 #fliptxt {
 	display: none;
 	color: #e0e7ee;
@@ -227,7 +234,7 @@ span.timer i {
 div#gpio-num.col-sm-10,
 .delay,
 #gpio-num .bootstrap-select {
-	width: 75px !important;
+	width: 85px !important;
 }
 #gpio-name,
 #gpio div.text,
@@ -239,7 +246,7 @@ div#gpio-num.col-sm-10,
 #gpio .bootstrap-select,
 #gpio input[type=text],
 #gpio input[type=number] {
-	width: 180px;
+	width: 190px;
 }
 @media(max-width: 500px) {
 	#divgpio {

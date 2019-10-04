@@ -19,6 +19,10 @@ var timer = $( '#timer' ).val();
 $( '.close-root' ).click( function() {
 	location.href = '/';
 } );
+$( '#help' ).click( function() {
+	$( this ).toggleClass( 'blue' );
+	$( '.help-block' ).toggleClass( 'hide' );
+} );
 $( '#gpioimgtxt, #close-img' ).click( function() {
 	if ( $( '#gpiopin, #gpiopin1' ).is( ':visible' ) && $( '#gpiopin' ).is( ':hidden' ) ) $( '#gpiopin, #gpiopin1' ).toggle();
 	$( '#gpiopin' ).slideToggle();
