@@ -127,8 +127,7 @@ a:hover {
 .btn-default {
 	background: hsl(200,3%,30%)/*cg*/ !important;
 }
-.btn-default:focus,
-.dropdown-toggle.btn-default:focus {
+.btn-default:focus {
 	color: #e0e7ee;
 	background: hsl(200,3%,60%)/*cgl*/ !important;
 	outline: none !important;
@@ -304,22 +303,6 @@ input:focus {
 .clear {
 	clear: both;
 }
-select {
-	display: none;
-}
-.dropdown-menu {
-	background: hsl(200,3%,30%)/*cg*/;
-	box-shadow: 4px 4px 10px #000000;
-}
-.dropdown-menu > li > a {
-	line-height: 31px;
-	color: #e0e7ee;
-}
-.dropdown-menu >li.selected a {
-	color: #e0e7ee;
-	background: hsl(0,0%,20%);
-	outline: none;
-}
 .close-root,
 #gpioimgtxt,
 .blue {
@@ -361,16 +344,9 @@ select {
 	#gpioimgtxt:hover {
 		color: hsl(200,100%,45%)/*ch*/;
 	}
-	.dropdown-menu > li > a:hover,
 	.btn-default:active,
-	.dropdown-toggle.btn-default:active,
-	.btn-default:hover,
-	.dropdown-menu > li.selected > a,
-	.dropdown-toggle.btn-default:hover {
+	.btn-default:hover {
 		background: hsl(200,3%,20%)/*cga*/ !important;
 		color: #e0e7ee;
-	}
-	.dropdown-menu > li.selected a:hover {
-		background: hsl(200,3%,10%)/*cda*/ !important;
 	}
 }
