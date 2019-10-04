@@ -32,16 +32,36 @@ $pin = array_keys( $name );
 $on   = $gpio[ 'on' ];
 $off   = $gpio[ 'off' ];
 $timer = $gpio[ 'timer' ];
-function optpin( $n ) {
-	// omit pins: on-boot-pullup, uart
-	$pinarray = array( 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 );
-	$option = '';
-	foreach ( $pinarray as $pin ) {
-		$selected = ( $pin == $n ) ? ' selected' : '';
-		$option.= '<option value='.$pin.$selected.'>'.$pin.'</option>';
-	}
-	return $option;
+
+$htmlname = '';
+foreach( range( 1, 4 ) as $i ) {
+	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'">';
 }
+$htmlpin = '';
+foreach( range( 1, 4 ) as $i ) {
+	$pins = array( 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 );
+	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">';
+	foreach ( $pins as $pin ) {
+		$selected = ( $pin == $pin[ $i - 1 ] ) ? ' selected' : '';
+		$htmlpin.= '<option value='.$pin.$selected.'>'.$pin.'</option>';
+	}
+	$htmlpin.= '</select>';
+}
+$htmlon = '';
+foreach( range( 1, 4 ) as $i ) {
+	$htmlon.= '<select id="on'.$i.'" name="on'.$i.'" class="on">'.optname( $on[ "on$i" ] ).'</select>';
+	if ( $i === 4 ) break;
+	
+	$htmlon.= '<select id="ond'.$i.'" name="ond'.$i.'" class="ond delay">'.opttime( $on[ "ond$i" ] ).'</select><span class="sec">sec.</span>';
+}
+$htmloff = '';
+foreach( range( 1, 4 ) as $i ) {
+	$htmloff.= '<select id="off'.$i.'" name="off'.$i.'" class="off">'.optname( $off[ "off$i" ] ).'</select>';
+	if ( $i === 4 ) break;
+	
+	$htmloff.= '<select id="offd'.$i.'" name="offd'.$i.'" class="offd delay">'.opttime( $off[ "offd$i" ] ).'</select><span class="sec">sec.</span>';
+}
+
 function optname( $pin ) {
 	global $name;
 	$option = '<option value="0">none</option>';
@@ -59,32 +79,9 @@ function opttime( $n, $minimum = 1 ) {
 	}
 	return $option;
 }
-$htmlname = '';
-foreach( range( 1, 4 ) as $i ) {
-	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'">';
-}
-$htmlpin = '';
-foreach( range( 1, 4 ) as $i ) {
-	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">'.optpin( $pin[ $i - 1 ] ).'</select>';
-}
-$htmlon = '';
-foreach( range( 1, 4 ) as $i ) {
-	$htmlon.= '<select id="on'.$i.'" name="on'.$i.'" class="on">'.optname( $on[ "on$i" ] ).'</select>';
-	if ( $i === 4 ) break;
-	
-	$htmlon.= '<select id="ond'.$i.'" name="ond'.$i.'" class="ond delay">'.opttime( $on[ "ond$i" ] ).'</select><span>sec.</span>';
-}
-$htmloff = '';
-foreach( range( 1, 4 ) as $i ) {
-	$htmloff.= '<select id="off'.$i.'" name="off'.$i.'" class="off">'.optname( $off[ "off$i" ] ).'</select>';
-	if ( $i === 4 ) break;
-	
-	$htmloff.= '<select id="offd'.$i.'" name="offd'.$i.'" class="offd delay">'.opttime( $off[ "offd$i" ] ).'</select><span>sec.</span>';
-}
 ?>
 
 <body>
-
 <div class="head">
 	<i class="page-icon fa fa-gpio"></i><span class="title">GPIO</span><a href="/"><i id="close" class="fa fa-times"></i></a><i id="help" class="fa fa-question-circle"></i>
 </div>
@@ -92,8 +89,10 @@ foreach( range( 1, 4 ) as $i ) {
 <div class="container">
 
 <heading>Settings</heading>
-
-<span class="help-block hide">Control <wh>GPIO</wh> connected relay module for power on /off equipments in sequence. <a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br><br></span>
+<span class="help-block hide">
+	Control <wh>GPIO</wh> connected relay module for power on /off equipments in sequence. 
+	<a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br><br>
+</span>
 
 <div class="col-sm-10 section" id="gpio">
 	<form></form> <!-- dummy for bypass 1st form not serialize -->
@@ -127,6 +126,7 @@ foreach( range( 1, 4 ) as $i ) {
 		</div>
 	</form>
 </div>
+
 <heading>Pin reference</heading>
 <span class="help-block hide">Click to show RPi GPIO pin reference.</span><br>
 <span>GPIO connector: <a id="gpioimgtxt">RPi J8 &ensp;<i class="fa fa-chevron-down"></i></a><a id="fliptxt">&emsp;(Tap image to flip)</a></span><br><br>
