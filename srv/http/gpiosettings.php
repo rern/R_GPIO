@@ -32,24 +32,24 @@ $pin = array_keys( $name );
 $on   = $gpio[ 'on' ];
 $off   = $gpio[ 'off' ];
 $timer = $gpio[ 'timer' ];
-function optpin( $n ) {
-	// omit pins: on-boot-pullup, uart
-	$pinarray = array( 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 );
-	$option = '';
-	foreach ( $pinarray as $pin ) {
-		$selected = ( $pin == $n ) ? ' selected' : '';
-		$option.= '<option value='.$pin.$selected.'>'.$pin.'</option>';
-	}
-	return $option;
-}
+// omit pins: on-boot-pullup and uart
+$pins = array( 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 );
+
 $htmlpin = '';
 foreach( range( 1, 4 ) as $i ) {
-	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">'.optpin( $pin[ $i - 1 ] ).'</select>';
+	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">';
+	foreach ( $pins as $p ) {
+		$selected = ( $p == $pin[ $i - 1 ] ) ? ' selected' : '';
+		$htmlpin.= '<option value='.$p.$selected.'>'.$p.'</option>';
+	}
+	$htmlpin.= '</select>';
 }
+
 $htmlname = '';
 foreach( range( 1, 4 ) as $i ) {
 	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'">';
 }
+
 $htmlon = '';
 foreach( range( 1, 4 ) as $i ) {
 	$htmlon.= '<select id="on'.$i.'" name="on'.$i.'" class="on">'.optname( $on[ "on$i" ] ).'</select>';
@@ -57,6 +57,7 @@ foreach( range( 1, 4 ) as $i ) {
 	
 	$htmlon.= '<select id="ond'.$i.'" name="ond'.$i.'" class="ond delay">'.opttime( $on[ "ond$i" ] ).'</select><span>sec.</span>';
 }
+
 $htmloff = '';
 foreach( range( 1, 4 ) as $i ) {
 	$htmloff.= '<select id="off'.$i.'" name="off'.$i.'" class="off">'.optname( $off[ "off$i" ] ).'</select>';
@@ -64,6 +65,7 @@ foreach( range( 1, 4 ) as $i ) {
 	
 	$htmloff.= '<select id="offd'.$i.'" name="offd'.$i.'" class="offd delay">'.opttime( $off[ "offd$i" ] ).'</select><span>sec.</span>';
 }
+
 function optname( $pin ) {
 	global $name;
 	$option = '<option value="0">none</option>';
