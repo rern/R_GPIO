@@ -32,7 +32,7 @@
 }
 *,
 *:before,
-*:after{
+*:after {
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
@@ -43,17 +43,18 @@ html {
 body {
 	margin: 0;
 	font-family: "Lato";
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1.42857143;
 	color: #e0e7ee;
 	background-color: #000;
 	overscroll-behavior: none; /* disable android pull-down refresh */
 }
-.hide{ display: none !important; }
+.hide {
+	display: none !important;
+}
 .container {
-	margin: 0 40px;
-	max-width: 750px;
-	padding: 60px 15px 100px 15px;
+	max-width: 768px;
+	padding: 60px 55px 100px 55px;
 }
 .head {
 	position: fixed;
@@ -154,10 +155,6 @@ wh, .wh { color: #e0e7ee !important; }
 gr, .gr { color: hsl(200,3%,60%)/*cgl*/ !important; }
 .blue, bl { color: hsl(200,100%,40%)/*c*/ !important; }
 
-body {
-	font-family: "Lato";
-	font-size: 14px;
-}
 h1 {
 	font-weight: 300;
 }
@@ -324,16 +321,12 @@ input:focus {
 	color: yellow;
 }
 
-@media (min-width:1200px) {
-	.container{ width:1170px; }
-}
-@media (min-width:992px) {
-	.container { width:970px; }
+@media (min-width: 768px) {
+	.container {
+		margin: 0 auto;
+	}
 }
 @media (max-width: 510px) {
-	.container {
-		margin: 0;
-	}
 	.col-sm-2 i {
 		float: left;
 		margin: 0 5px 5px;
