@@ -1,6 +1,6 @@
 $( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-$( '#pin1, #pin2, #pin3, #pin4, #timer, #on1, #on2, #on3, #on4, #ond1, #ond2, #ond3, #on4, #off1, #off2, #off3, #off4, #offd1, #offd2, #offd3' ).selectric();
+$( 'select' ).selectric();
 
 var pin = {
 	  1: $( '#pin1' ).val()

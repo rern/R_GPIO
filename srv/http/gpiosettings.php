@@ -29,6 +29,7 @@ $gpio = json_decode( $gpio, true );
 $name = $gpio[ 'name' ];
 
 $pin = array_keys( $name );
+array_shift( $pin, 0 ); // add a dummy to shift $pin[ $i ]
 $on   = $gpio[ 'on' ];
 $off   = $gpio[ 'off' ];
 $timer = $gpio[ 'timer' ];
@@ -39,7 +40,7 @@ $htmlpin = '';
 foreach( range( 1, 4 ) as $i ) {
 	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">';
 	foreach ( $pins as $p ) {
-		$selected = ( $p == $pin[ $i - 1 ] ) ? ' selected' : '';
+		$selected = ( $p == $pin[ $i ] ) ? ' selected' : '';
 		$htmlpin.= '<option value='.$p.$selected.'>'.$p.'</option>';
 	}
 	$htmlpin.= '</select>';
@@ -47,7 +48,7 @@ foreach( range( 1, 4 ) as $i ) {
 
 $htmlname = '';
 foreach( range( 1, 4 ) as $i ) {
-	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'">';
+	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i ] ].'">';
 }
 
 $htmlon = '';
@@ -98,37 +99,34 @@ function opttime( $n, $minimum = 1 ) {
 	<a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br><br>
 </span>
 
-<div class="col-sm-10 section" id="gpio">
-	<form></form> <!-- dummy for bypass 1st form not serialize -->
-	<form id="gpioform">
-		<div class="gpio-float-l">
-			<div class="col-sm-10" id="gpio-num">
-				<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
-				<?=$htmlpin?>
-				<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
-				<select id="timer" name="timer" class="timer">
-					<?=( opttime( $timer, 2 ) )?>
-				</select>
-			</div>
-			<div class="col-sm-10" id="gpio-name">
-				<span class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</span>
-				<?=$htmlname?>
-				<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power red"></i></span>
-			</div>
+<div class="column section" id="gpio">
+	<div class="gpio-float-l">
+		<div class="column" id="gpio-num">
+			<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
+			<?=$htmlpin?>
+			<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
+			<select id="timer" name="timer" class="timer">
+				<?=( opttime( $timer, 2 ) )?>
+			</select>
 		</div>
-		<div class="gpio-float-r">
-			<div class="col-sm-10">
-				<span class="gpio-text"><i class="fa fa-power green"></i> &nbsp; On Sequence</span>
-				<?=$htmlon?>
-			</div>
-			<div class="col-sm-10" style="width: 20px;">
-			</div>
-				<div class="col-sm-10">
-					<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
-					<?=$htmloff?>
-				</div>
+		<div class="column" id="gpio-name">
+			<span class="gpio-text"><i class="fa fa-tag fa-lg blue"></i> &nbsp; Name</span>
+			<?=$htmlname?>
+			<span class="timer">&nbsp;min. to &nbsp;<i class="fa fa-power red"></i></span>
 		</div>
-	</form>
+	</div>
+	<div class="gpio-float-r">
+		<div class="column">
+			<span class="gpio-text"><i class="fa fa-power green"></i> &nbsp; On Sequence</span>
+			<?=$htmlon?>
+		</div>
+		<div class="column" style="width: 20px;">
+		</div>
+		<div class="column">
+			<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
+			<?=$htmloff?>
+		</div>
+	</div>
 </div>
 
 <heading>Pin reference</heading>

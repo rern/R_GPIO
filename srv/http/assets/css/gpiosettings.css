@@ -31,14 +31,11 @@
 	font-style: normal;
 }
 *,
-*:before,
-*:after {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-}
-html {
-	padding: env( safe-area-inset ); /* disable iPhone X rounded corner padding */
+*: before,
+*: after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 body {
 	margin: 0;
@@ -47,27 +44,26 @@ body {
 	line-height: 1.42857143;
 	color: #e0e7ee;
 	background-color: #000;
-	overscroll-behavior: none; /* disable android pull-down refresh */
+	overscroll-behavior: none;
 }
 .hide {
 	display: none !important;
 }
 .container {
 	max-width: 768px;
-	padding: 60px 55px 100px 55px;
+	padding: 40px 55px 100px 55px;
 }
 .head {
 	position: fixed;
 	width: 100%;
 	height: 40px;
 	padding-right: 10px;
-	background: hsl(200,3%,20%)/*cd*/;
+	background: hsl(200,3%,20%);
 	box-shadow: 0px 4px 10px #000000;
 	z-index: 100;
 }
 .page-icon,
-#help,
-#close {
+#help,#close {
 	width: 40px;
 	height: 40px;
 	line-height: 38px;
@@ -78,18 +74,18 @@ body {
 }
 .page-icon {
 	float: left;
-	background: hsl(200,100%,40%)/*c*/;
+	background: hsl(200,100%,40%);
 }
 #help,
 #close {
 	float: right;
 }
 #help {
-	color: hsl(200,3%,60%)/*cgl*/
+	color: hsl(200,3%,60%);
 }
 #close {
 	font-size: 2em !important;
-	color: hsl(200,100%,40%)/*c*/;
+	color: hsl(200,100%,40%);
 	cursor: pointer;
 }
 .title {
@@ -102,16 +98,20 @@ body {
 heading {
 	display: inline-block;
 	width: 100%;
+	margin-top: 20px;
 	margin-bottom: 10px;
 	line-height: 35px;
 	font-size: 24px;
 	font-weight: 300;
-	border-bottom: 1px solid hsl(200,3%,30%)/*cg*/;
+	border-bottom: 1px solid hsl(200,3%,30%);
 }
 a,
-a:hover {
+a: hover {
 	color: #e0e7ee;
 	text-decoration: none !important;
+}
+select {
+	opacity: 0;
 }
 .selectric-wrapper {
 	width: auto;
@@ -125,43 +125,15 @@ a:hover {
 .selectric-delay {
 	width: 85px;
 }
-.btn-default {
-	background: hsl(200,3%,30%)/*cg*/ !important;
+wh {
+	color: #e0e7ee !important;
 }
-.btn-default:focus {
-	color: #e0e7ee;
-	background: hsl(200,3%,60%)/*cgl*/ !important;
-	outline: none !important;
+.blue,bl {
+	color: hsl(200,100%,40%) !important;
 }
-a.btn {
-	display: inline-block;
-	text-transform: none;
-	min-width: 100px;
-	line-height: 34px;
-	text-align: center;
-	color: #e0e7ee;
-	background: -webkit-radial-gradient(50% -50%, 160% 200%, hsla(0,0%,100%,.3) 50%, hsla(0,0%,100%,0) 55%); /* button highlight - last % for anti-alias edge*/
-	background: radial-gradient(160% 100% at 50% 0% ,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 55%); /* (Width% Heigth% at H-center_offset% V-center_offset%, hsla(0,0%,100%,1st-T) 1st-area%, hsla(0,0%,100%,2nd-T) 2nd-area%)) */
-	box-shadow: 2px 2px 3px 1px #000000;
-	border-radius: 4px;
-	border: none;
-	user-select: none;
-}
-a.btn-primary {
-	background: hsl(200,100%,40%)/*c*/;
-	border: none;
-}
-wh, .wh { color: #e0e7ee !important; }
-gr, .gr { color: hsl(200,3%,60%)/*cgl*/ !important; }
-.blue, bl { color: hsl(200,100%,40%)/*c*/ !important; }
-
-h1 {
-	font-weight: 300;
-}
-p,
 span.timer,
-.gpio-float-r span:not(:first-of-type) {
-	color: hsl(200,3%,60%)/*cgl*/;
+.gpio-float-r span: not(: first-of-type) {
+	color: hsl(200,3%,60%);
 }
 .sec {
 	display: inline-block;
@@ -179,15 +151,6 @@ span.timer i {
 #gpioform i {
 	font-size: 18px;
 }
-.btn-default {
-	border: none;
-}
-.close-root {
-	float: right;
-	margin-top: 20px;
-	font-size: 28px;
-}
-.close-root,
 #gpioimgtxt,
 #close-img {
 	cursor: pointer;
@@ -198,10 +161,6 @@ span.timer i {
 	right: 15px;
 	top: 5px;
 	font-size: 28px;
-}
-.form-group {
-	margin-top: 10px;
-	padding: 0 30px;
 }
 #fliptxt {
 	display: none;
@@ -215,36 +174,26 @@ span.timer i {
 	border-radius: 6px;
 	background: #e0e7ee;
 }
-#divgpio div.col-sm-10 {
-	padding: 0;
-}
 .gpio-float-l {
 	float: left;
 	min-width: 220px;
 }
 .gpio-float-r {
 	float: left;
-	min-width: 320px;
-}
-
-div#gpio-num.col-sm-10,
-.delay,
-#gpio-num .bootstrap-select {
-	width: 85px !important;
 }
 #gpio-name,
-#gpio div.text,
-#gpio-name input[type=text] {
-	width: 120px !important;
+#gpio-name input {
+	width: 120px;
 }
-#gpio div.col-sm-10,
-.gpio-text,
-#gpio .bootstrap-select,
-#gpio input[type=text],
-#gpio input[type=number] {
+#gpio .column,
+.gpio-text {
 	width: 190px;
 }
-#gpio div.col-sm-10 {
+#gpio-num.column,
+.delay {
+	width: 85px;
+}
+#gpio .column {
 	float: left;
 	margin: 0;
 	padding: 0;
@@ -256,26 +205,15 @@ div#gpio-num.col-sm-10,
 	line-height: 40px;
 	color: #e0e7ee;
 }
-#gpio .bootstrap-select {
-	margin: 0 0 5px 0;
-	height: 41px;
-	color: #e0e7ee;
-}
-div#gpio-num.col-sm-10 {
+#gpio-num.column {
 	margin-right: 5px;
 }
-button {
-	height: 40px;
-}
-.btn,
 input {
 	border-radius: 4px;
 }
-#audioout button {
-	width: 200px;
-}
 #gpio-name {
 	margin: 0 20px 5px 0 !important;
+	width: 120px !important;
 }
 input {
 	margin-bottom: 10px;
@@ -285,61 +223,42 @@ input {
 	font-size: 15px !important;
 	color: #e0e7ee;
 	background-color: #000000 !important;
-	border: 1px solid hsl(200,3%,30%)/*cg*/ !important;
+	border: 1px solid hsl(200,3%,30%) !important;
 }
-input:focus {
+input: focus {
 	outline: none;
 }
-#gpio div.text {
-	margin: 0 5px 0 0;
-}
-#gpio p {
-	text-align: center;
-	line-height: 46px;
-}
-.clear {
-	clear: both;
-}
-.close-root,
 #gpioimgtxt,
 .blue {
-	color: hsl(200,100%,40%)/*c*/;
+	color: hsl(200,100%,40%);
 }
 .cgl {
-	color: hsl(200,3%,60%)/*cgl*/ !important;
-}
-.btn-default:focus .cgl {
-	color: #e0e7ee !important;
+	color: hsl(200,3%,60%) !important;
 }
 .green {
-	color: #0f0
+	color: #0f0;
 }
 .red {
-	color: #f00
+	color: #f00;
 }
 .yellow {
 	color: yellow;
 }
-
-@media (min-width: 768px) {
+@media (min-width:  768px) {
 	.container {
 		margin: 0 auto;
 	}
 }
-@media (max-width: 510px) {
-	.col-sm-2 i {
-		float: left;
-		margin: 0 5px 5px;
+@media (max-width:  512px) {
+	.container {
+		padding: 40px 20px 100px 20px;
+	}
+	.head {
+		padding-right: 0 !important;
 	}
 }
-@media( hover:hover ) {
-	.close-root:hover,
-	#gpioimgtxt:hover {
-		color: hsl(200,100%,45%)/*ch*/;
-	}
-	.btn-default:active,
-	.btn-default:hover {
-		background: hsl(200,3%,20%)/*cga*/ !important;
-		color: #e0e7ee;
+@media ( hover: hover ) {
+	#gpioimgtxt: hover {
+		color: hsl(200,100%,45%);
 	}
 }
