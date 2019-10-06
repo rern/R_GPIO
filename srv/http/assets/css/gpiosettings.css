@@ -37,6 +37,9 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+*:focus {
+	outline: none;
+}
 body {
 	margin: 0;
 	font-family: "Lato";
