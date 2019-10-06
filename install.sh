@@ -26,16 +26,6 @@ EOF
     chown http:http $file
 fi
 
-echo -e "$bar Modify files ..."
-
-file=/srv/http/index.php
-echo $file
-string=$( cat <<'EOF'
-<script src="/assets/js/gpio.<?=$time?>.js"></script>
-EOF
-)
-appendH 'js/lyrics'
-
 # set permission #######################################
 chmod 755 /root/gpio*
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
