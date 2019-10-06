@@ -104,7 +104,7 @@ function opttime( $n, $minimum = 1 ) {
 		<div class="column" id="gpio-num">
 			<span class="gpio-text"><i class="fa fa-gpiopins blue"></i> &nbsp; Pin</span>
 			<?=$htmlpin?>
-			<span class="gpio-text"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
+			<span class="gpio-text" style="margin-top: 10px"><i class="fa fa-stopwatch yellow"></i> &nbsp; Idle</span>
 			<select id="timer" name="timer" class="timer">
 				<?=( opttime( $timer, 2 ) )?>
 			</select>
