@@ -36,14 +36,6 @@ EOF
 )
 appendH 'js/lyrics'
 
-file=/srv/http/indexbody.php
-echo $file
-string=$( cat <<'EOF'
-	<a id="gpio"><i class="fa fa-gpio"></i>GPIO<i class="fa fa-gear submenu"></i></a>
-EOF
-)
-appendH 'fa-power'
-
 # set permission #######################################
 chmod 755 /root/gpio*
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
