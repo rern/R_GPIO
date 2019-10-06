@@ -120,8 +120,6 @@ function opttime( $n, $minimum = 1 ) {
 			<span class="gpio-text"><i class="fa fa-power green"></i> &nbsp; On Sequence</span>
 			<?=$htmlon?>
 		</div>
-		<div class="column" style="width: 20px;">
-		</div>
 		<div class="column">
 			<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
 			<?=$htmloff?>

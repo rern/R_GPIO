@@ -121,7 +121,9 @@ select {
 	width: 170px;
 }
 .selectric-pin,
-.selectric-timer,
+.selectric-timer {
+	width: 70px;
+}
 .selectric-delay {
 	width: 85px;
 }
@@ -142,7 +144,7 @@ span.timer,
 }
 span.timer {
 	display: block;
-	margin-top: 48px;
+	margin-top: 50px;
 	margin-left: 0;
 }
 span.timer i {
@@ -176,7 +178,7 @@ span.timer i {
 }
 .gpio-float-l {
 	float: left;
-	min-width: 220px;
+	min-width: 200px;
 }
 .gpio-float-r {
 	float: left;
@@ -185,13 +187,12 @@ span.timer i {
 #gpio-name input {
 	width: 120px;
 }
-#gpio .column,
-.gpio-text {
-	width: 190px;
+#gpio .column {
+	width: 175px;
 }
 #gpio-num.column,
 .delay {
-	width: 85px;
+	width: 75px;
 }
 #gpio .column {
 	float: left;
@@ -200,19 +201,15 @@ span.timer i {
 }
 .gpio-text {
 	display: block;
-	width: 100%;
 	padding: 0 0 0 5px;
 	line-height: 40px;
 	color: #e0e7ee;
-}
-#gpio-num.column {
-	margin-right: 5px;
 }
 input {
 	border-radius: 4px;
 }
 #gpio-name {
-	margin: 0 20px 5px 0 !important;
+	margin: 0 0 5px 0 !important;
 	width: 120px !important;
 }
 input {
@@ -249,7 +246,7 @@ input: focus {
 		margin: 0 auto;
 	}
 }
-@media (max-width:  512px) {
+@media (max-width:  740px) {
 	.container {
 		padding: 40px 20px 100px 20px;
 	}
