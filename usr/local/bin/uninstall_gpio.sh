@@ -18,7 +18,7 @@ rm -v /srv/http/assets/img/RPi3_GPIO*
 rm -v /srv/http/assets/js/gpio*
 
 echo -e "$bar Restore files ..."
-restorefile /srv/http/index.php /srv/http/indexbody.php
+restorefile /srv/http/index.php
 
 uninstallfinish $@
 
