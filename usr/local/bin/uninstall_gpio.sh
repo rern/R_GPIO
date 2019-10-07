@@ -3,15 +3,14 @@
 alias=gpio
 
 . /srv/http/addonsfunctions.sh
-. /srv/http/addonsedit.sh
 
 # gpio off #######################################
-./gpiooff.py &> /dev/null &
+/root/gpio/gpiooff.py &> /dev/null &
 
 uninstallstart $@
 
 echo -e "$bar Remove files ..."
-rm -v /root/gpio*
+rm -rv /root/gpio
 rm -v /srv/http/gpio*
 rm -v /srv/http/assets/css/gpio*
 rm -v /srv/http/assets/img/RPi3_GPIO*
