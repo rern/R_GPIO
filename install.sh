@@ -9,6 +9,7 @@ alias=gpio
 installstart $@
 
 if [[ -e /usr/bin/python2.7 ]]; then
+	title "$bar Upgrade python ... "
 	pacman -Rcns --noconfirm python2 python2-pip python python-pip
 	rm -f /usr/bin/{pip,python}
 	rm -r /usr/lib/python*
