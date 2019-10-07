@@ -26,7 +26,5 @@ $gpio = array(
 	)
 	, 'timer' => $_POST[ 'timer' ]
 );
-$jsonfile = fopen( '/srv/http/assets/img/gpio/gpio.json', 'w' );
-$set = fwrite( $jsonfile, json_encode( $gpio, JSON_NUMERIC_CHECK ) );
-fclose( $jsonfile );
+$set = file_put_contents( '/srv/http/assets/img/gpio/gpio.json', json_encode( $gpio, JSON_NUMERIC_CHECK ) );
 echo $set;
