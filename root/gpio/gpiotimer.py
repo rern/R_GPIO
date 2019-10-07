@@ -12,11 +12,10 @@ while i >= 0:
 	else:
 		i -= 1
 		if i == 1: # broadcast last loop
-			data = ( state='IDLE', delay=60 )
-			requestData( d )
+			pushstream( dict( state='IDLE', delay=60 ) )
 			
 		if i == 0:
 			if os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) != 0: # all 'closed' - no 'state'
-				os.system( '/root/gpiooff.py' )
+				os.system( '/root/gpio/gpiooff.py' )
 			else:
 				i = timer

@@ -67,9 +67,8 @@ off3 != 0 and offorder.extend( [ offd2, name[ str( off3 ) ] ] )
 off4 != 0 and offorder.extend( [ offd3, name[ str( off4 ) ] ] )
 
 # broadcast pushstream
-url = 'http://localhost/pub?id=gpio'
 headerdata = { 'Content-type': 'application/json', 'Accept': 'application/json' }
-def requestData( d ):
+def pushstream( d ):
 	data = urllib.parse.urlencode( d ).encode( 'utf-8' )
-	req = urllib.request.Request( url, data=data, headers=headerdata )
+	req = urllib.request.Request( 'http://127.0.0.1/pub?id=gpio', data=data, headers=headerdata )
 	response = urllib.request.urlopen( req )

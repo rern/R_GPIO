@@ -4,8 +4,7 @@ from gpio import *
 state != ON and exit()
 
 # broadcast pushstream
-d = dict( state='OFF', delay='offd', order='offorder' )
-requestData( d )
+pushstream( dict( state='OFF', delay='offd', order='offorder' ) )
 
 if off1 != 0:
 	GPIO.output( off1, OFF )
@@ -20,8 +19,7 @@ if off4 != 0:
 	GPIO.output( off4, OFF )
 
 if GPIO.input( offenable[ 0 ] ) != OFF:
-	d = dict( state='FAILED !', delay=8 )
-	requestData( d )
+	pushstream( d = dict( state='FAILED !', delay=8 ) )
 	exit()
 
 timer > 0 and os.system( '/usr/bin/pkill -9 gpiotimer.py &> /dev/null' )
