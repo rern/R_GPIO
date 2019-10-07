@@ -5,11 +5,18 @@
 alias=gpio
 
 . /srv/http/addonsfunctions.sh
-. /srv/http/addonsedit.sh
 
 installstart $@
 
-ln -sf /usr/bin/python{2.7,}
+if [[ -e /usr/bin/python2.7 ]]; then
+	title "$bar Upgrade python ... "
+	pacman -Rcns --noconfirm python2 python2-pip python python-pip
+	rm -f /usr/bin/{pip,python}
+	rm -r /usr/lib/python*
+
+	pacman -Sy --noconfirm python python-pip
+	pip install -y RPi.GPIO
+fi
 
 getinstallzip
 
@@ -27,7 +34,7 @@ EOF
 fi
 
 # set permission #######################################
-chmod 755 /root/gpio*
+chmod 755 /root/gpio/*
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
 #chmod g+rw /dev/gpiomem # allow group to access set in gpio.py set for every boot
 
