@@ -29,7 +29,6 @@ $gpio = json_decode( $gpio, true );
 $name = $gpio[ 'name' ];
 
 $pin = array_keys( $name );
-array_shift( $pin, 0 ); // add a dummy to shift $pin[ $i ]
 $on   = $gpio[ 'on' ];
 $off   = $gpio[ 'off' ];
 $timer = $gpio[ 'timer' ];
@@ -40,7 +39,7 @@ $htmlpin = '';
 foreach( range( 1, 4 ) as $i ) {
 	$htmlpin.= '<select id="pin'.$i.'" name="pin'.$i.'" class="pin">';
 	foreach ( $pins as $p ) {
-		$selected = ( $p == $pin[ $i ] ) ? ' selected' : '';
+		$selected = ( $p == $pin[ $i - 1 ] ) ? ' selected' : '';
 		$htmlpin.= '<option value='.$p.$selected.'>'.$p.'</option>';
 	}
 	$htmlpin.= '</select>';
@@ -48,7 +47,7 @@ foreach( range( 1, 4 ) as $i ) {
 
 $htmlname = '';
 foreach( range( 1, 4 ) as $i ) {
-	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i ] ].'">';
+	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'">';
 }
 
 $htmlon = '';
