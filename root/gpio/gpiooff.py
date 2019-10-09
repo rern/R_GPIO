@@ -4,22 +4,22 @@ from gpio import *
 state != ON and exit()
 
 # broadcast pushstream
-pushstream( dict( state='OFF', delay='offd', order='offorder' ) )
+pushstream( 'gpio', { 'state': 'OFF', 'delay': offd, 'order': offorder } )
 
 if off1 != 0:
-	GPIO.output( off1, OFF )
+    GPIO.output( off1, OFF )
 if off2 != 0:
-	time.sleep( offd1 )
-	GPIO.output( off2, OFF )
+    time.sleep( offd1 )
+    GPIO.output( off2, OFF )
 if off3 != 0:
-	time.sleep( offd2 )
-	GPIO.output( off3, OFF )
+    time.sleep( offd2 )
+    GPIO.output( off3, OFF )
 if off4 != 0:
-	time.sleep( offd3 )
-	GPIO.output( off4, OFF )
+    time.sleep( offd3 )
+    GPIO.output( off4, OFF )
 
 if GPIO.input( offenable[ 0 ] ) != OFF:
-	pushstream( d = dict( state='FAILED !', delay=8 ) )
-	exit()
+    notifyFailed()
+    exit()
 
 timer > 0 and os.system( '/usr/bin/pkill -9 gpiotimer.py &> /dev/null' )
