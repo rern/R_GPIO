@@ -22,4 +22,4 @@ if GPIO.input( onenable[ 0 ] ) != ON:
     notifyFailed()
     exit()
 
-timer > 0 and os.system( '/root/gpio/gpiotimer.py &> /dev/null &' )
+timer > 0 and os.system( '/usr/local/bin/gpiotimer.py &> /dev/null &' )

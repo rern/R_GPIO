@@ -16,6 +16,6 @@ while i >= 0:
 			
 		if i == 0:
 			if os.system( 'cat /proc/asound/card*/pcm*/sub*/status | grep -q state' ) != 0: # all 'closed' - no 'state'
-				os.system( '/root/gpio/gpiooff.py' )
+				os.system( '/usr/local/bin/gpiooff.py' )
 			else:
 				i = timer
