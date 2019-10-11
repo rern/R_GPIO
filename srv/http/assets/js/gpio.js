@@ -8,7 +8,7 @@ var timer = false; // for 'setInterval' status check
 GUI.imodedelay = 0;
 
 function gpioOnOff() {
-	$.post( 'commands.php', { bash: '/root/gpio/gpio.py state' }, function( state ) {
+	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
 		GUI.gpio = state[ 0 ];
 		$( '#gpio' ).toggleClass( 'on', GUI.gpio === 'ON' );
 		$( '#igpio' ).toggleClass( 'hide', GUI.gpio === 'OFF' );
@@ -60,7 +60,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			, ok          : function() {
 				$.post( 'commands.php', { bash: [
 					  'killall -9 gpiotimer.py &> /dev/null'
-					, '/root/gpio/gpiotimer.py &> /dev/null &'
+					, '/usr/local/bin/gpiotimer.py &> /dev/null &'
 					, 'curl -s -X POST "http://localhost/pub?id=gpio" -d \'{ "state": "RESET" }\''
 				] } );
 			}
@@ -117,7 +117,7 @@ $( '#gpio' ).click( function( e ) {
 		location.href = 'gpiosettings.php';
 	} else {
 		GUI.imodedelay = 1; // fix imode flashing on usb dac switching
-		$.post( 'commands.php', { bash: '/root/gpio/gpio'+ ( GUI.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
+		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( GUI.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
 	}
 } );
 
