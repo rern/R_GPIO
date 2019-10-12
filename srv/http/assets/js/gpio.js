@@ -61,7 +61,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 				$.post( 'commands.php', { bash: [
 					  'killall -9 gpiotimer.py &> /dev/null'
 					, '/usr/local/bin/gpiotimer.py &> /dev/null &'
-					, 'curl -s -X POST "http://localhost/pub?id=gpio" -d \'{ "state": "RESET" }\''
+					, 'curl -s -X POST "http://127.0.0.1/pub?id=gpio" -d \'{ "state": "RESET" }\''
 				] } );
 			}
 		} );
