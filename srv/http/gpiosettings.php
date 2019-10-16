@@ -33,7 +33,7 @@ $on   = $gpio[ 'on' ];
 $off   = $gpio[ 'off' ];
 $timer = $gpio[ 'timer' ];
 // omit pins: on-boot-pullup and uart
-$pins = array( 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 );
+$pins = [ 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 32, 33, 35, 36, 37, 38, 40 ];
 
 $htmlpin = '';
 foreach( range( 1, 4 ) as $i ) {
