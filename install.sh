@@ -8,15 +8,8 @@ alias=gpio
 
 installstart $@
 
-if [[ -e /usr/bin/python2.7 ]]; then
-	title "$bar Upgrade python ... "
-	pacman -Rcns --noconfirm python2 python2-pip
-	rm -f /usr/bin/{pip,python}
-	rm -r /usr/lib/python*
-
-	pacman -Sy --noconfirm python python-pip
-	pip install -y RPi.GPIO
-fi
+[[ ! -e /usr/bin/python ]] && pacman -Sy --noconfirm python python-pip
+! pip list | grep RPi.GPIO &> /dev/null && pip install -y RPi.GPIO
 
 getinstallzip
 
