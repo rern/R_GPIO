@@ -4,7 +4,7 @@
 
 alias=gpio
 
-. /srv/http/addonsfunctions.sh
+[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/addonsfunctions.sh
 
 installstart $@
 
