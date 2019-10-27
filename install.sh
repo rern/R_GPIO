@@ -8,8 +8,8 @@ alias=gpio
 
 installstart $@
 
-[[ ! -e /usr/bin/python ]] && pacman -Sy --noconfirm python python-pip
-! pip list | grep RPi.GPIO &> /dev/null && pip install -y RPi.GPIO
+[[ -e /usr/bin/python ]] || pacman -Sy --noconfirm python python-pip
+pip list | grep RPi.GPIO &> /dev/null || pip install -y RPi.GPIO
 
 getinstallzip
 
