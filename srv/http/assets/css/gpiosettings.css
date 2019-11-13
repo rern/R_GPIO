@@ -228,6 +228,28 @@ input {
 input: focus {
 	outline: none;
 }
+.btn {
+	display: inline-block;
+	width: 85px;
+	margin-bottom: 5px;
+	line-height: 34px;
+	text-align: center;
+	color: #e0e7ee;
+	background: -webkit-radial-gradient(50% -50%, 160% 200%, hsla(0,0%,100%,.3) 50%, hsla(0,0%,100%,0) 55%); /* button highlight - last % for anti-alias edge*/
+	background: radial-gradient(160% 100% at 50% 0% ,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 55%); /* (Width% Heigth% at H-center_offset% V-center_offset%, hsla(0,0%,100%,1st-T) 1st-area%, hsla(0,0%,100%,2nd-T) 2nd-area%)) */
+	box-shadow: 2px 2px 3px 1px #000000;
+	text-shadow: 1px 1px 2px #000000;
+	border-radius: 4px;
+	border: none;
+	user-select: none;
+	cursor: pointer;
+}
+.btn-primary {
+	background-color: hsl(200,100%,40%)/*c*/;
+}
+.btn-primary:hover {
+	background-color: hsl(200,100%,45%)/*ch*/
+}
 #gpioimgtxt,
 .blue {
 	color: hsl(200,100%,40%);

@@ -98,6 +98,7 @@ function opttime( $n, $minimum = 1 ) {
 	<a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br><br>
 </span>
 
+<form id="gpioform">
 <div class="column section" id="gpio">
 	<div class="gpio-float-l">
 		<div class="column" id="gpio-num">
@@ -122,9 +123,11 @@ function opttime( $n, $minimum = 1 ) {
 		<div class="column">
 			<span class="gpio-text"><i class="fa fa-power red"></i> &nbsp; Off Sequence</span>
 			<?=$htmloff?>
+			<a id="gpiosave" class="btn btn-primary">Save</a>
 		</div>
 	</div>
 </div>
+</form>
 
 <heading>Pin reference</heading>
 <span class="help-block hide">Click to show RPi GPIO pin reference.</span><br>
@@ -140,7 +143,7 @@ function opttime( $n, $minimum = 1 ) {
 
 <script src="/assets/js/vendor/jquery-2.2.4.min.<?=$time?>.js"></script>
 <script src="/assets/js/vendor/jquery.selectric.min.<?=$time?>.js"></script>
-<script src="/assets/js/banner.<?=$time?>.js"></script>
+<script src="/assets/js/info.<?=$time?>.js"></script>
 <script src="/assets/js/gpiosettings.<?=$time?>.js"></script>
 
 </body>
