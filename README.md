@@ -65,20 +65,9 @@ Dirt cheap on ebay
 - Power cables
 - DIY enclosure
 
-Things to do
----
-(click for larger image)  
-[![1](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/1.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/1.jpg?raw=1)
-[![2](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/2.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/2.jpg?raw=1)
-[![3](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/3.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/3.jpg?raw=1)
-[![4](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/4.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/4.jpg?raw=1)
-[![5](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/5.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/5.jpg?raw=1)
-[![6](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/6.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/6.jpg?raw=1)
-[![7](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/7.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/7.jpg?raw=1)
-
-Improved vrsion: 
-- Add LEDs for GPIO 3.3V status
-- Add switches
+### The box
+- LEDs for GPIO 3.3V status
+- Switches
 	- Normal : GPIO 3.3V > LED ON, relay ON
 	- Off : GPIO 3.3V > LED ON, relay OFF
 	- Bypass : Direct 5V > LED OFF, relay ON
@@ -88,6 +77,5 @@ Improved vrsion:
 [![9](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/09.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/09.jpg?raw=1)
 [![10](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/GPIOs/10.jpg)](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/10.jpg?raw=1)
 
-Install
----
+### Software
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
