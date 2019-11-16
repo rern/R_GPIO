@@ -47,8 +47,7 @@ Features
 
 <hr>
 
-Things to get
----
+### Things to get
 Dirt cheap on ebay
 
 ![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay.jpg)  
