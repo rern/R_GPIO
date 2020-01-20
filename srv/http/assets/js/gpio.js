@@ -11,7 +11,8 @@ function gpioOnOff() {
 	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
 		GUI.gpio = state[ 0 ];
 		$( '#gpio' ).toggleClass( 'on', GUI.gpio === 'ON' );
-		$( '#igpio' ).toggleClass( 'hide', GUI.gpio === 'OFF' );
+		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#igpio' );
+		$gpio.toggleClass( 'hide', GUI.gpio !== 'ON' );
 		if ( GUI.gpio === 'OFF' && $( '#infoOverlay' ).is( ':visible' ) ) $( '#infoX' ).click();
 	}, 'json' );
 }
