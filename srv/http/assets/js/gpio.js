@@ -94,7 +94,6 @@ function gpioOnOff() {
 		$( '#gpio' ).toggleClass( 'on', GUI.gpio === 'ON' );
 		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#igpio' );
 		$gpio.toggleClass( 'hide', GUI.gpio !== 'ON' );
-		if ( GUI.gpio === 'OFF' && $( '#infoOverlay' ).is( ':visible' ) ) $( '#infoX' ).click();
 	}, 'json' );
 }
 gpioOnOff();
