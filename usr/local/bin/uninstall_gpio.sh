@@ -10,7 +10,7 @@ alias=gpio
 uninstallstart $@
 
 echo -e "$bar Remove files ..."
-rm -rv /root/gpio
+rm -rv /usr/local/bin/gpio*
 rm -v /srv/http/gpio*
 rm -v /srv/http/assets/css/gpio*
 rm -v /srv/http/assets/img/RPi3_GPIO*
