@@ -71,8 +71,8 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		info( {
 			  icon      : 'gpio'
-			, title     : 'GPIO Power '+ state
-			, message   : stopwatch +' Power <wh>'+ state +'</wh>:<br>'
+			, title     : 'GPIO'
+			, message   : stopwatch +' <wh>Power '+ state +'</wh><hr>'
 						+ devices
 			, nobutton  : 1
 		} );
