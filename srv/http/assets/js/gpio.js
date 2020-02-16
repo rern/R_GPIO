@@ -5,14 +5,14 @@ var stopwatch = '<span class="stopwatch">'
 				+'<i class="fa fa-stopwatch-o"></i>'
 				+'</span>';
 var timer = false; // for 'setInterval' status check
-GUI.imodedelay = 0;
+G.imodedelay = 0;
 
 $( '#gpio' ).click( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
 	} else {
-		GUI.imodedelay = 1; // fix imode flashing on usb dac switching
-		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( GUI.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
+		G.imodedelay = 1; // fix imode flashing on usb dac switching
+		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( G.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
 	}
 } );
 
@@ -27,7 +27,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
 	var response = response[ 0 ];
 	var state = response.state;
-	GUI.gpio = state;
+	G.gpio = state;
 	var delay = response.delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
@@ -52,7 +52,7 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		} );
 		timer = setInterval( function() {
 			if ( delay === 1 ) {
-				GUI.imodedelay = 1;
+				G.imodedelay = 1;
 				$( '#infoX' ).click();
 				clearInterval( timer );
 			}
@@ -83,17 +83,17 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 			gpioOnOff();
 		}, delay * 1000 );
 		setTimeout( function() {
-			GUI.imodedelay = 0;
+			G.imodedelay = 0;
 		}, 5000 );
 	}
 }
 
 function gpioOnOff() {
 	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
-		GUI.gpio = state[ 0 ];
-		$( '#gpio' ).toggleClass( 'on', GUI.gpio === 'ON' );
+		G.gpio = state[ 0 ];
+		$( '#gpio' ).toggleClass( 'on', G.gpio === 'ON' );
 		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#igpio' );
-		$gpio.toggleClass( 'hide', GUI.gpio !== 'ON' );
+		$gpio.toggleClass( 'hide', G.gpio !== 'ON' );
 	}, 'json' );
 }
 gpioOnOff();
