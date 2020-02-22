@@ -9,7 +9,7 @@ alias=gpio
 installstart $@
 
 if ! pip list | grep RPi.GPIO &> /dev/null; then
-	yes | pip  --no-cache-dir install RPi.GPIO
+	yes 2> /dev/null | pip  --no-cache-dir install RPi.GPIO
 fi
 
 getinstallzip
