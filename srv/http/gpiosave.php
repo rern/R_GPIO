@@ -26,5 +26,6 @@ $gpio = [
 	]
 	, 'timer' => $_POST[ 'timer' ]
 ];
-$set = file_put_contents( '/srv/http/data/gpio/gpio.json', json_encode( $gpio, JSON_NUMERIC_CHECK ) );
-echo $set;
+$data = json_encode( $gpio, JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT );
+
+echo file_put_contents( '/srv/http/data/gpio/gpio.json', $data );
