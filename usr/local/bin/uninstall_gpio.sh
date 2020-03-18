@@ -2,7 +2,7 @@
 
 alias=gpio
 
-. /srv/http/addons-functions.sh
+[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/bash/addons-functions.sh
 
 # gpio off #######################################
 /root/gpio/gpiooff.py &> /dev/null &
