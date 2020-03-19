@@ -9,7 +9,7 @@ alias=gpio
 installstart $@
 
 if ! pip list | grep RPi.GPIO &> /dev/null; then
-	yes 2> /dev/null | pip  --no-cache-dir install RPi.GPIO
+	yes 2> /dev/null | pip --no-cache-dir install RPi.GPIO
 fi
 
 getinstallzip
@@ -18,10 +18,10 @@ file=/srv/http/data/gpio/gpio.json
 if [[ ! -e $file ]]; then
     cat << 'EOF' > $file
 {
-"name":{"11":"DAC","13":"PreAmp","15":"Amp","16":"Subwoofer"},
-"on":{"on1":11,"ond1":2,"on2":13,"ond2":2,"on3":15,"ond3":2,"on4":16},
-"off":{"off1":16,"offd1":2,"off2":15,"offd2":2,"off3":13,"offd3":2,"off4":11},
-"timer":5
+	"name"  : { "11":"DAC", "13":"PreAmp", "15":"Amp", "16":"Subwoofer" },
+	"on"    : { "on1": 11, "ond1": 2, "on2": 13, "ond2": 2, "on3": 15, "ond3": 2, "on4": 16 },
+	"off"   : { "off1":16, "offd1":2, "off2":15, "offd2":2, "off3":13, "offd3":2, "off4":11 },
+	"timer" : 5
 }
 EOF
     chown http:http $file
