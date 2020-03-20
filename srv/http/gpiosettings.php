@@ -76,7 +76,7 @@ function optname( $pin ) {
 	return $option;
 }
 function opttime( $n, $minimum = 1 ) {
-	$option = '<option value="0">none</option>';
+	$option = '<option value="0">0</option>';
 	foreach ( range( $minimum, 10 ) as $num ) {
 		$selected = ( $num == $n ) ? ' selected' : '';
 		$option.= '<option value='.$num.$selected.'>'.$num.'</option>';

@@ -130,6 +130,9 @@ select {
 .selectric-delay {
 	width: 85px;
 }
+.selectric-disabled {
+	color: hsl(200,3%,60%)/*cgl*/;
+}
 wh {
 	color: #e0e7ee !important;
 }

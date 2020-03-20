@@ -33,51 +33,7 @@ $( '#gpiopin, #gpiopin1' ).click( function() {
 	$( '#gpiopin, #gpiopin1' ).toggle();
 } );
 
-function txtcolorpin() {
-	$( '.pin, .on, .off' )
-		.find( 'option' )
-		.show(); // default show all
-	$( '.pin' ) // hide used pin in options
-		.find( 'option[value='+ pin[ 1 ] +' ], [value='+ pin[ 2 ] +'], [value='+ pin[ 3 ] +'], [value='+ pin[ 4 ] +']')
-		.hide();
-}
-function txtcolorname() {
-	$( '.name, .on, .off' )
-		.css( 'color', '#e0e7ee' ) // default color text
-		.filter( function() { // .find('input[value="(no name)"]') not work
-			return this.value == '(no name)';
-		})
-		.addClass( 'cgl' ); // '(no name)' gray text
-}
-function txtcolordelay() {
-	$( '.delay' )
-		.prop( 'disabled', false ); // default enabled
-	$( '.on, .off' ).each( function() { // delay 0 & disabled for 'none' equipment
-		var txt = this.id.slice( 0, -1 );
-		var num = this.id.slice( -1 ) - 1;
-		var sum = 0;
-		for ( var i = num; i > 0; i-- ) { // sum previous pins
-			var pin = $( '#'+ txt + i ).val();
-			sum = sum + pin;
-		}
-		if ( this.value == 0 || sum == 0 ) { // this 'on/off' = none or all previous = none
-			var dly = '#'+ txt +'d'+ num;
-			$( dly ).val( 0 ).prop( 'disabled', true );
-		}
-	} );
-	
-	$( '.delay' ).selectric( 'refresh' );
-}
-function txtcolor() {
-	$( '.selectric .label' ).removeClass( 'cgl' );
-	$( '.timer, .delay, .on, .off' ).each( function() {
-		$this = $( this );
-		if ( !$this.prop( 'disabled' ) ) $this.parent().next().find( '.label' ).toggleClass( 'cgl', $this.val() == 0 );
-	} );
-}
-
 txtcolorpin();
-txtcolorname();
 txtcolordelay();
 txtcolor();
 
@@ -131,7 +87,7 @@ $( '.name' ).click( function() {
 		, 3: $( '#name3' ).val()
 		, 4: $( '#name4' ).val()
 	};
-	txtcolorname();
+	txtcolor();
 } );
 $( '.timer, .delay' ).on( 'selectric-change', function() {
 	txtcolor();
@@ -176,5 +132,39 @@ $( '#gpiosave' ).click( function() {
 		} );
 	}
 } );
+
+function txtcolorpin() {
+	$( '.pin, .on, .off' )
+		.find( 'option' )
+		.show(); // default show all
+	$( '.pin' ) // hide used pin in options
+		.find( 'option[value='+ pin[ 1 ] +' ], [value='+ pin[ 2 ] +'], [value='+ pin[ 3 ] +'], [value='+ pin[ 4 ] +']')
+		.hide();
+}
+function txtcolordelay() {
+	$( '.delay' )
+		.prop( 'disabled', false ); // default enabled
+	$( '.on, .off' ).each( function() { // delay 0 & disabled for 'none' equipment
+		var txt = this.id.slice( 0, -1 );
+		var num = this.id.slice( -1 ) - 1;
+		var sum = 0;
+		for ( var i = num; i > 0; i-- ) { // sum previous pins
+			var pin = $( '#'+ txt + i ).val();
+			sum = sum + pin;
+		}
+		if ( this.value == 0 || sum == 0 ) { // this 'on/off' = none or all previous = none
+			var dly = '#'+ txt +'d'+ num;
+			$( dly ).val( 0 ).prop( 'disabled', true );
+		}
+	} );
+	
+	$( '.delay' ).selectric( 'refresh' );
+}
+function txtcolor() {
+	$( '.timer, .delay, .on, .off' ).each( function() {
+		$this = $( this );
+		if ( !$this.prop( 'disabled' ) ) $this.parent().next().find( '.label' ).toggleClass( 'cgl', $this.val() == 0 );
+	} );
+}
 
 } ); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
