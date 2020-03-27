@@ -47,7 +47,7 @@ foreach( range( 1, 4 ) as $i ) {
 
 $htmlname = '';
 foreach( range( 1, 4 ) as $i ) {
-	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'">';
+	$htmlname.= '<input id="name'.$i.'" name="name'.$i.'" type="text" class="name" value="'.$name[ $pin[ $i - 1 ] ].'" placeholder="(no name)">';
 }
 
 $htmlon = '';
