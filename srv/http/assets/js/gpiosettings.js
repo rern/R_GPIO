@@ -59,18 +59,8 @@ $( '.pin' ).on( 'selectric-change', function() { // 'object' by 'class' must add
 	};
 	txtcolorpin();
 } );
-$( '.name' ).click( function() {
-	if ( $( this ).val() == '(no name)' ) $( this ).val( '' );
-} ).blur( function() {
-	if ( !$( this ).val() ) $( this ).val( '(no name)' );
-} ).change( function() {
-	var tnew = '';
-	if ( this.value != '' && this.value != '(no name)' ) {
-		tnew = $( this ).val();
-	} else {
-		tnew = '(no name)';
-		$( this ).val( tnew );
-	}
+$( '.name' ).change( function() {
+	var tnew = $( this ).val();
 	var n = this.id.slice( -1 );
 	var on = $( '.on' ).find( 'select:has(option[value='+ pin[ n ] +']:selected)' ); // get 'select' with existing name
 	var off = $( '.off' ).find( 'select:has(option[value='+ pin[ n ] +']:selected)' );
@@ -100,7 +90,6 @@ $( '.on, .off' ).on( 'selectric-change', function() {
 		if ( el.length ) el.val( 0 ); // ... reset existing selected to 'none'
 	});
 	$( this ).val( pnew ); // select 'pnew'
-//	$(on ? '.ond' : '.offd').val(0);
 	txtcolordelay();
 	txtcolor();
 } );
