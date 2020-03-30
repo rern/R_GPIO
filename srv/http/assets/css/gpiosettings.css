@@ -45,7 +45,7 @@ body {
 	font-family: "Lato";
 	font-size: 15px;
 	line-height: 1.42857143;
-	color: #e0e7ee;
+	color: hsl(0,0%,90%);
 	background-color: #000;
 	overscroll-behavior: none;
 }
@@ -110,7 +110,7 @@ heading {
 }
 a,
 a: hover {
-	color: #e0e7ee;
+	color: hsl(0,0%,90%);
 	text-decoration: none !important;
 }
 select {
@@ -134,7 +134,7 @@ select {
 	color: hsl(200,3%,60%)/*cgl*/;
 }
 wh {
-	color: #e0e7ee !important;
+	color: hsl(0,0%,90%) !important;
 }
 .blue,bl {
 	color: hsl(200,100%,40%) !important;
@@ -172,7 +172,7 @@ span.timer i {
 }
 #fliptxt {
 	display: none;
-	color: #e0e7ee;
+	color: hsl(0,0%,90%);
 }
 #gpiopin,
 #gpiopin1 {
@@ -180,7 +180,7 @@ span.timer i {
 	margin-bottom: 10px;
 	width: 100%;
 	border-radius: 6px;
-	background: #e0e7ee;
+	background: hsl(0,0%,90%);
 }
 .gpio-float-l {
 	float: left;
@@ -209,7 +209,7 @@ span.timer i {
 	display: block;
 	padding: 0 0 0 5px;
 	line-height: 40px;
-	color: #e0e7ee;
+	color: hsl(0,0%,90%);
 }
 input {
 	border-radius: 4px;
@@ -224,7 +224,7 @@ input {
 	padding: 0 10px !important;
 	font-family: Lato;
 	font-size: 15px !important;
-	color: #e0e7ee;
+	color: hsl(0,0%,90%);
 	background-color: #000000 !important;
 	border: 1px solid hsl(200,3%,30%) !important;
 }
@@ -237,7 +237,7 @@ input: focus {
 	margin-bottom: 5px;
 	line-height: 34px;
 	text-align: center;
-	color: #e0e7ee;
+	color: hsl(0,0%,90%);
 	background: -webkit-radial-gradient(50% -50%, 160% 200%, hsla(0,0%,100%,.3) 50%, hsla(0,0%,100%,0) 55%); /* button highlight - last % for anti-alias edge*/
 	background: radial-gradient(160% 100% at 50% 0% ,hsla(0,0%,100%,.3) 50%,hsla(0,0%,100%,0) 55%); /* (Width% Heigth% at H-center_offset% V-center_offset%, hsla(0,0%,100%,1st-T) 1st-area%, hsla(0,0%,100%,2nd-T) 2nd-area%)) */
 	box-shadow: 2px 2px 3px 1px #000000;
@@ -248,10 +248,10 @@ input: focus {
 	cursor: pointer;
 }
 .btn-primary {
-	background-color: hsl(200,100%,40%)/*c*/;
+	background-color: hsl(200,100%,35%)/*c*/;
 }
 .btn-primary:hover {
-	background-color: hsl(200,100%,45%)/*ch*/
+	background-color: hsl(200,100%,40%)/*ch*/
 }
 #gpioimgtxt,
 .blue {
