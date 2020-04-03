@@ -25,7 +25,6 @@ pushstreamGPIO.addChannel( 'gpio' );
 pushstreamGPIO.connect();
 pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
-	var response = response[ 0 ];
 	var state = response.state;
 	G.gpio = state;
 	var delay = response.delay;
