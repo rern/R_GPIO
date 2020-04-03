@@ -1,5 +1,3 @@
-$( function() { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 var stopwatch = '<span class="stopwatch">'
 				+'<i class="fa fa-stopwatch-i fa-spin"></i>'
 				+'<i class="fa fa-stopwatch-o"></i>'
@@ -19,12 +17,15 @@ $( '#gpio' ).click( function( e ) {
 onVisibilityChange( function( visible ) {
 	if ( visible ) gpioOnOff();
 } );
-// nginx pushstream websocket (broadcast)
-var pushstreamGPIO = new PushStream( { modes: 'websocket' } );
-pushstreamGPIO.addChannel( 'gpio' );
-pushstreamGPIO.connect();
-pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
-	// json from python requests.post( 'url' json={...} ) is in response[ 0 ]
+function countdowngpio( i, iL, delays, state ) {
+	setTimeout( function() {
+		$( '#device'+ i ).toggleClass( 'gr' );
+		i++;
+		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
+	}, delays[ i ] * 1000 );
+	
+}
+function psGPIO( response ) { // on receive broadcast
 	var state = response.state;
 	G.gpio = state;
 	var delay = response.delay;
@@ -86,7 +87,6 @@ pushstreamGPIO.onmessage = function( response ) { // on receive broadcast
 		}, 5000 );
 	}
 }
-
 function gpioOnOff() {
 	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
 		G.gpio = state[ 0 ];
@@ -96,14 +96,3 @@ function gpioOnOff() {
 	}, 'json' );
 }
 gpioOnOff();
-
-function countdowngpio( i, iL, delays, state ) {
-	setTimeout( function() {
-		$( '#device'+ i ).toggleClass( 'gr' );
-		i++;
-		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
-	}, delays[ i ] * 1000 );
-	
-}
-
-} ); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
