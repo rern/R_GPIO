@@ -124,11 +124,9 @@ select {
 	width: 170px;
 }
 .selectric-pin,
-.selectric-timer {
-	width: 70px;
-}
+.selectric-timer,
 .selectric-delay {
-	width: 85px;
+	width: 70px;
 }
 .selectric-disabled {
 	color: hsl(200,3%,60%)/*cgl*/;
