@@ -17,14 +17,23 @@ $( '#gpio' ).click( function( e ) {
 onVisibilityChange( function( visible ) {
 	if ( visible ) gpioOnOff();
 } );
-function countdowngpio( i, iL, delays, state ) {
+function gpioCountdown( i, iL, delays, state ) {
 	setTimeout( function() {
 		$( '#device'+ i ).toggleClass( 'gr' );
 		i++;
-		i < iL ? countdowngpio( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
+		i < iL ? gpioCountdown( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
 	}, delays[ i ] * 1000 );
 	
 }
+function gpioOnOff() {
+	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
+		G.gpio = state[ 0 ];
+		$( '#gpio' ).toggleClass( 'on', G.gpio === 'ON' );
+		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#igpio' );
+		$gpio.toggleClass( 'hide', G.gpio !== 'ON' );
+	}, 'json' );
+}
+gpioOnOff();
 function psGPIO( response ) { // on receive broadcast
 	var state = response.state;
 	G.gpio = state;
@@ -78,7 +87,7 @@ function psGPIO( response ) { // on receive broadcast
 		} );
 		var iL = delays.length;
 		var i = 0
-		countdowngpio( i, iL, delays, state );
+		gpioCountdown( i, iL, delays, state );
 		setTimeout( function() {
 			gpioOnOff();
 		}, delay * 1000 );
@@ -87,12 +96,3 @@ function psGPIO( response ) { // on receive broadcast
 		}, 5000 );
 	}
 }
-function gpioOnOff() {
-	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
-		G.gpio = state[ 0 ];
-		$( '#gpio' ).toggleClass( 'on', G.gpio === 'ON' );
-		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#igpio' );
-		$gpio.toggleClass( 'hide', G.gpio !== 'ON' );
-	}, 'json' );
-}
-gpioOnOff();
