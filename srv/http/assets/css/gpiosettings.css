@@ -27,7 +27,7 @@
 	font-family: Lato;
 	src: url( '../fonts/lato-light-webfont.woff' ) format( 'woff' ),
 		url( '../fonts/lato-light-webfont.ttf' ) format( 'truetype' );
-	font-weight: thin;
+	font-weight: 300;
 	font-style: normal;
 }
 *,
@@ -95,7 +95,7 @@ body {
 	margin-left: 15px;
 	line-height: 40px;
 	font-size: 26px;
-	font-weight: thin;
+	font-weight: 300;
 	letter-spacing: 5px;
 }
 heading {
@@ -105,7 +105,7 @@ heading {
 	margin-bottom: 10px;
 	line-height: 35px;
 	font-size: 24px;
-	font-weight: thin;
+	font-weight: 300;
 	border-bottom: 1px solid hsl(200,3%,30%);
 }
 a,
