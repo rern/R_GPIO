@@ -1,4 +1,18 @@
-/* 'addons' declared in <head> for cache busting */
+/* 'enhance' declared in <head> for cache busting */
+@font-face {
+	font-family: Lato;
+	src: url( '../fonts/lato-regular-webfont.woff' ) format( 'woff' ),
+		url( '../fonts/lato/lato-regular-webfont.ttf' ) format( 'truetype' );
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: Lato;
+	src: url( '../fonts/lato-light-webfont.woff' ) format( 'woff' ),
+		url( '../fonts/lato-light-webfont.ttf' ) format( 'truetype' );
+	font-weight: 300;
+	font-style: normal;
+}
 .fa {
 	display: inline-block;
 	font-family: enhance;
@@ -16,20 +30,6 @@
 .fa-tag:before { content: "\f545" }
 .fa-times:before { content: "\f51A" }
 
-@font-face {
-	font-family: Lato;
-	src: url( '../fonts/lato-regular-webfont.woff' ) format( 'woff' ),
-		url( '../fonts/lato/lato-regular-webfont.ttf' ) format( 'truetype' );
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: Lato;
-	src: url( '../fonts/lato-light-webfont.woff' ) format( 'woff' ),
-		url( '../fonts/lato-light-webfont.ttf' ) format( 'truetype' );
-	font-weight: 300;
-	font-style: normal;
-}
 *,
 *: before,
 *: after {
@@ -95,7 +95,7 @@ body {
 	margin-left: 15px;
 	line-height: 40px;
 	font-size: 26px;
-	font-weight: 300;
+	font-weight: thin;
 	letter-spacing: 5px;
 }
 heading {
@@ -105,7 +105,7 @@ heading {
 	margin-bottom: 10px;
 	line-height: 35px;
 	font-size: 24px;
-	font-weight: 300;
+	font-weight: thin;
 	border-bottom: 1px solid hsl(200,3%,30%);
 }
 a,
