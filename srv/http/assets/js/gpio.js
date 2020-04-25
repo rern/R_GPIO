@@ -29,7 +29,7 @@ function gpioOnOff() {
 	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
 		G.gpio = state[ 0 ];
 		$( '#gpio' ).toggleClass( 'on', G.gpio === 'ON' );
-		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#igpio' );
+		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#posgpio' ) : $( '#ti-gpio' );
 		$gpio.toggleClass( 'hide', G.gpio !== 'ON' );
 	}, 'json' );
 }
