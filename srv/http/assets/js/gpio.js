@@ -3,13 +3,13 @@ var stopwatch = '<span class="stopwatch">'
 				+'<i class="fa fa-stopwatch-o"></i>'
 				+'</span>';
 var timer = false; // for 'setInterval' status check
-G.imodedelay = 0;
+G.icondelay = 0;
 
 $( '#gpio' ).click( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
 	} else {
-		G.imodedelay = 1; // fix imode flashing on usb dac switching
+		G.icondelay = 1; // fix imode flashing on usb dac switching
 		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( G.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
 	}
 } );
@@ -61,7 +61,7 @@ function psGPIO( response ) { // on receive broadcast
 		} );
 		timer = setInterval( function() {
 			if ( delay === 1 ) {
-				G.imodedelay = 1;
+				G.icondelay = 1;
 				$( '#infoX' ).click();
 				clearInterval( timer );
 			}
@@ -92,7 +92,7 @@ function psGPIO( response ) { // on receive broadcast
 			gpioOnOff();
 		}, delay * 1000 );
 		setTimeout( function() {
-			G.imodedelay = 0;
+			G.icondelay = 0;
 		}, 5000 );
 	}
 }
