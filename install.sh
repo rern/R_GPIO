@@ -12,7 +12,7 @@ fi
 
 getinstallzip
 
-file=/srv/http/data/gpio/gpio.json
+file=/srv/http/data/system/gpio.json
 if [[ ! -e $file ]]; then
     cat << 'EOF' > $file
 {

@@ -28,4 +28,4 @@ $gpio = [
 ];
 $data = json_encode( $gpio, JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT );
 
-echo file_put_contents( '/srv/http/data/gpio/gpio.json', $data );
+echo file_put_contents( '/srv/http/data/system/gpio.json', $data );

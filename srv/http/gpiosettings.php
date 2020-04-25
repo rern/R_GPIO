@@ -24,7 +24,7 @@
 </head>
 
 <?php
-$gpio = file_get_contents( '/srv/http/data/gpio/gpio.json' );
+$gpio = file_get_contents( '/srv/http/data/system/gpio.json' );
 $gpio = json_decode( $gpio, true );
 $name = $gpio[ 'name' ];
 
