@@ -10,7 +10,7 @@ $( '#gpio' ).click( function( e ) {
 		location.href = 'gpiosettings.php';
 	} else {
 		G.icondelay = 1; // fix imode flashing on usb dac switching
-		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( G.gpio === 'ON' ? 'off' : 'on' ) +'.py' } );
+		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( G.gpio ? 'off' : 'on' ) +'.py' } );
 	}
 } );
 
@@ -26,16 +26,17 @@ function gpioCountdown( i, iL, delays, state ) {
 	
 }
 function gpioOnOff() {
-	$.post( 'commands.php', { bash: '/usr/local/bin/gpio.py state' }, function( state ) {
-		G.gpio = state[ 0 ];
-		$( '#gpio .fa-gpio' ).toggleClass( 'on', G.gpio === 'ON' );
+	$.post( 'commands.php', { bash0: '[[ -e /srv/http/data/tmp/gpioon ]] && echo true || echo false' }, function( state ) {
+		G.gpio = state;
+		$( '#gpio .fa-gpio' ).toggleClass( 'on', G.gpio );
 		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#i-gpio' ) : $( '#ti-gpio' );
-		$gpio.toggleClass( 'hide', G.gpio !== 'ON' );
+		$gpio.toggleClass( 'hide', !G.gpio );
 	}, 'json' );
 }
 gpioOnOff();
 function psGPIO( response ) { // on receive broadcast
 	var state = response.state;
+	alert(state); return
 	G.gpio = state;
 	var delay = response.delay;
 	if ( timer ) { // must clear before pnotify can remove
