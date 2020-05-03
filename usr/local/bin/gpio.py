@@ -36,9 +36,12 @@ ond = ond1 + ond2 + ond3
 
 state = GPIO.input( onenable[ 0 ] )
 
-print( 'ON' if state == 1 else 'OFF' )
+onoff = 'ON' if state == 1 else 'OFF'
+print( onoff )
 
 len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state' and exit()
+
+gpiofile = '/srv/http/data/tmp/gpioon'
 
 off   = gpio[ 'off' ]
 off1  = off[ 'off1' ]

@@ -23,4 +23,7 @@ if GPIO.input( offenable[ 0 ] ) != OFF:
     exit()
 
 timer > 0 and os.system( '/usr/bin/pkill -9 gpiotimer.py &> /dev/null' )
+
+sys.stderr = object
+os.remove( gpiofile )
 os.remove( '/srv/http/data/system/usbdac' )

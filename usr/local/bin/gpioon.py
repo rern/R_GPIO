@@ -23,3 +23,6 @@ if GPIO.input( onenable[ 0 ] ) != ON:
     exit()
 
 timer > 0 and os.system( '/usr/local/bin/gpiotimer.py &> /dev/null &' )
+
+with open( gpiofile, 'w' ) as file:
+	file.write( '1' )
