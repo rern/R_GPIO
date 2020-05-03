@@ -4,7 +4,7 @@ from gpio import *
 state != ON and exit()
 
 # broadcast pushstream
-pushstream( 'gpio', { 'state': 'OFF', 'delay': offd, 'order': offorder } )
+pushstream( 'gpio', { 'state': False, 'delay': offd, 'order': offorder } )
 
 if off1 != 0:
     GPIO.output( off1, OFF )
