@@ -28,24 +28,20 @@ function gpioCountdown( i, iL, delays, state ) {
 function gpioOnOff() {
 	$.post( 'commands.php', { bash0: '[[ -e /srv/http/data/tmp/gpioon ]] && echo true || echo false' }, function( state ) {
 		G.gpio = state;
-		$( '#gpio .fa-gpio' ).toggleClass( 'on', G.gpio );
-		$gpio = $( '#time-knob' ).is( ':hidden' ) ? $( '#i-gpio' ) : $( '#ti-gpio' );
-		$gpio.toggleClass( 'hide', !G.gpio );
 	}, 'json' );
 }
 gpioOnOff();
 function psGPIO( response ) { // on receive broadcast
 	var state = response.state;
-	alert(state); return
 	G.gpio = state;
 	var delay = response.delay;
 	if ( timer ) { // must clear before pnotify can remove
 		clearInterval( timer );
 		timer = false;
 	}
-	if ( state == 'RESET' ) {
+	if ( state === 'RESET' ) {
 		$( '#infoX' ).click();
-	} else if ( state == 'IDLE' ) {
+	} else if ( state === 'IDLE' ) {
 		info( {
 			  icon        : 'gpio'
 			, title       : 'GPIO Idle Timer'
@@ -62,6 +58,8 @@ function psGPIO( response ) { // on receive broadcast
 		} );
 		timer = setInterval( function() {
 			if ( delay === 1 ) {
+				G.gpio = false;
+				setButtonToggle();
 				G.icondelay = 1;
 				$( '#infoX' ).click();
 				clearInterval( timer );
@@ -90,7 +88,7 @@ function psGPIO( response ) { // on receive broadcast
 		var i = 0
 		gpioCountdown( i, iL, delays, state );
 		setTimeout( function() {
-			gpioOnOff();
+			setButtonToggle();
 		}, delay * 1000 );
 		setTimeout( function() {
 			G.icondelay = 0;
