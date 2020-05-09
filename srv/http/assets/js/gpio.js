@@ -9,8 +9,9 @@ $( '#gpio' ).click( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
 	} else {
-		G.icondelay = 1; // fix imode flashing on usb dac switching
+		//G.icondelay = 1; // fix imode flashing on usb dac switching
 		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( G.gpio ? 'off' : 'on' ) +'.py' } );
+		$( '#settings' ).addClass( 'hide' );
 	}
 } );
 
