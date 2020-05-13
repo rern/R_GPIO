@@ -3,13 +3,11 @@ var stopwatch = '<span class="stopwatch">'
 				+'<i class="fa fa-stopwatch-o"></i>'
 				+'</span>';
 var timer = false; // for 'setInterval' status check
-G.icondelay = 0;
 
 $( '#gpio' ).click( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
 	} else {
-		//G.icondelay = 1; // fix imode flashing on usb dac switching
 		$.post( 'commands.php', { bash: '/usr/local/bin/gpio'+ ( G.gpio ? 'off' : 'on' ) +'.py' } );
 		$( '#settings' ).addClass( 'hide' );
 	}
@@ -61,7 +59,6 @@ function psGPIO( response ) { // on receive broadcast
 			if ( delay === 1 ) {
 				G.gpio = false;
 				setButtonToggle();
-				G.icondelay = 1;
 				$( '#infoX' ).click();
 				clearInterval( timer );
 			}
