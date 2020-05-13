@@ -18,11 +18,11 @@ $( '#gpio' ).click( function( e ) {
 onVisibilityChange( function( visible ) {
 	if ( visible ) gpioOnOff();
 } );
-function gpioCountdown( i, iL, delays, state ) {
+function gpioCountdown( i, iL, delays ) {
 	setTimeout( function() {
 		$( '#device'+ i ).toggleClass( 'gr' );
 		i++;
-		i < iL ? gpioCountdown( i, iL, delays, state ) : setTimeout( infoReset, 1000 );
+		i < iL ? gpioCountdown( i, iL, delays ) : setTimeout( infoReset, 1000 );
 	}, delays[ i ] * 1000 );
 	
 }
@@ -68,6 +68,7 @@ function psGPIO( response ) { // on receive broadcast
 			$( '#infoMessage white' ).text( delay-- );
 		}, 1000 );
 	} else {
+		var onoff = state === true ? 'ON' : 'OFF';
 		var order = response.order;
 		var delays = [ 0 ];
 		var devices = ''
@@ -75,24 +76,21 @@ function psGPIO( response ) { // on receive broadcast
 			if ( i % 2 ) {
 				delays.push( val );
 			} else {
-				devices += '<br><a id="device'+ i / 2 +'" class="'+ ( state === 'ON' ? 'gr' : '' ) +'">'+ val +'</a>';
+				devices += '<br><a id="device'+ i / 2 +'" class="'+ ( state ? 'gr' : '' ) +'">'+ val +'</a>';
 			}
 		} );
 		info( {
 			  icon      : 'gpio'
 			, title     : 'GPIO'
-			, message   : stopwatch +' <wh>Power '+ state +'</wh><hr>'
+			, message   : stopwatch +' <wh>Power '+ onoff +'</wh><hr>'
 						+ devices
 			, nobutton  : 1
 		} );
 		var iL = delays.length;
 		var i = 0
-		gpioCountdown( i, iL, delays, state );
+		gpioCountdown( i, iL, delays );
 		setTimeout( function() {
 			setButtonToggle();
 		}, delay * 1000 );
-		setTimeout( function() {
-			G.icondelay = 0;
-		}, 5000 );
 	}
 }
