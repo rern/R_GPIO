@@ -8,7 +8,7 @@ $( '#gpio' ).click( function( e ) {
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		location.href = 'gpiosettings.php';
 	} else {
-		$.post( 'commands.php', { bash0: '/usr/local/bin/'+ ( G.gpio ? 'gpiooff.py' : 'gpioon.py' ) } );
+		$.post( 'commands.php', { bash: '/usr/local/bin/'+ ( G.gpio ? 'gpiooff.py' : 'gpioon.py' ) } );
 	}
 } );
 
@@ -24,7 +24,7 @@ function gpioCountdown( i, iL, delays ) {
 	
 }
 function gpioOnOff() {
-	$.post( 'commands.php', { bash0: 'test -e /srv/http/data/tmp/gpioon && echo true || echo false' }, function( state ) {
+	$.post( 'commands.php', { bash: 'test -e /srv/http/data/tmp/gpioon && echo true || echo false' }, function( state ) {
 		G.gpio = state;
 	}, 'json' );
 }
