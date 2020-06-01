@@ -24,9 +24,9 @@ function gpioCountdown( i, iL, delays ) {
 	
 }
 function gpioOnOff() {
-	$.post( 'commands.php', { bash: 'test -e /srv/http/data/tmp/gpioon && echo true || echo false' }, function( state ) {
+	$.post( 'commands.php', { bash: 'test -e /srv/http/data/tmp/gpioon && echo true || echo false', string: 1 }, function( state ) {
 		G.gpio = state;
-	}, 'json' );
+	} );
 }
 gpioOnOff();
 function psGPIO( response ) { // on receive broadcast
