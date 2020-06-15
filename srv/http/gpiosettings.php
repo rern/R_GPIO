@@ -17,6 +17,7 @@
 			font-style : normal;
 		}
 	</style>
+	<link rel="stylesheet" href="/assets/css/colors.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/selectric.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/info.<?=$time?>.css">
 	<link rel="stylesheet" href="/assets/css/gpiosettings.<?=$time?>.css">
@@ -95,7 +96,6 @@ function opttime( $n, $minimum = 1 ) {
 <heading>Settings</heading>
 <span class="help-block hide">
 	Control <wh>GPIO</wh> connected relay module for power on /off equipments in sequence. 
-	<a href="https://github.com/rern/RuneUI_GPIO" target="_blank"><bl>More details</bl></a> <i class="fa fa-link"></i><br><br>
 </span>
 
 <form id="gpioform">
