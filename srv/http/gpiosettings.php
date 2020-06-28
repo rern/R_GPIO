@@ -134,8 +134,8 @@ function opttime( $n, $minimum = 1 ) {
 <span>GPIO connector: <a id="gpioimgtxt">RPi J8 &ensp;<i class="fa fa-chevron-down"></i></a><a id="fliptxt">&emsp;(Tap image to flip)</a></span><br><br>
 	
 <div style="position: relative">
-	<img id="gpiopin" src="/img/RPi3_GPIO-flip.<?=$time?>.svg">
-	<img id="gpiopin1" src="/img/RPi3_GPIO.<?=$time?>.svg">
+	<img id="gpiopin" src="/assets/img/RPi3_GPIO-flip.<?=$time?>.svg">
+	<img id="gpiopin1" src="/assets/img/RPi3_GPIO.<?=$time?>.svg">
 	<a id="close-img"><i class="fa fa-times"></i></a>
 </div>
 
