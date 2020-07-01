@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import json
 import sys
 import os
+import subprocess
 import time
 from urllib.request import urlopen
 from urllib.request import Request
@@ -41,7 +42,7 @@ print( onoff )
 
 len( sys.argv ) > 1 and sys.argv[ 1 ] == 'state' and exit()
 
-gpiofile = '/srv/http/data/tmp/gpioon'
+gpiofile = '/srv/http/data/tmp/gpiotimer'
 
 off   = gpio[ 'off' ]
 off1  = off[ 'off1' ]
