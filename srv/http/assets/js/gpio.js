@@ -48,8 +48,7 @@ function psGPIO( response ) { // on receive broadcast
 			, oklabel     : 'Reset'
 			, ok          : function() {
 				$.post( 'commands.php', { bash: [
-					  'pkill gpiotimer.py &> /dev/null'
-					, '/usr/local/bin/gpiotimer.py &> /dev/null &'
+					  "awk '/timer/ {print $NF}' /srv/http/data/system/gpio.json > /srv/http/data/tmp/gpiotimer"
 					, 'curl -s -X POST "http://127.0.0.1/pub?id=gpio" -d \'{ "state": "RESET" }\''
 				] } );
 			}

@@ -129,7 +129,7 @@ select {
 	width: 70px;
 }
 .selectric-disabled {
-	color: var( --cgl );
+	color: var( --cg60 );
 }
 wh {
 	color: var( --cw ) !important;
@@ -249,13 +249,13 @@ input: focus {
 	background-color: var( --cm );
 }
 .btn-primary:hover {
-	background-color: var( --cmh )
+	background-color: var( --cml )
 }
 #gpioimgtxt,
 .blue {
 	color: var( --cml );
 }
-.cgl {
+.cg60 {
 	color: var( --cg60 ) !important;
 }
 .green {
