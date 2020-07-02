@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#[[ $( gpio.py ) == OFF ]] && exit
-
 file=/srv/http/data/tmp/gpiotimer
 timer=$( cat $file )
 
 i=$timer
 
 looptimer() {
-	sleep 60
+	[[ ! -e $file ]] && exit
+	
+	sleep 60	
 	[[ ! -e $file ]] && exit
 	
 	if [[ $( cat /proc/asound/card*/pcm*/sub*/status | grep -q state ) == 0 ]]; then # state: RUNNING
@@ -21,8 +21,8 @@ looptimer() {
 		elif (( $i == 0 )); then
 			gpiooff.py
 			exit
+			
 		fi
-		
 		echo $i > $file
 	fi
 	looptimer
