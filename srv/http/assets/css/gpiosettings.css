@@ -129,7 +129,7 @@ select {
 	width: 70px;
 }
 .selectric-disabled {
-	color: var( --cgl );
+	color: var( --cg60 );
 }
 wh {
 	color: var( --cw ) !important;
@@ -255,7 +255,7 @@ input: focus {
 .blue {
 	color: var( --cml );
 }
-.cgl {
+.cg60 {
 	color: var( --cg60 ) !important;
 }
 .green {

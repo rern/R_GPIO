@@ -178,7 +178,7 @@ function txtcolordelay() {
 function txtcolor() {
 	$( '.timer, .delay, .on, .off' ).each( function() {
 		$this = $( this );
-		if ( !$this.prop( 'disabled' ) ) $this.parent().next().find( '.label' ).toggleClass( 'cgl', $this.val() == 0 );
+		if ( !$this.prop( 'disabled' ) ) $this.parent().next().find( '.label' ).toggleClass( 'cg60', $this.val() == 0 );
 	} );
 }
 
