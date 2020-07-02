@@ -249,7 +249,7 @@ input: focus {
 	background-color: var( --cm );
 }
 .btn-primary:hover {
-	background-color: var( --cmh )
+	background-color: var( --cml )
 }
 #gpioimgtxt,
 .blue {

@@ -8,7 +8,7 @@ var pin = {
 	, 3: $( '#pin3' ).val()
 	, 4: $( '#pin4' ).val()
 };
-var name = {
+var pname = {
 	  1: $( '#name1' ).val()
 	, 2: $( '#name2' ).val()
 	, 3: $( '#name3' ).val()
@@ -45,7 +45,7 @@ $( '.pin' ).on( 'selectric-change', function() { // 'object' by 'class' must add
 
 	$( '.on, .off' )
 		.find( 'select option:nth-child('+ n +')' )
-		.after( '<option value='+ pnew +'>'+ name[ n ] +' - '+ pnew +'</option>' ); // insert new item in option list ...
+		.after( '<option value='+ pnew +'>'+ pname[ n ] +' - '+ pnew +'</option>' ); // insert new item in option list ...
 	on.val( pnew ); // ... select new option list
 	off.val( pnew );
 
@@ -71,7 +71,7 @@ $( '.name' ).change( function() {
 		.after( '<option value='+ pin[ n ] +'>'+ tnew +' - '+ pin[ n ] +'</option>' ); // insert new option to list
 	on.val( pin[ n ] ); // select new option
 	off.val( pin[ n ] );
-	name = { // update new value
+	pname = { // update new value
 		  1: $( '#name1' ).val()
 		, 2: $( '#name2' ).val()
 		, 3: $( '#name3' ).val()
@@ -113,7 +113,33 @@ $( '#gpiosave' ).click( function() {
 			, message : on +' On : '+ off +' Off \nNumber of equipments not matched !'
 		} );
 	} else {
-		$.post( 'gpiosave.php', $( '#gpioform').serialize() );
+		var pinname = {}
+		for ( i = 1; i < 5; i++ ) {
+			pinname[ $( '#pin'+ i ).val() ] = $( '#name'+ i ).val() || '';
+		}
+		var on = {}
+		for ( i = 1; i < 5; i++ ) {
+			on[ 'on'+ i ] = Number( $( '#on'+ i ).val() ) || '';
+			if ( i == 4 ) break
+			on[ 'ond'+ i ] = Number( $( '#ond'+ i ).val() ) || 0;
+		}
+		var off = {}
+		for ( i = 1; i < 5; i++ ) {
+			off[ 'off'+ i ] = Number( $( '#off'+ i ).val() ) || '';
+			if ( i == 4 ) break
+			off[ 'offd'+ i ] = Number( $( '#offd'+ i ).val() ) || 0;
+		}
+		var timer = Number( $( '#timer' ).val() )
+		var gpiojson = {
+			  name : pinname
+			, on   : on
+			, off  : off
+			, timer : timer
+		}
+		$.post( 'commands.php', { bash: [
+			  "echo '"+ JSON.stringify( gpiojson ) +"' | jq > /srv/http/data/system/gpio.json"
+			, 'test -e /srv/http/data/tmp/gpiotimer && echo '+ timer +' > /srv/http/data/tmp/gpiotimer'
+		] } );
 		info( {
 			  icon    : 'gpio'
 			, title   : 'RuneUI GPIO'
@@ -127,7 +153,7 @@ function txtcolorpin() {
 		.find( 'option' )
 		.show(); // default show all
 	$( '.pin' ) // hide used pin in options
-		.find( 'option[value='+ pin[ 1 ] +' ], [value='+ pin[ 2 ] +'], [value='+ pin[ 3 ] +'], [value='+ pin[ 4 ] +']')
+		.find( 'option[value='+ pin[ 1 ] +' ], [value='+ pin[ 2 ] +'], [value='+ pin[ 3 ] +'], [value='+ pin[ 4 ] +']' )
 		.hide();
 }
 function txtcolordelay() {
