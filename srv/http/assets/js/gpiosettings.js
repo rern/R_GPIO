@@ -119,13 +119,13 @@ $( '#gpiosave' ).click( function() {
 		}
 		var on = {}
 		for ( i = 1; i < 5; i++ ) {
-			on[ 'on'+ i ] = Number( $( '#on'+ i ).val() ) || '';
+			on[ 'on'+ i ] = Number( $( '#on'+ i ).val() ) || 0;
 			if ( i == 4 ) break
 			on[ 'ond'+ i ] = Number( $( '#ond'+ i ).val() ) || 0;
 		}
 		var off = {}
 		for ( i = 1; i < 5; i++ ) {
-			off[ 'off'+ i ] = Number( $( '#off'+ i ).val() ) || '';
+			off[ 'off'+ i ] = Number( $( '#off'+ i ).val() ) || 0;
 			if ( i == 4 ) break
 			off[ 'offd'+ i ] = Number( $( '#offd'+ i ).val() ) || 0;
 		}
