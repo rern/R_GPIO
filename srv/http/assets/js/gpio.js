@@ -44,7 +44,7 @@ function psGPIO( response ) { // on receive broadcast
 			  icon        : 'gpio'
 			, title       : 'GPIO Idle Timer'
 			, message     : 'Power Off Countdown:<br><br>'
-						   + stopwatch +'<white>'+ delay +'</white>'
+						   + stopwatch +'&ensp;<white>'+ delay +'</white>'
 			, oklabel     : 'Reset'
 			, ok          : function() {
 				$.post( 'commands.php', { bash: [

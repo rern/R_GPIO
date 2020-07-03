@@ -19,7 +19,8 @@ looptimer() {
 		if (( $i == 1 )); then
 			curl -s -X POST "http://127.0.0.1/pub?id=gpio" -d '{ "state": "IDLE", "delay": 60 }'
 		elif (( $i == 0 )); then
-			gpiooff.py
+			rm $file
+			/usr/local/bin/gpiooff.py
 			exit
 			
 		fi
