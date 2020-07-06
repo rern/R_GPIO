@@ -22,8 +22,8 @@ if GPIO.input( onenable[ 0 ] ) != ON:
     notifyFailed()
     exit()
 
-timer > 0 and subprocess.Popen( [ '/usr/local/bin/gpiotimer.sh' ] )
-
 with open( gpiofile, 'w' ) as file:
     file.write( str( timer ) )
 os.chmod( gpiofile, 0o777 )
+
+timer > 0 and subprocess.Popen( [ '/usr/local/bin/gpiotimer.sh' ] )
