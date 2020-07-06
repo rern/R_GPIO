@@ -11,7 +11,7 @@ looptimer() {
 	sleep 60	
 	[[ ! -e $file ]] && exit
 	
-	if [[ $( cat /proc/asound/card*/pcm*/sub*/status | grep -q state ) == 0 ]]; then # state: RUNNING
+	if grep -q RUNNING /proc/asound/card*/pcm*/sub*/status; then # state: RUNNING
 		[[ $i != $timer ]] && echo $timer > $file
 	else
 		i=$( cat $file )
