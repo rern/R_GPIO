@@ -24,7 +24,7 @@ function gpioCountdown( i, iL, delays ) {
 	
 }
 function gpioOnOff() {
-	$.post( 'commands.php', { bash: 'test -e /srv/http/data/tmp/gpioon' }, function( state ) {
+	$.post( 'commands.php', { bash0: 'test -e /srv/http/data/tmp/gpioon && echo 0 || echo -1' }, function( state ) {
 		G.gpio = state != -1 ? true : false;
 	} );
 }
