@@ -1,6 +1,6 @@
 RuneUI GPIO
 ---
-GPIO-connected relay module control for power on / off audio equipments.  
+Control GPIO-connected relay module for power on / off audio equipments.  
 
 Try it - [**Demo**](https://rern.github.io/RuneUI_GPIO/)  
 Can be installed without relay module to play with interface.  
