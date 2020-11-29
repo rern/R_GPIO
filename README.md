@@ -1,4 +1,4 @@
-RuneUI GPIO
++R GPIO
 ---
 Control GPIO-connected relay module for power on / off audio equipments.  
 
