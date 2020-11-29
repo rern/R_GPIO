@@ -49,8 +49,8 @@ Features
 ### Things to get
 Dirt cheap on ebay
 
-![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay.jpg)  
-![relay](https://github.com/rern/_assets/blob/master/RuneUI_GPIO/relay_module_circuit.png)
+![relay](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/relay.jpg)  
+![relay](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/relay_module_circuit.png)
 
 - [Relay module](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2055119.m570.l1313.TR0.TRC0.H0.Xrelay+low+high+trigger.TRS0&_nkw=relay+low+high+trigger&_sacat=0)
 	- **low trigger** causes on-off flash at boot
