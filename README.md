@@ -10,7 +10,7 @@ Control GPIO-connected relay module for power on / off equipments.
 
 <hr>
 
-![warning](https://github.com/rern/R_GPIO/blob/master/warning_el.png) **Warning**
+![warning](https://github.com/rern/R_GPIO/blob/master/warning.png) **Warning**
 - A relay module can be connected to GPIO, to see how it works, by anyone with basic skill.  
 - Wrong connection may just damage your RPi. (only 5V)  
 - Requires **electrical skill and knowledge** to connect these relays as power switches. (110V / 220V)  
