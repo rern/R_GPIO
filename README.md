@@ -1,23 +1,12 @@
 +R GPIO
 ---
-Control GPIO-connected relay module for power on / off equipments.  
-
->[Features](#features)  
->[Things to get](#things-to-get)  
->[Things to do](#things-to-do)  
->[Before install](#before-install)  
->[Install](#install)  
-
-Features
----
-
-**Power `on` `off` audio equipments in sequence**
-- up to 4 equipments(relays)
-- delay setting for each equipment(relay)
+Control GPIO-connected relay module for power on / off equipments.
+- Power `on` `off` audio equipments in sequence**
+- Up to 4 equipments(relays)
+- Delay setting for each equipment(relay)
 - Idle timer power off
-	- polling 'play' status every minute
-	- notification last minute warning with countdown
-	- reset on play or `reset` button during warning
+	- Notify last minute warning with countdown
+	- Reset on play or `reset` button during warning
 
 <hr>
 
@@ -29,7 +18,7 @@ Features
 
 <hr>
 
-### Things to get
+### Relay module
 Dirt cheap on ebay
 
 ![relay](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/relay.jpg)  
