@@ -1,6 +1,6 @@
 +R GPIO
 ---
-Control GPIO-connected relay module for power on / off equipments.
+Fir [rAudio](https://github.com/rern/rAudio-1) - Control GPIO-connected relay module for power on / off equipments.
 - Power `on` `off` audio equipments in sequence**
 - Up to 4 equipments(relays)
 - Delay setting for each equipment(relay)
@@ -10,7 +10,8 @@ Control GPIO-connected relay module for power on / off equipments.
 
 <hr>
 
-![warning](https://github.com/rern/R_GPIO/blob/master/warning.png) **Warning**
+![warning](https://github.com/rern/R_GPIO/blob/master/warning.png)  
+**Warning**
 - A relay module can be connected to GPIO, to see how it works, by anyone with basic skill.  
 - Wrong connection may just damage your RPi. (only 5V)  
 - Requires **electrical skill and knowledge** to connect these relays as power switches. (110V / 220V)  
@@ -21,8 +22,7 @@ Control GPIO-connected relay module for power on / off equipments.
 ### Relay module
 Dirt cheap on ebay
 
-![relay](https://github.com/rern/R_GPIO/blob/master/relay.jpg)  
-![relay](https://github.com/rern/R_GPIO/blob/master/relay_module_circuit.png)
+![relay](https://github.com/rern/R_GPIO/blob/master/relay.jpg)  ![relay](https://github.com/rern/R_GPIO/blob/master/relay_module_circuit.png)
 
 - [Relay module](https://www.ebay.com/sch/i.html?_from=R40&_nkw=5V+4+Channel+Relay+Module+High%2FLow&_sacat=0&_sop=15)
     - use **high/low level trigger** and set to **high**
