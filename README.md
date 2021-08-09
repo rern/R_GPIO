@@ -22,7 +22,7 @@ Fir [rAudio](https://github.com/rern/rAudio-1) - Control GPIO-connected relay mo
 ### Relay module
 Dirt cheap on ebay
 
-![relay](https://github.com/rern/R_GPIO/blob/master/relay.jpg)  ![relay](https://github.com/rern/R_GPIO/blob/master/relay_module_circuit.png)
+![relay](https://github.com/rern/R_GPIO/blob/master/relays.jpg)  ![relay](https://github.com/rern/R_GPIO/blob/master/relay_module_circuit.png)
 
 - [Relay module](https://www.ebay.com/sch/i.html?_from=R40&_nkw=5V+4+Channel+Relay+Module+High%2FLow&_sacat=0&_sop=15)
     - use **high/low level trigger** and set to **high**
