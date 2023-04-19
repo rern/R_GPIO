@@ -1,6 +1,6 @@
 +R GPIO
 ---
-Fir [rAudio](https://github.com/rern/rAudio-1) - Control GPIO-connected relay module for power on / off equipments.
+Fir [rAudio](https://github.com/rern/rAudio) - Control GPIO-connected relay module for power on / off equipments.
 - Power `on` `off` audio equipments in sequence**
 - Up to 4 equipments(relays)
 - Delay setting for each equipment(relay)
